@@ -3,21 +3,21 @@
 <plist version="1.0">
 <dict>
 	<key>CLIENT_ID</key>
-	<string>270671605612-kgc14vsivm71b8c1k7q0p03v7qaajmlo.apps.googleusercontent.com</string>
+	<string>708519951985-a5r4fb3ku553m4tdkis1166h7t54thlc.apps.googleusercontent.com</string>
 	<key>REVERSED_CLIENT_ID</key>
-	<string>com.googleusercontent.apps.270671605612-kgc14vsivm71b8c1k7q0p03v7qaajmlo</string>
+	<string>com.googleusercontent.apps.708519951985-a5r4fb3ku553m4tdkis1166h7t54thlc</string>
 	<key>API_KEY</key>
-	<string>AIzaSyBfFkk_caHKdXOAW42bY6uLdLm_y4w1MV8</string>
+	<string>AIzaSyDu7LeV-EfHaaDeoxvvIONuNQYk7M39C48</string>
 	<key>GCM_SENDER_ID</key>
-	<string>270671605612</string>
+	<string>708519951985</string>
 	<key>PLIST_VERSION</key>
 	<string>1</string>
 	<key>BUNDLE_ID</key>
-	<string>com.PMJs.GWShopReal</string>
+	<string>com.PMJs.GWShop</string>
 	<key>PROJECT_ID</key>
-	<string>gwshop-18cac</string>
+	<string>gwshopreal</string>
 	<key>STORAGE_BUCKET</key>
-	<string>gwshop-18cac.appspot.com</string>
+	<string>gwshopreal.appspot.com</string>
 	<key>IS_ADS_ENABLED</key>
 	<false></false>
 	<key>IS_ANALYTICS_ENABLED</key>
@@ -29,8 +29,8 @@
 	<key>IS_SIGNIN_ENABLED</key>
 	<true></true>
 	<key>GOOGLE_APP_ID</key>
-	<string>1:270671605612:ios:a2b1d5095d07f398540d49</string>
+	<string>1:708519951985:ios:4a43cee1b1596384e465d0</string>
 	<key>DATABASE_URL</key>
-	<string>https://gwshop-18cac.firebaseio.com</string>
+	<string>https://gwshopreal.firebaseio.com</string>
 </dict>
 </plist>
