@@ -18,8 +18,7 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         registerButton.layer.cornerRadius = loginButton.frame.size.height/5
-        
-        loginButton.layer.cornerRadius = loginButton.frame.size.height/5
+         loginButton.layer.cornerRadius = loginButton.frame.size.height/5
     }
     
     override func viewWillAppear(_ animated: Bool) {
