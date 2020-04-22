@@ -25,7 +25,8 @@
                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 </state>
                                 <connections>
-                                    <segue destination="zFE-tR-7dB" kind="show" id="JDt-Eo-h1r"/>
+                                    <action selector="registerButton:" destination="BYZ-38-t0r" eventType="touchUpInside" id="q5P-4v-IlM"/>
+                                    <segue destination="9w5-As-Myd" kind="show" id="W4g-FZ-5WY"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Nk1-Lx-gRM">
@@ -37,6 +38,7 @@
                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 </state>
                                 <connections>
+                                    <action selector="loginButton:" destination="BYZ-38-t0r" eventType="touchUpInside" id="ln9-bD-GfA"/>
                                     <segue destination="dL4-lR-hdw" kind="show" id="Cn6-C9-GqM"/>
                                 </connections>
                             </button>
@@ -45,15 +47,35 @@
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
                     <navigationItem key="navigationItem" id="sEA-vG-WAv"/>
+                    <connections>
+                        <outlet property="loginButton" destination="Nk1-Lx-gRM" id="Xdk-hB-7dP"/>
+                        <outlet property="registerButton" destination="IOc-Ey-wwQ" id="s36-Y7-RFh"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1047.8260869565217" y="129.91071428571428"/>
         </scene>
-        <!--View Controller-->
+        <!--Register View Controller-->
+        <scene sceneID="dKB-zE-b7I">
+            <objects>
+                <viewController id="9w5-As-Myd" customClass="RegisterViewController" customModule="GWShopReal" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="5oV-eA-ATZ">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <viewLayoutGuide key="safeArea" id="hi7-9V-Afo"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="dq0-ce-2DO"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="2SV-uj-Mfc" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1824" y="-320"/>
+        </scene>
+        <!--Login Controller-->
         <scene sceneID="spX-xD-uOw">
             <objects>
-                <viewController id="dL4-lR-hdw" sceneMemberID="viewController">
+                <viewController id="dL4-lR-hdw" customClass="LoginController" customModule="GWShopReal" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="KTF-UJ-oMf">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -92,47 +114,6 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="UXf-V3-NLS" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1810.144927536232" y="387.72321428571428"/>
-        </scene>
-        <!--View Controller-->
-        <scene sceneID="5UD-qw-ciZ">
-            <objects>
-                <viewController id="A4h-Lm-DUA" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="m8Z-tr-oda">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
-                        <viewLayoutGuide key="safeArea" id="XTj-le-fxz"/>
-                    </view>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="H5A-1A-2FO" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="3528.985507246377" y="63.616071428571423"/>
-        </scene>
-        <!--View Controller-->
-        <scene sceneID="9wi-Rg-DXL">
-            <objects>
-                <viewController id="kRq-BW-r0h" sceneMemberID="viewController">
-                    <navigationItem key="navigationItem" id="a0P-zC-z4n"/>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="rS0-sC-UJQ" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="2694.202898550725" y="-261.16071428571428"/>
-        </scene>
-        <!--Navigation Controller-->
-        <scene sceneID="YDc-TO-URY">
-            <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="zFE-tR-7dB" sceneMemberID="viewController">
-                    <toolbarItems/>
-                    <navigationItem key="navigationItem" id="nLX-1e-hPy"/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="q4R-ja-hmN">
-                        <rect key="frame" x="0.0" y="44" width="414" height="44"/>
-                        <autoresizingMask key="autoresizingMask"/>
-                    </navigationBar>
-                    <nil name="viewControllers"/>
-                </navigationController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="q2j-ea-2v7" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="1784.057971014493" y="-261.16071428571428"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="QJo-aL-rjI">

@@ -76,22 +76,14 @@
 				A33A277E2450995000810BC5 /* AppDelegate.swift */,
 				A33A27802450995000810BC5 /* SceneDelegate.swift */,
 				A33A279F2450A04600810BC5 /* Model */,
-				A33A279624509DB300810BC5 /* Controller */,
-				A33A279424509D1C00810BC5 /* New Group */,
 				A33A279524509D9600810BC5 /* View */,
+				A33A279624509DB300810BC5 /* Controller */,
 				A33A27872450995200810BC5 /* Assets.xcassets */,
 				A33A27892450995200810BC5 /* LaunchScreen.storyboard */,
 				A33A279224509B8900810BC5 /* GoogleService-Info.plist */,
 				A33A278C2450995200810BC5 /* Info.plist */,
 			);
 			path = GWShopReal;
-			sourceTree = "<group>";
-		};
-		A33A279424509D1C00810BC5 /* New Group */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = "New Group";
 			sourceTree = "<group>";
 		};
 		A33A279524509D9600810BC5 /* View */ = {
