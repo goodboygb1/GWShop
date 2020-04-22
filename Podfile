@@ -9,4 +9,7 @@ target 'GWShopReal' do
   pod 'IQKeyboardManagerSwift'
   pod 'Firebase/Auth'
   pod 'Firebase/Firestore'
+  
+
 end
+
