@@ -17,18 +17,17 @@ class ViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        registerButton.layer.cornerRadius = loginButton.frame.size.height/5
+        registerButton.layer.cornerRadius = loginButton.frame.size.height/5      //ปุ่มโค้ง
          loginButton.layer.cornerRadius = loginButton.frame.size.height/5
     }
     
-    override func viewWillAppear(_ animated: Bool) {
+    override func viewWillAppear(_ animated: Bool) {               //ซ่อนแถบข้างบนตอนเปิดหน้า
         super.viewWillAppear(animated)
-        navigationController?.isNavigationBarHidden = true
-        navigationController?.isToolbarHidden = true
+         navigationController?.isNavigationBarHidden = true
     }
-    override func viewWillDisappear(_ animated: Bool) {
+    override func viewWillDisappear(_ animated: Bool) {            //เอาแถบข้างบนกลับมาตอนปิด
         super.viewWillDisappear(animated)
-        navigationController?.isNavigationBarHidden = false
+         navigationController?.isNavigationBarHidden = false
     }
 
 

@@ -3,21 +3,21 @@
 <plist version="1.0">
 <dict>
 	<key>CLIENT_ID</key>
-	<string>708519951985-a5r4fb3ku553m4tdkis1166h7t54thlc.apps.googleusercontent.com</string>
+	<string>287816819326-kc65qo39e3ia4e108tk4inermcmr204e.apps.googleusercontent.com</string>
 	<key>REVERSED_CLIENT_ID</key>
-	<string>com.googleusercontent.apps.708519951985-a5r4fb3ku553m4tdkis1166h7t54thlc</string>
+	<string>com.googleusercontent.apps.287816819326-kc65qo39e3ia4e108tk4inermcmr204e</string>
 	<key>API_KEY</key>
-	<string>AIzaSyDu7LeV-EfHaaDeoxvvIONuNQYk7M39C48</string>
+	<string>AIzaSyCzUl5Z8z2VAHMI9BE9DNFWxuPRBdvHBA8</string>
 	<key>GCM_SENDER_ID</key>
-	<string>708519951985</string>
+	<string>287816819326</string>
 	<key>PLIST_VERSION</key>
 	<string>1</string>
 	<key>BUNDLE_ID</key>
-	<string>com.PMJs.GWShop</string>
+	<string>com.PMJs.GWShopReal</string>
 	<key>PROJECT_ID</key>
-	<string>gwshopreal</string>
+	<string>gwshopreal-47f16</string>
 	<key>STORAGE_BUCKET</key>
-	<string>gwshopreal.appspot.com</string>
+	<string>gwshopreal-47f16.appspot.com</string>
 	<key>IS_ADS_ENABLED</key>
 	<false></false>
 	<key>IS_ANALYTICS_ENABLED</key>
@@ -29,8 +29,8 @@
 	<key>IS_SIGNIN_ENABLED</key>
 	<true></true>
 	<key>GOOGLE_APP_ID</key>
-	<string>1:708519951985:ios:4a43cee1b1596384e465d0</string>
+	<string>1:287816819326:ios:15a452cdee160c2f572e2f</string>
 	<key>DATABASE_URL</key>
-	<string>https://gwshopreal.firebaseio.com</string>
+	<string>https://gwshopreal-47f16.firebaseio.com</string>
 </dict>
 </plist>
