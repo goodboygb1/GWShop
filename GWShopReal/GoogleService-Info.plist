@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>CLIENT_ID</key>
+	<string>270671605612-kgc14vsivm71b8c1k7q0p03v7qaajmlo.apps.googleusercontent.com</string>
+	<key>REVERSED_CLIENT_ID</key>
+	<string>com.googleusercontent.apps.270671605612-kgc14vsivm71b8c1k7q0p03v7qaajmlo</string>
+	<key>API_KEY</key>
+	<string>AIzaSyBfFkk_caHKdXOAW42bY6uLdLm_y4w1MV8</string>
+	<key>GCM_SENDER_ID</key>
+	<string>270671605612</string>
+	<key>PLIST_VERSION</key>
+	<string>1</string>
+	<key>BUNDLE_ID</key>
+	<string>com.PMJs.GWShopReal</string>
+	<key>PROJECT_ID</key>
+	<string>gwshop-18cac</string>
+	<key>STORAGE_BUCKET</key>
+	<string>gwshop-18cac.appspot.com</string>
+	<key>IS_ADS_ENABLED</key>
+	<false></false>
+	<key>IS_ANALYTICS_ENABLED</key>
+	<false></false>
+	<key>IS_APPINVITE_ENABLED</key>
+	<true></true>
+	<key>IS_GCM_ENABLED</key>
+	<true></true>
+	<key>IS_SIGNIN_ENABLED</key>
+	<true></true>
+	<key>GOOGLE_APP_ID</key>
+	<string>1:270671605612:ios:a2b1d5095d07f398540d49</string>
+	<key>DATABASE_URL</key>
+	<string>https://gwshop-18cac.firebaseio.com</string>
+</dict>
+</plist>
