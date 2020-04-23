@@ -645,10 +645,10 @@
             </objects>
             <point key="canvasLocation" x="5660" y="29.55665024630542"/>
         </scene>
-        <!--Notification View Controller-->
+        <!--Me View Controller-->
         <scene sceneID="VQO-D8-vlW">
             <objects>
-                <viewController id="n5t-AK-a5G" customClass="NotificationViewController" customModule="GWShopReal" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="n5t-AK-a5G" customClass="MeViewController" customModule="GWShopReal" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="uXA-iM-qio">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>

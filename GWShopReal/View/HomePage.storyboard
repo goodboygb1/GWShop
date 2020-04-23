@@ -12,14 +12,61 @@
             <objects>
                 <viewController id="3BS-TI-0Xf" customClass="MainViewController" customModule="GWShopReal" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="2LD-YY-xyH">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="1000"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="HGL-TJ-hq9">
+                                <rect key="frame" x="0.0" y="88" width="375" height="829"/>
+                                <subviews>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Kuh-ge-AIR">
+                                        <rect key="frame" x="0.0" y="0.0" width="375" height="829"/>
+                                        <subviews>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QXJ-K6-qZ4">
+                                                <rect key="frame" x="140.66666666666666" y="745" width="94" height="48"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="40"/>
+                                                <nil key="textColor"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cuC-QP-SUM">
+                                                <rect key="frame" x="140.66666666666666" y="35" width="94" height="48"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="40"/>
+                                                <nil key="textColor"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                        </subviews>
+                                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                        <constraints>
+                                            <constraint firstItem="cuC-QP-SUM" firstAttribute="top" secondItem="Kuh-ge-AIR" secondAttribute="top" constant="35" id="4cN-Hb-aul"/>
+                                            <constraint firstItem="QXJ-K6-qZ4" firstAttribute="centerX" secondItem="Kuh-ge-AIR" secondAttribute="centerX" id="9eT-UD-dRZ"/>
+                                            <constraint firstItem="cuC-QP-SUM" firstAttribute="centerX" secondItem="Kuh-ge-AIR" secondAttribute="centerX" id="Jte-Xm-UJB"/>
+                                            <constraint firstAttribute="bottom" secondItem="QXJ-K6-qZ4" secondAttribute="bottom" constant="36" id="ltm-A0-YeT"/>
+                                            <constraint firstItem="QXJ-K6-qZ4" firstAttribute="top" secondItem="cuC-QP-SUM" secondAttribute="bottom" constant="662" id="s9Y-31-y9I"/>
+                                        </constraints>
+                                    </view>
+                                </subviews>
+                                <constraints>
+                                    <constraint firstItem="Kuh-ge-AIR" firstAttribute="trailing" secondItem="HGL-TJ-hq9" secondAttribute="trailing" id="7t0-po-A3H"/>
+                                    <constraint firstItem="Kuh-ge-AIR" firstAttribute="height" secondItem="HGL-TJ-hq9" secondAttribute="height" priority="250" id="KNk-Mz-Ywo"/>
+                                    <constraint firstItem="Kuh-ge-AIR" firstAttribute="leading" secondItem="HGL-TJ-hq9" secondAttribute="leading" id="R1j-dI-rXz"/>
+                                    <constraint firstItem="Kuh-ge-AIR" firstAttribute="width" secondItem="HGL-TJ-hq9" secondAttribute="width" id="Ym4-Za-hXk"/>
+                                    <constraint firstItem="Kuh-ge-AIR" firstAttribute="top" secondItem="HGL-TJ-hq9" secondAttribute="top" id="tBA-wg-sGp"/>
+                                    <constraint firstItem="Kuh-ge-AIR" firstAttribute="bottom" secondItem="HGL-TJ-hq9" secondAttribute="bottom" id="zgc-Nt-SPX"/>
+                                </constraints>
+                            </scrollView>
+                        </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <constraints>
+                            <constraint firstItem="HGL-TJ-hq9" firstAttribute="top" secondItem="LVf-Bj-jHh" secondAttribute="top" id="8Ri-de-3kV"/>
+                            <constraint firstItem="HGL-TJ-hq9" firstAttribute="trailing" secondItem="LVf-Bj-jHh" secondAttribute="trailing" id="9uJ-18-qAM"/>
+                            <constraint firstItem="HGL-TJ-hq9" firstAttribute="leading" secondItem="LVf-Bj-jHh" secondAttribute="leading" id="BbS-qv-9pu"/>
+                            <constraint firstItem="HGL-TJ-hq9" firstAttribute="bottom" secondItem="LVf-Bj-jHh" secondAttribute="bottom" id="sz6-zM-oTc"/>
+                        </constraints>
                         <viewLayoutGuide key="safeArea" id="LVf-Bj-jHh"/>
                     </view>
                     <tabBarItem key="tabBarItem" title="หน้าแรก" image="btn_หน้าแรก" selectedImage="btn_หน้าแรก" id="wMi-Lr-1tr"/>
                     <navigationItem key="navigationItem" id="FNf-Rt-v1L"/>
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
+                    <size key="freeformSize" width="375" height="1000"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="oAX-Ma-lAE" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
