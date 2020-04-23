@@ -9,8 +9,15 @@
 import UIKit
 
 class EditProfileController: UIViewController {
-
+    @IBOutlet weak var profileImage: UIImageView!
+    @IBOutlet weak var newFirstNameTextField: UITextField!
+    @IBOutlet weak var newLastNameTextField: UITextField!
+    @IBOutlet weak var genderSegment: UISegmentedControl!
+    @IBOutlet weak var newDateTextField: UITextField!
+    @IBOutlet weak var newPhoneNumberTextField: UITextField!
+    
     override func viewDidLoad() {
+        
         super.viewDidLoad()
         
         // make rounded profile image 
@@ -19,6 +26,11 @@ class EditProfileController: UIViewController {
         image.layer.borderColor = UIColor.black.cgColor
         image.layer.cornerRadius = image.frame.height/2
         image.clipsToBounds = true*/
+    }
+    @IBAction func updateProfileImagePressed(_ sender: UIButton) {
+    }
+    @IBAction func submitProfilePressed(_ sender: UIButton) {
+        self.dismiss(animated: true, completion: nil)
     }
     
 
