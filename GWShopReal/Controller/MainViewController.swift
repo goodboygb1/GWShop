@@ -19,6 +19,7 @@ class MainViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         tabBarController?.navigationItem.setHidesBackButton(true, animated: true)
+            tabBarController?.navigationController?.isNavigationBarHidden = true
     }
 
     /*
