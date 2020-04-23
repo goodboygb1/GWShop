@@ -1,5 +1,5 @@
 //
-//  EditCardsController.swift
+//  EditAddressController.swift
 //  GWShopReal
 //
 //  Created by Thakorn Krittayakunakorn on 23/4/2563 BE.
@@ -8,24 +8,15 @@
 
 import UIKit
 
-class EditCardsController: UIViewController {
-    @IBOutlet weak var cardNameTextField: UITextField!
-    @IBOutlet weak var cardNumberTextField: UITextField!
-    @IBOutlet weak var expiredMonthTextField: UITextField!
-    @IBOutlet weak var expiredYearTextField: UITextField!
-    @IBOutlet weak var cvvTextField: UITextField!
-    
+class EditAddressController: UIViewController {
+
     override func viewDidLoad() {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
     }
-    @IBAction func submitCardButton(_ sender: Any) {
-    }
     
-    @IBAction func submitCardPressed(_ sender: UIButton) {
-    }
-    
+
     /*
     // MARK: - Navigation
 
