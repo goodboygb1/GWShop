@@ -12,6 +12,7 @@
 		8436DBCD24517FE900956EDA /* ProfileController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8436DBCC24517FE900956EDA /* ProfileController.swift */; };
 		8436DBCF2451800B00956EDA /* EditProfileController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8436DBCE2451800B00956EDA /* EditProfileController.swift */; };
 		8436DBD12451AE9600956EDA /* EditCardsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8436DBD02451AE9600956EDA /* EditCardsController.swift */; };
+		8436DBD32451C8B900956EDA /* EditAddressController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8436DBD22451C8B900956EDA /* EditAddressController.swift */; };
 		A33A277F2450995000810BC5 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A33A277E2450995000810BC5 /* AppDelegate.swift */; };
 		A33A27812450995000810BC5 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A33A27802450995000810BC5 /* SceneDelegate.swift */; };
 		A33A27832450995000810BC5 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A33A27822450995000810BC5 /* ViewController.swift */; };
@@ -46,6 +47,7 @@
 		8436DBCC24517FE900956EDA /* ProfileController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileController.swift; sourceTree = "<group>"; };
 		8436DBCE2451800B00956EDA /* EditProfileController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditProfileController.swift; sourceTree = "<group>"; };
 		8436DBD02451AE9600956EDA /* EditCardsController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditCardsController.swift; sourceTree = "<group>"; };
+		8436DBD22451C8B900956EDA /* EditAddressController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditAddressController.swift; sourceTree = "<group>"; };
 		A33A277B2450995000810BC5 /* GWShopReal.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GWShopReal.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A33A277E2450995000810BC5 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		A33A27802450995000810BC5 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -128,6 +130,7 @@
 				8436DBCC24517FE900956EDA /* ProfileController.swift */,
 				8436DBCE2451800B00956EDA /* EditProfileController.swift */,
 				8436DBD02451AE9600956EDA /* EditCardsController.swift */,
+				8436DBD22451C8B900956EDA /* EditAddressController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -276,6 +279,7 @@
 			files = (
 				A33A279E2450A04200810BC5 /* Constant.swift in Sources */,
 				8436DBCF2451800B00956EDA /* EditProfileController.swift in Sources */,
+				8436DBD32451C8B900956EDA /* EditAddressController.swift in Sources */,
 				A33A27832450995000810BC5 /* ViewController.swift in Sources */,
 				A33A279A24509FA100810BC5 /* RegisterViewController.swift in Sources */,
 				8436DBD12451AE9600956EDA /* EditCardsController.swift in Sources */,

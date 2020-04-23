@@ -19,7 +19,6 @@ class EditProfileController: UIViewController {
     override func viewDidLoad() {
         
         super.viewDidLoad()
-        
         // make rounded profile image 
         /*image.layer.borderWidth = 1
         image.layer.masksToBounds = false
@@ -29,7 +28,7 @@ class EditProfileController: UIViewController {
     }
     @IBAction func updateProfileImagePressed(_ sender: UIButton) {
     }
-    @IBAction func submitProfilePressed(_ sender: UIButton) {
+    @IBAction func submitProfilePressed(_ sender: UIButton) { // go back to profile page
         self.dismiss(animated: true, completion: nil)
     }
     
