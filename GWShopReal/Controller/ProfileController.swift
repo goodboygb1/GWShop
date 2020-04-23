@@ -38,7 +38,7 @@ class ProfileController: UIViewController {
     @IBAction func notificationButtonPressed(_ sender: UIButton) {
     }
     
-    
+    // pressed gear button
     @IBAction func editProfilePressed(_ sender: UIButton) {
         self.performSegue(withIdentifier: "goToEditProfile", sender: self)
     }
