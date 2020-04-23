@@ -366,31 +366,27 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="49"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <color key="barTintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     </tabBar>
                     <connections>
-                        <segue destination="xvi-GH-WNE" kind="relationship" relationship="viewControllers" id="0bf-wt-y53"/>
+                        <segue destination="Y5F-u7-dnR" kind="relationship" relationship="viewControllers" id="3Ju-3c-CwT"/>
+                        <segue destination="B3K-Qb-ku7" kind="relationship" relationship="viewControllers" id="RZf-cq-Wud"/>
+                        <segue destination="z96-Ih-LAr" kind="relationship" relationship="viewControllers" id="gKE-s6-lfn"/>
                     </connections>
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="qxX-VV-AgM" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="2676" y="-54"/>
         </scene>
-        <!--หน้าแรก-->
-        <scene sceneID="1aE-cy-b9Y">
+        <!--HomePage-->
+        <scene sceneID="9Qs-sW-8r9">
             <objects>
-                <viewController id="xvi-GH-WNE" customClass="MainViewController" customModule="GWShopReal" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="GOm-6h-cOf">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
-                        <viewLayoutGuide key="safeArea" id="HpJ-r9-xef"/>
-                    </view>
-                    <tabBarItem key="tabBarItem" title="หน้าแรก" selectedImage="btn_หน้าแรก" id="3Bx-Ga-S2M"/>
-                    <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="epv-E2-Uj6" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+                <viewControllerPlaceholder storyboardName="HomePage" id="Y5F-u7-dnR" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="Item" id="UyM-xa-VNd"/>
+                </viewControllerPlaceholder>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Dw6-ue-hkT" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3539" y="-49"/>
+            <point key="canvasLocation" x="3400" y="-211"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="QJo-aL-rjI">
@@ -410,6 +406,26 @@
             </objects>
             <point key="canvasLocation" x="137.68115942028987" y="129.91071428571428"/>
         </scene>
+        <!--Notification-->
+        <scene sceneID="nbe-44-135">
+            <objects>
+                <viewControllerPlaceholder storyboardName="Notification" id="B3K-Qb-ku7" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="Item" id="cUh-CJ-oYQ"/>
+                </viewControllerPlaceholder>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="AVc-X3-uNR" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3400" y="-55"/>
+        </scene>
+        <!--Me-->
+        <scene sceneID="AQg-lg-OZG">
+            <objects>
+                <viewControllerPlaceholder storyboardName="Me" id="z96-Ih-LAr" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="Item" id="hw6-HZ-gwF"/>
+                </viewControllerPlaceholder>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="D80-6P-Zgr" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3400" y="60"/>
+        </scene>
     </scenes>
     <inferredMetricsTieBreakers>
         <segue reference="WlC-tm-PIG"/>
@@ -417,7 +433,6 @@
     <resources>
         <image name="Logo-GW-white" width="166.66667175292969" height="166.66667175292969"/>
         <image name="background" width="105" height="270.66665649414062"/>
-        <image name="btn_หน้าแรก" width="11" height="14"/>
         <namedColor name="Blue">
             <color red="0.32899999618530273" green="0.32400000095367432" blue="0.4779999852180481" alpha="0.33000001311302185" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
