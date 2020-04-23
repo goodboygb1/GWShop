@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="16096" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="Bqg-43-QvD">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16087"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--Tab Bar Controller-->
+        <scene sceneID="PWq-6B-5vd">
+            <objects>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="cOA-GN-hJy" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+                <tabBarController id="Bqg-43-QvD" sceneMemberID="viewController">
+                    <navigationItem key="navigationItem" id="fk3-cl-hhB"/>
+                    <tabBar key="tabBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="bl9-9L-HiN">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="49"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <color key="barTintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    </tabBar>
+                    <connections>
+                        <segue destination="npA-Dl-e6p" kind="relationship" relationship="viewControllers" id="fkh-Rr-Vtj"/>
+                        <segue destination="2gp-rS-eHH" kind="relationship" relationship="viewControllers" id="9xm-jx-8yi"/>
+                        <segue destination="wZy-zu-ylN" kind="relationship" relationship="viewControllers" id="Nok-Uw-H1D"/>
+                    </connections>
+                </tabBarController>
+            </objects>
+            <point key="canvasLocation" x="2676" y="-54"/>
+        </scene>
+        <!--HomePage-->
+        <scene sceneID="WGk-ie-5zO">
+            <objects>
+                <viewControllerPlaceholder storyboardName="HomePage" id="npA-Dl-e6p" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="Item" id="bvS-bK-j5G"/>
+                </viewControllerPlaceholder>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="4Bx-IC-NEl" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3400" y="-211"/>
+        </scene>
+        <!--Notification-->
+        <scene sceneID="Rzo-7r-uuR">
+            <objects>
+                <viewControllerPlaceholder storyboardName="Notification" id="2gp-rS-eHH" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="Item" id="LS9-2I-ivW"/>
+                </viewControllerPlaceholder>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Fgv-WW-Nak" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3400" y="-55"/>
+        </scene>
+        <!--Me-->
+        <scene sceneID="27v-Dv-pGG">
+            <objects>
+                <viewControllerPlaceholder storyboardName="Me" id="wZy-zu-ylN" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="Item" id="RcM-zH-P1p"/>
+                </viewControllerPlaceholder>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Jnl-yM-YgI" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3400" y="60"/>
+        </scene>
+    </scenes>
+</document>

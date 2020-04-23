@@ -274,12 +274,22 @@
                         <outlet property="passwordTextField" destination="xKQ-Xp-o7T" id="ZGL-So-g4O"/>
                         <outlet property="phoneNumberTextField" destination="IcC-ev-UKf" id="oAG-cf-rUf"/>
                         <outlet property="postCodeTextField" destination="2k3-0U-MDO" id="tNc-7Y-Izj"/>
-                        <segue destination="Kri-c4-YoV" kind="show" identifier="registerToMain" id="WlC-tm-PIG"/>
+                        <segue destination="jiW-7L-R2w" kind="show" identifier="registerToMain" id="27a-gt-aym"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="2SV-uj-Mfc" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1838" y="-304"/>
+        </scene>
+        <!--splitWay-->
+        <scene sceneID="aJk-4S-qVh">
+            <objects>
+                <viewControllerPlaceholder storyboardName="splitWay" id="jiW-7L-R2w" sceneMemberID="viewController">
+                    <navigationItem key="navigationItem" id="feb-Db-Kr7"/>
+                </viewControllerPlaceholder>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="zC8-MD-5sd" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3019" y="1"/>
         </scene>
         <!--Login Controller-->
         <scene sceneID="spX-xD-uOw">
@@ -350,43 +360,12 @@
                     <connections>
                         <outlet property="emailTextField" destination="U9K-TT-gD4" id="1kM-Ic-Hyw"/>
                         <outlet property="passwordTextField" destination="kPX-Gi-XEI" id="L0c-tP-vQ7"/>
-                        <segue destination="Kri-c4-YoV" kind="show" identifier="loginToMain" id="khC-IB-8MO"/>
+                        <segue destination="jiW-7L-R2w" kind="show" identifier="loginToMain" id="U53-oh-nck"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="UXf-V3-NLS" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1837.5999999999999" y="382.75862068965517"/>
-        </scene>
-        <!--Tab Bar Controller-->
-        <scene sceneID="yuU-0e-8hK">
-            <objects>
-                <tabBarController id="Kri-c4-YoV" sceneMemberID="viewController">
-                    <navigationItem key="navigationItem" id="kE2-36-mlM"/>
-                    <tabBar key="tabBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="oux-e5-Fzu">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="49"/>
-                        <autoresizingMask key="autoresizingMask"/>
-                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                        <color key="barTintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                    </tabBar>
-                    <connections>
-                        <segue destination="Y5F-u7-dnR" kind="relationship" relationship="viewControllers" id="3Ju-3c-CwT"/>
-                        <segue destination="B3K-Qb-ku7" kind="relationship" relationship="viewControllers" id="RZf-cq-Wud"/>
-                        <segue destination="z96-Ih-LAr" kind="relationship" relationship="viewControllers" id="gKE-s6-lfn"/>
-                    </connections>
-                </tabBarController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="qxX-VV-AgM" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="2676" y="-54"/>
-        </scene>
-        <!--HomePage-->
-        <scene sceneID="9Qs-sW-8r9">
-            <objects>
-                <viewControllerPlaceholder storyboardName="HomePage" id="Y5F-u7-dnR" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Item" id="UyM-xa-VNd"/>
-                </viewControllerPlaceholder>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="Dw6-ue-hkT" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="3400" y="-211"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="QJo-aL-rjI">
@@ -406,29 +385,9 @@
             </objects>
             <point key="canvasLocation" x="137.68115942028987" y="129.91071428571428"/>
         </scene>
-        <!--Notification-->
-        <scene sceneID="nbe-44-135">
-            <objects>
-                <viewControllerPlaceholder storyboardName="Notification" id="B3K-Qb-ku7" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Item" id="cUh-CJ-oYQ"/>
-                </viewControllerPlaceholder>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="AVc-X3-uNR" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="3400" y="-55"/>
-        </scene>
-        <!--Me-->
-        <scene sceneID="AQg-lg-OZG">
-            <objects>
-                <viewControllerPlaceholder storyboardName="Me" id="z96-Ih-LAr" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Item" id="hw6-HZ-gwF"/>
-                </viewControllerPlaceholder>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="D80-6P-Zgr" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="3400" y="60"/>
-        </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="WlC-tm-PIG"/>
+        <segue reference="U53-oh-nck"/>
     </inferredMetricsTieBreakers>
     <resources>
         <image name="Logo-GW-white" width="166.66667175292969" height="166.66667175292969"/>

@@ -16,16 +16,14 @@ class MeViewController: UIViewController {
         // Do any additional setup after loading the view.
     }
     
+   override func viewWillAppear(_ animated: Bool) {
+       super.viewWillAppear(animated)
+       tabBarController?.navigationItem.setHidesBackButton(true, animated: animated)
+       tabBarController?.navigationController?.setNavigationBarHidden(true, animated: animated)
+       navigationController?.setNavigationBarHidden(true, animated: animated)
+      
+   }
 
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        tabBarController?.navigationItem.setHidesBackButton(true, animated: true)
-        tabBarController?.navigationController?.isNavigationBarHidden = true
-    }
-
-    override func viewWillDisappear(_ animated: Bool) {
-        super.viewWillDisappear(animated)
-        tabBarController?.navigationItem.setHidesBackButton(false, animated: false)
-    }
+    
     
 }
