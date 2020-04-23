@@ -26,6 +26,7 @@
 		A3B434772451ECCE008E71EC /* Notification.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A3B434762451ECCE008E71EC /* Notification.storyboard */; };
 		A3B434792451ECDB008E71EC /* Me.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A3B434782451ECDB008E71EC /* Me.storyboard */; };
 		A3FC91B424521C5100475F40 /* MeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3FC91B324521C5100475F40 /* MeViewController.swift */; };
+		A3FEBC0024523BB200E3827B /* splitWay.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A3FEBBFF24523BB200E3827B /* splitWay.storyboard */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -64,6 +65,7 @@
 		A3B434762451ECCE008E71EC /* Notification.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Notification.storyboard; sourceTree = "<group>"; };
 		A3B434782451ECDB008E71EC /* Me.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Me.storyboard; sourceTree = "<group>"; };
 		A3FC91B324521C5100475F40 /* MeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MeViewController.swift; sourceTree = "<group>"; };
+		A3FEBBFF24523BB200E3827B /* splitWay.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = splitWay.storyboard; sourceTree = "<group>"; };
 		D77F4BE2124F5E982C1F279C /* Pods-GWShopReal.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GWShopReal.debug.xcconfig"; path = "Target Support Files/Pods-GWShopReal/Pods-GWShopReal.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -118,6 +120,7 @@
 			isa = PBXGroup;
 			children = (
 				A33A27842450995000810BC5 /* Main.storyboard */,
+				A3FEBBFF24523BB200E3827B /* splitWay.storyboard */,
 				A3B434742451ECBC008E71EC /* HomePage.storyboard */,
 				A3B434762451ECCE008E71EC /* Notification.storyboard */,
 				A3B434782451ECDB008E71EC /* Me.storyboard */,
@@ -231,6 +234,7 @@
 				A33A27862450995000810BC5 /* Main.storyboard in Resources */,
 				A3B434792451ECDB008E71EC /* Me.storyboard in Resources */,
 				A3B434772451ECCE008E71EC /* Notification.storyboard in Resources */,
+				A3FEBC0024523BB200E3827B /* splitWay.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
