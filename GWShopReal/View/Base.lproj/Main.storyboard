@@ -378,7 +378,7 @@
         <!--หน้าแรก-->
         <scene sceneID="1aE-cy-b9Y">
             <objects>
-                <viewController id="xvi-GH-WNE" sceneMemberID="viewController">
+                <viewController id="xvi-GH-WNE" customClass="MainViewController" customModule="GWShopReal" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="GOm-6h-cOf">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>

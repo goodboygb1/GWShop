@@ -9,10 +9,6 @@
 /* Begin PBXBuildFile section */
 		8436DBC9245174EE00956EDA /* Pods_GWShopReal.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 22955FD222D677EA13792783 /* Pods_GWShopReal.framework */; };
 		8436DBCA245174EE00956EDA /* Pods_GWShopReal.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 22955FD222D677EA13792783 /* Pods_GWShopReal.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		8436DBCD24517FE900956EDA /* ProfileController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8436DBCC24517FE900956EDA /* ProfileController.swift */; };
-		8436DBCF2451800B00956EDA /* EditProfileController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8436DBCE2451800B00956EDA /* EditProfileController.swift */; };
-		8436DBD12451AE9600956EDA /* EditCardsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8436DBD02451AE9600956EDA /* EditCardsController.swift */; };
-		8436DBD32451C8B900956EDA /* EditAddressController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8436DBD22451C8B900956EDA /* EditAddressController.swift */; };
 		A33A277F2450995000810BC5 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A33A277E2450995000810BC5 /* AppDelegate.swift */; };
 		A33A27812450995000810BC5 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A33A27802450995000810BC5 /* SceneDelegate.swift */; };
 		A33A27832450995000810BC5 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A33A27822450995000810BC5 /* ViewController.swift */; };
@@ -28,6 +24,7 @@
 		A3B434752451ECBC008E71EC /* HomePage.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A3B434742451ECBC008E71EC /* HomePage.storyboard */; };
 		A3B434772451ECCE008E71EC /* Notification.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A3B434762451ECCE008E71EC /* Notification.storyboard */; };
 		A3B434792451ECDB008E71EC /* Me.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A3B434782451ECDB008E71EC /* Me.storyboard */; };
+		A3FC91B424521C5100475F40 /* MeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3FC91B324521C5100475F40 /* MeViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -47,10 +44,6 @@
 /* Begin PBXFileReference section */
 		22955FD222D677EA13792783 /* Pods_GWShopReal.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_GWShopReal.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		6649F8358CCAC210AAB18B18 /* Pods-GWShopReal.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GWShopReal.release.xcconfig"; path = "Target Support Files/Pods-GWShopReal/Pods-GWShopReal.release.xcconfig"; sourceTree = "<group>"; };
-		8436DBCC24517FE900956EDA /* ProfileController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileController.swift; sourceTree = "<group>"; };
-		8436DBCE2451800B00956EDA /* EditProfileController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditProfileController.swift; sourceTree = "<group>"; };
-		8436DBD02451AE9600956EDA /* EditCardsController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditCardsController.swift; sourceTree = "<group>"; };
-		8436DBD22451C8B900956EDA /* EditAddressController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditAddressController.swift; sourceTree = "<group>"; };
 		A33A277B2450995000810BC5 /* GWShopReal.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GWShopReal.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A33A277E2450995000810BC5 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		A33A27802450995000810BC5 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -68,6 +61,7 @@
 		A3B434742451ECBC008E71EC /* HomePage.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = HomePage.storyboard; sourceTree = "<group>"; };
 		A3B434762451ECCE008E71EC /* Notification.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Notification.storyboard; sourceTree = "<group>"; };
 		A3B434782451ECDB008E71EC /* Me.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Me.storyboard; sourceTree = "<group>"; };
+		A3FC91B324521C5100475F40 /* MeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MeViewController.swift; sourceTree = "<group>"; };
 		D77F4BE2124F5E982C1F279C /* Pods-GWShopReal.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GWShopReal.debug.xcconfig"; path = "Target Support Files/Pods-GWShopReal/Pods-GWShopReal.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -134,12 +128,9 @@
 			children = (
 				A33A27822450995000810BC5 /* ViewController.swift */,
 				A33A279724509F9200810BC5 /* LoginController.swift */,
-				A33A279924509FA100810BC5 /* RegisterViewController.swift */,
 				A33A279B24509FAE00810BC5 /* MainViewController.swift */,
-				8436DBCC24517FE900956EDA /* ProfileController.swift */,
-				8436DBCE2451800B00956EDA /* EditProfileController.swift */,
-				8436DBD02451AE9600956EDA /* EditCardsController.swift */,
-				8436DBD22451C8B900956EDA /* EditAddressController.swift */,
+				A33A279924509FA100810BC5 /* RegisterViewController.swift */,
+				A3FC91B324521C5100475F40 /* MeViewController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -289,15 +280,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A3FC91B424521C5100475F40 /* MeViewController.swift in Sources */,
 				A33A279E2450A04200810BC5 /* Constant.swift in Sources */,
-				8436DBCF2451800B00956EDA /* EditProfileController.swift in Sources */,
-				8436DBD32451C8B900956EDA /* EditAddressController.swift in Sources */,
 				A33A27832450995000810BC5 /* ViewController.swift in Sources */,
 				A33A279A24509FA100810BC5 /* RegisterViewController.swift in Sources */,
-				8436DBD12451AE9600956EDA /* EditCardsController.swift in Sources */,
 				A33A279824509F9200810BC5 /* LoginController.swift in Sources */,
 				A33A279C24509FAE00810BC5 /* MainViewController.swift in Sources */,
-				8436DBCD24517FE900956EDA /* ProfileController.swift in Sources */,
 				A37003DE2450CB08002B0066 /* userDetail.swift in Sources */,
 				A33A277F2450995000810BC5 /* AppDelegate.swift in Sources */,
 				A33A27812450995000810BC5 /* SceneDelegate.swift in Sources */,
