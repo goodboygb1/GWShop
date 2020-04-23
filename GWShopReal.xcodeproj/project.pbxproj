@@ -7,6 +7,11 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		8436DBC9245174EE00956EDA /* Pods_GWShopReal.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 22955FD222D677EA13792783 /* Pods_GWShopReal.framework */; };
+		8436DBCA245174EE00956EDA /* Pods_GWShopReal.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 22955FD222D677EA13792783 /* Pods_GWShopReal.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		8436DBCD24517FE900956EDA /* ProfileController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8436DBCC24517FE900956EDA /* ProfileController.swift */; };
+		8436DBCF2451800B00956EDA /* EditProfileController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8436DBCE2451800B00956EDA /* EditProfileController.swift */; };
+		8436DBD12451AE9600956EDA /* EditCardsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8436DBD02451AE9600956EDA /* EditCardsController.swift */; };
 		A33A277F2450995000810BC5 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A33A277E2450995000810BC5 /* AppDelegate.swift */; };
 		A33A27812450995000810BC5 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A33A27802450995000810BC5 /* SceneDelegate.swift */; };
 		A33A27832450995000810BC5 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A33A27822450995000810BC5 /* ViewController.swift */; };
@@ -19,12 +24,28 @@
 		A33A279E2450A04200810BC5 /* Constant.swift in Sources */ = {isa = PBXBuildFile; fileRef = A33A279D2450A04200810BC5 /* Constant.swift */; };
 		A37003DC2450C6E8002B0066 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = A37003DB2450C6E8002B0066 /* GoogleService-Info.plist */; };
 		A37003DE2450CB08002B0066 /* userDetail.swift in Sources */ = {isa = PBXBuildFile; fileRef = A37003DD2450CB08002B0066 /* userDetail.swift */; };
-		B0F5C876722260610C0AA96B /* Pods_GWShopReal.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 22955FD222D677EA13792783 /* Pods_GWShopReal.framework */; };
 /* End PBXBuildFile section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		8436DBCB245174EE00956EDA /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				8436DBCA245174EE00956EDA /* Pods_GWShopReal.framework in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		22955FD222D677EA13792783 /* Pods_GWShopReal.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_GWShopReal.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		6649F8358CCAC210AAB18B18 /* Pods-GWShopReal.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GWShopReal.release.xcconfig"; path = "Target Support Files/Pods-GWShopReal/Pods-GWShopReal.release.xcconfig"; sourceTree = "<group>"; };
+		8436DBCC24517FE900956EDA /* ProfileController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileController.swift; sourceTree = "<group>"; };
+		8436DBCE2451800B00956EDA /* EditProfileController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditProfileController.swift; sourceTree = "<group>"; };
+		8436DBD02451AE9600956EDA /* EditCardsController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditCardsController.swift; sourceTree = "<group>"; };
 		A33A277B2450995000810BC5 /* GWShopReal.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GWShopReal.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A33A277E2450995000810BC5 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		A33A27802450995000810BC5 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -47,7 +68,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				B0F5C876722260610C0AA96B /* Pods_GWShopReal.framework in Frameworks */,
+				8436DBC9245174EE00956EDA /* Pods_GWShopReal.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -104,6 +125,9 @@
 				A33A279724509F9200810BC5 /* LoginController.swift */,
 				A33A279924509FA100810BC5 /* RegisterViewController.swift */,
 				A33A279B24509FAE00810BC5 /* MainViewController.swift */,
+				8436DBCC24517FE900956EDA /* ProfileController.swift */,
+				8436DBCE2451800B00956EDA /* EditProfileController.swift */,
+				8436DBD02451AE9600956EDA /* EditCardsController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -144,6 +168,8 @@
 				A33A27772450995000810BC5 /* Sources */,
 				A33A27782450995000810BC5 /* Frameworks */,
 				A33A27792450995000810BC5 /* Resources */,
+				8436DBCB245174EE00956EDA /* Embed Frameworks */,
+				169EFD2FC3C5E727993FAE68 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -224,6 +250,23 @@
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
+		169EFD2FC3C5E727993FAE68 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-GWShopReal/Pods-GWShopReal-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-GWShopReal/Pods-GWShopReal-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-GWShopReal/Pods-GWShopReal-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
@@ -232,10 +275,13 @@
 			buildActionMask = 2147483647;
 			files = (
 				A33A279E2450A04200810BC5 /* Constant.swift in Sources */,
+				8436DBCF2451800B00956EDA /* EditProfileController.swift in Sources */,
 				A33A27832450995000810BC5 /* ViewController.swift in Sources */,
 				A33A279A24509FA100810BC5 /* RegisterViewController.swift in Sources */,
+				8436DBD12451AE9600956EDA /* EditCardsController.swift in Sources */,
 				A33A279824509F9200810BC5 /* LoginController.swift in Sources */,
 				A33A279C24509FAE00810BC5 /* MainViewController.swift in Sources */,
+				8436DBCD24517FE900956EDA /* ProfileController.swift in Sources */,
 				A37003DE2450CB08002B0066 /* userDetail.swift in Sources */,
 				A33A277F2450995000810BC5 /* AppDelegate.swift in Sources */,
 				A33A27812450995000810BC5 /* SceneDelegate.swift in Sources */,

@@ -20,41 +20,46 @@ class RegisterViewController: UIViewController{
     @IBOutlet weak var districtField: UITextField!
     @IBOutlet weak var ProvinceField: UITextField!
     @IBOutlet weak var postCode: UITextField!
-    @IBOutlet weak var malePressed: UIButton!
-    @IBOutlet weak var femalePressed: UIButton!
     @IBOutlet weak var dateField: UITextField!
-    @IBOutlet weak var monthField: UITextField!
-    @IBOutlet weak var yearField: UITextField!
+    @IBOutlet weak var genderSegment: UISegmentedControl!
     
-    var user  = Constant()
+    var user: userDetail!
+    var datePickerView: UIDatePicker!
     override func viewDidLoad() {
         super.viewDidLoad()
     }
         
-    @IBAction func genderPressed(_ sender: UIButton) {
-        malePressed.isSelected = false
-        femalePressed.isSelected = false
-        sender.isSelected = true
+    @IBAction func showDatePicker(_ sender: UITextField) {
+        datePickerView = UIDatePicker()
+        sender.inputView = datePickerView
+        
+        let toolBar: UIToolbar = UIToolbar(frame: CGRect(x: 0, y: 0, width: 0, height: 44))
+        toolBar.barStyle = UIBarStyle.default
+        let cancelButton = UIBarButtonItem(barButtonSystemItem: .cancel, target: self, action: nil)
+        let flexibleSpace = UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: nil, action: nil)
+        let doneButton = UIBarButtonItem(barButtonSystemItem: .done, target: self, action: nil)
+        
+        toolBar.items = [cancelButton, flexibleSpace, doneButton]
+        sender.inputAccessoryView = toolBar
     }
     
+    @objc func doneTapped(sender:UIBarButtonItem!) {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateStyle = .medium
+        dateFormatter.timeStyle = .none
+        dateField.text = dateFormatter.string(from: datePickerView.date)
+        dateField.resignFirstResponder()
+    }
+    
+    let doneButton = UIBarButtonItem(barButtonSystemItem: .done, target: self, action: #selector(doneTapped))
+    
+    @objc func cancelTapped(sender:UIBarButtonItem!) {
+        dateField.resignFirstResponder()
+    }
+    let cancelButton = UIBarButtonItem(barButtonSystemItem: .cancel, target: self, action: #selector(cancelTapped))
+    
     @IBAction func registerPressed(_ sender: UIButton) {
-        if emailText.text != "" && passwordText != "" && firstName.text != "" && lastName.text != "" && dateField != "" && monthField != "" && yearField != "" && phoneNumber != "" && address1Field != "" && address2Field != "" && districtField != "" && ProvinceField != "" && postCode != "" && (malePressed.isSelected || femalePressed){
-            
-            user.name = firstName.text
-            user.surname = lastName.text
-            user.phoneNumber = phoneNumber.text
-            user.dateOfBirth = String(dateField.text + "/\(monthField.text)/\(yearField.text)" )
-            user.addressDetail = String(address1Field.text + " \(address2Field)")
-            user.province = ProvinceField.text
-            user.district = districtField.text
-            user.postCode = Int(postCode.text)
-            
-            if malePressed {
-                user.gender = "M"
-            }else{
-                user.gender = "F"
-            }
-        }
+        
     }
     
 
