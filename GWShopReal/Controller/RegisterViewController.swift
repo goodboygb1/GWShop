@@ -116,6 +116,7 @@ class RegisterViewController: UIViewController{
                                 print("error while saveing data to fire store \(e)")
                             } else {
                                 print("saving success")
+                                self.performSegue(withIdentifier: segue.registerToMain, sender: self)
                                 
                             }                             // sent data to firebase
                         }
