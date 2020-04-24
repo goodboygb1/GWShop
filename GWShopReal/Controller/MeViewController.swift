@@ -38,6 +38,7 @@ class ProfileController:UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        print("Hello")
     }
     
     @IBAction func editProfilePressed(_ sender: UIButton) {
