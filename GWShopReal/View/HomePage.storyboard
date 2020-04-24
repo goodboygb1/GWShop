@@ -30,7 +30,7 @@
                                                 <rect key="frame" x="0.0" y="-43" width="375" height="162"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                             </imageView>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="ค้นหา" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2cy-yB-lDm">
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="ค้นหา" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2cy-yB-lDm">
                                                 <rect key="frame" x="18" y="8" width="68" height="48"/>
                                                 <fontDescription key="fontDescription" name="SukhumvitSet-Text" family="Sukhumvit Set" pointSize="30"/>
                                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -42,7 +42,7 @@
                                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                 <textInputTraits key="textInputTraits"/>
                                             </textField>
-                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="749" ambiguous="YES" image="location-pin" translatesAutoresizingMaskIntoConstraints="NO" id="tI2-Uc-QsB">
+                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="749" image="location-pin" translatesAutoresizingMaskIntoConstraints="NO" id="tI2-Uc-QsB">
                                                 <rect key="frame" x="28" y="680" width="128" height="128"/>
                                             </imageView>
                                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="location-pin" translatesAutoresizingMaskIntoConstraints="NO" id="zrb-D4-maE">
@@ -89,6 +89,8 @@
                                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                         <constraints>
                                             <constraint firstAttribute="bottom" secondItem="tI2-Uc-QsB" secondAttribute="bottom" constant="65" id="ATa-fH-XEU"/>
+                                            <constraint firstItem="tI2-Uc-QsB" firstAttribute="leading" secondItem="Kuh-ge-AIR" secondAttribute="leading" constant="28" id="IHC-nQ-MR3"/>
+                                            <constraint firstItem="2cy-yB-lDm" firstAttribute="leading" secondItem="Kuh-ge-AIR" secondAttribute="leading" constant="18" id="PpG-c1-yhc"/>
                                             <constraint firstItem="2cy-yB-lDm" firstAttribute="top" secondItem="Kuh-ge-AIR" secondAttribute="top" constant="8" id="SNI-P0-stF"/>
                                             <constraint firstItem="tI2-Uc-QsB" firstAttribute="top" secondItem="2cy-yB-lDm" secondAttribute="bottom" constant="624" id="ccT-GN-ICi"/>
                                         </constraints>
