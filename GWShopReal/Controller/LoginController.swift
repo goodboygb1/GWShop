@@ -9,7 +9,7 @@
 import UIKit
 import Firebase
 
-class LoginController: UIViewController {
+class LoginController: UIViewController,UITextFieldDelegate {
     
     
     
@@ -18,12 +18,15 @@ class LoginController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        passwordTextField.delegate = self
         
     }
     
     
     @IBAction func loginButtonPressed(_ sender: UIButton) {
-        if let email = emailTextField.text , let password = passwordTextField.text { //                                                                                   สร้างตัวแปรได้
+       
+        if let email = emailTextField.text , let password = passwordTextField.text { //                                                                         ร้างตัวแปรได้
+            
             if emailTextField.text != "" && passwordTextField.text != "" {      // ถ้ากรอกครบ
                 
                 Auth.auth().signIn(withEmail: email, password: password) {  authResult, error in
@@ -36,11 +39,24 @@ class LoginController: UIViewController {
                     
                 }
             } else {                                        // user กรอก เมลหรือพาสไม่ครบ
-                print("fill email and password")
+                
+                let passwordAlert = UIAlertController(title:"Error", message: "Please Fill email or password", preferredStyle: .alert)        // create alertview
+                
+                let alertAction = UIAlertAction(title: "Dismiss", style: .destructive) { (UIAlertAction) in                              // create action button
+                    self.passwordTextField.becomeFirstResponder()
+                }
+                passwordAlert.addAction(alertAction)                // add action
+                
+                self.present(passwordAlert, animated: true)
+                
+                
+               
             }
         }
         
     }
+    
+   
 }
 
 

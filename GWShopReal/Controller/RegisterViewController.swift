@@ -84,20 +84,28 @@ class RegisterViewController: UIViewController{
     
     @IBAction func registerPressed(_ sender: UIButton) {
         
-        if let email = emailTextField.text , let password = passwordTextField.text {
+        let userDetailIsNotNil = userDetailIsNotNilFunction()  // เช็ค detail ว่ากรอกครบไหม
+        
+        if userDetailIsNotNil {                                // ถ้าครบ
             
-            Auth.auth().createUser(withEmail: email, password: password) { authResult, error in
+            if let email = emailTextField.text , let password = passwordTextField.text {
                 
-                if let errorFount = error {                              // ถ้า register ไม่ผ่าน
-                    print("Register Failed")
-                    print(errorFount.localizedDescription)
-                }
-                else {                                                    // ถ้า register ผ่าน
-                    print("Register Success")
-                    let userDetailIsNotNil = self.userDetailIsNotNil()    // เช็ค detail     ว่ากรอกครบไหม
+                Auth.auth().createUser(withEmail: email, password: password) { authResult, error in
                     
-                    if userDetailIsNotNil {                               // ถ้ากรอกครบ
-                        print("Success detail")
+                    if let errorFound = error {                 // ถ้า register ไม่ผ่าน
+                        print("Register Failed")
+                        print(errorFound.localizedDescription)
+                        
+                        let firebaseAlert = UIAlertController(title: "Error", message: errorFound.localizedDescription, preferredStyle: .alert)
+                        let firebaseAlertAction = UIAlertAction(title: "Dissmiss", style: .destructive) { (UIAlertAction) in
+                        }
+                        firebaseAlert.addAction(firebaseAlertAction)
+                        self.present(firebaseAlert, animated: true)
+                    }
+                        
+                    else {                                                    // ถ้า register ผ่าน
+                        print("Register Success")
+                        
                         let detailForSendToFirebase : [String : Any] =    // pack                                                           userdetail to                                                   dictionary
                             [
                                 K.firstName : self.firstNameTextField.text!,
@@ -121,18 +129,34 @@ class RegisterViewController: UIViewController{
                             }                             // sent data to firebase
                         }
                         
-                    } else {
-                        print("Error detail")                             // ถ้ากรอกไม่ครบ
                     }
                     
+                    
                 }
+                
             }
+        }
+            
+            
+        else {    print("Error detail")                             // ถ้ากรอกไม่ครบ
+            
+            let detailAlert = UIAlertController(title: "Error", message: "Please fill information befor pressed register", preferredStyle: .alert)                      // crete alert
+            let detailAction = UIAlertAction(title: "Dissmiss", style: .destructive) { (UIAlertAction) in
+                
+            }
+            
+            detailAlert.addAction(detailAction)
+            self.present(detailAlert, animated: true)      // show alert to user
             
         }
     }
     
     
-    func userDetailIsNotNil () -> Bool { // เช็คว่ากรอกครบทุกช่องแล้ว
+    
+    
+    
+    
+    func userDetailIsNotNilFunction() -> Bool { // เช็คว่ากรอกครบทุกช่องแล้ว
         if firstNameTextField.text != "" {
             if lastNameTextField.text != "" {
                 if phoneNumberTextField.text != "" {
@@ -167,9 +191,7 @@ class RegisterViewController: UIViewController{
             return false
         }
     }
-    
 }
-
 
 
 
