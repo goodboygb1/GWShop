@@ -206,4 +206,20 @@ class NewVendorController: UIViewController{
     
 }
 
-
+class AddProductController:UIViewController{
+    @IBOutlet weak var productNameTextField: UITextField!
+    @IBOutlet weak var productCategoryTextField: UITextField!
+    @IBOutlet weak var priceTextField: UITextField!
+    @IBOutlet weak var numberOfProductTextField: UITextField!
+    @IBOutlet weak var detailTextField: UITextField!
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+    }
+    @IBAction func removeImagePressed(_ sender: UIButton) {
+           }
+    @IBAction func confirmPressed(_ sender: UIButton) {
+       
+    }
+}
