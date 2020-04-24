@@ -665,11 +665,10 @@
         <!--ฉัน-->
         <scene sceneID="ofB-GS-wWZ">
             <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="yur-OF-Wfs" sceneMemberID="viewController">
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" navigationBarHidden="YES" id="yur-OF-Wfs" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="ฉัน" image="btn_หน้าแรก" selectedImage="btn_หน้าแรก" id="JG5-rH-74I"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="WYL-7h-BUh">
-                        <rect key="frame" x="0.0" y="44" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <nil name="viewControllers"/>

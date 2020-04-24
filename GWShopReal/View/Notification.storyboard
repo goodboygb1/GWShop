@@ -27,11 +27,10 @@
         <!--การแจ้งเตือน-->
         <scene sceneID="cGc-bq-sj3">
             <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="Phg-yE-Uci" sceneMemberID="viewController">
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" navigationBarHidden="YES" id="Phg-yE-Uci" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="การแจ้งเตือน" image="btn_หน้าแรก" selectedImage="btn_หน้าแรก" id="90E-Th-qn2"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="KSd-Jz-cGg">
-                        <rect key="frame" x="0.0" y="44" width="414" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <nil name="viewControllers"/>

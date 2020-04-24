@@ -9,6 +9,12 @@
 /* Begin PBXBuildFile section */
 		8436DBC9245174EE00956EDA /* Pods_GWShopReal.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 22955FD222D677EA13792783 /* Pods_GWShopReal.framework */; };
 		8436DBCA245174EE00956EDA /* Pods_GWShopReal.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 22955FD222D677EA13792783 /* Pods_GWShopReal.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		A30CD899245316A00061FE27 /* SukhumvitSet-Thin.ttf in Resources */ = {isa = PBXBuildFile; fileRef = A30CD8932453169F0061FE27 /* SukhumvitSet-Thin.ttf */; };
+		A30CD89A245316A00061FE27 /* SukhumvitSet-Light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = A30CD8942453169F0061FE27 /* SukhumvitSet-Light.ttf */; };
+		A30CD89B245316A00061FE27 /* SukhumvitSet-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = A30CD8952453169F0061FE27 /* SukhumvitSet-Bold.ttf */; };
+		A30CD89C245316A00061FE27 /* SukhumvitSet-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = A30CD8962453169F0061FE27 /* SukhumvitSet-Medium.ttf */; };
+		A30CD89D245316A00061FE27 /* SukhumvitSet-Text.ttf in Resources */ = {isa = PBXBuildFile; fileRef = A30CD897245316A00061FE27 /* SukhumvitSet-Text.ttf */; };
+		A30CD89E245316A00061FE27 /* SukhumvitSet-SemiBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = A30CD898245316A00061FE27 /* SukhumvitSet-SemiBold.ttf */; };
 		A33A277F2450995000810BC5 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A33A277E2450995000810BC5 /* AppDelegate.swift */; };
 		A33A27812450995000810BC5 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A33A27802450995000810BC5 /* SceneDelegate.swift */; };
 		A33A27832450995000810BC5 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A33A27822450995000810BC5 /* ViewController.swift */; };
@@ -46,6 +52,12 @@
 /* Begin PBXFileReference section */
 		22955FD222D677EA13792783 /* Pods_GWShopReal.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_GWShopReal.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		6649F8358CCAC210AAB18B18 /* Pods-GWShopReal.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GWShopReal.release.xcconfig"; path = "Target Support Files/Pods-GWShopReal/Pods-GWShopReal.release.xcconfig"; sourceTree = "<group>"; };
+		A30CD8932453169F0061FE27 /* SukhumvitSet-Thin.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SukhumvitSet-Thin.ttf"; sourceTree = "<group>"; };
+		A30CD8942453169F0061FE27 /* SukhumvitSet-Light.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SukhumvitSet-Light.ttf"; sourceTree = "<group>"; };
+		A30CD8952453169F0061FE27 /* SukhumvitSet-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SukhumvitSet-Bold.ttf"; sourceTree = "<group>"; };
+		A30CD8962453169F0061FE27 /* SukhumvitSet-Medium.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SukhumvitSet-Medium.ttf"; sourceTree = "<group>"; };
+		A30CD897245316A00061FE27 /* SukhumvitSet-Text.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SukhumvitSet-Text.ttf"; sourceTree = "<group>"; };
+		A30CD898245316A00061FE27 /* SukhumvitSet-SemiBold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SukhumvitSet-SemiBold.ttf"; sourceTree = "<group>"; };
 		A33A277B2450995000810BC5 /* GWShopReal.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GWShopReal.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A33A277E2450995000810BC5 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		A33A27802450995000810BC5 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -109,6 +121,12 @@
 				A33A279624509DB300810BC5 /* Controller */,
 				A33A27872450995200810BC5 /* Assets.xcassets */,
 				A33A279D2450A04200810BC5 /* Constant.swift */,
+				A30CD8952453169F0061FE27 /* SukhumvitSet-Bold.ttf */,
+				A30CD8942453169F0061FE27 /* SukhumvitSet-Light.ttf */,
+				A30CD8962453169F0061FE27 /* SukhumvitSet-Medium.ttf */,
+				A30CD898245316A00061FE27 /* SukhumvitSet-SemiBold.ttf */,
+				A30CD897245316A00061FE27 /* SukhumvitSet-Text.ttf */,
+				A30CD8932453169F0061FE27 /* SukhumvitSet-Thin.ttf */,
 				A33A27892450995200810BC5 /* LaunchScreen.storyboard */,
 				A37003DB2450C6E8002B0066 /* GoogleService-Info.plist */,
 				A33A278C2450995200810BC5 /* Info.plist */,
@@ -229,12 +247,18 @@
 			files = (
 				A3B434752451ECBC008E71EC /* HomePage.storyboard in Resources */,
 				A33A278B2450995200810BC5 /* LaunchScreen.storyboard in Resources */,
+				A30CD89B245316A00061FE27 /* SukhumvitSet-Bold.ttf in Resources */,
 				A37003DC2450C6E8002B0066 /* GoogleService-Info.plist in Resources */,
 				A33A27882450995200810BC5 /* Assets.xcassets in Resources */,
+				A30CD89C245316A00061FE27 /* SukhumvitSet-Medium.ttf in Resources */,
+				A30CD899245316A00061FE27 /* SukhumvitSet-Thin.ttf in Resources */,
 				A33A27862450995000810BC5 /* Main.storyboard in Resources */,
 				A3B434792451ECDB008E71EC /* Me.storyboard in Resources */,
+				A30CD89D245316A00061FE27 /* SukhumvitSet-Text.ttf in Resources */,
 				A3B434772451ECCE008E71EC /* Notification.storyboard in Resources */,
 				A3FEBC0024523BB200E3827B /* splitWay.storyboard in Resources */,
+				A30CD89A245316A00061FE27 /* SukhumvitSet-Light.ttf in Resources */,
+				A30CD89E245316A00061FE27 /* SukhumvitSet-SemiBold.ttf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
