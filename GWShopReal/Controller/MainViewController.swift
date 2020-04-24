@@ -10,9 +10,13 @@ import UIKit
 
 class MainViewController: UIViewController {
 
+    
+    
+    @IBOutlet weak var searchTextField: UITextField!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        searchTextField.layer.cornerRadius = searchTextField.frame.size.height/10
     }
     
     override func viewWillAppear(_ animated: Bool) {

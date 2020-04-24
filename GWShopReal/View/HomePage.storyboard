@@ -23,33 +23,43 @@
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="HGL-TJ-hq9">
                                 <rect key="frame" x="0.0" y="44" width="375" height="2194"/>
                                 <subviews>
-                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Kuh-ge-AIR">
-                                        <rect key="frame" x="0.0" y="0.0" width="375" height="2194"/>
+                                    <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Kuh-ge-AIR">
+                                        <rect key="frame" x="1" y="0.0" width="375" height="2194"/>
                                         <subviews>
                                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="background" highlightedImage="background" translatesAutoresizingMaskIntoConstraints="NO" id="cFU-Sd-0px">
                                                 <rect key="frame" x="0.0" y="0.0" width="375" height="132"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                             </imageView>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="ค้นหา" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2cy-yB-lDm">
-                                                <rect key="frame" x="18" y="28" width="85" height="57"/>
-                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="ค้นหา" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2cy-yB-lDm">
+                                                <rect key="frame" x="18" y="27.999999999999996" width="77" height="51.666666666666657"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="width" secondItem="2cy-yB-lDm" secondAttribute="height" multiplier="85:57" id="SCY-Dn-GdN"/>
+                                                </constraints>
                                                 <fontDescription key="fontDescription" name="SukhumvitSet-Text" family="Sukhumvit Set" pointSize="32"/>
                                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
-                                            <textField opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="aBe-Bd-gM0">
-                                                <rect key="frame" x="18" y="81" width="286" height="34"/>
-                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="aBe-Bd-gM0">
+                                                <rect key="frame" x="18" y="82" width="286" height="34"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="width" constant="286" id="XKm-wW-MQi"/>
+                                                </constraints>
                                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                 <textInputTraits key="textInputTraits"/>
                                             </textField>
-                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="gQG-Il-8Qq">
+                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="btn_หน้าแรก" translatesAutoresizingMaskIntoConstraints="NO" id="gQG-Il-8Qq">
                                                 <rect key="frame" x="319" y="71" width="44" height="46"/>
-                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="46" id="dUi-tJ-1Cr"/>
+                                                    <constraint firstAttribute="width" constant="44" id="nss-VZ-hWl"/>
+                                                </constraints>
                                             </imageView>
-                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="background" translatesAutoresizingMaskIntoConstraints="NO" id="kuN-1O-q6J">
+                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="background" translatesAutoresizingMaskIntoConstraints="NO" id="kuN-1O-q6J">
                                                 <rect key="frame" x="20" y="151" width="335" height="138"/>
-                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="138" id="P8m-AV-gmN"/>
+                                                    <constraint firstAttribute="width" constant="335" id="nNR-co-xoo"/>
+                                                </constraints>
                                             </imageView>
                                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="Logo-GW" translatesAutoresizingMaskIntoConstraints="NO" id="iWr-qJ-R9o">
                                                 <rect key="frame" x="196" y="297" width="159" height="145"/>
@@ -143,12 +153,28 @@
                                                 <rect key="frame" x="196" y="1980" width="159" height="145"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                             </imageView>
-                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="Logo-GW" translatesAutoresizingMaskIntoConstraints="NO" id="9aR-wS-K8d">
-                                                <rect key="frame" x="20" y="1980" width="159" height="145"/>
-                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Logo-GW" translatesAutoresizingMaskIntoConstraints="NO" id="9aR-wS-K8d">
+                                                <rect key="frame" x="20" y="1981" width="159" height="145"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="145" id="cY8-15-ceC"/>
+                                                    <constraint firstAttribute="width" constant="159" id="gYo-kJ-wcG"/>
+                                                </constraints>
                                             </imageView>
                                         </subviews>
                                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                        <constraints>
+                                            <constraint firstItem="2cy-yB-lDm" firstAttribute="leading" secondItem="Kuh-ge-AIR" secondAttribute="leading" constant="18" id="2N9-gt-SFA"/>
+                                            <constraint firstItem="9aR-wS-K8d" firstAttribute="top" secondItem="2cy-yB-lDm" secondAttribute="bottom" constant="1901.3333333333333" id="3Ja-tZ-fhg"/>
+                                            <constraint firstItem="9aR-wS-K8d" firstAttribute="leading" secondItem="Kuh-ge-AIR" secondAttribute="leading" constant="20" id="3ho-RY-qS6"/>
+                                            <constraint firstItem="aBe-Bd-gM0" firstAttribute="leading" secondItem="Kuh-ge-AIR" secondAttribute="leading" constant="18" id="41m-LB-BUZ"/>
+                                            <constraint firstAttribute="trailing" secondItem="gQG-Il-8Qq" secondAttribute="trailing" constant="12" id="72O-Vl-1IO"/>
+                                            <constraint firstItem="aBe-Bd-gM0" firstAttribute="top" secondItem="2cy-yB-lDm" secondAttribute="bottom" constant="2.3333333333333428" id="8JF-H4-u6T"/>
+                                            <constraint firstItem="kuN-1O-q6J" firstAttribute="top" secondItem="gQG-Il-8Qq" secondAttribute="bottom" constant="34" id="BCR-Ly-Q1Q"/>
+                                            <constraint firstItem="gQG-Il-8Qq" firstAttribute="top" secondItem="Kuh-ge-AIR" secondAttribute="top" constant="71" id="QRz-Ya-muQ"/>
+                                            <constraint firstAttribute="bottom" secondItem="9aR-wS-K8d" secondAttribute="bottom" constant="69" id="ccz-12-ZoC"/>
+                                            <constraint firstItem="2cy-yB-lDm" firstAttribute="top" secondItem="Kuh-ge-AIR" secondAttribute="top" constant="27.999999999999996" id="cjb-o2-on7"/>
+                                            <constraint firstItem="kuN-1O-q6J" firstAttribute="leading" secondItem="Kuh-ge-AIR" secondAttribute="leading" constant="20" id="lNi-gO-eww"/>
+                                        </constraints>
                                     </view>
                                 </subviews>
                                 <constraints>
@@ -174,10 +200,13 @@
                     <navigationItem key="navigationItem" id="FNf-Rt-v1L"/>
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
                     <size key="freeformSize" width="375" height="2321"/>
+                    <connections>
+                        <outlet property="searchTextField" destination="aBe-Bd-gM0" id="AQw-lx-Yb9"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="oAX-Ma-lAE" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="4480.8000000000002" y="-49.50738916256158"/>
+            <point key="canvasLocation" x="4480.8000000000002" y="-49.876847290640399"/>
         </scene>
         <!--หน้าแรก-->
         <scene sceneID="MSW-U4-7CT">
