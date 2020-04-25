@@ -7,7 +7,7 @@
 //
 
 import UIKit
-
+import Firebase
 class MeViewController: UIViewController {
 
     override func viewDidLoad() {
@@ -52,9 +52,15 @@ class ProfileController:UIViewController {
     }
     @IBAction func showCardPressed(_ sender: UIButton) {
     }
-    @IBAction func logOutPressed(_ sender: UIButton) {
-    }
     
+    @IBAction func logOutPressed(_ sender: UIButton) {
+        do{
+            try Auth.auth().signOut()
+            navigationController?.popToRootViewController(animated: true)
+        }catch let signOutError as NSError {
+          print ("Error signing out: %@", signOutError)
+        }
+    }
 }
 
 class EditProfileController: UIViewController{
@@ -100,12 +106,44 @@ class EditAddressController:UIViewController {
     @IBOutlet weak var districtTextField: UITextField!
     @IBOutlet weak var provinceTextField: UITextField!
     @IBOutlet weak var postCodeTextField: UITextField!
-    
+    var db = Firestore.firestore()
     override func viewDidLoad() {
         super.viewDidLoad()
     }
     
     @IBAction func submitPressed(_ sender: UIButton) {
+        if newAddressNotNil() {
+            let firstName = firstNameTextField.text!
+            let lastName = lastNameTextField.text!
+            let phoneNumber = phoneNumberTextField.text!
+            let address = addressTextField.text!
+            let district = districtTextField.text!
+            let province = provinceTextField.text!
+            let postCode = postCodeTextField.text!
+            if let sender = Auth.auth().currentUser?.email{
+                db.collection(K.tableName.addressTableName) // still no addressID in this collection
+                .addDocument(data:  [
+                                   K.firstName: firstName,
+                                   K.surname: lastName,
+                                   K.phoneNumber: phoneNumber,
+                                   K.addressDetail: address,
+                                   K.district: district,
+                                   K.province: province,
+                                   K.postCode: postCode,
+                                   K.dateField: Date().timeIntervalSince1970,
+                                   K.sender: sender
+                ]) { (error) in
+                    if let e = error{
+                        print("Add new Address error: \(e.localizedDescription)")
+                    }
+                    else{
+                        print("Successfully added new address")
+                    }
+                }
+            }
+        }else {
+            print("Some text fields did not have any text inside")
+        }
     }
     
     func newAddressNotNil() -> Bool{
@@ -135,10 +173,35 @@ class EditCardController:UIViewController {
     @IBOutlet weak var expiredYearTextField: UITextField!
     @IBOutlet weak var cvvTextField: UITextField!
     
+    var db = Firestore.firestore()
     override func viewDidLoad() {
         super.viewDidLoad()
     }
     @IBAction func submitPressed(_ sender: UIButton) {
+        if cardNotNil(){
+            let cardName = cardNameTextField.text!
+            let cardNumber = cardNumberTextField.text!
+            let expiredDate = "\(expiredMonthTextField.text!)/\(expiredYearTextField.text!)"
+            let cvv = cvvTextField!
+            if let sender = Auth.auth().currentUser?.email{
+                db.collection(K.tableName.cardDetailTableName).addDocument(data: [
+                    K.cardDetail.cardName: cardName,
+                    K.cardDetail.cardNumber: cardNumber,
+                    K.cardDetail.expiredDate: expiredDate,
+                    K.cardDetail.cvvNumber: cvv,
+                    K.sender: sender,
+                    K.dateField: Date().timeIntervalSince1970
+                ]) { (error) in
+                    if let e = error{
+                        print("Add card error: \(e.localizedDescription)")
+                    }else{
+                        print("Successfully added new card")
+                    }
+                }
+            }
+        }else{
+            print("Some text fields did not have any text inside")
+        }
     }
     
     func cardNotNil() -> Bool{
@@ -169,6 +232,7 @@ class NewVendorController: UIViewController{
     @IBOutlet weak var idCardTextField: UITextField!
     @IBOutlet weak var accountNumberTextField: UITextField!
     
+    var db = Firestore.firestore()
     var bankName: String!
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -177,7 +241,33 @@ class NewVendorController: UIViewController{
     @IBAction func bankNameChoosed(_ sender: UISegmentedControl) {
         bankName = bankNameSegment.titleForSegment(at: bankNameSegment.selectedSegmentIndex)
     }
-    @IBAction func submitPressed(_ sender: UIButton) {
+    @IBAction func submitPressed(_ sender: UIButton) { // add addressID in collection
+        if storeDetailNotNil(){
+            let storeName = storeNameTextField.text!
+            let storePhoneNumber = storePhoneTextField.text!
+            let storeAddress = storeAddressTextField.text!
+            let storeDistrict = storeDistrictTextField.text!
+            let storeProvince = storeProvinceTextField.text!
+            let storePostCode = storePostCodeTextField.text!
+            if let sender = Auth.auth().currentUser?.email{
+                db.collection(K.tableName.storeDetailTableName).addDocument(data: [
+                    K.storeDetail.storeName: storeName,
+                    K.sender: sender,
+                    K.phoneNumber: storePhoneNumber,
+                    K.storeDetail.moneyTotal: 0,
+                    K.dateField: Date().timeIntervalSince1970
+                ]) { (error) in
+                    if let e = error{
+                        print("Create new store error: \(e.localizedDescription)")
+                    }else{
+                        print("Successfully added new store in this user")
+                    }
+                }
+            }
+            
+        }else {
+            print("Some text fields did not have any text inside")
+        }
     }
     
     func storeDetailNotNil()-> Bool{
