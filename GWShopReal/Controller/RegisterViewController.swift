@@ -152,11 +152,7 @@ class RegisterViewController: UIViewController{
             
         }
     }
-    
-    
-    
-    
-    
+
     
     func userDetailIsNotNilFunction() -> Bool { // เช็คว่ากรอกครบทุกช่องแล้ว
         if firstNameTextField.text != "" {
