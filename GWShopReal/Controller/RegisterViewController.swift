@@ -30,6 +30,7 @@ class RegisterViewController: UIViewController{
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        gender = genderSegment.titleForSegment(at: genderSegment.selectedSegmentIndex)!
     }
     
     @IBAction func showDatePicker(_ sender: UITextField) {
