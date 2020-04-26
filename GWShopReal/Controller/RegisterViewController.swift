@@ -116,7 +116,8 @@ class RegisterViewController: UIViewController{
                                 K.addressDetail : self.address1TextField.text!,
                                 K.province : self.provinceTextField.text!,
                                 K.district : self.districtTextField.text!,
-                                K.postCode : self.postCodeTextField.text!
+                                K.postCode : self.postCodeTextField.text!,
+                                K.sender : email
                         ]
                         
                         self.db.collection(K.userDetailCollection).addDocument(data:  detailForSendToFirebase) { (error) in

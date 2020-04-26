@@ -35,9 +35,22 @@ class ProfileController:UIViewController {
     @IBOutlet weak var dateOfBirthLabel: UILabel!
     @IBOutlet weak var phoneNumberLabel: UILabel!
     
+    var db = Firestore.firestore()
+    var user: [userDetail] = []
     
     override func viewDidLoad() {
         super.viewDidLoad()
+    }
+    
+    func loadData(){
+        db.collection(K.userDetailCollection).getDocuments { (querySnapshot, error) in
+            if let e = error{
+                print("Load profile form database error: \(e.localizedDescription)")
+            }else{
+                if let snapShotDocuments = querySnapshot?.documents{
+                }
+            }
+        }
     }
     
     @IBAction func editProfilePressed(_ sender: UIButton) {

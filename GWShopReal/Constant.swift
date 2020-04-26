@@ -28,6 +28,7 @@ struct K {
     static let province = "province"
     static let district = "district"
     static let postCode = "postCode"
+    
     static let userDetailCollection = "userDetail"
     
     static let dateField = "date"
