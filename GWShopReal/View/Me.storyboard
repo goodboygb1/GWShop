@@ -206,38 +206,6 @@
                                     <action selector="editProfilePressed:" destination="NhV-SR-vjh" eventType="touchUpInside" id="V2f-1V-CBO"/>
                                 </connections>
                             </button>
-                            <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="74" translatesAutoresizingMaskIntoConstraints="NO" id="S3O-us-npR">
-                                <rect key="frame" x="76" y="733.66666666666663" width="223" height="24.333333333333371"/>
-                                <subviews>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0u3-TC-p7R">
-                                        <rect key="frame" x="0.0" y="0.0" width="25" height="24.333333333333332"/>
-                                        <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                        <state key="normal" image="house" catalog="system">
-                                            <preferredSymbolConfiguration key="preferredSymbolConfiguration" scale="large"/>
-                                        </state>
-                                        <connections>
-                                            <action selector="homeButtonPressed:" destination="NhV-SR-vjh" eventType="touchUpInside" id="kkf-uG-4aK"/>
-                                        </connections>
-                                    </button>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="a2c-1E-yX0">
-                                        <rect key="frame" x="99" y="0.0" width="25" height="24.333333333333332"/>
-                                        <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                        <state key="normal" image="bell" catalog="system">
-                                            <preferredSymbolConfiguration key="preferredSymbolConfiguration" scale="large"/>
-                                        </state>
-                                        <connections>
-                                            <action selector="notificationButtonPressed:" destination="NhV-SR-vjh" eventType="touchUpInside" id="P8X-Yd-Tyq"/>
-                                        </connections>
-                                    </button>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Xzp-Ws-3yJ">
-                                        <rect key="frame" x="198" y="0.0" width="25" height="24.333333333333332"/>
-                                        <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                        <state key="normal" image="person.circle" catalog="system">
-                                            <preferredSymbolConfiguration key="preferredSymbolConfiguration" scale="large"/>
-                                        </state>
-                                    </button>
-                                </subviews>
-                            </stackView>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="oqg-kY-vJX">
                                 <rect key="frame" x="344" y="135" width="15" height="15"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -251,20 +219,15 @@
                             </button>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
-                        <constraints>
-                            <constraint firstItem="P4J-CD-Zqx" firstAttribute="trailing" secondItem="S3O-us-npR" secondAttribute="trailing" constant="76" id="IFM-Wv-vgQ"/>
-                            <constraint firstItem="P4J-CD-Zqx" firstAttribute="bottom" secondItem="S3O-us-npR" secondAttribute="bottom" constant="20" id="r2V-ir-4ws"/>
-                            <constraint firstItem="S3O-us-npR" firstAttribute="leading" secondItem="P4J-CD-Zqx" secondAttribute="leading" constant="76" id="tKT-Ox-FP4"/>
-                        </constraints>
                         <viewLayoutGuide key="safeArea" id="P4J-CD-Zqx"/>
                     </view>
+                    <navigationItem key="navigationItem" id="GSP-pu-ApV"/>
                     <connections>
                         <outlet property="dateOfBirthLabel" destination="hnH-gY-icS" id="hGl-fU-8id"/>
-                        <outlet property="dobLabel" destination="hnH-gY-icS" id="qnK-Be-DRD"/>
                         <outlet property="emailLabel" destination="HIv-mn-qZl" id="9Cu-hK-wHu"/>
                         <outlet property="firstNameLabel" destination="9A6-Qg-nV3" id="a3c-re-hqs"/>
                         <outlet property="genderLabel" destination="utk-zt-gsT" id="C0R-wg-DZg"/>
-                        <outlet property="headerNameLabel" destination="F7s-fi-Ybq" id="pmh-xZ-yZT"/>
+                        <outlet property="headerNameLabel" destination="F7s-fi-Ybq" id="IgR-EC-xD9"/>
                         <outlet property="lastNameLabel" destination="MEh-e9-7lY" id="fSG-nh-5GC"/>
                         <outlet property="phoneNumberLabel" destination="5KU-Yn-bs8" id="OMZ-pP-nWY"/>
                         <outlet property="profileImageView" destination="CuO-A5-Vsf" id="8SL-ep-HDi"/>
@@ -273,14 +236,14 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="XKZ-Yu-1y0" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="6412" y="29.55665024630542"/>
+            <point key="canvasLocation" x="5566" y="-313"/>
         </scene>
         <!--Edit Profile Controller-->
         <scene sceneID="D0U-61-5Pn">
             <objects>
                 <viewController id="JdM-EH-wkz" customClass="EditProfileController" customModule="GWShopReal" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="ysx-Us-X9u" customClass="Edit">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="758"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="background" translatesAutoresizingMaskIntoConstraints="NO" id="njt-Qn-Ohv">
@@ -396,18 +359,13 @@
                         <outlet property="firstNameTextField" destination="jAA-kl-bUZ" id="qRn-eQ-OTA"/>
                         <outlet property="genderSegment" destination="2jN-nz-Gwf" id="Gax-RD-pIc"/>
                         <outlet property="lastNameTextField" destination="7Rc-mH-hOu" id="N2Y-Bi-pbX"/>
-                        <outlet property="newDateTextField" destination="h6m-YL-AYb" id="Koh-2n-4a5"/>
-                        <outlet property="newFirstNameTextField" destination="jAA-kl-bUZ" id="vkb-t0-mUl"/>
-                        <outlet property="newLastNameTextField" destination="7Rc-mH-hOu" id="siv-Sc-oXc"/>
-                        <outlet property="newPhoneNumberTextField" destination="QUE-8W-aSv" id="K3g-es-gS0"/>
                         <outlet property="newProfileImageView" destination="NqN-yf-wZ4" id="fo0-IT-tVk"/>
                         <outlet property="phoneNumberTextField" destination="QUE-8W-aSv" id="1i0-8S-RUa"/>
-                        <outlet property="profileImage" destination="NqN-yf-wZ4" id="0aM-9p-hiq"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ewZ-Jx-udD" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="7180" y="30"/>
+            <point key="canvasLocation" x="6412" y="140"/>
         </scene>
         <!--Edit Address Controller-->
         <scene sceneID="A1J-eB-S4U">
@@ -552,7 +510,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="D81-np-3Io" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="5660" y="-647"/>
+            <point key="canvasLocation" x="8062" y="30"/>
         </scene>
         <!--New Vendor Controller-->
         <scene sceneID="80s-hU-4IX">
@@ -1010,7 +968,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ygo-2L-HUd" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="5660" y="29.55665024630542"/>
+            <point key="canvasLocation" x="8062" y="-647"/>
         </scene>
         <!--Me View Controller-->
         <scene sceneID="VQO-D8-vlW">
@@ -1027,7 +985,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Mas-Cy-rKy" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="4583.1999999999998" y="-313.30049261083747"/>
+            <point key="canvasLocation" x="4618" y="107"/>
         </scene>
         <!--ฉัน-->
         <scene sceneID="ofB-GS-wWZ">
@@ -1040,7 +998,7 @@
                     </navigationBar>
                     <nil name="viewControllers"/>
                     <connections>
-                        <segue destination="n5t-AK-a5G" kind="relationship" relationship="rootViewController" id="5Kn-je-djL"/>
+                        <segue destination="NhV-SR-vjh" kind="relationship" relationship="rootViewController" id="rBf-IO-nBy"/>
                     </connections>
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="27i-hb-yCe" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -1051,13 +1009,11 @@
     <resources>
         <image name="Gear" width="120" height="128"/>
         <image name="background" width="105" height="270.66665649414062"/>
-        <image name="bell" catalog="system" width="128" height="124"/>
         <image name="btn_หน้าแรก" width="11" height="14"/>
         <image name="cart" catalog="system" width="128" height="102"/>
         <image name="creditcard" catalog="system" width="128" height="91"/>
         <image name="house" catalog="system" width="128" height="110"/>
         <image name="location-pin" width="128" height="128"/>
-        <image name="person.circle" catalog="system" width="128" height="121"/>
         <image name="shop" width="128" height="128"/>
         <image name="xmark.circle.fill" catalog="system" width="128" height="121"/>
     </resources>

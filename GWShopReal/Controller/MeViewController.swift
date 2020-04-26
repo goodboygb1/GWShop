@@ -12,7 +12,6 @@ class MeViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
         // Do any additional setup after loading the view.
     }
     
@@ -34,27 +33,46 @@ class ProfileController:UIViewController {
     @IBOutlet weak var genderLabel: UILabel!
     @IBOutlet weak var dateOfBirthLabel: UILabel!
     @IBOutlet weak var phoneNumberLabel: UILabel!
+    @IBOutlet weak var headerNameLabel: UILabel!
     
     var db = Firestore.firestore()
     var user: [userDetail] = []
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        loadProfileData()
     }
     
-    func loadData(){
-        db.collection(K.userDetailCollection).getDocuments { (querySnapshot, error) in
-            if let e = error{
-                print("Load profile form database error: \(e.localizedDescription)")
-            }else{
-                if let snapShotDocuments = querySnapshot?.documents{
+    func loadProfileData(){
+        if let emailSender = Auth.auth().currentUser?.email!{
+            db.collection(K.userDetailCollection).whereField(K.sender, isEqualTo: emailSender)
+                .getDocuments { (querySnapshot, error) in
+                if let e = error{
+                    print("Load profile form database error: \(e.localizedDescription)")
+                }else{
+                    if let snapShotDocuments = querySnapshot?.documents{
+                        let data = snapShotDocuments[0].data()
+                        if let email = data[K.sender] as? String, let firstName = data[K.firstName] as? String , let lastName = data[K.surname] as? String
+                            ,let gender = data[K.gender] as? String, let dob = data[K.dateOfBirth] as? String, let phoneNumber = data[K.phoneNumber] as? String{
+                            DispatchQueue.main.async {
+                                self.headerNameLabel.text = "\(firstName) \(lastName)"
+                                self.emailLabel.text = email
+                                self.firstNameLabel.text = firstName
+                                self.lastNameLabel.text = lastName
+                                self.genderLabel.text = gender
+                                self.dateOfBirthLabel.text = dob
+                                self.phoneNumberLabel.text = phoneNumber
+                            }
+                         }
+                    }
                 }
             }
         }
+        
     }
     
     @IBAction func editProfilePressed(_ sender: UIButton) {
-        self.performSegue(withIdentifier: "goToEditProfile", sender: self)
+        self.performSegue(withIdentifier: K.segue.goToEditProfileSegue, sender: self)
     }
     @IBAction func shopCartPressed(_ sender: UIButton) {
     }
@@ -84,15 +102,44 @@ class EditProfileController: UIViewController{
     @IBOutlet weak var dateOfBirthTextField: UITextField!
     @IBOutlet weak var phoneNumberTextField: UITextField!
     
+    var db = Firestore.firestore()
     var gender: String!
     override func viewDidLoad() {
         super.viewDidLoad()
+        gender = genderSegment.titleForSegment(at: genderSegment.selectedSegmentIndex)
     }
     @IBAction func genderChoosed(_ sender: UISegmentedControl) {
         gender = genderSegment.titleForSegment(at: genderSegment.selectedSegmentIndex)
     }
     
     @IBAction func submitPressed(_ sender: UIButton) {
+        if newProfileNotNil(){
+            if let emailSender = Auth.auth().currentUser?.email{
+                db.collection(K.userDetailCollection).whereField(K.sender, isEqualTo: emailSender).getDocuments { (querySnapshot, error) in
+                    if let e = error{
+                        print("Error in update profile page: \(e.localizedDescription)")
+                    }else{
+                        if let snapShotData = querySnapshot?.documents{
+                            snapShotData.first?.reference.updateData([
+                                K.firstName: self.firstNameTextField.text!,
+                                K.surname:  self.lastNameTextField.text!,
+                                K.gender: self.gender!,
+                                K.dateOfBirth: self.dateOfBirthTextField.text!,
+                                K.phoneNumber: self.phoneNumberTextField.text!
+                                ], completion: { (error) in
+                                    if let e = error{
+                                        print("Error while updating data: \(e.localizedDescription)")
+                                    }else{
+                                        print("Successfully updated new profile")
+                                    }
+                            })
+                        }
+                    }
+                }
+            }
+            
+        }
+        
     }
     
     func newProfileNotNil() -> Bool{

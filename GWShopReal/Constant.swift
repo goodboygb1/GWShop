@@ -34,6 +34,11 @@ struct K {
     static let dateField = "date"
     static let sender = "sender"
     
+    struct segue{
+        static let goToProfileSegue = "goToProfile"
+        static let goToEditProfileSegue = "goToEditProfile"
+    }
+    
     struct cardDetail{
         static let cardNumber = "cardNumber"
         static let cardName = "nameCardHolder"
