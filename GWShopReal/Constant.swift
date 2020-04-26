@@ -50,11 +50,19 @@ struct K {
         static let addressTableName = "address"
         static let cardDetailTableName = "cardDetail"
         static let storeDetailTableName = "vendor"
+        static let bankAccountTableName = "bankAccount"
     }
     
     struct storeDetail {
         static let storeName = "storeName"
         static let moneyTotal = "moneyTotal"
+    }
+    
+    struct bankAccount {
+        static let bankName = "bankName"
+        static let accountName = "accountName"
+        static let accountNumber = "accountNumber"
+        static let idCardNumber = "idCardNumber"
     }
 }
 

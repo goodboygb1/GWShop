@@ -85,9 +85,9 @@ class ProfileController:UIViewController {
     }
     
     @IBAction func logOutPressed(_ sender: UIButton) {
-        do{
+        do{ print("log outed")
             try Auth.auth().signOut()
-            navigationController?.popToRootViewController(animated: true)
+            navigationController?.popToRootViewController(animated: false)
         }catch let signOutError as NSError {
           print ("Error signing out: %@", signOutError)
         }
@@ -119,7 +119,8 @@ class EditProfileController: UIViewController{
                     if let e = error{
                         print("Error in update profile page: \(e.localizedDescription)")
                     }else{
-                        if let snapShotData = querySnapshot?.documents{
+                        print("got document")
+                         if let snapShotData = querySnapshot?.documents{
                             snapShotData.first?.reference.updateData([
                                 K.firstName: self.firstNameTextField.text!,
                                 K.surname:  self.lastNameTextField.text!,
@@ -134,10 +135,13 @@ class EditProfileController: UIViewController{
                                     }
                             })
                         }
+                        
                     }
                 }
             }
-            
+        self.dismiss(animated: false, completion: nil)
+        }else {
+            print("Some text fields did not have any text inside")
         }
         
     }
@@ -296,6 +300,7 @@ class NewVendorController: UIViewController{
     var bankName: String!
     override func viewDidLoad() {
         super.viewDidLoad()
+        bankName = bankNameSegment.titleForSegment(at: bankNameSegment.selectedSegmentIndex)
     }
     
     @IBAction func bankNameChoosed(_ sender: UISegmentedControl) {
@@ -323,8 +328,19 @@ class NewVendorController: UIViewController{
                         print("Successfully added new store in this user")
                     }
                 }
+                db.collection(K.tableName.bankAccountTableName).addDocument(data: [
+                    K.bankAccount.accountName: self.accountNameTextField.text!,
+                    K.bankAccount.accountNumber: self.accountNumberTextField.text!,
+                    K.storeDetail.storeName: storeName,
+                    K.bankAccount.bankName: self.bankName!
+                ]) { (error) in
+                    if let e = error{
+                        print("Error in create new vendor page: \(e.localizedDescription)")
+                    }else{
+                        print("Successfully added new store in database")
+                    }
+                }
             }
-            
         }else {
             print("Some text fields did not have any text inside")
         }
