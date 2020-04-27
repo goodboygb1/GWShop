@@ -44,6 +44,7 @@ struct K {
     
     struct identifierForTableView{
         static let identifierAddress = "ReuseAddressCell"
+        static let nibNameAddress = "AddressTableViewCell"
     }
     struct cardDetail{
         static let cardNumber = "cardNumber"
