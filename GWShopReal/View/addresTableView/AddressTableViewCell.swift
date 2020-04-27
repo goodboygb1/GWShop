@@ -17,8 +17,8 @@ class AddressTableViewCell: UITableViewCell {
     @IBOutlet weak var postCodeTextField: UILabel!
     @IBOutlet weak var phoneNumberTextField: UILabel!
     
-    @IBOutlet weak var editButton: UIButton!
-    @IBOutlet weak var deleteButton: UIButton!
+    // @IBOutlet weak var editButton: UIButton!
+    // @IBOutlet weak var deleteButton: UIButton!
     
     override func awakeFromNib() {
         super.awakeFromNib()
