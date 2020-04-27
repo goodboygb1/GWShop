@@ -10,6 +10,16 @@ import UIKit
 
 class AddressTableViewCell: UITableViewCell {
 
+    @IBOutlet weak var nameTextField: UILabel!
+    @IBOutlet weak var addressDetailTextField: UILabel!
+    @IBOutlet weak var districtTextField: UILabel!
+    @IBOutlet weak var provinceTextField: UILabel!
+    @IBOutlet weak var postCodeTextField: UILabel!
+    @IBOutlet weak var phoneNumberTextField: UILabel!
+    
+    @IBOutlet weak var editButton: UIButton!
+    @IBOutlet weak var deleteButton: UIButton!
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code

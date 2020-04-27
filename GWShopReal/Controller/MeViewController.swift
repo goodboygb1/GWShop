@@ -104,51 +104,69 @@ class ProfileController:UIViewController {
 
 class ShowAddressViewController:UIViewController{
     @IBOutlet weak var nameLabel: UILabel!
+    @IBOutlet weak var addressTableView: UITableView!
+    
     var name: String?
+    var addresses: [Address] = []
     var db = Firestore.firestore()
     override func viewDidLoad() {
         super.viewDidLoad()
         nameLabel.text = name!
-        //loadNameData()
+        addressTableView.dataSource = self
+        addressTableView.register(UINib(nibName: K.identifierForTableView.nibNameAddress, bundle: nil), forCellReuseIdentifier: K.identifierForTableView.identifierAddress)
+        loadAddressData()
     }
     @IBAction func addAddressPressed(_ sender: UIButton) {
         self.performSegue(withIdentifier: K.segue.goToEditAddressSegue, sender: self)
     }
     
-    func loadNameData(){
+    func loadAddressData(){
         if let emailSender = Auth.auth().currentUser?.email{
-            db.collection(K.userDetailCollection).whereField(K.sender, isEqualTo: emailSender).getDocuments { (querySnapshot, error) in
+            db.collection(K.tableName.addressTableName).whereField(K.sender, isEqualTo: emailSender).getDocuments { (querySnapshot, error) in
+                self.addresses = []
                 if let e = error{
                     print("error while loading name in show address page: \(e.localizedDescription)")
                 }else{
                     if let snapShotDocument = querySnapshot?.documents{
-                        let data = snapShotDocument[0].data()
-                        if let firstName = data[K.firstName] as? String, let lastName = data[K.surname] as? String{
-                            
-                            DispatchQueue.main.async {
-                                self.nameLabel.text = "\(firstName) \(lastName)"
+                        for doc in snapShotDocument{
+                            let data = doc.data()
+                            if let firstName = data[K.firstName] as? String, let lastName = data[K.surname] as? String, let phoneNumber = data[K.phoneNumber] as? String
+                                , let addressDetail = data[K.addressDetail] as? String, let district = data[K.district] as? String
+                                , let province = data[K.province] as? String, let postCode = data[K.postCode] as? String{
+                                let newAddress = Address(name: "\(firstName) \(lastName)", phoneNumber: phoneNumber, addressDetail: addressDetail, district: district, province: province, postCode: postCode)
+                                self.addresses.append(newAddress)
+                                
+                                DispatchQueue.main.async {
+                                    self.addressTableView.reloadData()
+                                }
                             }
                         }
                     }
-                    
                 }
             }
         }
     }
-    
-    
+
 }
 
-/*extension ShowAddressViewController: UITableViewDataSource{
+extension ShowAddressViewController: UITableViewDataSource{
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        
+        return addresses.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let address = addresses[indexPath.row]
+        let addressCell = addressTableView.dequeueReusableCell(withIdentifier: K.identifierForTableView.identifierAddress) as! AddressTableViewCell
+        addressCell.nameTextField.text = address.name
+        addressCell.phoneNumberTextField.text = address.phoneNumber
+        addressCell.addressDetailTextField.text = address.addressDetail
+        addressCell.districtTextField.text = address.district
+        addressCell.provinceTextField.text = address.province
+        addressCell.postCodeTextField.text = address.postCode
         
+        return addressCell
     }
-    
-}*/
+}
 
 class EditProfileController: UIViewController{
     @IBOutlet weak var newProfileImageView: UIImageView!
