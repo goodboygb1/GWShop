@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		843665A32456DD8700613201 /* AddressTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 843665A12456DD8700613201 /* AddressTableViewCell.swift */; };
+		843665A42456DD8700613201 /* AddressTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 843665A22456DD8700613201 /* AddressTableViewCell.xib */; };
 		8436DBC9245174EE00956EDA /* Pods_GWShopReal.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 22955FD222D677EA13792783 /* Pods_GWShopReal.framework */; };
 		8436DBCA245174EE00956EDA /* Pods_GWShopReal.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 22955FD222D677EA13792783 /* Pods_GWShopReal.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		A30CD899245316A00061FE27 /* SukhumvitSet-Thin.ttf in Resources */ = {isa = PBXBuildFile; fileRef = A30CD8932453169F0061FE27 /* SukhumvitSet-Thin.ttf */; };
@@ -52,6 +54,8 @@
 /* Begin PBXFileReference section */
 		22955FD222D677EA13792783 /* Pods_GWShopReal.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_GWShopReal.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		6649F8358CCAC210AAB18B18 /* Pods-GWShopReal.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GWShopReal.release.xcconfig"; path = "Target Support Files/Pods-GWShopReal/Pods-GWShopReal.release.xcconfig"; sourceTree = "<group>"; };
+		843665A12456DD8700613201 /* AddressTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddressTableViewCell.swift; sourceTree = "<group>"; };
+		843665A22456DD8700613201 /* AddressTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AddressTableViewCell.xib; sourceTree = "<group>"; };
 		A30CD8932453169F0061FE27 /* SukhumvitSet-Thin.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SukhumvitSet-Thin.ttf"; sourceTree = "<group>"; };
 		A30CD8942453169F0061FE27 /* SukhumvitSet-Light.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SukhumvitSet-Light.ttf"; sourceTree = "<group>"; };
 		A30CD8952453169F0061FE27 /* SukhumvitSet-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SukhumvitSet-Bold.ttf"; sourceTree = "<group>"; };
@@ -93,6 +97,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		843665A52456DF9D00613201 /* addresTableView */ = {
+			isa = PBXGroup;
+			children = (
+				843665A12456DD8700613201 /* AddressTableViewCell.swift */,
+				843665A22456DD8700613201 /* AddressTableViewCell.xib */,
+			);
+			path = addresTableView;
+			sourceTree = "<group>";
+		};
 		A33A27722450995000810BC5 = {
 			isa = PBXGroup;
 			children = (
@@ -142,6 +155,7 @@
 				A3B434742451ECBC008E71EC /* HomePage.storyboard */,
 				A3B434762451ECCE008E71EC /* Notification.storyboard */,
 				A3B434782451ECDB008E71EC /* Me.storyboard */,
+				843665A52456DF9D00613201 /* addresTableView */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -246,6 +260,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				A3B434752451ECBC008E71EC /* HomePage.storyboard in Resources */,
+				843665A42456DD8700613201 /* AddressTableViewCell.xib in Resources */,
 				A33A278B2450995200810BC5 /* LaunchScreen.storyboard in Resources */,
 				A30CD89B245316A00061FE27 /* SukhumvitSet-Bold.ttf in Resources */,
 				A37003DC2450C6E8002B0066 /* GoogleService-Info.plist in Resources */,
@@ -316,6 +331,7 @@
 				A33A279E2450A04200810BC5 /* Constant.swift in Sources */,
 				A33A27832450995000810BC5 /* ViewController.swift in Sources */,
 				A33A279A24509FA100810BC5 /* RegisterViewController.swift in Sources */,
+				843665A32456DD8700613201 /* AddressTableViewCell.swift in Sources */,
 				A33A279824509F9200810BC5 /* LoginController.swift in Sources */,
 				A33A279C24509FAE00810BC5 /* MainViewController.swift in Sources */,
 				A37003DE2450CB08002B0066 /* userDetail.swift in Sources */,
