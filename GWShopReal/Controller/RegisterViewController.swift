@@ -114,21 +114,36 @@ class RegisterViewController: UIViewController{
                                 K.gender : self.gender!,
                                 K.phoneNumber : self.phoneNumberTextField.text!,
                                 K.dateOfBirth : self.dateTextField.text!,
-                                K.addressDetail : self.address1TextField.text!,
-                                K.province : self.provinceTextField.text!,
-                                K.district : self.districtTextField.text!,
-                                K.postCode : self.postCodeTextField.text!,
                                 K.sender : email
                         ]
                         
                         self.db.collection(K.userDetailCollection).addDocument(data:  detailForSendToFirebase) { (error) in
                             if let e = error {
-                                print("error while saveing data to fire store \(e)")
+                                print("error while saving data to fire store \(e)")
                             } else {
                                 print("saving success")
                                 self.performSegue(withIdentifier: segue.registerToMain, sender: self)
                                 
                             }                             // sent data to firebase
+                        }
+                        
+                        self.db.collection(K.tableName.addressTableName).addDocument(data: [
+                            K.firstName : self.firstNameTextField.text!,
+                            K.surname : self.lastNameTextField.text!,
+                            K.phoneNumber : self.phoneNumberTextField.text!,
+                            K.addressDetail : self.address1TextField.text!,
+                            K.province : self.provinceTextField.text!,
+                            K.district : self.districtTextField.text!,
+                            K.postCode : self.postCodeTextField.text!,
+                            K.dateField: Date().timeIntervalSince1970,
+                            K.sender: email
+                        ]) { (error) in
+                            if let e = error{
+                                print("error while saving address to database: \(e.localizedDescription)")
+                            }
+                            else {
+                                print("Successfully added address")
+                            }
                         }
                         
                     }

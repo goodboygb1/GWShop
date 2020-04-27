@@ -24,6 +24,7 @@ struct K {
     static let gender = "gender"
     static let phoneNumber = "phoneNumber"
     static let dateOfBirth = "dateOfBirth"
+    
     static let addressDetail = "addressDetail"
     static let province = "province"
     static let district = "district"
@@ -37,8 +38,13 @@ struct K {
     struct segue{
         static let goToProfileSegue = "goToProfile"
         static let goToEditProfileSegue = "goToEditProfile"
+        static let goToShowAddressSegue = "goToShowAddress"
+        static let goToEditAddressSegue = "goToEditAddress"
     }
     
+    struct identifierForTableView{
+        static let identifierAddress = "ReuseAddressCell"
+    }
     struct cardDetail{
         static let cardNumber = "cardNumber"
         static let cardName = "nameCardHolder"

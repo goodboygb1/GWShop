@@ -80,19 +80,75 @@ class ProfileController:UIViewController {
     }
     
     @IBAction func showAddressPressed(_ sender: UIButton) {
+        self.performSegue(withIdentifier: K.segue.goToShowAddressSegue, sender: self)
     }
     @IBAction func showCardPressed(_ sender: UIButton) {
     }
     
     @IBAction func logOutPressed(_ sender: UIButton) {
-        do{ print("log outed")
+        do{ print("logged out")
             try Auth.auth().signOut()
             navigationController?.popToRootViewController(animated: false)
         }catch let signOutError as NSError {
           print ("Error signing out: %@", signOutError)
         }
     }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == K.segue.goToShowAddressSegue{
+            let destinationVC = segue.destination as! ShowAddressViewController
+            destinationVC.name = headerNameLabel.text
+        }
+    }
 }
+
+class ShowAddressViewController:UIViewController{
+    @IBOutlet weak var nameLabel: UILabel!
+    var name: String?
+    var db = Firestore.firestore()
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        nameLabel.text = name!
+        //loadNameData()
+    }
+    @IBAction func addAddressPressed(_ sender: UIButton) {
+        self.performSegue(withIdentifier: K.segue.goToEditAddressSegue, sender: self)
+    }
+    
+    func loadNameData(){
+        if let emailSender = Auth.auth().currentUser?.email{
+            db.collection(K.userDetailCollection).whereField(K.sender, isEqualTo: emailSender).getDocuments { (querySnapshot, error) in
+                if let e = error{
+                    print("error while loading name in show address page: \(e.localizedDescription)")
+                }else{
+                    if let snapShotDocument = querySnapshot?.documents{
+                        let data = snapShotDocument[0].data()
+                        if let firstName = data[K.firstName] as? String, let lastName = data[K.surname] as? String{
+                            
+                            DispatchQueue.main.async {
+                                self.nameLabel.text = "\(firstName) \(lastName)"
+                            }
+                        }
+                    }
+                    
+                }
+            }
+        }
+    }
+    
+    
+}
+
+/*extension ShowAddressViewController: UITableViewDataSource{
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        
+    }
+    
+}*/
 
 class EditProfileController: UIViewController{
     @IBOutlet weak var newProfileImageView: UIImageView!
@@ -165,11 +221,11 @@ class EditProfileController: UIViewController{
 class EditAddressController:UIViewController {
     @IBOutlet weak var firstNameTextField: UITextField!
     @IBOutlet weak var lastNameTextField: UITextField!
-    @IBOutlet weak var phoneNumberTextField: UITextField!
     @IBOutlet weak var addressTextField: UITextField!
     @IBOutlet weak var districtTextField: UITextField!
     @IBOutlet weak var provinceTextField: UITextField!
     @IBOutlet weak var postCodeTextField: UITextField!
+    @IBOutlet weak var phoneNumberTextField: UITextField!
     var db = Firestore.firestore()
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -189,7 +245,7 @@ class EditAddressController:UIViewController {
                 .addDocument(data:  [
                                    K.firstName: firstName,
                                    K.surname: lastName,
-                                   K.phoneNumber: phoneNumber,
+                                   K.phoneNumber : phoneNumber,
                                    K.addressDetail: address,
                                    K.district: district,
                                    K.province: province,
@@ -202,6 +258,7 @@ class EditAddressController:UIViewController {
                     }
                     else{
                         print("Successfully added new address")
+                        self.navigationController?.popToRootViewController(animated: true)
                     }
                 }
             }
@@ -211,9 +268,9 @@ class EditAddressController:UIViewController {
     }
     
     func newAddressNotNil() -> Bool{
-        if firstNameTextField.text != ""{
-            if lastNameTextField.text != ""{
-                if phoneNumberTextField.text != ""{
+        if phoneNumberTextField.text != ""{
+            if firstNameTextField.text != ""{
+                if lastNameTextField.text != ""{
                     if addressTextField.text != ""{
                         if districtTextField.text != ""{
                             if provinceTextField.text != ""{
@@ -332,7 +389,8 @@ class NewVendorController: UIViewController{
                     K.bankAccount.accountName: self.accountNameTextField.text!,
                     K.bankAccount.accountNumber: self.accountNumberTextField.text!,
                     K.storeDetail.storeName: storeName,
-                    K.bankAccount.bankName: self.bankName!
+                    K.bankAccount.bankName: self.bankName!,
+                    K.sender: sender
                 ]) { (error) in
                     if let e = error{
                         print("Error in create new vendor page: \(e.localizedDescription)")
