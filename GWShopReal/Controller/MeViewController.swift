@@ -87,7 +87,29 @@ class ProfileController:UIViewController {
         
     }
     @IBAction func storePressed(_ sender: UIButton) {
+        if let emailSender = Auth.auth().currentUser?.email{
+            db.collection(K.tableName.storeDetailTableName).whereField(K.sender, isEqualTo: emailSender).getDocuments { (querySnapshot, error) in
+                if let e = error{
+                    print("Error in hadStore Function: \(e.localizedDescription)")
+                }else{
+                    if let snapShotData = querySnapshot?.documents{
+                        for doc in snapShotData{
+                            let data = doc.data()
+                            if let dataSender = data[K.sender] as? String{
+                                if dataSender == emailSender{
+                                    self.performSegue(withIdentifier: K.segue.profileToStoreDetailSegue, sender: self)
+                                }
+                                else if dataSender != emailSender{
+                                    self.performSegue(withIdentifier: K.segue.profileToNewVendorSegue, sender: self)
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
     }
+    
     
     @IBAction func showAddressPressed(_ sender: UIButton) {
         self.performSegue(withIdentifier: K.segue.goToShowAddressSegue, sender: self)
@@ -527,7 +549,6 @@ class NewVendorController: UIViewController{
     
     @IBOutlet weak var bankNameSegment: UISegmentedControl!
     @IBOutlet weak var accountNameTextField: UITextField!
-    @IBOutlet weak var idCardTextField: UITextField!
     @IBOutlet weak var accountNumberTextField: UITextField!
     
     var db = Firestore.firestore()
@@ -553,6 +574,10 @@ class NewVendorController: UIViewController{
                     K.storeDetail.storeName: storeName,
                     K.sender: sender,
                     K.phoneNumber: storePhoneNumber,
+                    K.storeDetail.addressDetail: storeAddress,
+                    K.storeDetail.district: storeDistrict,
+                    K.storeDetail.province: storeProvince,
+                    K.storeDetail.postCode: storePostCode,
                     K.storeDetail.moneyTotal: 0,
                     K.dateField: Date().timeIntervalSince1970
                 ]) { (error) in
@@ -573,6 +598,7 @@ class NewVendorController: UIViewController{
                         print("Error in create new vendor page: \(e.localizedDescription)")
                     }else{
                         print("Successfully added new store in database")
+                        self.performSegue(withIdentifier: K.segue.newVendorToStoreDetailSegue, sender: self)
                     }
                 }
             }
@@ -590,11 +616,9 @@ class NewVendorController: UIViewController{
                             if storePostCodeTextField.text != ""{
                                 if bankName != ""{
                                     if accountNameTextField.text != ""{
-                                        if idCardTextField.text != ""{
                                             if accountNumberTextField.text != ""{
                                                 return true
                                             }else { return false }
-                                        }else { return false }
                                     }else { return false }
                                 }else { return false }
                             }else { return false }
@@ -606,6 +630,99 @@ class NewVendorController: UIViewController{
     }
     
 }
+
+class StoreDetailController :UIViewController{
+    @IBOutlet weak var storeNameLabel: UILabel!
+    @IBOutlet weak var storePhoneNumberLabel: UILabel!
+    @IBOutlet weak var moneyTotalLabel: UILabel!
+    @IBOutlet weak var storeAddressLabel: UILabel!
+    @IBOutlet weak var storeDistrictLabel: UILabel!
+    @IBOutlet weak var storeProvinceLabel: UILabel!
+    @IBOutlet weak var storePostCodeLabel: UILabel!
+    
+    @IBOutlet weak var storeBankAccountTableView: UITableView!
+    var db = Firestore.firestore()
+    var bankAccounts: [BankAccount] = []
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        storeBankAccountTableView.dataSource = self
+        loadStoreData()
+    }
+    
+    func loadStoreData(){
+        if let emailSender = Auth.auth().currentUser?.email{
+            self.bankAccounts = []
+            db.collection(K.tableName.storeDetailTableName).whereField(K.sender
+                , isEqualTo:  emailSender) .getDocuments { (querySnapshot, error) in
+                if let e = error{
+                    print("Error while loading store data: \(e.localizedDescription)")
+                }else{
+                    if let snapShotDocument = querySnapshot?.documents{
+                        let data = snapShotDocument[0].data()
+                        if let storeName = data[K.storeDetail.storeName] as? String,let storePhone = data[K.phoneNumber] as? String,let money = data[K.storeDetail.moneyTotal] as? Double,let storeAddress = data[K.storeDetail.addressDetail] as? String,let storeDistrict = data[K.storeDetail.district] as? String,let storeProvince = data[K.storeDetail.province] as? String,let storePostCode = data[K.storeDetail.postCode] as? String{
+                            DispatchQueue.main.async {
+                                self.storeNameLabel.text = storeName
+                                self.storePhoneNumberLabel.text = storePhone
+                                self.moneyTotalLabel.text = String(format: "%.2f", money)
+                                self.storeAddressLabel.text = storeAddress
+                                self.storeDistrictLabel.text = storeDistrict
+                                self.storeProvinceLabel.text = storeProvince
+                                self.storePostCodeLabel.text = storePostCode
+                            }
+                            
+                        }
+                    }
+                }
+            }
+            db.collection(K.tableName.bankAccountTableName).whereField(K.sender
+                , isEqualTo:  emailSender).getDocuments { (querySnapshot, error) in
+                    if let e = error{
+                        print("Error while loading bank account: \(e.localizedDescription)")
+                    }else{
+                        if let snapShotDocuments = querySnapshot?.documents{
+                            for doc in snapShotDocuments{
+                                let data = doc.data()
+                                let docID = doc.documentID
+                                if let accountName = data[K.bankAccount.accountName] as? String,let accountNumber = data[K.bankAccount.accountNumber] as? String,let bankName = data[K.bankAccount.bankName] as? String,let sender = data[K.sender] as? String{
+                                    self.bankAccounts.append(BankAccount(bankAccontName: accountName, bankAccountNumber: accountNumber, bankName: bankName, sender: sender, docID: docID))
+                                    
+                                    DispatchQueue.main.async {
+                                        self.storeBankAccountTableView.reloadData()
+                                    }
+                                }
+                            }
+                        }
+                }
+            }
+        }
+    }
+}
+
+extension StoreDetailController: UITableViewDataSource,UITableViewDelegate{
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return bankAccounts.count
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let account = bankAccounts[indexPath.row]
+        let accountCell = storeBankAccountTableView.dequeueReusableCell(withIdentifier: K.identifierForTableView.identifierBankAccount) as! BankAccountCell
+        accountCell.accountNameLabel.text = account.bankAccontName
+        accountCell.accountNumberLabel.text = account.bankAccountNumber
+        accountCell.bankNameLabel.text = account.bankName
+        
+        return accountCell
+    }
+    
+    
+}
+class BankAccountCell : UITableViewCell{
+    @IBOutlet weak var accountNameLabel: UILabel!
+    @IBOutlet weak var accountNumberLabel: UILabel!
+    @IBOutlet weak var bankNameLabel: UILabel!
+    @IBOutlet weak var bankImageView: UIImageView!
+    
+}
+
 
 class AddProductController:UIViewController{
     @IBOutlet weak var productNameTextField: UITextField!
