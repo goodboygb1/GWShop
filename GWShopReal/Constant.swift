@@ -43,12 +43,16 @@ struct K {
         static let goToEditAddressSegue = "goToEditAddress"
         static let profileToShowCardSegue = "profileGoToShowCard"
         static let showCardToEditCardSegue = "showCardGoToEditCard"
+        static let profileToNewVendorSegue = "profileGoToNewVendor"
+        static let newVendorToStoreDetailSegue = "newVendotGoToStoreDetail"
+        static let profileToStoreDetailSegue = "profileGoToStoreDetail"
     }
     
     struct identifierForTableView{
         static let identifierAddress = "ReuseAddressCell"
         static let nibNameAddress = "AddressTableViewCell"
         static let identifierCard = "CardDetailIdentifier"
+        static let identifierBankAccount = "BankAccountIdentifier"
     }
     struct cardDetail{
         static let cardNumber = "cardNumber"
@@ -67,6 +71,10 @@ struct K {
     struct storeDetail {
         static let storeName = "storeName"
         static let moneyTotal = "moneyTotal"
+        static let addressDetail = "addressDetail"
+        static let district = "storeDistrict"
+        static let province = "storeProvince"
+        static let postCode = "storePostCode"
     }
     
     struct bankAccount {
