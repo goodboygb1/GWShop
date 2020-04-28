@@ -229,12 +229,12 @@
                         <outlet property="phoneNumberLabel" destination="5KU-Yn-bs8" id="OMZ-pP-nWY"/>
                         <outlet property="profileImageView" destination="CuO-A5-Vsf" id="8SL-ep-HDi"/>
                         <segue destination="JdM-EH-wkz" kind="show" identifier="goToEditProfile" id="uuG-ke-d5B"/>
-                        <segue destination="wk9-t3-ou0" kind="show" identifier="goToShowAddress" id="b5w-F2-hGW"/>
+                        <segue destination="wk9-t3-ou0" kind="show" identifier="goToShowAddress" id="nlx-P3-zAt"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="XKZ-Yu-1y0" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="5565.6000000000004" y="-313.30049261083747"/>
+            <point key="canvasLocation" x="5484" y="-313"/>
         </scene>
         <!--Edit Profile Controller-->
         <scene sceneID="D0U-61-5Pn">
@@ -396,6 +396,110 @@
                                 <rect key="frame" x="0.0" y="202" width="375" height="610"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                <prototypes>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="ReuseAddressCell" rowHeight="150" id="Q4Z-it-xqU" customClass="AddressCell" customModule="GWShopReal" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="28" width="375" height="150"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="Q4Z-it-xqU" id="rrx-wf-eXs">
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="150"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Vty-P2-lP6">
+                                                    <rect key="frame" x="110" y="0.0" width="265" height="150"/>
+                                                    <subviews>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="district" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3zb-VT-jTL">
+                                                            <rect key="frame" x="7" y="72" width="235" height="16"/>
+                                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                            <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                                                            <nil key="textColor"/>
+                                                            <nil key="highlightedColor"/>
+                                                        </label>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="province" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="aTj-Vt-S6u">
+                                                            <rect key="frame" x="8" y="91" width="172" height="16"/>
+                                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                            <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                                                            <nil key="textColor"/>
+                                                            <nil key="highlightedColor"/>
+                                                        </label>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="postcode" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="08c-og-8uY">
+                                                            <rect key="frame" x="200" y="91" width="57" height="16"/>
+                                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                            <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                                                            <nil key="textColor"/>
+                                                            <nil key="highlightedColor"/>
+                                                        </label>
+                                                        <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5u9-5F-bE2">
+                                                            <rect key="frame" x="7" y="120" width="258" height="30"/>
+                                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                            <color key="backgroundColor" red="0.61450511220000004" green="0.14198878409999999" blue="0.11855889109999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                            <state key="normal" title="Delete">
+                                                                <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                            </state>
+                                                            <connections>
+                                                                <action selector="deletePressed:" destination="Q4Z-it-xqU" eventType="touchUpInside" id="73A-q2-egq"/>
+                                                            </connections>
+                                                        </button>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="phone number" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="p0B-68-5YZ">
+                                                            <rect key="frame" x="7" y="18" width="235" height="16"/>
+                                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                            <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                                                            <nil key="textColor"/>
+                                                            <nil key="highlightedColor"/>
+                                                        </label>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="address detail" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Wed-n2-6VY">
+                                                            <rect key="frame" x="7" y="33" width="235" height="31"/>
+                                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                            <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                                                            <nil key="textColor"/>
+                                                            <nil key="highlightedColor"/>
+                                                        </label>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Hqs-J8-F8u">
+                                                            <rect key="frame" x="133" y="0.0" width="124" height="16"/>
+                                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                            <fontDescription key="fontDescription" type="boldSystem" pointSize="13"/>
+                                                            <nil key="textColor"/>
+                                                            <nil key="highlightedColor"/>
+                                                        </label>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="igd-h9-I86">
+                                                            <rect key="frame" x="7" y="0.0" width="126" height="16"/>
+                                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                            <fontDescription key="fontDescription" type="boldSystem" pointSize="13"/>
+                                                            <nil key="textColor"/>
+                                                            <nil key="highlightedColor"/>
+                                                        </label>
+                                                    </subviews>
+                                                    <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                                </view>
+                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="location-pin" translatesAutoresizingMaskIntoConstraints="NO" id="DVD-27-4bO">
+                                                    <rect key="frame" x="15" y="45" width="60" height="60"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="60" id="gsI-ui-eFU"/>
+                                                        <constraint firstAttribute="width" constant="60" id="yOa-V8-1px"/>
+                                                    </constraints>
+                                                </imageView>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstAttribute="bottom" secondItem="Vty-P2-lP6" secondAttribute="bottom" id="6SJ-ed-pM3"/>
+                                                <constraint firstAttribute="bottomMargin" secondItem="DVD-27-4bO" secondAttribute="bottom" constant="34" id="AmW-OO-T4j"/>
+                                                <constraint firstItem="Vty-P2-lP6" firstAttribute="leading" secondItem="DVD-27-4bO" secondAttribute="trailing" constant="35" id="Whj-11-IZt"/>
+                                                <constraint firstItem="Vty-P2-lP6" firstAttribute="leading" secondItem="DVD-27-4bO" secondAttribute="trailing" constant="35" id="WzV-sK-fnQ"/>
+                                                <constraint firstItem="DVD-27-4bO" firstAttribute="top" secondItem="rrx-wf-eXs" secondAttribute="topMargin" constant="34" id="X29-l2-gE8"/>
+                                                <constraint firstItem="DVD-27-4bO" firstAttribute="leading" secondItem="rrx-wf-eXs" secondAttribute="leadingMargin" id="fVe-cP-c7a"/>
+                                                <constraint firstAttribute="trailing" secondItem="Vty-P2-lP6" secondAttribute="trailing" id="glI-HX-Tee"/>
+                                                <constraint firstItem="Vty-P2-lP6" firstAttribute="top" secondItem="rrx-wf-eXs" secondAttribute="top" id="uY9-27-ugF"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                        <connections>
+                                            <outlet property="addressDetailLabel" destination="Wed-n2-6VY" id="oIj-Eh-ULr"/>
+                                            <outlet property="districtLabel" destination="3zb-VT-jTL" id="ZCd-uU-00v"/>
+                                            <outlet property="firstNameLabel" destination="igd-h9-I86" id="5Q3-cm-8HS"/>
+                                            <outlet property="lastNameLabel" destination="Hqs-J8-F8u" id="dGc-sE-foR"/>
+                                            <outlet property="phoneLabel" destination="p0B-68-5YZ" id="khh-aB-hr6"/>
+                                            <outlet property="postCodeLabel" destination="08c-og-8uY" id="YCr-XD-Zlk"/>
+                                            <outlet property="provinceLabel" destination="aTj-Vt-S6u" id="BUC-6y-6V6"/>
+                                        </connections>
+                                    </tableViewCell>
+                                </prototypes>
                             </tableView>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ijP-Gt-PvG">
                                 <rect key="frame" x="319" y="95" width="40" height="40"/>
@@ -419,9 +523,8 @@
                     </view>
                     <navigationItem key="navigationItem" id="5Sy-cA-4nK"/>
                     <connections>
-                        <outlet property="addressTableView" destination="ig3-cY-cK3" id="bRu-Qe-KBM"/>
-                        <outlet property="nameLabel" destination="7zF-gg-8xd" id="pIo-el-Cr3"/>
-                        <segue destination="3kO-Nj-s4F" kind="show" identifier="goToEditAddress" id="sKH-Bo-ndx"/>
+                        <outlet property="addressTableView" destination="ig3-cY-cK3" id="Wbo-0X-qTs"/>
+                        <outlet property="nameLabel" destination="7zF-gg-8xd" id="u0q-St-Bd8"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="x0d-lz-h2j" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -1044,7 +1147,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Mas-Cy-rKy" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="4618" y="107"/>
+            <point key="canvasLocation" x="4663" y="188"/>
         </scene>
         <!--ฉัน-->
         <scene sceneID="ofB-GS-wWZ">
@@ -1062,7 +1165,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="27i-hb-yCe" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3640.8000000000002" y="-313.30049261083747"/>
+            <point key="canvasLocation" x="3865" y="-313"/>
         </scene>
     </scenes>
     <resources>

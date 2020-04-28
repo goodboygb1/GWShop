@@ -9,7 +9,8 @@
 import Foundation
 
 struct Address {
-    let name: String
+    let firstName: String
+    let lastName: String
     let phoneNumber: String
     let addressDetail: String
     let district: String

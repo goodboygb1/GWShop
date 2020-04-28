@@ -113,7 +113,7 @@ class ShowAddressViewController:UIViewController{
         super.viewDidLoad()
         nameLabel.text = name!
         addressTableView.dataSource = self
-        addressTableView.register(UINib(nibName: K.identifierForTableView.nibNameAddress, bundle: nil), forCellReuseIdentifier: K.identifierForTableView.identifierAddress)
+        //addressTableView.register(UINib(nibName: K.identifierForTableView.nibNameAddress, bundle: nil), forCellReuseIdentifier: K.identifierForTableView.identifierAddress)
         loadAddressData()
     }
     @IBAction func addAddressPressed(_ sender: UIButton) {
@@ -133,7 +133,7 @@ class ShowAddressViewController:UIViewController{
                             if let firstName = data[K.firstName] as? String, let lastName = data[K.surname] as? String, let phoneNumber = data[K.phoneNumber] as? String
                                 , let addressDetail = data[K.addressDetail] as? String, let district = data[K.district] as? String
                                 , let province = data[K.province] as? String, let postCode = data[K.postCode] as? String{
-                                let newAddress = Address(name: "\(firstName) \(lastName)", phoneNumber: phoneNumber, addressDetail: addressDetail, district: district, province: province, postCode: postCode)
+                                let newAddress = Address(firstName: firstName,lastName: lastName, phoneNumber: phoneNumber, addressDetail: addressDetail, district: district, province: province, postCode: postCode)
                                 self.addresses.append(newAddress)
                                 
                                 DispatchQueue.main.async {
@@ -145,27 +145,63 @@ class ShowAddressViewController:UIViewController{
                 }
             }
         }
+        print("Successfully address loaded to array")
     }
 
 }
+extension ShowAddressViewController: AddressDelegate{
+    func didPressDelete(firstName: String,lastName: String,phoneNumber: String,addressDetail: String,district: String,province: String,postCode: String) {
+        
+    }
+}
 
-extension ShowAddressViewController: UITableViewDataSource{
+extension ShowAddressViewController: UITableViewDataSource,UITableViewDelegate{
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return addresses.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let address = addresses[indexPath.row]
-        let addressCell = addressTableView.dequeueReusableCell(withIdentifier: K.identifierForTableView.identifierAddress) as! AddressTableViewCell
-        addressCell.nameTextField.text = address.name
-        addressCell.phoneNumberTextField.text = address.phoneNumber
-        addressCell.addressDetailTextField.text = address.addressDetail
-        addressCell.districtTextField.text = address.district
-        addressCell.provinceTextField.text = address.province
-        addressCell.postCodeTextField.text = address.postCode
-        
+        let addressCell = addressTableView.dequeueReusableCell(withIdentifier: K.identifierForTableView.identifierAddress) as! AddressCell
+        addressCell.firstNameLabel.text = address.firstName
+        addressCell.lastNameLabel.text = address.lastName
+        addressCell.phoneLabel.text = address.phoneNumber
+        addressCell.addressDetailLabel.text = address.addressDetail
+        addressCell.districtLabel.text = address.district
+        addressCell.provinceLabel.text = address.province
+        addressCell.postCodeLabel.text = address.postCode
+
+        addressCell.delegate = self
         return addressCell
     }
+}
+
+protocol AddressDelegate {
+    func didPressDelete(firstName: String,lastName: String,phoneNumber: String,addressDetail: String,district: String,province: String,postCode: String)
+}
+class AddressCell: UITableViewCell {
+    
+    @IBOutlet weak var phoneLabel: UILabel!
+    @IBOutlet weak var firstNameLabel: UILabel!
+    @IBOutlet weak var lastNameLabel: UILabel!
+    @IBOutlet weak var addressDetailLabel: UILabel!
+    @IBOutlet weak var districtLabel: UILabel!
+    @IBOutlet weak var provinceLabel: UILabel!
+    @IBOutlet weak var postCodeLabel: UILabel!
+    
+    var delegate: AddressDelegate?
+    override func awakeFromNib() {
+        super.awakeFromNib()
+        // Initialization code
+    }
+
+    override func setSelected(_ selected: Bool, animated: Bool) {
+        super.setSelected(selected, animated: animated)
+    }
+    @IBAction func deletePressed(_ sender: UIButton) {
+        delegate?.didPressDelete(firstName: firstNameLabel.text!, lastName: lastNameLabel.text!, phoneNumber: phoneLabel.text!, addressDetail: addressDetailLabel.text!, district: districtLabel.text!, province: provinceLabel.text!, postCode: postCodeLabel.text!)
+    }
+    
 }
 
 class EditProfileController: UIViewController{
