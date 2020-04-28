@@ -103,8 +103,8 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="..." textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5KU-Yn-bs8">
-                                <rect key="frame" x="178" y="400" width="13" height="17"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="..." textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5KU-Yn-bs8">
+                                <rect key="frame" x="178" y="400" width="165" height="17"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <nil key="textColor"/>
@@ -230,6 +230,7 @@
                         <outlet property="profileImageView" destination="CuO-A5-Vsf" id="8SL-ep-HDi"/>
                         <segue destination="JdM-EH-wkz" kind="show" identifier="goToEditProfile" id="uuG-ke-d5B"/>
                         <segue destination="wk9-t3-ou0" kind="show" identifier="goToShowAddress" id="b5w-F2-hGW"/>
+                        <segue destination="vbc-YI-Jo6" kind="presentation" identifier="logoutToMainSegue" modalPresentationStyle="fullScreen" id="5kE-mj-VJf"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="XKZ-Yu-1y0" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -398,7 +399,7 @@
                                 <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                             </tableView>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ijP-Gt-PvG">
-                                <rect key="frame" x="319" y="95" width="40" height="40"/>
+                                <rect key="frame" x="319" y="98" width="40" height="40"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <state key="normal" image="plus" catalog="system"/>
@@ -407,7 +408,7 @@
                                 </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Add address" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dy5-g1-Jbp">
-                                <rect key="frame" x="283" y="78" width="76" height="16"/>
+                                <rect key="frame" x="274" y="89" width="76" height="16"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="13"/>
                                 <nil key="textColor"/>
@@ -1029,33 +1030,20 @@
             </objects>
             <point key="canvasLocation" x="8434" y="596"/>
         </scene>
-        <!--Me View Controller-->
-        <scene sceneID="VQO-D8-vlW">
-            <objects>
-                <viewController id="n5t-AK-a5G" customClass="MeViewController" customModule="GWShopReal" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="uXA-iM-qio">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
-                        <viewLayoutGuide key="safeArea" id="E3Y-fk-7Ho"/>
-                    </view>
-                    <navigationItem key="navigationItem" id="bcr-2D-LD0"/>
-                    <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="Mas-Cy-rKy" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="4618" y="107"/>
-        </scene>
         <!--ฉัน-->
         <scene sceneID="ofB-GS-wWZ">
             <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" navigationBarHidden="YES" id="yur-OF-Wfs" sceneMemberID="viewController">
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="yur-OF-Wfs" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="ฉัน" image="btn_หน้าแรก" selectedImage="btn_หน้าแรก" id="JG5-rH-74I"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="WYL-7h-BUh">
+                        <rect key="frame" x="0.0" y="44" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <nil name="viewControllers"/>
+                    <toolbar key="toolbar" opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="GOb-K1-JC7">
+                        <autoresizingMask key="autoresizingMask"/>
+                    </toolbar>
                     <connections>
                         <segue destination="NhV-SR-vjh" kind="relationship" relationship="rootViewController" id="rBf-IO-nBy"/>
                     </connections>
@@ -1063,6 +1051,16 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="27i-hb-yCe" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="3640.8000000000002" y="-313.30049261083747"/>
+        </scene>
+        <!--Main-->
+        <scene sceneID="ZFB-bD-u3A">
+            <objects>
+                <viewControllerPlaceholder storyboardName="Main" id="vbc-YI-Jo6" sceneMemberID="viewController">
+                    <navigationItem key="navigationItem" id="6LK-QU-n3R"/>
+                </viewControllerPlaceholder>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="0sY-hR-ZZa" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="4578" y="115"/>
         </scene>
     </scenes>
     <resources>

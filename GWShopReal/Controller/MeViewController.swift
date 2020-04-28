@@ -8,24 +8,10 @@
 
 import UIKit
 import Firebase
-class MeViewController: UIViewController {
 
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        // Do any additional setup after loading the view.
-    }
-    
-   override func viewWillAppear(_ animated: Bool) {
-       super.viewWillAppear(animated)
-       tabBarController?.navigationItem.setHidesBackButton(true, animated: animated)
-       tabBarController?.navigationController?.setNavigationBarHidden(true, animated: animated)
-       navigationController?.setNavigationBarHidden(true, animated: animated)
-      
-   }
-
-}
 
 class ProfileController:UIViewController {
+    
     @IBOutlet weak var profileImageView: UIImageView!
     @IBOutlet weak var emailLabel: UILabel!
     @IBOutlet weak var firstNameLabel: UILabel!
@@ -38,6 +24,14 @@ class ProfileController:UIViewController {
     var db = Firestore.firestore()
     var user: [userDetail] = []
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        tabBarController?.navigationItem.setHidesBackButton(true, animated: animated)
+        tabBarController?.navigationController?.setNavigationBarHidden(true, animated: animated)
+        navigationController?.setNavigationBarHidden(true, animated: animated)
+       
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         loadProfileData()
@@ -48,12 +42,27 @@ class ProfileController:UIViewController {
             db.collection(K.userDetailCollection).whereField(K.sender, isEqualTo: emailSender)
                 .getDocuments { (querySnapshot, error) in
                 if let e = error{
+                    
+                    let queryAlart = UIAlertController(title:"Error", message: "Please Fill email or password", preferredStyle: .alert)  // create alertview
+                    
+                    let alertAction = UIAlertAction(title: "Load profile error", style: .destructive) { (UIAlertAction) in           // create action button
+                       
+                    }
+                    queryAlart.addAction(alertAction)                // add action
+                    
+                    self.present(queryAlart, animated: true)
+                    
                     print("Load profile form database error: \(e.localizedDescription)")
-                }else{
+                    
+                } else {
                     if let snapShotDocuments = querySnapshot?.documents{
                         let data = snapShotDocuments[0].data()
-                        if let email = data[K.sender] as? String, let firstName = data[K.firstName] as? String , let lastName = data[K.surname] as? String
-                            ,let gender = data[K.gender] as? String, let dob = data[K.dateOfBirth] as? String, let phoneNumber = data[K.phoneNumber] as? String{
+                        if let email = data[K.sender] as? String,
+                           let firstName = data[K.firstName] as? String,
+                           let lastName = data[K.surname] as? String,
+                           let gender = data[K.gender] as? String,
+                           let dob = data[K.dateOfBirth] as? String,
+                           let phoneNumber = data[K.phoneNumber] as? String {
                             DispatchQueue.main.async {
                                 self.headerNameLabel.text = "\(firstName) \(lastName)"
                                 self.emailLabel.text = email
@@ -88,8 +97,9 @@ class ProfileController:UIViewController {
     @IBAction func logOutPressed(_ sender: UIButton) {
         do{ print("logged out")
             try Auth.auth().signOut()
-            navigationController?.popToRootViewController(animated: false)
-        }catch let signOutError as NSError {
+            performSegue(withIdentifier: K.segue.logoutToMainSegue, sender: self)
+            
+        } catch let signOutError as NSError {
           print ("Error signing out: %@", signOutError)
         }
     }
@@ -109,6 +119,10 @@ class ShowAddressViewController:UIViewController{
     var name: String?
     var addresses: [Address] = []
     var db = Firestore.firestore()
+    
+    
+   
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         nameLabel.text = name!
@@ -116,6 +130,13 @@ class ShowAddressViewController:UIViewController{
         addressTableView.register(UINib(nibName: K.identifierForTableView.nibNameAddress, bundle: nil), forCellReuseIdentifier: K.identifierForTableView.identifierAddress)
         loadAddressData()
     }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        navigationController?.setNavigationBarHidden(false, animated: animated)
+    }
+    
     @IBAction func addAddressPressed(_ sender: UIButton) {
         self.performSegue(withIdentifier: K.segue.goToEditAddressSegue, sender: self)
     }

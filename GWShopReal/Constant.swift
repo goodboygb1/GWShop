@@ -36,6 +36,7 @@ struct K {
     static let sender = "sender"
     
     struct segue{
+        static let logoutToMainSegue = "logoutToMainSegue"
         static let goToProfileSegue = "goToProfile"
         static let goToEditProfileSegue = "goToEditProfile"
         static let goToShowAddressSegue = "goToShowAddress"

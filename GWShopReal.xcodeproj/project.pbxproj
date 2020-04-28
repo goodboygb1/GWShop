@@ -133,6 +133,7 @@
 				A33A27802450995000810BC5 /* SceneDelegate.swift */,
 				A33A279F2450A04600810BC5 /* Model */,
 				A33A279524509D9600810BC5 /* View */,
+				843665A52456DF9D00613201 /* addresTableView */,
 				A33A279624509DB300810BC5 /* Controller */,
 				A33A27872450995200810BC5 /* Assets.xcassets */,
 				A33A279D2450A04200810BC5 /* Constant.swift */,
@@ -157,7 +158,6 @@
 				A3B434742451ECBC008E71EC /* HomePage.storyboard */,
 				A3B434762451ECCE008E71EC /* Notification.storyboard */,
 				A3B434782451ECDB008E71EC /* Me.storyboard */,
-				843665A52456DF9D00613201 /* addresTableView */,
 			);
 			path = View;
 			sourceTree = "<group>";
