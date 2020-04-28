@@ -16,4 +16,5 @@ struct Address {
     let district: String
     let province: String
     let postCode: String
+    let docID: String
 }

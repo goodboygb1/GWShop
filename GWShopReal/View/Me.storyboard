@@ -229,10 +229,9 @@
                         <outlet property="phoneNumberLabel" destination="5KU-Yn-bs8" id="OMZ-pP-nWY"/>
                         <outlet property="profileImageView" destination="CuO-A5-Vsf" id="8SL-ep-HDi"/>
                         <segue destination="JdM-EH-wkz" kind="show" identifier="goToEditProfile" id="uuG-ke-d5B"/>
-
                         <segue destination="wk9-t3-ou0" kind="show" identifier="goToShowAddress" id="b5w-F2-hGW"/>
                         <segue destination="vbc-YI-Jo6" kind="presentation" identifier="logoutToMainSegue" modalPresentationStyle="fullScreen" id="5kE-mj-VJf"/>
-
+                        <segue destination="uri-jH-N64" kind="show" identifier="profileGoToShowCard" id="ZZO-tS-hkJ"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="XKZ-Yu-1y0" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -480,6 +479,13 @@
                                                         <constraint firstAttribute="width" constant="60" id="yOa-V8-1px"/>
                                                     </constraints>
                                                 </imageView>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ad0-hF-U2f">
+                                                    <rect key="frame" x="12" y="130" width="63" height="15"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="4"/>
+                                                    <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
                                             </subviews>
                                             <constraints>
                                                 <constraint firstAttribute="bottom" secondItem="Vty-P2-lP6" secondAttribute="bottom" id="6SJ-ed-pM3"/>
@@ -495,6 +501,7 @@
                                         <connections>
                                             <outlet property="addressDetailLabel" destination="Wed-n2-6VY" id="oIj-Eh-ULr"/>
                                             <outlet property="districtLabel" destination="3zb-VT-jTL" id="ZCd-uU-00v"/>
+                                            <outlet property="documentIDLabel" destination="ad0-hF-U2f" id="FQS-fw-iJ3"/>
                                             <outlet property="firstNameLabel" destination="igd-h9-I86" id="5Q3-cm-8HS"/>
                                             <outlet property="lastNameLabel" destination="Hqs-J8-F8u" id="dGc-sE-foR"/>
                                             <outlet property="phoneLabel" destination="p0B-68-5YZ" id="khh-aB-hr6"/>
@@ -528,6 +535,7 @@
                     <connections>
                         <outlet property="addressTableView" destination="ig3-cY-cK3" id="Wbo-0X-qTs"/>
                         <outlet property="nameLabel" destination="7zF-gg-8xd" id="u0q-St-Bd8"/>
+                        <segue destination="3kO-Nj-s4F" kind="show" identifier="goToEditAddress" id="AFR-Vy-2IZ"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="x0d-lz-h2j" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -1016,6 +1024,135 @@
             </objects>
             <point key="canvasLocation" x="7156" y="-1080"/>
         </scene>
+        <!--Show Card View Controller-->
+        <scene sceneID="6rG-od-9cb">
+            <objects>
+                <viewController id="uri-jH-N64" customClass="ShowCardViewController" customModule="GWShopReal" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="9G5-o0-bHl">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="background" translatesAutoresizingMaskIntoConstraints="NO" id="CbS-vW-wdA">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="211"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </imageView>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="creditcard" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="DXw-6y-duo">
+                                <rect key="frame" x="42" y="138" width="60" height="60"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            </imageView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="..." textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="YLf-wU-4jb">
+                                <rect key="frame" x="118" y="146" width="193" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Your cards" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gat-Em-WIv">
+                                <rect key="frame" x="118" y="167" width="88" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Add card" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gxW-38-Ha8">
+                                <rect key="frame" x="304" y="97" width="55" height="16"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="pVb-HC-pfm">
+                                <rect key="frame" x="319" y="112" width="40" height="40"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <state key="normal" image="plus" catalog="system"/>
+                                <connections>
+                                    <action selector="addCardPressed:" destination="uri-jH-N64" eventType="touchUpInside" id="3iz-H4-mhk"/>
+                                </connections>
+                            </button>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="120" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="1g4-vy-j6n">
+                                <rect key="frame" x="0.0" y="219" width="375" height="593"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                <prototypes>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="CardDetailIdentifier" id="i0F-Tu-Bpf" customClass="CardViewCell" customModule="GWShopReal" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="28" width="375" height="120"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="i0F-Tu-Bpf" id="Wy7-Ts-dBr" customClass="CardViewCell" customModule="GWShopReal" customModuleProvider="target">
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="120"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Card Number" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xVx-Mp-z7q">
+                                                    <rect key="frame" x="136" y="43" width="224" height="21"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="aux-90-lO0">
+                                                    <rect key="frame" x="136" y="22" width="224" height="21"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Expierd date" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zOh-HL-GgH">
+                                                    <rect key="frame" x="136" y="65" width="224" height="21"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="creditcard.fill" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="rd4-aC-uAd">
+                                                    <rect key="frame" x="15" y="20.333333333333258" width="80" height="80"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                </imageView>
+                                                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="J1B-0V-KnJ">
+                                                    <rect key="frame" x="136" y="90" width="239" height="30"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    <color key="backgroundColor" red="0.61450511220000004" green="0.14198878409999999" blue="0.11855889109999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                    <state key="normal" title="Delete">
+                                                        <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                    </state>
+                                                    <connections>
+                                                        <action selector="deletePressed:" destination="i0F-Tu-Bpf" eventType="touchUpInside" id="JYl-ld-bCp"/>
+                                                    </connections>
+                                                </button>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vvf-1V-dHa">
+                                                    <rect key="frame" x="136" y="4" width="170" height="5"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="4"/>
+                                                    <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                        </tableViewCellContentView>
+                                        <connections>
+                                            <outlet property="cardNameLabel" destination="aux-90-lO0" id="Bct-6T-aPh"/>
+                                            <outlet property="cardNumberLabel" destination="xVx-Mp-z7q" id="L50-EI-Etq"/>
+                                            <outlet property="documentIDLabel" destination="vvf-1V-dHa" id="RdN-Ld-l0q"/>
+                                            <outlet property="expiredDateLabel" destination="zOh-HL-GgH" id="YkS-pZ-C8J"/>
+                                        </connections>
+                                    </tableViewCell>
+                                </prototypes>
+                            </tableView>
+                        </subviews>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <viewLayoutGuide key="safeArea" id="Qbb-v7-Ton"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="Hug-w7-sIn"/>
+                    <connections>
+                        <outlet property="cardTableView" destination="1g4-vy-j6n" id="eTF-bf-jE4"/>
+                        <outlet property="headerNameLabel" destination="YLf-wU-4jb" id="hZS-if-MgS"/>
+                        <segue destination="y2t-Cd-QMa" kind="show" identifier="showCardGoToEditCard" id="LxH-wZ-CpD"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Ap4-xf-dIr" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="5484" y="1121.6748768472908"/>
+        </scene>
         <!--Edit Card Controller-->
         <scene sceneID="D00-PW-vZV">
             <objects>
@@ -1042,8 +1179,7 @@
                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 </state>
                                 <connections>
-                                    <action selector="submitCardPressed:" destination="y2t-Cd-QMa" eventType="touchUpInside" id="Ug3-EG-hbC"/>
-                                    <action selector="submitPressed:" destination="y2t-Cd-QMa" eventType="touchUpInside" id="b7D-dG-g0C"/>
+                                    <action selector="submitPressed:" destination="y2t-Cd-QMa" eventType="touchUpInside" id="SH2-Jz-xlv"/>
                                 </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Card Holder's name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9FP-pR-gLZ">
@@ -1080,8 +1216,8 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
-                            <textField opaque="NO" alpha="0.5" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="type name here" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="gjT-pl-ofB">
-                                <rect key="frame" x="35" y="277" width="324" height="34"/>
+                            <textField opaque="NO" alpha="0.5" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="type first name here" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="gjT-pl-ofB">
+                                <rect key="frame" x="35" y="277" width="164" height="34"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
@@ -1118,13 +1254,20 @@
                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <textField opaque="NO" alpha="0.5" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="type last name here" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="cD9-cE-7w7">
+                                <rect key="frame" x="207" y="277" width="152" height="34"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <viewLayoutGuide key="safeArea" id="yjV-ML-3co"/>
                     </view>
                     <navigationItem key="navigationItem" id="Cfd-rT-ry2"/>
                     <connections>
-                        <outlet property="cardNameTextField" destination="gjT-pl-ofB" id="gXk-Jp-lRm"/>
+                        <outlet property="cardFirstNameTextField" destination="gjT-pl-ofB" id="Yjm-p7-8Lm"/>
+                        <outlet property="cardLastNameTextField" destination="cD9-cE-7w7" id="51o-sq-ilf"/>
                         <outlet property="cardNumberTextField" destination="ugR-JY-kNI" id="xhN-9c-Nmh"/>
                         <outlet property="cvvTextField" destination="eXJ-6b-AwI" id="7Nh-al-xqO"/>
                         <outlet property="expiredMonthTextField" destination="rSf-BE-Jy5" id="ndN-Rv-Wwj"/>
@@ -1133,9 +1276,8 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ygo-2L-HUd" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="8434" y="596"/>
+            <point key="canvasLocation" x="6376.8000000000002" y="1121.6748768472908"/>
         </scene>
-
         <!--Me View Controller-->
         <scene sceneID="VQO-D8-vlW">
             <objects>
@@ -1153,7 +1295,6 @@
             </objects>
             <point key="canvasLocation" x="4663" y="188"/>
         </scene>
-
         <!--ฉัน-->
         <scene sceneID="ofB-GS-wWZ">
             <objects>
@@ -1190,9 +1331,10 @@
     <resources>
         <image name="Gear" width="120" height="128"/>
         <image name="background" width="105" height="270.66665649414062"/>
-        <image name="btn_หน้าแรก" width="11" height="14"/>
+        <image name="btn_หน้าแรก" width="14.666666984558105" height="18.666666030883789"/>
         <image name="cart" catalog="system" width="128" height="102"/>
         <image name="creditcard" catalog="system" width="128" height="91"/>
+        <image name="creditcard.fill" catalog="system" width="128" height="91"/>
         <image name="house" catalog="system" width="128" height="110"/>
         <image name="location-pin" width="128" height="128"/>
         <image name="palmSky" width="360" height="480"/>

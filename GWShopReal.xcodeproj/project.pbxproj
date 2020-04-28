@@ -10,6 +10,7 @@
 		8433D16924570A77003C59E5 /* Address.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8433D16824570A77003C59E5 /* Address.swift */; };
 		8436DBC9245174EE00956EDA /* Pods_GWShopReal.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 22955FD222D677EA13792783 /* Pods_GWShopReal.framework */; };
 		8436DBCA245174EE00956EDA /* Pods_GWShopReal.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 22955FD222D677EA13792783 /* Pods_GWShopReal.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		8490DB2B24585E1600A2BD88 /* Card.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8490DB2A24585E1600A2BD88 /* Card.swift */; };
 		A30CD899245316A00061FE27 /* SukhumvitSet-Thin.ttf in Resources */ = {isa = PBXBuildFile; fileRef = A30CD8932453169F0061FE27 /* SukhumvitSet-Thin.ttf */; };
 		A30CD89A245316A00061FE27 /* SukhumvitSet-Light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = A30CD8942453169F0061FE27 /* SukhumvitSet-Light.ttf */; };
 		A30CD89B245316A00061FE27 /* SukhumvitSet-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = A30CD8952453169F0061FE27 /* SukhumvitSet-Bold.ttf */; };
@@ -54,6 +55,7 @@
 		22955FD222D677EA13792783 /* Pods_GWShopReal.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_GWShopReal.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		6649F8358CCAC210AAB18B18 /* Pods-GWShopReal.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GWShopReal.release.xcconfig"; path = "Target Support Files/Pods-GWShopReal/Pods-GWShopReal.release.xcconfig"; sourceTree = "<group>"; };
 		8433D16824570A77003C59E5 /* Address.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Address.swift; sourceTree = "<group>"; };
+		8490DB2A24585E1600A2BD88 /* Card.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Card.swift; sourceTree = "<group>"; };
 		A30CD8932453169F0061FE27 /* SukhumvitSet-Thin.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SukhumvitSet-Thin.ttf"; sourceTree = "<group>"; };
 		A30CD8942453169F0061FE27 /* SukhumvitSet-Light.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SukhumvitSet-Light.ttf"; sourceTree = "<group>"; };
 		A30CD8952453169F0061FE27 /* SukhumvitSet-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SukhumvitSet-Bold.ttf"; sourceTree = "<group>"; };
@@ -120,7 +122,6 @@
 				A33A27802450995000810BC5 /* SceneDelegate.swift */,
 				A33A279F2450A04600810BC5 /* Model */,
 				A33A279524509D9600810BC5 /* View */,
-				843665A52456DF9D00613201 /* addresTableView */,
 				A33A279624509DB300810BC5 /* Controller */,
 				A33A27872450995200810BC5 /* Assets.xcassets */,
 				A33A279D2450A04200810BC5 /* Constant.swift */,
@@ -167,6 +168,7 @@
 			children = (
 				A37003DD2450CB08002B0066 /* userDetail.swift */,
 				8433D16824570A77003C59E5 /* Address.swift */,
+				8490DB2A24585E1600A2BD88 /* Card.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -322,6 +324,7 @@
 				A33A279A24509FA100810BC5 /* RegisterViewController.swift in Sources */,
 				8433D16924570A77003C59E5 /* Address.swift in Sources */,
 				A33A279824509F9200810BC5 /* LoginController.swift in Sources */,
+				8490DB2B24585E1600A2BD88 /* Card.swift in Sources */,
 				A33A279C24509FAE00810BC5 /* MainViewController.swift in Sources */,
 				A37003DE2450CB08002B0066 /* userDetail.swift in Sources */,
 				A33A277F2450995000810BC5 /* AppDelegate.swift in Sources */,
