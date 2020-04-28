@@ -84,6 +84,7 @@ class ProfileController:UIViewController {
         self.performSegue(withIdentifier: K.segue.goToEditProfileSegue, sender: self)
     }
     @IBAction func shopCartPressed(_ sender: UIButton) {
+        
     }
     @IBAction func storePressed(_ sender: UIButton) {
     }
@@ -92,6 +93,7 @@ class ProfileController:UIViewController {
         self.performSegue(withIdentifier: K.segue.goToShowAddressSegue, sender: self)
     }
     @IBAction func showCardPressed(_ sender: UIButton) {
+        self.performSegue(withIdentifier: K.segue.profileToShowCardSegue, sender: self)
     }
     
     @IBAction func logOutPressed(_ sender: UIButton) {
@@ -107,6 +109,9 @@ class ProfileController:UIViewController {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == K.segue.goToShowAddressSegue{
             let destinationVC = segue.destination as! ShowAddressViewController
+            destinationVC.name = headerNameLabel.text
+        }else if segue.identifier == K.segue.profileToShowCardSegue{
+            let destinationVC = segue.destination as! ShowCardViewController
             destinationVC.name = headerNameLabel.text
         }
     }
@@ -137,6 +142,7 @@ class ShowAddressViewController:UIViewController{
         navigationController?.setNavigationBarHidden(false, animated: animated)
     }
     
+    
     @IBAction func addAddressPressed(_ sender: UIButton) {
         self.performSegue(withIdentifier: K.segue.goToEditAddressSegue, sender: self)
     }
@@ -151,10 +157,11 @@ class ShowAddressViewController:UIViewController{
                     if let snapShotDocument = querySnapshot?.documents{
                         for doc in snapShotDocument{
                             let data = doc.data()
+                            let doc_id = doc.documentID
                             if let firstName = data[K.firstName] as? String, let lastName = data[K.surname] as? String, let phoneNumber = data[K.phoneNumber] as? String
                                 , let addressDetail = data[K.addressDetail] as? String, let district = data[K.district] as? String
                                 , let province = data[K.province] as? String, let postCode = data[K.postCode] as? String{
-                                let newAddress = Address(firstName: firstName,lastName: lastName, phoneNumber: phoneNumber, addressDetail: addressDetail, district: district, province: province, postCode: postCode)
+                                let newAddress = Address(firstName: firstName,lastName: lastName, phoneNumber: phoneNumber, addressDetail: addressDetail, district: district, province: province, postCode: postCode,docID: doc_id)
                                 self.addresses.append(newAddress)
                                 
                                 DispatchQueue.main.async {
@@ -171,9 +178,10 @@ class ShowAddressViewController:UIViewController{
 
 }
 extension ShowAddressViewController: AddressDelegate{
-    func didPressDelete(firstName: String,lastName: String,phoneNumber: String,addressDetail: String,district: String,province: String,postCode: String) {
-        
+    func didPressDelete(documentID: String) {
+        db.collection(K.tableName.addressTableName).document(documentID).delete()
     }
+    
 }
 
 extension ShowAddressViewController: UITableViewDataSource,UITableViewDelegate{
@@ -192,14 +200,15 @@ extension ShowAddressViewController: UITableViewDataSource,UITableViewDelegate{
         addressCell.districtLabel.text = address.district
         addressCell.provinceLabel.text = address.province
         addressCell.postCodeLabel.text = address.postCode
-
+        addressCell.documentIDLabel.text = address.docID
         addressCell.delegate = self
         return addressCell
     }
 }
 
 protocol AddressDelegate {
-    func didPressDelete(firstName: String,lastName: String,phoneNumber: String,addressDetail: String,district: String,province: String,postCode: String)
+    func didPressDelete(documentID: String)
+    // firstName: String,lastName: String,phoneNumber: String,addressDetail: String,district: String,province: String,postCode: String
 }
 class AddressCell: UITableViewCell {
     
@@ -210,6 +219,7 @@ class AddressCell: UITableViewCell {
     @IBOutlet weak var districtLabel: UILabel!
     @IBOutlet weak var provinceLabel: UILabel!
     @IBOutlet weak var postCodeLabel: UILabel!
+    @IBOutlet weak var documentIDLabel: UILabel!
     
     var delegate: AddressDelegate?
     override func awakeFromNib() {
@@ -221,7 +231,7 @@ class AddressCell: UITableViewCell {
         super.setSelected(selected, animated: animated)
     }
     @IBAction func deletePressed(_ sender: UIButton) {
-        delegate?.didPressDelete(firstName: firstNameLabel.text!, lastName: lastNameLabel.text!, phoneNumber: phoneLabel.text!, addressDetail: addressDetailLabel.text!, district: districtLabel.text!, province: provinceLabel.text!, postCode: postCodeLabel.text!)
+        delegate?.didPressDelete(documentID: documentIDLabel.text!)
     }
     
 }
@@ -363,8 +373,96 @@ class EditAddressController:UIViewController {
     
 }
 
+class ShowCardViewController: UIViewController{
+    @IBOutlet weak var headerNameLabel: UILabel!
+    @IBOutlet weak var cardTableView: UITableView!
+    
+    var name: String?
+    var cards: [Card] = []
+    var db = Firestore.firestore()
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        headerNameLabel.text = name!
+        cardTableView.dataSource = self
+        loadCardData()
+    }
+    
+    func loadCardData(){
+        if let emailSender = Auth.auth().currentUser?.email{
+            self.cards = []
+            db.collection(K.tableName.cardDetailTableName).whereField(K.sender, isEqualTo: emailSender).getDocuments { (querySnapshot, error) in
+                if let e = error{
+                    print("Error in show card page: \(e.localizedDescription)")
+                }else{
+                    if let snapShotDocuments = querySnapshot?.documents{
+                        for doc in snapShotDocuments{
+                            let data = doc.data()
+                            let docID = doc.documentID
+                            if let cardName = data[K.cardDetail.cardName] as? String, let cardNumber = data[K.cardDetail.cardNumber] as? String, let expiredDate = data[K.cardDetail.expiredDate] as? String
+                                ,let cvv = data[K.cardDetail.cvvNumber] as? String{
+                                self.cards.append(Card(cardNumber: cardNumber, cardName: cardName, expiredDate: expiredDate, cvv: cvv, docID: docID))
+                                
+                                DispatchQueue.main.async {
+                                    self.cardTableView.reloadData()
+                                }
+                            }
+                        }
+                    }
+                    
+                }
+            }
+        }
+    }
+    
+    @IBAction func addCardPressed(_ sender: UIButton) {
+        performSegue(withIdentifier: K.segue.showCardToEditCardSegue, sender: self)
+    }
+    
+}
+extension ShowCardViewController: CardViewCellDelegate{
+    func didPressDelete(docID: String) {
+        db.collection(K.tableName.cardDetailTableName).document(docID).delete()
+    }
+    
+    
+}
+
+extension ShowCardViewController: UITableViewDataSource, UITableViewDelegate{
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return cards.count
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let card = cards[indexPath.row]
+        let cardCell = cardTableView.dequeueReusableCell(withIdentifier: K.identifierForTableView.identifierCard) as! CardViewCell
+        cardCell.cardNameLabel.text = card.cardName
+        cardCell.cardNumberLabel.text = card.cardNumber
+        cardCell.expiredDateLabel.text = card.expiredDate
+        cardCell.documentIDLabel.text = card.docID
+        cardCell.delegate = self
+        return cardCell
+    }
+    
+}
+protocol CardViewCellDelegate {
+    func didPressDelete(docID: String)
+}
+
+class CardViewCell: UITableViewCell{
+    @IBOutlet weak var cardNameLabel: UILabel!
+    @IBOutlet weak var cardNumberLabel: UILabel!
+    @IBOutlet weak var expiredDateLabel: UILabel!
+    @IBOutlet weak var documentIDLabel: UILabel!
+    var delegate: CardViewCellDelegate?
+    
+    @IBAction func deletePressed(_ sender: UIButton) {
+        delegate?.didPressDelete(docID: documentIDLabel.text!)
+    }
+}
+
 class EditCardController:UIViewController {
-    @IBOutlet weak var cardNameTextField: UITextField!
+    @IBOutlet weak var cardFirstNameTextField: UITextField!
+    @IBOutlet weak var cardLastNameTextField: UITextField!
     @IBOutlet weak var cardNumberTextField: UITextField!
     @IBOutlet weak var expiredMonthTextField: UITextField!
     @IBOutlet weak var expiredYearTextField: UITextField!
@@ -376,23 +474,24 @@ class EditCardController:UIViewController {
     }
     @IBAction func submitPressed(_ sender: UIButton) {
         if cardNotNil(){
-            let cardName = cardNameTextField.text!
+            let cardName = "\(cardFirstNameTextField.text!) \(cardLastNameTextField.text!)"
             let cardNumber = cardNumberTextField.text!
             let expiredDate = "\(expiredMonthTextField.text!)/\(expiredYearTextField.text!)"
-            let cvv = cvvTextField!
-            if let sender = Auth.auth().currentUser?.email{
+            let cvv = cvvTextField.text!
+            if let emailSender = Auth.auth().currentUser?.email{
                 db.collection(K.tableName.cardDetailTableName).addDocument(data: [
                     K.cardDetail.cardName: cardName,
                     K.cardDetail.cardNumber: cardNumber,
                     K.cardDetail.expiredDate: expiredDate,
                     K.cardDetail.cvvNumber: cvv,
-                    K.sender: sender,
+                    K.sender: emailSender,
                     K.dateField: Date().timeIntervalSince1970
                 ]) { (error) in
                     if let e = error{
                         print("Add card error: \(e.localizedDescription)")
                     }else{
                         print("Successfully added new card")
+                        self.dismiss(animated: true, completion: nil)
                     }
                 }
             }
@@ -402,12 +501,14 @@ class EditCardController:UIViewController {
     }
     
     func cardNotNil() -> Bool{
-        if cardNameTextField.text != ""{
-            if cardNumberTextField.text != ""{
-                if expiredMonthTextField.text != ""{
-                    if expiredYearTextField.text != ""{
-                        if cvvTextField.text != ""{
-                            return true
+        if cardLastNameTextField.text != ""{
+            if cardFirstNameTextField.text != ""{
+                if cardNumberTextField.text != ""{
+                    if expiredMonthTextField.text != ""{
+                        if expiredYearTextField.text != ""{
+                            if cvvTextField.text != ""{
+                                return true
+                            }else { return false }
                         }else { return false }
                     }else { return false }
                 }else { return false }

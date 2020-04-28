@@ -41,11 +41,14 @@ struct K {
         static let goToEditProfileSegue = "goToEditProfile"
         static let goToShowAddressSegue = "goToShowAddress"
         static let goToEditAddressSegue = "goToEditAddress"
+        static let profileToShowCardSegue = "profileGoToShowCard"
+        static let showCardToEditCardSegue = "showCardGoToEditCard"
     }
     
     struct identifierForTableView{
         static let identifierAddress = "ReuseAddressCell"
         static let nibNameAddress = "AddressTableViewCell"
+        static let identifierCard = "CardDetailIdentifier"
     }
     struct cardDetail{
         static let cardNumber = "cardNumber"
