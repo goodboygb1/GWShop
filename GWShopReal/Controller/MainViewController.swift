@@ -7,14 +7,16 @@
 //
 
 import UIKit
+import Firebase
 
-class MainViewController: UIViewController {
+class MainViewController: UIViewController,UITextFieldDelegate {
 
     
     
     @IBOutlet weak var searchTextField: UITextField!
     
     override func viewDidLoad() {
+        searchTextField.delegate = self
         super.viewDidLoad()
         searchTextField.layer.cornerRadius = searchTextField.frame.size.height/10
     }
@@ -26,6 +28,12 @@ class MainViewController: UIViewController {
         navigationController?.setNavigationBarHidden(true, animated: animated)
        
     }
+    
+//    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+//
+//        let db = Firestore.firestore()
+//        db.collection("")
+//    }
     
    
 

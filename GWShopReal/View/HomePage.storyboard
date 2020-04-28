@@ -39,13 +39,13 @@
                                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
-                                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="aBe-Bd-gM0">
-                                                <rect key="frame" x="18" y="82" width="286" height="34"/>
+                                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="ค้นหาสินค้าที่ต้องการ" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="aBe-Bd-gM0">
+                                                <rect key="frame" x="18" y="82" width="286" height="37"/>
                                                 <constraints>
                                                     <constraint firstAttribute="width" constant="286" id="XKm-wW-MQi"/>
                                                 </constraints>
-                                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                <textInputTraits key="textInputTraits"/>
+                                                <fontDescription key="fontDescription" name="SukhumvitSet-Text" family="Sukhumvit Set" pointSize="17"/>
+                                                <textInputTraits key="textInputTraits" returnKeyType="search"/>
                                             </textField>
                                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="cart" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="gQG-Il-8Qq">
                                                 <rect key="frame" x="319" y="72.666666666666671" width="44" height="44"/>
@@ -62,99 +62,99 @@
                                                     <constraint firstAttribute="width" constant="335" id="nNR-co-xoo"/>
                                                 </constraints>
                                             </imageView>
-                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="Logo-GW" translatesAutoresizingMaskIntoConstraints="NO" id="iWr-qJ-R9o">
+                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="icon_shirt" translatesAutoresizingMaskIntoConstraints="NO" id="iWr-qJ-R9o">
                                                 <rect key="frame" x="196" y="297" width="159" height="145"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                             </imageView>
-                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="Logo-GW" translatesAutoresizingMaskIntoConstraints="NO" id="Hwl-22-oeU">
+                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="icon_dress" translatesAutoresizingMaskIntoConstraints="NO" id="Hwl-22-oeU">
                                                 <rect key="frame" x="20" y="297" width="159" height="145"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                             </imageView>
-                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="Logo-GW" translatesAutoresizingMaskIntoConstraints="NO" id="Qg6-fs-M7T">
+                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="icon_foodsup" translatesAutoresizingMaskIntoConstraints="NO" id="Qg6-fs-M7T">
                                                 <rect key="frame" x="196" y="450" width="159" height="145"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                             </imageView>
-                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="Logo-GW" translatesAutoresizingMaskIntoConstraints="NO" id="4Eu-n9-a5S">
+                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="icon_phone" translatesAutoresizingMaskIntoConstraints="NO" id="4Eu-n9-a5S">
                                                 <rect key="frame" x="20" y="450" width="159" height="145"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                             </imageView>
-                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="Logo-GW" translatesAutoresizingMaskIntoConstraints="NO" id="2yv-uG-5e1">
+                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="icon_watch" translatesAutoresizingMaskIntoConstraints="NO" id="2yv-uG-5e1">
                                                 <rect key="frame" x="196" y="603" width="159" height="145"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                             </imageView>
-                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="Logo-GW" translatesAutoresizingMaskIntoConstraints="NO" id="eW5-wP-1sx">
+                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="icon_toy" translatesAutoresizingMaskIntoConstraints="NO" id="eW5-wP-1sx">
                                                 <rect key="frame" x="20" y="603" width="159" height="145"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                             </imageView>
-                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="Logo-GW" translatesAutoresizingMaskIntoConstraints="NO" id="7PI-IB-1Xz">
+                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="icon_menshoes" translatesAutoresizingMaskIntoConstraints="NO" id="7PI-IB-1Xz">
                                                 <rect key="frame" x="196" y="756" width="159" height="145"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                             </imageView>
-                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="Logo-GW" translatesAutoresizingMaskIntoConstraints="NO" id="gMK-tx-uuH">
+                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="icon_sofa" translatesAutoresizingMaskIntoConstraints="NO" id="gMK-tx-uuH">
                                                 <rect key="frame" x="20" y="756" width="159" height="145"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                             </imageView>
-                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="Logo-GW" translatesAutoresizingMaskIntoConstraints="NO" id="CX3-iG-c9m">
+                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="icon_bag" translatesAutoresizingMaskIntoConstraints="NO" id="CX3-iG-c9m">
                                                 <rect key="frame" x="194" y="909" width="159" height="145"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                             </imageView>
-                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="Logo-GW" translatesAutoresizingMaskIntoConstraints="NO" id="NNN-HB-MMP">
+                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="icon_womenshoes" translatesAutoresizingMaskIntoConstraints="NO" id="NNN-HB-MMP">
                                                 <rect key="frame" x="18" y="909" width="159" height="145"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                             </imageView>
-                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="Logo-GW" translatesAutoresizingMaskIntoConstraints="NO" id="z3w-uY-M8a">
+                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="icon_computer" translatesAutoresizingMaskIntoConstraints="NO" id="z3w-uY-M8a">
                                                 <rect key="frame" x="194" y="1062" width="159" height="145"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                             </imageView>
-                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="Logo-GW" translatesAutoresizingMaskIntoConstraints="NO" id="lxx-z3-gof">
+                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="icon_cosmetic" translatesAutoresizingMaskIntoConstraints="NO" id="lxx-z3-gof">
                                                 <rect key="frame" x="18" y="1062" width="159" height="145"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                             </imageView>
-                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="Logo-GW" translatesAutoresizingMaskIntoConstraints="NO" id="wpY-Uq-nO0">
+                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="icon_jewelry" translatesAutoresizingMaskIntoConstraints="NO" id="wpY-Uq-nO0">
                                                 <rect key="frame" x="196" y="1215" width="159" height="145"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                             </imageView>
-                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="Logo-GW" translatesAutoresizingMaskIntoConstraints="NO" id="Z7E-GH-Ini">
+                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="icon_camera" translatesAutoresizingMaskIntoConstraints="NO" id="Z7E-GH-Ini">
                                                 <rect key="frame" x="20" y="1215" width="159" height="145"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                             </imageView>
-                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="Logo-GW" translatesAutoresizingMaskIntoConstraints="NO" id="jV5-gn-TfS">
+                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="icon_food" translatesAutoresizingMaskIntoConstraints="NO" id="jV5-gn-TfS">
                                                 <rect key="frame" x="196" y="1368" width="159" height="145"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                             </imageView>
-                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="Logo-GW" translatesAutoresizingMaskIntoConstraints="NO" id="ulX-1g-ehs">
+                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="icon_ball" translatesAutoresizingMaskIntoConstraints="NO" id="ulX-1g-ehs">
                                                 <rect key="frame" x="20" y="1368" width="159" height="145"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                             </imageView>
-                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="Logo-GW" translatesAutoresizingMaskIntoConstraints="NO" id="7GC-VY-gP6">
+                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="icon_electronic" translatesAutoresizingMaskIntoConstraints="NO" id="7GC-VY-gP6">
                                                 <rect key="frame" x="196" y="1521" width="159" height="145"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                             </imageView>
-                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="Logo-GW" translatesAutoresizingMaskIntoConstraints="NO" id="AHF-0F-LN5">
+                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="icon_tv" translatesAutoresizingMaskIntoConstraints="NO" id="AHF-0F-LN5">
                                                 <rect key="frame" x="20" y="1521" width="159" height="145"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                             </imageView>
-                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="Logo-GW" translatesAutoresizingMaskIntoConstraints="NO" id="3uh-8D-7WZ">
+                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="icon_pet" translatesAutoresizingMaskIntoConstraints="NO" id="3uh-8D-7WZ">
                                                 <rect key="frame" x="196" y="1674" width="159" height="145"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                             </imageView>
-                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="Logo-GW" translatesAutoresizingMaskIntoConstraints="NO" id="X1V-RE-AU3">
+                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="icon_toy" translatesAutoresizingMaskIntoConstraints="NO" id="X1V-RE-AU3">
                                                 <rect key="frame" x="20" y="1674" width="159" height="145"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                             </imageView>
-                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="Logo-GW" translatesAutoresizingMaskIntoConstraints="NO" id="1bV-9U-jBX">
+                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="icon_stationary" translatesAutoresizingMaskIntoConstraints="NO" id="1bV-9U-jBX">
                                                 <rect key="frame" x="196" y="1827" width="159" height="145"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                             </imageView>
-                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="Logo-GW" translatesAutoresizingMaskIntoConstraints="NO" id="yql-2r-f3O">
+                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="icon_car" translatesAutoresizingMaskIntoConstraints="NO" id="yql-2r-f3O">
                                                 <rect key="frame" x="20" y="1827" width="159" height="145"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                             </imageView>
-                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="Logo-GW" translatesAutoresizingMaskIntoConstraints="NO" id="3Yy-F4-4co">
+                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="icon_other" translatesAutoresizingMaskIntoConstraints="NO" id="3Yy-F4-4co">
                                                 <rect key="frame" x="196" y="1980" width="159" height="145"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                             </imageView>
-                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Logo-GW" translatesAutoresizingMaskIntoConstraints="NO" id="9aR-wS-K8d">
+                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="icon_ticket" translatesAutoresizingMaskIntoConstraints="NO" id="9aR-wS-K8d">
                                                 <rect key="frame" x="20" y="1981" width="159" height="145"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="145" id="cY8-15-ceC"/>
@@ -232,9 +232,31 @@
         </scene>
     </scenes>
     <resources>
-        <image name="Logo-GW" width="341.33334350585938" height="341.33334350585938"/>
         <image name="background" width="105" height="270.66665649414062"/>
-        <image name="btn_หน้าแรก" width="11" height="14"/>
+        <image name="btn_หน้าแรก" width="14.666666984558105" height="18.666666030883789"/>
         <image name="cart" catalog="system" width="128" height="102"/>
+        <image name="icon_bag" width="53" height="48.333332061767578"/>
+        <image name="icon_ball" width="53" height="48.333332061767578"/>
+        <image name="icon_camera" width="53" height="48.333332061767578"/>
+        <image name="icon_car" width="53" height="48.333332061767578"/>
+        <image name="icon_computer" width="53" height="48.333332061767578"/>
+        <image name="icon_cosmetic" width="53" height="48.333332061767578"/>
+        <image name="icon_dress" width="53" height="48.333332061767578"/>
+        <image name="icon_electronic" width="53" height="48.333332061767578"/>
+        <image name="icon_food" width="53" height="48.333332061767578"/>
+        <image name="icon_foodsup" width="53" height="48.333332061767578"/>
+        <image name="icon_jewelry" width="53" height="48.333332061767578"/>
+        <image name="icon_menshoes" width="53" height="48.333332061767578"/>
+        <image name="icon_other" width="53" height="48.333332061767578"/>
+        <image name="icon_pet" width="55.333332061767578" height="48.333332061767578"/>
+        <image name="icon_phone" width="53" height="48.333332061767578"/>
+        <image name="icon_shirt" width="53" height="48.333332061767578"/>
+        <image name="icon_sofa" width="53" height="48.333332061767578"/>
+        <image name="icon_stationary" width="53" height="48.333332061767578"/>
+        <image name="icon_ticket" width="53" height="48.333332061767578"/>
+        <image name="icon_toy" width="53" height="48.333332061767578"/>
+        <image name="icon_tv" width="53" height="48.333332061767578"/>
+        <image name="icon_watch" width="53" height="48.333332061767578"/>
+        <image name="icon_womenshoes" width="53" height="48.333332061767578"/>
     </resources>
 </document>
