@@ -31,6 +31,11 @@ class ProfileController:UIViewController {
         navigationController?.setNavigationBarHidden(true, animated: animated)
        
     }
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        navigationController?.setNavigationBarHidden(false, animated: animated)
+        navigationItem.setHidesBackButton(false, animated: animated)
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -649,6 +654,7 @@ class StoreDetailController :UIViewController{
         storeBankAccountTableView.dataSource = self
         loadStoreData()
     }
+   
     
     func loadStoreData(){
         if let emailSender = Auth.auth().currentUser?.email{
@@ -715,6 +721,7 @@ class StoreDetailController :UIViewController{
         }else if segue.identifier == K.segue.storeDetailToWithdrawPageSegue{
             let destinationVC = segue.destination as! WithDrawController
             destinationVC.moneyTotal = moneyTotal
+            destinationVC.storeName = storeNameLabel.text
         }
     }
     
@@ -882,6 +889,7 @@ class WithDrawController: UIViewController {
     
     @IBOutlet weak var moneyTextField: UITextField!
     @IBOutlet weak var bankAccountTableView: UITableView!
+    var storeName: String!
     var moneyTotal: Double!
     var diffMoney: Double = 0.0
     var db = Firestore.firestore()
@@ -932,9 +940,22 @@ class WithDrawController: UIViewController {
                                 snapShotDocument.first?.reference.updateData([
                                     K.storeDetail.moneyTotal: self.diffMoney
                                 ])
-                                print("Successfully withdrawed")
+                                print("Successfully withdrawn")
                                 self.dismiss(animated: true, completion: nil)
                             }
+                        }
+                    }
+                    db.collection(K.tableName.transactionTableName).addDocument(data: [
+                        K.transaction.amountMoney: withdrawMoney!,
+                        K.storeDetail.storeName: storeName!,
+                        K.sender: emailSender,
+                        K.dateField: Date(),
+                        K.transaction.isApprove: true
+                    ]) { (error) in
+                        if let e = error{
+                            print("Error while adding transaction data: \(e)")
+                        }else{
+                            print("Successfully add transaction data")
                         }
                     }
                 }
@@ -1002,6 +1023,72 @@ class AccountCellInWithdrawCell:UITableViewCell{
     
 }
 
+
+class StoreMainController: UIViewController{
+    @IBOutlet weak var storeNameLabel: UILabel!
+    @IBOutlet weak var moneyTotalLabel: UILabel!
+    @IBOutlet weak var storeMainTableView: UITableView!
+    
+    var db = Firestore.firestore()
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        storeMainTableView.dataSource = self
+        storeMainTableView.delegate = self
+    }
+    
+    func loadData(){
+        if let emailSender = Auth.auth().currentUser?.email{
+            db.collection(K.tableName.storeDetailTableName).whereField(K.sender, isEqualTo: emailSender).getDocuments { (querySnapshot, error) in
+                if let e = error{
+                    print("Error load data store data: \(e.localizedDescription)")
+                }else{
+                    if let snapShotDocuments = querySnapshot?.documents{
+                        let data = snapShotDocuments[0].data()
+                        if let storeName = data[K.storeDetail.storeName] as? String, let moneyTotal = data[K.storeDetail.moneyTotal] as? Double{
+                            self.storeNameLabel.text = storeName
+                            self.moneyTotalLabel.text = String(format: "%.2f", moneyTotal)
+                        }
+                        
+                    }
+                }
+            }
+        }
+    }
+    @IBAction func searchPressed(_ sender: UIButton) {
+    }
+    @IBAction func addProductPressed(_ sender: UIButton) {
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == K.segue.storeMainToProductDetailSegue{
+            let destinationVC = segue.destination as! ProductDetailController
+        }
+    }
+}
+
+extension StoreMainController: UITableViewDataSource,UITableViewDelegate{
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        <#code#>
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        <#code#>
+    }
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        <#code#>
+    }
+    
+    
+}
+
+class ProductCell: UITableViewCell{
+    
+}
+
+class ProductDetailController: UIViewController{
+    
+}
+
 class AddProductController:UIViewController{
     @IBOutlet weak var productNameTextField: UITextField!
     @IBOutlet weak var productCategoryTextField: UITextField!
@@ -1019,3 +1106,4 @@ class AddProductController:UIViewController{
        
     }
 }
+

@@ -49,6 +49,7 @@ struct K {
         static let storeDetialToEditAccountSegue = "storeDetailGoToEditAccount"
         static let storeDetailToEditStoreDetailSegue = "storeDetialGoToEditStoreDetail"
         static let storeDetailToWithdrawPageSegue = "storeDetailGoToWithDraw"
+        static let storeMainToProductDetailSegue = "storeMainGoToProductDetail"
     }
     
     struct identifierForTableView{
@@ -57,6 +58,7 @@ struct K {
         static let identifierCard = "CardDetailIdentifier"
         static let identifierBankAccount = "BankAccountIdentifier"
         static let identifierBankAccountWithDraw = "accountForWithdrawIdentifier"
+        static let identifierProductInStoreMain = "StoreMainProductIdentifier"
     }
     struct cardDetail{
         static let cardNumber = "cardNumber"
@@ -70,7 +72,7 @@ struct K {
         static let cardDetailTableName = "cardDetail"
         static let storeDetailTableName = "vendor"
         static let bankAccountTableName = "bankAccount"
-        static let TransactionTableName = "transaction"
+        static let transactionTableName = "transaction"
     }
     
     struct storeDetail {
@@ -89,9 +91,24 @@ struct K {
         static let idCardNumber = "idCardNumber"
     }
     
+
+    struct other {
+        static  let empty = "empty"
+    }
+    
+    struct productCollection {
+        static let productCollection = "product"
+        static let productName = "productName"
+        static let productDetail = "productDetail"
+        static let productCategory = "productCategory"
+        static let productPrice = "productPrice"
+        static let productQuantity = "productQuantity"
+        static let productImageURL = "productImageURL"
+    }
     struct transaction{
         static let amountMoney = "amountMoney"
         static let isApprove = "isApprove"
     }
+
 }
 
