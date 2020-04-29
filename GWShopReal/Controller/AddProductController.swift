@@ -81,76 +81,122 @@ class AddProductController: UIViewController,UIImagePickerControllerDelegate,UIN
     
     @IBAction func addProductButton(_ sender: UIButton) {
         
-    }
-    
-}
-
-extension AddProductController : UIPickerViewDataSource,UIPickerViewDelegate {
-    
-    func numberOfComponents(in pickerView: UIPickerView) -> Int {
-        return 1
-    }
-    
-    func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
-        return categoryTitle.count
-    }
-    func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
-        productCategoryTextField.text = categoryTitle[row]
-    }
-    func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
-        return categoryTitle[row]
-    }
-    
-    
-}
-
-extension AddProductController {
-    
-    func uploadImage() -> String {
+        let imageURL = uploadImage()
+        let userProductIsNotnil = userProductIsNotNilFunction()
         
-        var imageURL = K.other.empty
-        guard let imageSelect = self.imageForUpload else {
-            print("Image is nil")
-            presentAlert(title: "Image Error", message: "Please select image", actiontitle: "Dismiss")
-            return K.other.empty
-        }
-        
-        guard let imageData = imageSelect.jpegData(compressionQuality: 0.5) else {
-            presentAlert(title: "Image Error", message: "Can't convert Image", actiontitle: "Dismiss")
-            return K.other.empty
-        }
-        
-        let storageRef = Storage.storage().reference(forURL: "gs://gwshopreal-47f16.appspot.com")
-        let storageProductRef = storageRef.child("ProductImage").child("\(Auth.auth().currentUser?.email)+\(Date().timeIntervalSince1970)")
-        
-        let metaData  = StorageMetadata()
-        metaData.contentType = "image/jpg"
-        
-        storageProductRef.putData(imageData, metadata: metaData) { (storageMetaData, error) in
-            if error != nil {
-                print(error?.localizedDescription)
-                self.presentAlert(title: "Error Upload Image", message: error?.localizedDescription ?? "error", actiontitle: "Dismiss")
-                return
+        if userProductIsNotnil && (imageURL != K.other.empty) {
+            
+            let db = Firestore.firestore()
+            let productCollection = db.collection(K.productCollection.productCollection)
+            productCollection.addDocument(data: [ K.productCollection.productName:productNameTextField.text!,
+                K.productCollection.productDetail:productDetailTextField.text!,
+                K.productCollection.productCategory:productCategoryTextField.text!,
+                K.productCollection.productPrice:productPriceTextField.text!,
+                K.productCollection.productQuantity:productQuantityTextField.text!,
+                K.productCollection.productImageURL:imageURL
+            
+            ]) { (error) in
+                if let e = error{
+                    print(e.localizedDescription)
+                    self.presentAlert(title: "Error", message: e.localizedDescription ?? "error", actiontitle: "Dismiss")
+                }
             }
+            
         }
         
-        storageProductRef.downloadURL { (url, error) in
-            if let metaImageURL = url?.absoluteString {
-                print(metaImageURL)
-                imageURL = metaImageURL
-            }
-        }
-        
-        
-        return imageURL
     }
     
-    func presentAlert(title:String,message:String,actiontitle:String)  {
-        
-        let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
-        let action = UIAlertAction(title: actiontitle, style: .default, handler: nil)
-        
-        alert.addAction(action)
-        self.present(alert, animated: true, completion: nil)
+    func userProductIsNotNilFunction() -> Bool { // เช็คว่ากรอกครบทุกช่องแล้ว
+        if productNameTextField.text != "" {
+            if productDetailTextField.text != "" {
+                if productCategoryTextField.text != "" {
+                    if productPriceTextField.text != "" {
+                        if productQuantityTextField.text != "" {
+                            return true
+                        } else {
+                            return false
+                        }
+                    } else {
+                        return false
+                    }
+                } else {
+                    return false
+                }
+            } else {
+                return false
+            }
+        } else {
+            return false
+        }
     }
+}
+        
+        extension AddProductController : UIPickerViewDataSource,UIPickerViewDelegate {
+            
+            func numberOfComponents(in pickerView: UIPickerView) -> Int {
+                return 1
+            }
+            
+            func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
+                return categoryTitle.count
+            }
+            func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
+                productCategoryTextField.text = categoryTitle[row]
+            }
+            func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
+                return categoryTitle[row]
+            }
+            
+            
+        }
+        
+        extension AddProductController {
+            
+            func uploadImage() -> String {
+                
+                var imageURL = K.other.empty
+                guard let imageSelect = self.imageForUpload else {
+                    print("Image is nil")
+                    presentAlert(title: "Image Error", message: "Please select image", actiontitle: "Dismiss")
+                    return K.other.empty
+                }
+                
+                guard let imageData = imageSelect.jpegData(compressionQuality: 0.5) else {
+                    presentAlert(title: "Image Error", message: "Can't convert Image", actiontitle: "Dismiss")
+                    return K.other.empty
+                }
+                
+                let storageRef = Storage.storage().reference(forURL: "gs://gwshopreal-47f16.appspot.com")
+                let storageProductRef = storageRef.child("ProductImage").child("\(Auth.auth().currentUser?.email)+\(Date().timeIntervalSince1970)")
+                
+                let metaData  = StorageMetadata()
+                metaData.contentType = "image/jpg"
+                
+                storageProductRef.putData(imageData, metadata: metaData) { (storageMetaData, error) in
+                    if error != nil {
+                        print(error?.localizedDescription)
+                        self.presentAlert(title: "Error Upload Image", message: error?.localizedDescription ?? "error", actiontitle: "Dismiss")
+                        return
+                    }
+                }
+                
+                storageProductRef.downloadURL { (url, error) in
+                    if let metaImageURL = url?.absoluteString {
+                        print(metaImageURL)
+                        imageURL = metaImageURL
+                    }
+                }
+                
+                
+                return imageURL
+            }
+            
+            func presentAlert(title:String,message:String,actiontitle:String)  {
+                
+                let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
+                let action = UIAlertAction(title: actiontitle, style: .default, handler: nil)
+                
+                alert.addAction(action)
+                self.present(alert, animated: true, completion: nil)
+            }
 }

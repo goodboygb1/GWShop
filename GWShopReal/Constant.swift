@@ -87,5 +87,16 @@ struct K {
     struct other {
         static  let empty = "empty"
     }
+    
+    struct productCollection {
+        static let productCollection = "productCollection"
+        static let productName = "productName"
+        static let productDetail = "productDetail"
+        static let productCategory = "productCategory"
+        static let productPrice = "productPrice"
+        static let productQuantity = "productQuantity"
+        static let productImageURL = "productImageURL"
+    }
+    
 }
 
