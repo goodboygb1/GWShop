@@ -31,6 +31,11 @@ class ProfileController:UIViewController {
         navigationController?.setNavigationBarHidden(true, animated: animated)
        
     }
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        navigationController?.setNavigationBarHidden(false, animated: animated)
+        navigationItem.setHidesBackButton(false, animated: animated)
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -648,6 +653,7 @@ class StoreDetailController :UIViewController{
         storeBankAccountTableView.dataSource = self
         loadStoreData()
     }
+   
     
     func loadStoreData(){
         if let emailSender = Auth.auth().currentUser?.email{
@@ -724,20 +730,3 @@ class BankAccountCell : UITableViewCell{
 }
 
 
-class AddProductController:UIViewController{
-    @IBOutlet weak var productNameTextField: UITextField!
-    @IBOutlet weak var productCategoryTextField: UITextField!
-    @IBOutlet weak var priceTextField: UITextField!
-    @IBOutlet weak var numberOfProductTextField: UITextField!
-    @IBOutlet weak var detailTextField: UITextField!
-    
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        
-    }
-    @IBAction func removeImagePressed(_ sender: UIButton) {
-           }
-    @IBAction func confirmPressed(_ sender: UIButton) {
-       
-    }
-}
