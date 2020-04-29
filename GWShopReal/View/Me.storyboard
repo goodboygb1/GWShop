@@ -193,7 +193,7 @@
                                 <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <state key="normal" image="shop"/>
                                 <connections>
-                                    <action selector="storePressed:" destination="NhV-SR-vjh" eventType="touchUpInside" id="FdP-yl-Y8J"/>
+                                    <action selector="storePressed:" destination="NhV-SR-vjh" eventType="touchUpInside" id="9h3-Tf-Z6o"/>
                                 </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="..." textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="F7s-fi-Ybq">
@@ -240,13 +240,13 @@
                         <segue destination="wk9-t3-ou0" kind="show" identifier="goToShowAddress" id="b5w-F2-hGW"/>
                         <segue destination="vbc-YI-Jo6" kind="presentation" identifier="logoutToMainSegue" modalPresentationStyle="fullScreen" id="5kE-mj-VJf"/>
                         <segue destination="uri-jH-N64" kind="show" identifier="profileGoToShowCard" id="ZZO-tS-hkJ"/>
-                        <segue destination="TgO-oN-wVN" kind="show" identifier="profileGoToNewVendor" id="Fud-TN-IoP"/>
-                        <segue destination="ytW-cm-30B" kind="show" identifier="profileGoToStoreDetail" id="6Wu-Q8-Drp"/>
+                        <segue destination="TgO-oN-wVN" kind="show" identifier="meToCreateStore" id="gR9-IM-1YX"/>
+                        <segue destination="Mp1-TS-rnb" kind="show" identifier="fuckyou" id="5Vj-b1-Ozd"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="XKZ-Yu-1y0" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="5484" y="-313.30049261083747"/>
+            <point key="canvasLocation" x="3812" y="-313"/>
         </scene>
         <!--Edit Profile Controller-->
         <scene sceneID="D0U-61-5Pn">
@@ -362,6 +362,7 @@
                     <navigationItem key="navigationItem" id="tfE-Oo-bDU"/>
                     <connections>
                         <outlet property="dateOfBirthTextField" destination="h6m-YL-AYb" id="0pp-ey-OdY"/>
+                        <outlet property="firstNameTextField" destination="jAA-kl-bUZ" id="4Ah-HW-tXI"/>
                         <outlet property="genderSegment" destination="2jN-nz-Gwf" id="Gax-RD-pIc"/>
                         <outlet property="lastNameTextField" destination="7Rc-mH-hOu" id="N2Y-Bi-pbX"/>
                         <outlet property="newProfileImageView" destination="NqN-yf-wZ4" id="fo0-IT-tVk"/>
@@ -370,7 +371,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ewZ-Jx-udD" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="6548" y="-313"/>
+            <point key="canvasLocation" x="5407" y="559"/>
         </scene>
         <!--Store Main Controller-->
         <scene sceneID="vWG-5D-QQP">
@@ -410,7 +411,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="W4R-5W-hMh">
-                                <rect key="frame" x="339" y="74" width="20" height="22"/>
+                                <rect key="frame" x="339" y="83" width="20" height="47"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="tintColor" systemColor="labelColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <state key="normal" image="plus.circle" catalog="system"/>
@@ -473,23 +474,25 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="CHh-Br-FAK"/>
                     </view>
+                    <navigationItem key="navigationItem" id="ugp-Ri-RLn"/>
                     <connections>
                         <outlet property="moneyTotalLabel" destination="yua-wB-GIt" id="cFC-dk-efX"/>
                         <outlet property="storeMainTableView" destination="A4t-qQ-DkU" id="zCA-Oz-Beg"/>
                         <outlet property="storeNameLabel" destination="Y25-sE-exM" id="ZAC-7P-pZN"/>
                         <segue destination="N9U-qa-gqL" kind="show" identifier="storeMainGoToProductDetail" id="QKI-ml-hC5"/>
+                        <segue destination="dGU-4H-M7O" kind="show" identifier="mainStoreToAddProduct" id="R5m-Ee-fiE"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="hhl-VH-b3B" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="8860" y="-348"/>
+            <point key="canvasLocation" x="5854" y="-294"/>
         </scene>
         <!--Product Detail Controller-->
         <scene sceneID="mFr-H1-yMx">
             <objects>
                 <viewController id="N9U-qa-gqL" customClass="ProductDetailController" customModule="GWShopReal" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="aKL-4w-PV5">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="758"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="sde-72-c5a">
@@ -504,7 +507,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="6sB-xQ-49F" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="9663" y="-348"/>
+            <point key="canvasLocation" x="7092" y="-294"/>
         </scene>
         <!--Show Address View Controller-->
         <scene sceneID="Dhd-hM-28c">
@@ -683,7 +686,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="x0d-lz-h2j" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="6376.8000000000002" y="431.5270935960591"/>
+            <point key="canvasLocation" x="4226" y="559"/>
         </scene>
         <!--Edit Address Controller-->
         <scene sceneID="A1J-eB-S4U">
@@ -828,7 +831,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="D81-np-3Io" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="7156" y="432"/>
+            <point key="canvasLocation" x="4225" y="1348"/>
         </scene>
         <!--New Vendor Controller-->
         <scene sceneID="80s-hU-4IX">
@@ -1011,12 +1014,11 @@
                         <outlet property="storePhoneTextField" destination="BhX-ll-4ZA" id="fHQ-6M-xiB"/>
                         <outlet property="storePostCodeTextField" destination="vjb-Gd-SMV" id="AlP-Lv-FAV"/>
                         <outlet property="storeProvinceTextField" destination="3hQ-D0-42o" id="bfU-dQ-Hks"/>
-                        <segue destination="ytW-cm-30B" kind="show" identifier="newVendotGoToStoreDetail" id="8TS-iS-eD3"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="fik-JS-fLb" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="6207" y="-1262"/>
+            <point key="canvasLocation" x="3812" y="-1034"/>
         </scene>
         <!--Store Detail Controller-->
         <scene sceneID="egX-6i-HBu">
@@ -1183,14 +1185,6 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="F2g-a4-pYG">
-                                <rect key="frame" x="182" y="491" width="141" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="Button"/>
-                                <connections>
-                                    <segue destination="dGU-4H-M7O" kind="show" id="gzS-oW-Cnq"/>
-                                </connections>
-                            </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="i8g-7A-aqB">
                                 <rect key="frame" x="339" y="562" width="20" height="22"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -1241,14 +1235,14 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="TLa-9J-tJt" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="7303" y="-1238"/>
+            <point key="canvasLocation" x="5854" y="-1096"/>
         </scene>
         <!--With Draw Controller-->
         <scene sceneID="EcZ-ge-kfM">
             <objects>
                 <viewController id="bmU-FS-tyD" customClass="WithDrawController" customModule="GWShopReal" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="wpf-Ed-QvX">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="758"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="background" translatesAutoresizingMaskIntoConstraints="NO" id="3CM-vn-zos">
@@ -1361,14 +1355,14 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="cDR-3K-jGJ" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="9031" y="-1071"/>
+            <point key="canvasLocation" x="7092" y="-2075"/>
         </scene>
         <!--Edit Store Detail Controller-->
         <scene sceneID="7Y8-Ng-dLl">
             <objects>
                 <viewController id="bRC-jh-A3c" customClass="EditStoreDetailController" customModule="GWShopReal" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="TgD-G7-RqL">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="758"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2oy-YY-z8R">
@@ -1503,14 +1497,14 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Y0v-vq-Xh7" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="8245.6000000000004" y="-2228.5714285714284"/>
+            <point key="canvasLocation" x="4881" y="-1939"/>
         </scene>
         <!--Edit Account Controller-->
         <scene sceneID="57f-9a-Y2n">
             <objects>
                 <viewController id="DJx-H5-7aK" customClass="EditAccountController" customModule="GWShopReal" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="mTE-nO-CSp">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="758"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="background" translatesAutoresizingMaskIntoConstraints="NO" id="W8J-Hr-Ynd">
@@ -1608,7 +1602,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Mjn-Se-BlT" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="8245.6000000000004" y="-1569.4581280788177"/>
+            <point key="canvasLocation" x="5854" y="-1940"/>
         </scene>
         <!--Add Product Controller-->
         <scene sceneID="TgA-gI-s3o">
@@ -1804,7 +1798,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="SnD-VF-bfe" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="7982" y="-151"/>
+            <point key="canvasLocation" x="7094" y="-1185"/>
         </scene>
         <!--Show Card View Controller-->
         <scene sceneID="6rG-od-9cb">
@@ -1933,7 +1927,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ap4-xf-dIr" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="5484" y="1121.6748768472908"/>
+            <point key="canvasLocation" x="3052" y="559"/>
         </scene>
         <!--Edit Card Controller-->
         <scene sceneID="D00-PW-vZV">
@@ -2058,24 +2052,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ygo-2L-HUd" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="6376.8000000000002" y="1121.6748768472908"/>
-        </scene>
-        <!--Me View Controller-->
-        <scene sceneID="VQO-D8-vlW">
-            <objects>
-                <viewController id="n5t-AK-a5G" customClass="MeViewController" customModule="GWShopReal" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="uXA-iM-qio">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
-                        <viewLayoutGuide key="safeArea" id="E3Y-fk-7Ho"/>
-                    </view>
-                    <navigationItem key="navigationItem" id="bcr-2D-LD0"/>
-                    <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="Mas-Cy-rKy" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="4663" y="188"/>
+            <point key="canvasLocation" x="3052" y="1377"/>
         </scene>
         <!--ฉัน-->
         <scene sceneID="ofB-GS-wWZ">
@@ -2097,7 +2074,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="27i-hb-yCe" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3865" y="-313"/>
+            <point key="canvasLocation" x="2750" y="-313"/>
         </scene>
         <!--Main-->
         <scene sceneID="ZFB-bD-u3A">
@@ -2107,12 +2084,9 @@
                 </viewControllerPlaceholder>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="0sY-hR-ZZa" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="4578" y="115"/>
+            <point key="canvasLocation" x="2299" y="220"/>
         </scene>
     </scenes>
-    <inferredMetricsTieBreakers>
-        <segue reference="6Wu-Q8-Drp"/>
-    </inferredMetricsTieBreakers>
     <resources>
         <image name="Gear" width="120" height="128"/>
         <image name="background" width="105" height="270.66665649414062"/>

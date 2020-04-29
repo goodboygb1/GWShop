@@ -50,6 +50,9 @@ struct K {
         static let storeDetailToEditStoreDetailSegue = "storeDetialGoToEditStoreDetail"
         static let storeDetailToWithdrawPageSegue = "storeDetailGoToWithDraw"
         static let storeMainToProductDetailSegue = "storeMainGoToProductDetail"
+        static let meToMainStore = "meToMainStore"
+        static let mainStoreToAddProduct = "mainStoreToAddProduct"
+        static let meToCreateStore = "meToCreateStore"
     }
     
     struct identifierForTableView{

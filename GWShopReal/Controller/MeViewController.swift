@@ -92,6 +92,7 @@ class ProfileController:UIViewController {
         
     }
     @IBAction func storePressed(_ sender: UIButton) {
+        var segueCheck = 0
         if let emailSender = Auth.auth().currentUser?.email{
             db.collection(K.tableName.storeDetailTableName)/*.whereField(K.sender, isEqualTo: emailSender)*/.getDocuments { (querySnapshot, error) in
                 if let e = error{
@@ -102,16 +103,22 @@ class ProfileController:UIViewController {
                             let data = doc.data()
                             if let dataSender = data[K.sender] as? String{
                                 if dataSender == emailSender{
-                                    self.performSegue(withIdentifier: K.segue.profileToStoreDetailSegue, sender: self)
+                                    print("come on")
+                                    segueCheck = 1
                                 }
                                 else{
-                                    self.performSegue(withIdentifier: K.segue.profileToNewVendorSegue, sender: self)
+                                    segueCheck = 2
                                 }
                             }
                         }
                     }
                 }
             }
+        }
+        if segueCheck == 1 {
+            self.performSegue(withIdentifier: "fuckyou", sender: self)
+        } else {
+            self.performSegue(withIdentifier: K.segue.meToCreateStore, sender: self)
         }
     }
     
@@ -1025,6 +1032,8 @@ class AccountCellInWithdrawCell:UITableViewCell{
 
 
 class StoreMainController: UIViewController{
+    
+    
     @IBOutlet weak var storeNameLabel: UILabel!
     @IBOutlet weak var moneyTotalLabel: UILabel!
     @IBOutlet weak var storeMainTableView: UITableView!
@@ -1032,8 +1041,8 @@ class StoreMainController: UIViewController{
     var db = Firestore.firestore()
     override func viewDidLoad() {
         super.viewDidLoad()
-        storeMainTableView.dataSource = self
-        storeMainTableView.delegate = self
+//        storeMainTableView.dataSource = self
+//        storeMainTableView.delegate = self
     }
     
     func loadData(){
@@ -1057,6 +1066,7 @@ class StoreMainController: UIViewController{
     @IBAction func searchPressed(_ sender: UIButton) {
     }
     @IBAction func addProductPressed(_ sender: UIButton) {
+        performSegue(withIdentifier: K.segue.mainStoreToAddProduct, sender: self)
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -1066,20 +1076,20 @@ class StoreMainController: UIViewController{
     }
 }
 
-extension StoreMainController: UITableViewDataSource,UITableViewDelegate{
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        <#code#>
-    }
-    
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        <#code#>
-    }
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        <#code#>
-    }
-    
-    
-}
+//extension StoreMainController: UITableViewDataSource,UITableViewDelegate{
+//    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+//        <#code#>
+//    }
+//    
+//    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+//        <#code#>
+//    }
+//    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+//        <#code#>
+//    }
+//    
+//    
+//}
 
 class ProductCell: UITableViewCell{
     
@@ -1089,21 +1099,5 @@ class ProductDetailController: UIViewController{
     
 }
 
-class AddProductController:UIViewController{
-    @IBOutlet weak var productNameTextField: UITextField!
-    @IBOutlet weak var productCategoryTextField: UITextField!
-    @IBOutlet weak var priceTextField: UITextField!
-    @IBOutlet weak var numberOfProductTextField: UITextField!
-    @IBOutlet weak var detailTextField: UITextField!
-    
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        
-    }
-    @IBAction func removeImagePressed(_ sender: UIButton) {
-           }
-    @IBAction func confirmPressed(_ sender: UIButton) {
-       
-    }
-}
+
 
