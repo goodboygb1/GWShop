@@ -89,7 +89,7 @@ struct K {
     }
     
     struct productCollection {
-        static let productCollection = "productCollection"
+        static let productCollection = "product"
         static let productName = "productName"
         static let productDetail = "productDetail"
         static let productCategory = "productCategory"
