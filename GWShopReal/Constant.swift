@@ -56,6 +56,7 @@ struct K {
         static let nibNameAddress = "AddressTableViewCell"
         static let identifierCard = "CardDetailIdentifier"
         static let identifierBankAccount = "BankAccountIdentifier"
+        static let identifierBankAccountWithDraw = "accountForWithdrawIdentifier"
     }
     struct cardDetail{
         static let cardNumber = "cardNumber"

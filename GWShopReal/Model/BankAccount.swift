@@ -13,6 +13,5 @@ struct BankAccount{
     let bankAccontName: String
     let bankAccountNumber: String
     let bankName: String
-    let sender: String
     let docID: String
 }

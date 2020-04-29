@@ -171,7 +171,7 @@ class ShowAddressViewController:UIViewController{
     
     func loadAddressData(){
         if let emailSender = Auth.auth().currentUser?.email{
-            db.collection(K.tableName.addressTableName).whereField(K.sender, isEqualTo: emailSender).getDocuments { (querySnapshot, error) in
+            db.collection(K.tableName.addressTableName).whereField(K.sender, isEqualTo: emailSender).order(by: K.dateField).getDocuments { (querySnapshot, error) in
                 self.addresses = []
                 if let e = error{
                     print("error while loading name in show address page: \(e.localizedDescription)")
@@ -412,7 +412,7 @@ class ShowCardViewController: UIViewController{
     func loadCardData(){
         if let emailSender = Auth.auth().currentUser?.email{
             self.cards = []
-            db.collection(K.tableName.cardDetailTableName).whereField(K.sender, isEqualTo: emailSender).getDocuments { (querySnapshot, error) in
+            db.collection(K.tableName.cardDetailTableName).whereField(K.sender, isEqualTo: emailSender).order(by: K.dateField).getDocuments { (querySnapshot, error) in
                 if let e = error{
                     print("Error in show card page: \(e.localizedDescription)")
                 }else{
@@ -643,6 +643,7 @@ class StoreDetailController :UIViewController{
     @IBOutlet weak var storeBankAccountTableView: UITableView!
     var db = Firestore.firestore()
     var bankAccounts: [BankAccount] = []
+    var moneyTotal: Double = 0.0
     override func viewDidLoad() {
         super.viewDidLoad()
         storeBankAccountTableView.dataSource = self
@@ -664,6 +665,7 @@ class StoreDetailController :UIViewController{
                                 self.storeNameLabel.text = storeName
                                 self.storePhoneNumberLabel.text = storePhone
                                 self.moneyTotalLabel.text = String(format: "%.2f", money)
+                                self.moneyTotal = money
                                 self.storeAddressLabel.text = storeAddress
                                 self.storeDistrictLabel.text = storeDistrict
                                 self.storeProvinceLabel.text = storeProvince
@@ -683,8 +685,8 @@ class StoreDetailController :UIViewController{
                             for doc in snapShotDocuments{
                                 let data = doc.data()
                                 let docID = doc.documentID
-                                if let accountName = data[K.bankAccount.accountName] as? String,let accountNumber = data[K.bankAccount.accountNumber] as? String,let bankName = data[K.bankAccount.bankName] as? String,let sender = data[K.sender] as? String{
-                                    self.bankAccounts.append(BankAccount(bankAccontName: accountName, bankAccountNumber: accountNumber, bankName: bankName, sender: sender, docID: docID))
+                                if let accountName = data[K.bankAccount.accountName] as? String,let accountNumber = data[K.bankAccount.accountNumber] as? String,let bankName = data[K.bankAccount.bankName] as? String{
+                                    self.bankAccounts.append(BankAccount(bankAccontName: accountName, bankAccountNumber: accountNumber, bankName: bankName, docID: docID))
                                     
                                     DispatchQueue.main.async {
                                         self.storeBankAccountTableView.reloadData()
@@ -710,6 +712,9 @@ class StoreDetailController :UIViewController{
         if segue.identifier == K.segue.storeDetialToEditAccountSegue{
             let destinationVC = segue.destination as! EditAccountController
             destinationVC.storeName = storeNameLabel.text
+        }else if segue.identifier == K.segue.storeDetailToWithdrawPageSegue{
+            let destinationVC = segue.destination as! WithDrawController
+            destinationVC.moneyTotal = moneyTotal
         }
     }
     
@@ -875,17 +880,127 @@ class  EditStoreDetailController: UIViewController {
 
 class WithDrawController: UIViewController {
     
+    @IBOutlet weak var moneyTextField: UITextField!
+    @IBOutlet weak var bankAccountTableView: UITableView!
+    var moneyTotal: Double!
+    var diffMoney: Double = 0.0
     var db = Firestore.firestore()
+    var withdrawAccount: String = ""
+    var accounts:[BankAccount] = []
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        bankAccountTableView.delegate = self
+        bankAccountTableView.dataSource = self
+        loadAccountData()
     }
 
+    func loadAccountData(){
+        if let emailSender = Auth.auth().currentUser?.email{
+            self.accounts = []
+            db.collection(K.tableName.bankAccountTableName).whereField(K.sender, isEqualTo:  emailSender).getDocuments { (querySnapshot, error) in
+                if let e = error{
+                    print("Error while loading bank account for withdraw: \(e.localizedDescription)")
+                }else{
+                    if let snapShotDocuments = querySnapshot?.documents{
+                        for doc in snapShotDocuments{
+                            let data = doc.data()
+                            let docID = doc.documentID
+                            if let accountName = data[K.bankAccount.accountName] as? String, let accountNumber = data[K.bankAccount.accountNumber] as? String,let bankName = data[K.bankAccount.bankName] as? String{
+                                self.accounts.append(BankAccount(bankAccontName: accountName, bankAccountNumber: accountNumber, bankName: bankName, docID: docID))
+                                
+                                DispatchQueue.main.async {
+                                    self.bankAccountTableView.reloadData()
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
     @IBAction func withdrawPressed(_ sender: UIButton) {
+        if withdrawNotNil(){
+            let withdrawMoney = Double(moneyTextField.text!)
+            diffMoney = moneyTotal - withdrawMoney!
+            if diffMoney > 0{
+                if let emailSender = Auth.auth().currentUser?.email{
+                    db.collection(K.tableName.storeDetailTableName).whereField(K.sender, isEqualTo: emailSender).getDocuments { (querySnapshot, error) in
+                        if let e = error{
+                            print("Error while withdrawing money: \(e.localizedDescription)")
+                        }else{
+                            if let snapShotDocument = querySnapshot?.documents{
+                                snapShotDocument.first?.reference.updateData([
+                                    K.storeDetail.moneyTotal: self.diffMoney
+                                ])
+                                print("Successfully withdrawed")
+                                self.dismiss(animated: true, completion: nil)
+                            }
+                        }
+                    }
+                }
+            }else{
+                /*let alert = UIAlertController(title: "Can't withdraw", message: "Your money is not enough", preferredStyle: .alert)
+                alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))*/
+                print("Your money is not enough")
+            }
+        }else{
+            /*let alert = UIAlertController(title: "Can't withdraw", message: "Please select account for withdrawing money or type amount of money", preferredStyle: .alert)
+            alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))*/
+            print("Please select account for withdrawing money or type amount of money")
+        }
+    }
+    
+    func withdrawNotNil()-> Bool{
+        if withdrawAccount != ""{
+            if moneyTextField.text != ""{
+                return true
+            }else { return false}
+        }else { return false }
     }
 }
 
+extension WithDrawController: UITableViewDataSource,UITableViewDelegate{
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return accounts.count
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let account = accounts[indexPath.row]
+        let accountCell = bankAccountTableView.dequeueReusableCell(withIdentifier: K.identifierForTableView.identifierBankAccountWithDraw) as! AccountCellInWithdrawCell
+        accountCell.accountNameLabel.text = account.bankAccontName
+        accountCell.accountNumberLabel.text = account.bankAccountNumber
+        accountCell.bankNameLabel.text = account.bankName
+        accountCell.documentIDLabel.text = account.docID
+        
+        if account.bankName == "KTB"{
+            accountCell.bankImageView.image = #imageLiteral(resourceName: "ktb-logo")
+        }else if account.bankName == "KBANK"{
+            accountCell.bankImageView.image = #imageLiteral(resourceName: "kbank-logo")
+        }else if account.bankName == "SCB"{
+            accountCell.bankImageView.image = #imageLiteral(resourceName: "SCB-logo")
+        }else{
+            accountCell.bankImageView.image = #imageLiteral(resourceName: "logo-krungsri")
+        }
+        return accountCell
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        withdrawAccount = accounts[indexPath.row].bankAccountNumber
+    }
+}
 
+protocol AccountCellWithdrawDelegate {
+    func didSelectAccount(docID: String)
+}
+
+class AccountCellInWithdrawCell:UITableViewCell{
+    @IBOutlet weak var bankImageView: UIImageView!
+    @IBOutlet weak var accountNameLabel: UILabel!
+    @IBOutlet weak var accountNumberLabel: UILabel!
+    @IBOutlet weak var bankNameLabel: UILabel!
+    @IBOutlet weak var documentIDLabel: UILabel!
+    
+}
 
 class AddProductController:UIViewController{
     @IBOutlet weak var productNameTextField: UITextField!
