@@ -74,6 +74,7 @@ class AddProductController: UIViewController,UIImagePickerControllerDelegate,UIN
     }
     
     
+    
     @IBOutlet weak var productNameTextField: UITextField!
     @IBOutlet weak var productDetailTextField: UITextField!
     @IBOutlet weak var productCategoryTextField: UITextField!
@@ -82,9 +83,7 @@ class AddProductController: UIViewController,UIImagePickerControllerDelegate,UIN
     @IBOutlet weak var addProductLabel: UIButton!
     
     @IBAction func addProductButton(_ sender: UIButton) {
-        
-         uploadImage()
-            
+        uploadImage()
     }
     
     
@@ -135,41 +134,48 @@ extension AddProductController : UIPickerViewDataSource,UIPickerViewDelegate {
 
 extension AddProductController {
     
-    func uploadImage() -> Bool {
+    func uploadImage()  {
         
-        guard let imageSelect = self.imageForUpload else {
+        guard let imageSelect = self.imageForUpload else {     //add image for upload
             print("Image is nil")
             presentAlert(title: "Image Error", message: "Please select image", actiontitle: "Dismiss")
             return false
         }
         
         guard let imageData = imageSelect.jpegData(compressionQuality: 0.5) else {
+                                                               // convert image to jpeg
+            
             presentAlert(title: "Image Error", message: "Can't convert Image", actiontitle: "Dismiss")
             return false
         }
         
-        let storageRef = Storage.storage().reference(forURL: "gs://gwshopreal-47f16.appspot.com")
-        let storageProductRef = storageRef.child("ProductImage").child("+")
+        let storageRef = Storage.storage().reference(forURL:    "gs://gwshopreal-47f16.appspot.com")               // add link to upload
         
-        let metaData  = StorageMetadata()
+        let storageProductRef = storageRef.child("ProductImage").child("\(Auth.auth().currentUser?.email)+\(Date().timeIntervalSince1970)")          // path for upload
+        
+        let metaData  = StorageMetadata()                      // set meta data
         metaData.contentType = "image/jpg"
         
-        storageProductRef.putData(imageData, metadata: metaData) { (storageMetaData, error) in
-            if let errorFromPut = error {
+        storageProductRef.putData(imageData, metadata: metaData) { (storageMetaData, error) in                                          // upload file
+            
+            if let errorFromPut = error {                      // upload failed
                 self.presentAlert(title: "Error Upload Image", message: error?.localizedDescription ?? "error", actiontitle: "Dismiss")
                 print(errorFromPut.localizedDescription)
                 
-            } else {
+            } else {                                           // upload success
                 print("put success")
-                storageProductRef.downloadURL { (url, error) in
+                
+                storageProductRef.downloadURL { (url, error) in     // download URL
                     
-                    if let metaImageURL = url?.absoluteString {
-                        //ถ้าอัพโหลดเสร็จ
+                    if let metaImageURL = url?.absoluteString {     // change URL TO String
+                                                                       
                         
-                        self.updateStatus = self.uploadDataToFirebase(imageURL: metaImageURL)
+                        self.updateStatus = self.uploadDataToFirebase(imageURL: metaImageURL)                           // update others                                                  information
+                                                                   // add picture first
+                                                                   // picture use long time
                         
                     } else {
-                        print("error from download URL")
+                        print("error from download URL")          // can't donwload URL
                         print(error?.localizedDescription)
                         
                     }
@@ -177,10 +183,12 @@ extension AddProductController {
                 }
             }
         }
-        return updateStatus
+                                               
     }
     
     func presentAlert(title:String,message:String,actiontitle:String)  {
+                                            
+                                                            // for show alert to user
         
         let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
         let action = UIAlertAction(title: actiontitle, style: .default, handler: nil)
@@ -189,13 +197,13 @@ extension AddProductController {
         self.present(alert, animated: true, completion: nil)
     }
     
-    func uploadDataToFirebase(imageURL:String) -> Bool {
+    func uploadDataToFirebase(imageURL:String) -> Bool {    // for upload data to firebase
         
-        let userProductIsNotnil = userProductIsNotNilFunction()
+        let userProductIsNotnil = userProductIsNotNilFunction()        // เช็คกรอกครบไหม
         let db = Firestore.firestore()
         let productCollection = db.collection(K.productCollection.productCollection)
         
-        if userProductIsNotnil && (imageURL != K.other.empty) {
+        if userProductIsNotnil && (imageURL != K.other.empty) {        // ถ้ากรอกครบ
             print("insirting data")
             productCollection.addDocument(data: [ K.productCollection.productName:productNameTextField.text!,
                                                   K.productCollection.productDetail:productDetailTextField.text!,
@@ -203,13 +211,14 @@ extension AddProductController {
                                                   K.productCollection.productPrice:productPriceTextField.text!,
                                                   K.productCollection.productQuantity:productQuantityTextField.text!,
                                                   K.productCollection.productImageURL:imageURL
-                
-            ]) { (error) in
+                                                                    // packing, add data
+            
+            ]) { (error) in                                         // can't add data
                 if let e = error{
                     print("error from add product")
                   self.updateStatus = false
                     self.presentAlert(title: "Error", message: "Product wasn't added", actiontitle: "Dismiss")
-                } else {
+                } else {                                           // add data success
                     self.updateStatus = true
                     self.presentAlert(title: "Success", message: "Product was added", actiontitle: "Dismiss")
                 }

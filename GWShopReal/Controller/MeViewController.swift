@@ -91,23 +91,28 @@ class ProfileController:UIViewController {
     @IBAction func shopCartPressed(_ sender: UIButton) {
         
     }
-    @IBAction func storePressed(_ sender: UIButton) {
-        var segueCheck = 0
+    
+    
+    @IBAction func storePress(_ sender: UIButton) {
+        
+       
         if let emailSender = Auth.auth().currentUser?.email{
             db.collection(K.tableName.storeDetailTableName)/*.whereField(K.sender, isEqualTo: emailSender)*/.getDocuments { (querySnapshot, error) in
                 if let e = error{
                     print("Error in hadStore Function: \(e.localizedDescription)")
-                }else{
+                }else {
                     if let snapShotData = querySnapshot?.documents{
                         for doc in snapShotData{
                             let data = doc.data()
                             if let dataSender = data[K.sender] as? String{
-                                if dataSender == emailSender{
-                                    print("come on")
-                                    segueCheck = 1
+                                print(dataSender)
+                                if dataSender == emailSender {
+                                    self.performSegue(withIdentifier: K.segue.meToMainStore, sender: self)
+                                    
                                 }
-                                else{
-                                    segueCheck = 2
+                                else {
+                                   print("create")
+                                    self.performSegue(withIdentifier: K.segue.meToCreateStore, sender: self)
                                 }
                             }
                         }
@@ -115,13 +120,7 @@ class ProfileController:UIViewController {
                 }
             }
         }
-        if segueCheck == 1 {
-            self.performSegue(withIdentifier: "fuckyou", sender: self)
-        } else {
-            self.performSegue(withIdentifier: K.segue.meToCreateStore, sender: self)
-        }
     }
-    
     
     @IBAction func showAddressPressed(_ sender: UIButton) {
         self.performSegue(withIdentifier: K.segue.goToShowAddressSegue, sender: self)

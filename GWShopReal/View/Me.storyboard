@@ -193,7 +193,7 @@
                                 <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <state key="normal" image="shop"/>
                                 <connections>
-                                    <action selector="storePressed:" destination="NhV-SR-vjh" eventType="touchUpInside" id="9h3-Tf-Z6o"/>
+                                    <action selector="storePress:" destination="NhV-SR-vjh" eventType="touchUpInside" id="DZM-7E-0bx"/>
                                 </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="..." textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="F7s-fi-Ybq">
@@ -241,7 +241,7 @@
                         <segue destination="vbc-YI-Jo6" kind="presentation" identifier="logoutToMainSegue" modalPresentationStyle="fullScreen" id="5kE-mj-VJf"/>
                         <segue destination="uri-jH-N64" kind="show" identifier="profileGoToShowCard" id="ZZO-tS-hkJ"/>
                         <segue destination="TgO-oN-wVN" kind="show" identifier="meToCreateStore" id="gR9-IM-1YX"/>
-                        <segue destination="Mp1-TS-rnb" kind="show" identifier="fuckyou" id="5Vj-b1-Ozd"/>
+                        <segue destination="Mp1-TS-rnb" kind="show" identifier="meToMainStore" id="5Vj-b1-Ozd"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="XKZ-Yu-1y0" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -1791,7 +1791,7 @@
                         <outlet property="productCategoryTextField" destination="bzd-9o-vOA" id="lxj-js-3AZ"/>
                         <outlet property="productDetailTextField" destination="YCb-t1-AKh" id="3em-FP-mnX"/>
                         <outlet property="productImageView" destination="cUk-FW-VZy" id="sns-vD-Dy9"/>
-                        <outlet property="productNameTextField" destination="VUm-hw-PqH" id="H5a-Sh-GQk"/>
+                        <outlet property="productNameTextField" destination="VUm-hw-PqH" id="md1-dD-bOt"/>
                         <outlet property="productPriceTextField" destination="gB3-sL-4CV" id="Ie5-ym-KQs"/>
                         <outlet property="productQuantityTextField" destination="qv9-I4-bB2" id="2J8-mn-fpn"/>
                     </connections>
