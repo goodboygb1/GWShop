@@ -46,6 +46,9 @@ struct K {
         static let profileToNewVendorSegue = "profileGoToNewVendor"
         static let newVendorToStoreDetailSegue = "newVendotGoToStoreDetail"
         static let profileToStoreDetailSegue = "profileGoToStoreDetail"
+        static let storeDetialToEditAccountSegue = "storeDetailGoToEditAccount"
+        static let storeDetailToEditStoreDetailSegue = "storeDetialGoToEditStoreDetail"
+        static let storeDetailToWithdrawPageSegue = "storeDetailGoToWithDraw"
     }
     
     struct identifierForTableView{
@@ -66,6 +69,7 @@ struct K {
         static let cardDetailTableName = "cardDetail"
         static let storeDetailTableName = "vendor"
         static let bankAccountTableName = "bankAccount"
+        static let TransactionTableName = "transaction"
     }
     
     struct storeDetail {
@@ -82,6 +86,11 @@ struct K {
         static let accountName = "accountName"
         static let accountNumber = "accountNumber"
         static let idCardNumber = "idCardNumber"
+    }
+    
+    struct transaction{
+        static let amountMoney = "amountMoney"
+        static let isApprove = "isApprove"
     }
 }
 
