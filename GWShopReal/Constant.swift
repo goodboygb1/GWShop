@@ -91,9 +91,24 @@ struct K {
         static let idCardNumber = "idCardNumber"
     }
     
+
+    struct other {
+        static  let empty = "empty"
+    }
+    
+    struct productCollection {
+        static let productCollection = "product"
+        static let productName = "productName"
+        static let productDetail = "productDetail"
+        static let productCategory = "productCategory"
+        static let productPrice = "productPrice"
+        static let productQuantity = "productQuantity"
+        static let productImageURL = "productImageURL"
+    }
     struct transaction{
         static let amountMoney = "amountMoney"
         static let isApprove = "isApprove"
     }
+
 }
 

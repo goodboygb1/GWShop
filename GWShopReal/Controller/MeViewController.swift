@@ -31,6 +31,11 @@ class ProfileController:UIViewController {
         navigationController?.setNavigationBarHidden(true, animated: animated)
        
     }
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        navigationController?.setNavigationBarHidden(false, animated: animated)
+        navigationItem.setHidesBackButton(false, animated: animated)
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -649,6 +654,7 @@ class StoreDetailController :UIViewController{
         storeBankAccountTableView.dataSource = self
         loadStoreData()
     }
+   
     
     func loadStoreData(){
         if let emailSender = Auth.auth().currentUser?.email{
@@ -1017,6 +1023,7 @@ class AccountCellInWithdrawCell:UITableViewCell{
     
 }
 
+
 class StoreMainController: UIViewController{
     @IBOutlet weak var storeNameLabel: UILabel!
     @IBOutlet weak var moneyTotalLabel: UILabel!
@@ -1099,3 +1106,4 @@ class AddProductController:UIViewController{
        
     }
 }
+
