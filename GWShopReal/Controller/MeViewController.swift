@@ -88,7 +88,7 @@ class ProfileController:UIViewController {
     }
     @IBAction func storePressed(_ sender: UIButton) {
         if let emailSender = Auth.auth().currentUser?.email{
-            db.collection(K.tableName.storeDetailTableName).whereField(K.sender, isEqualTo: emailSender).getDocuments { (querySnapshot, error) in
+            db.collection(K.tableName.storeDetailTableName)/*.whereField(K.sender, isEqualTo: emailSender)*/.getDocuments { (querySnapshot, error) in
                 if let e = error{
                     print("Error in hadStore Function: \(e.localizedDescription)")
                 }else{
@@ -99,7 +99,7 @@ class ProfileController:UIViewController {
                                 if dataSender == emailSender{
                                     self.performSegue(withIdentifier: K.segue.profileToStoreDetailSegue, sender: self)
                                 }
-                                else if dataSender != emailSender{
+                                else{
                                     self.performSegue(withIdentifier: K.segue.profileToNewVendorSegue, sender: self)
                                 }
                             }
@@ -203,7 +203,7 @@ extension ShowAddressViewController: AddressDelegate{
     func didPressDelete(documentID: String) {
         db.collection(K.tableName.addressTableName).document(documentID).delete()
     }
-    
+
 }
 
 extension ShowAddressViewController: UITableViewDataSource,UITableViewDelegate{
@@ -696,6 +696,23 @@ class StoreDetailController :UIViewController{
             }
         }
     }
+
+    @IBAction func addAccountPressed(_ sender: UIButton) {
+        self.performSegue(withIdentifier: K.segue.storeDetialToEditAccountSegue, sender: self)
+    }
+    @IBAction func editStorePressed(_ sender: UIButton) {
+        self.performSegue(withIdentifier: K.segue.storeDetailToEditStoreDetailSegue, sender: self)
+    }
+    @IBAction func withDrawPressed(_ sender: UIButton) {
+        self.performSegue(withIdentifier: K.segue.storeDetailToWithdrawPageSegue, sender: self)
+    }
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == K.segue.storeDetialToEditAccountSegue{
+            let destinationVC = segue.destination as! EditAccountController
+            destinationVC.storeName = storeNameLabel.text
+        }
+    }
+    
 }
 
 extension StoreDetailController: UITableViewDataSource,UITableViewDelegate{
@@ -709,6 +726,17 @@ extension StoreDetailController: UITableViewDataSource,UITableViewDelegate{
         accountCell.accountNameLabel.text = account.bankAccontName
         accountCell.accountNumberLabel.text = account.bankAccountNumber
         accountCell.bankNameLabel.text = account.bankName
+        accountCell.documentIDLabel.text = account.docID
+        
+        if account.bankName == "KTB"{
+            accountCell.bankImageView.image = #imageLiteral(resourceName: "ktb-logo")
+        }else if account.bankName == "KBANK"{
+            accountCell.bankImageView.image = #imageLiteral(resourceName: "kbank-logo")
+        }else if account.bankName == "SCB"{
+            accountCell.bankImageView.image = #imageLiteral(resourceName: "SCB-logo")
+        }else{
+            accountCell.bankImageView.image = #imageLiteral(resourceName: "logo-krungsri")
+        }
         
         return accountCell
     }
@@ -720,8 +748,143 @@ class BankAccountCell : UITableViewCell{
     @IBOutlet weak var accountNumberLabel: UILabel!
     @IBOutlet weak var bankNameLabel: UILabel!
     @IBOutlet weak var bankImageView: UIImageView!
+    @IBOutlet weak var documentIDLabel: UILabel!
     
 }
+
+class EditAccountController:UIViewController{
+    @IBOutlet weak var bankNameSegment: UISegmentedControl!
+    @IBOutlet weak var accountNameTextField: UITextField!
+    @IBOutlet weak var accountNumberTextField: UITextField!
+    @IBOutlet weak var storeNameLabel: UILabel!
+    var bankName: String!
+    var storeName: String!
+    var db = Firestore.firestore()
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        storeNameLabel.text = storeName
+        bankName = bankNameSegment.titleForSegment(at: bankNameSegment.selectedSegmentIndex)
+    }
+    
+    @IBAction func bankNameChoosed(_ sender: UISegmentedControl) {
+        bankName = bankNameSegment.titleForSegment(at: bankNameSegment.selectedSegmentIndex)
+    }
+    
+    func NewAccountNotNil() -> Bool{
+        if bankName != ""{
+            if accountNumberTextField.text != ""{
+                if accountNumberTextField.text != ""{
+                    return true
+                }else { return false }
+            }else { return false }
+        }else { return false }
+    }
+    
+    @IBAction func submitPressed(_ sender: UIButton) {
+        if NewAccountNotNil(){
+            if let emailSender = Auth.auth().currentUser?.email{
+                db.collection(K.tableName.bankAccountTableName).addDocument(data: [
+                    K.sender: emailSender,
+                    K.bankAccount.accountName: accountNameTextField.text!,
+                    K.bankAccount.accountNumber: accountNumberTextField.text!,
+                    K.bankAccount.bankName: bankName!,
+                    K.storeDetail.storeName: storeName!
+                ]) { (error) in
+                    if let e = error{
+                        print("Error while saving bank account to database: \(e)")
+                    }else{
+                        print("Successfully saved bank account")
+                    }
+                }
+            }
+            self.dismiss(animated: true, completion: nil)
+        }else{
+            print("Some text fields haven't filled in")
+        }
+    }
+}
+
+class  EditStoreDetailController: UIViewController {
+    @IBOutlet weak var storeNameTextField: UITextField!
+    @IBOutlet weak var phoneNumberTextField: UITextField!
+    @IBOutlet weak var addressTextField: UITextField!
+    @IBOutlet weak var storeDistrictTextField: UITextField!
+    @IBOutlet weak var storeProvinceTextField: UITextField!
+    @IBOutlet weak var postCodeTextField: UITextField!
+    
+    var db = Firestore.firestore()
+    override func viewDidLoad() {
+        super.viewDidLoad()
+    }
+    
+    @IBAction func updateImagePressed(_ sender: UIButton) {
+    }
+    @IBAction func submitPressed(_ sender: UIButton) {
+        if NewStoreDetailNotNil(){
+            if let emailSender = Auth.auth().currentUser?.email{
+                       db.collection(K.tableName.storeDetailTableName).whereField(K.sender, isEqualTo: emailSender).getDocuments { (querySnapshot, error) in
+                           if let e = error{
+                               print("Error while get store detail: \(e.localizedDescription)")
+                           }else{
+                               if let snapShotDocuments = querySnapshot?.documents{
+                                   snapShotDocuments.first?.reference.updateData([
+                                       K.sender: emailSender,
+                                       K.storeDetail.storeName: self.storeNameTextField.text!,
+                                       K.phoneNumber: self.phoneNumberTextField.text!,
+                                       K.storeDetail.addressDetail: self.storeDistrictTextField.text!,
+                                       K.storeDetail.district: self.storeProvinceTextField.text!,
+                                       K.storeDetail.province: self.storeProvinceTextField.text!,
+                                       K.storeDetail.postCode: self.postCodeTextField.text!,
+                                       K.dateField: Date().timeIntervalSince1970
+                                       ], completion: { (error) in
+                                           if let e = error{
+                                               print("Error while updating store detail: \(e.localizedDescription)")
+                                           }else{
+                                               print("Successfully updated store detail")
+                                           }
+                                   })
+                               }
+                               
+                           }
+                       }
+                    self.dismiss(animated: true, completion: nil)
+                   }else {
+                       print("Some text fields did not have any text inside")
+                   }
+        }
+       
+    }
+    
+    func NewStoreDetailNotNil()-> Bool{
+        if storeNameTextField.text != ""{
+            if phoneNumberTextField.text != ""{
+                if addressTextField.text != ""{
+                    if storeDistrictTextField.text != ""{
+                        if storeProvinceTextField.text != ""{
+                            if postCodeTextField.text != ""{
+                                return true
+                            }else { return false }
+                        }else { return false }
+                    }else { return false }
+                }else { return false }
+            }else { return false }
+        }else { return false }
+    }
+    
+}
+
+class WithDrawController: UIViewController {
+    
+    var db = Firestore.firestore()
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+    }
+
+    @IBAction func withdrawPressed(_ sender: UIButton) {
+    }
+}
+
 
 
 class AddProductController:UIViewController{
