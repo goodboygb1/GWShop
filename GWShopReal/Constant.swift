@@ -83,5 +83,9 @@ struct K {
         static let accountNumber = "accountNumber"
         static let idCardNumber = "idCardNumber"
     }
+    
+    struct other {
+        static  let empty = "empty"
+    }
 }
 
