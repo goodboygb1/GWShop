@@ -1083,10 +1083,10 @@
             </objects>
             <point key="canvasLocation" x="7332" y="-947.29064039408865"/>
         </scene>
-        <!--View Controller-->
+        <!--Add Product Controller-->
         <scene sceneID="TgA-gI-s3o">
             <objects>
-                <viewController id="dGU-4H-M7O" sceneMemberID="viewController">
+                <viewController id="dGU-4H-M7O" customClass="AddProductController" customModule="GWShopReal" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="3IO-gz-YHA">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="1150"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -1148,6 +1148,9 @@
                                                 <state key="normal" title="สร้าง">
                                                     <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 </state>
+                                                <connections>
+                                                    <action selector="addProductButton:" destination="dGU-4H-M7O" eventType="touchUpInside" id="mjm-f3-htV"/>
+                                                </connections>
                                             </button>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="รูปสินค้า" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rjy-VE-b2t">
                                                 <rect key="frame" x="28" y="204" width="61" height="29"/>
@@ -1178,6 +1181,9 @@
                                                 <state key="normal" title="เพิ่มรูป">
                                                     <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 </state>
+                                                <connections>
+                                                    <action selector="addImageButton:" destination="dGU-4H-M7O" eventType="touchUpInside" id="e3I-Cd-bNI"/>
+                                                </connections>
                                             </button>
                                             <textField opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="กรุณากดเพื่อเลือกหมวด" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="bzd-9o-vOA">
                                                 <rect key="frame" x="28" y="750" width="318" height="34"/>
@@ -1258,6 +1264,16 @@
                     </view>
                     <navigationItem key="navigationItem" id="8ag-4x-vSy"/>
                     <size key="freeformSize" width="375" height="1150"/>
+                    <connections>
+                        <outlet property="addImageLable" destination="Fig-s7-7I8" id="X5p-P7-zlm"/>
+                        <outlet property="addProductLabel" destination="8NK-hv-caC" id="94j-ps-43h"/>
+                        <outlet property="productCategoryTextField" destination="bzd-9o-vOA" id="lxj-js-3AZ"/>
+                        <outlet property="productDetailTextField" destination="YCb-t1-AKh" id="3em-FP-mnX"/>
+                        <outlet property="productImageView" destination="cUk-FW-VZy" id="sns-vD-Dy9"/>
+                        <outlet property="productNameTextField" destination="VUm-hw-PqH" id="H5a-Sh-GQk"/>
+                        <outlet property="productPriceTextField" destination="gB3-sL-4CV" id="Ie5-ym-KQs"/>
+                        <outlet property="productQuantityTextField" destination="qv9-I4-bB2" id="2J8-mn-fpn"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="SnD-VF-bfe" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
@@ -1538,7 +1554,7 @@
         <scene sceneID="ofB-GS-wWZ">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="yur-OF-Wfs" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="ฉัน" image="btn_หน้าแรก" selectedImage="btn_หน้าแรก" id="JG5-rH-74I"/>
+                    <tabBarItem key="tabBarItem" title="ฉัน" image="btn_ฉัน" selectedImage="btn_ฉัน" id="JG5-rH-74I"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="WYL-7h-BUh">
                         <rect key="frame" x="0.0" y="44" width="375" height="44"/>
@@ -1573,7 +1589,7 @@
     <resources>
         <image name="Gear" width="120" height="128"/>
         <image name="background" width="105" height="270.66665649414062"/>
-        <image name="btn_หน้าแรก" width="14.666666984558105" height="18.666666030883789"/>
+        <image name="btn_ฉัน" width="14.666666984558105" height="18.666666030883789"/>
         <image name="cart" catalog="system" width="128" height="102"/>
         <image name="creditcard" catalog="system" width="128" height="91"/>
         <image name="creditcard.fill" catalog="system" width="128" height="91"/>
