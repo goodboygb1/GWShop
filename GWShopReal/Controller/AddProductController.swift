@@ -139,14 +139,14 @@ extension AddProductController {
         guard let imageSelect = self.imageForUpload else {     //add image for upload
             print("Image is nil")
             presentAlert(title: "Image Error", message: "Please select image", actiontitle: "Dismiss")
-            return false
+            return
         }
         
         guard let imageData = imageSelect.jpegData(compressionQuality: 0.5) else {
                                                                // convert image to jpeg
             
             presentAlert(title: "Image Error", message: "Can't convert Image", actiontitle: "Dismiss")
-            return false
+            return 
         }
         
         let storageRef = Storage.storage().reference(forURL:    "gs://gwshopreal-47f16.appspot.com")               // add link to upload
