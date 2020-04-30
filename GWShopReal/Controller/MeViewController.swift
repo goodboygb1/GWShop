@@ -92,7 +92,6 @@ class ProfileController:UIViewController {
         
     }
     @IBAction func storePressed(_ sender: UIButton) {
-        var segueCheck = 0
         if let emailSender = Auth.auth().currentUser?.email{
             db.collection(K.tableName.storeDetailTableName)/*.whereField(K.sender, isEqualTo: emailSender)*/.getDocuments { (querySnapshot, error) in
                 if let e = error{
@@ -103,22 +102,16 @@ class ProfileController:UIViewController {
                             let data = doc.data()
                             if let dataSender = data[K.sender] as? String{
                                 if dataSender == emailSender{
-                                    print("come on")
-                                    segueCheck = 1
+                                    self.performSegue(withIdentifier: K.segue.meToMainStore, sender: self)
                                 }
                                 else{
-                                    segueCheck = 2
+                                    self.performSegue(withIdentifier: K.segue.meToCreateStore, sender: self)
                                 }
                             }
                         }
                     }
                 }
             }
-        }
-        if segueCheck == 1 {
-            self.performSegue(withIdentifier: "fuckyou", sender: self)
-        } else {
-            self.performSegue(withIdentifier: K.segue.meToCreateStore, sender: self)
         }
     }
     
@@ -159,9 +152,6 @@ class ShowAddressViewController:UIViewController{
     var addresses: [Address] = []
     var db = Firestore.firestore()
     
-    
-   
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         nameLabel.text = name!
@@ -183,12 +173,12 @@ class ShowAddressViewController:UIViewController{
     
     func loadAddressData(){
         if let emailSender = Auth.auth().currentUser?.email{
-            db.collection(K.tableName.addressTableName).whereField(K.sender, isEqualTo: emailSender).order(by: K.dateField).getDocuments { (querySnapshot, error) in
+            db.collection(K.tableName.addressTableName).whereField(K.sender, isEqualTo: emailSender).getDocuments { (querySnapshot, error) in
                 self.addresses = []
                 if let e = error{
                     print("error while loading name in show address page: \(e.localizedDescription)")
                 }else{
-                    if let snapShotDocument = querySnapshot?.documents{
+                   if let snapShotDocument = querySnapshot?.documents{
                         for doc in snapShotDocument{
                             let data = doc.data()
                             let doc_id = doc.documentID
@@ -424,7 +414,7 @@ class ShowCardViewController: UIViewController{
     func loadCardData(){
         if let emailSender = Auth.auth().currentUser?.email{
             self.cards = []
-            db.collection(K.tableName.cardDetailTableName).whereField(K.sender, isEqualTo: emailSender).order(by: K.dateField).getDocuments { (querySnapshot, error) in
+            db.collection(K.tableName.cardDetailTableName).whereField(K.sender, isEqualTo: emailSender).getDocuments { (querySnapshot, error) in
                 if let e = error{
                     print("Error in show card page: \(e.localizedDescription)")
                 }else{
@@ -610,7 +600,7 @@ class NewVendorController: UIViewController{
                         print("Error in create new vendor page: \(e.localizedDescription)")
                     }else{
                         print("Successfully added new store in database")
-                        self.performSegue(withIdentifier: K.segue.newVendorToStoreDetailSegue, sender: self)
+                        self.performSegue(withIdentifier: K.segue.createStoreToMainStoreSegue, sender: self)
                     }
                 }
             }
@@ -957,7 +947,7 @@ class WithDrawController: UIViewController {
                         K.storeDetail.storeName: storeName!,
                         K.sender: emailSender,
                         K.dateField: Date(),
-                        K.transaction.isApprove: true
+                        K.transaction.isApprove: false
                     ]) { (error) in
                         if let e = error{
                             print("Error while adding transaction data: \(e)")
@@ -1039,14 +1029,18 @@ class StoreMainController: UIViewController{
     @IBOutlet weak var storeMainTableView: UITableView!
     
     var db = Firestore.firestore()
+    var products: [Product] = []
+    var documentIDSelected: String!
     override func viewDidLoad() {
         super.viewDidLoad()
-//        storeMainTableView.dataSource = self
-//        storeMainTableView.delegate = self
+        storeMainTableView.dataSource = self
+        storeMainTableView.delegate = self
+        loadData()
     }
     
     func loadData(){
         if let emailSender = Auth.auth().currentUser?.email{
+            self.products = []
             db.collection(K.tableName.storeDetailTableName).whereField(K.sender, isEqualTo: emailSender).getDocuments { (querySnapshot, error) in
                 if let e = error{
                     print("Error load data store data: \(e.localizedDescription)")
@@ -1057,11 +1051,35 @@ class StoreMainController: UIViewController{
                             self.storeNameLabel.text = storeName
                             self.moneyTotalLabel.text = String(format: "%.2f", moneyTotal)
                         }
-                        
+                        print("Successfully loaded store Detail")
+                    }
+                }
+            }
+            
+            db.collection(K.productCollection.productCollection).whereField(K.sender, isEqualTo:  emailSender).getDocuments { (querySnapshot, error) in
+                if let e = error {
+                    print("Error while loading product data: \(e.localizedDescription)")
+                }else{
+                    if let snapShotDocuments = querySnapshot?.documents{
+                        for doc in snapShotDocuments{
+                            let data = doc.data()
+                            let docID = doc.documentID
+                            if let productName = data[K.productCollection.productName] as? String,let productDetail = data[K.productCollection.productDetail] as? String
+                                ,let productCategory = data[K.productCollection.productCategory] as? String,let productPrice = data[K.productCollection.productPrice] as?  String,let productQuantity = data[K.productCollection.productQuantity] as? String,let ImageURL = data[K.productCollection.productImageURL] as? String{
+                                self.products.append(Product(productName: productName, productDetail: productDetail, productCategory: productCategory, productPrice: productPrice, productQuantity: productQuantity, productImageURL: ImageURL, documentId: docID))
+                                DispatchQueue.main.async {
+                                    self.storeMainTableView.reloadData()
+                                }
+                                
+                            }
+                        }
                     }
                 }
             }
         }
+    }
+    @IBAction func showStoreDetailPressed(_ sender: UIButton) {
+        self.performSegue(withIdentifier: K.segue.mainStoreToStoreDetailSegue, sender: self)
     }
     @IBAction func searchPressed(_ sender: UIButton) {
     }
@@ -1072,32 +1090,127 @@ class StoreMainController: UIViewController{
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == K.segue.storeMainToProductDetailSegue{
             let destinationVC = segue.destination as! ProductDetailController
+            destinationVC.productDocumentID = documentIDSelected
+            destinationVC.storeName = storeNameLabel.text
         }
     }
 }
 
-//extension StoreMainController: UITableViewDataSource,UITableViewDelegate{
-//    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-//        <#code#>
-//    }
-//    
-//    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-//        <#code#>
-//    }
-//    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-//        <#code#>
-//    }
-//    
-//    
-//}
+extension StoreMainController: UITableViewDataSource,UITableViewDelegate{
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return products.count
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let product = products[indexPath.row]
+        let productCell = storeMainTableView.dequeueReusableCell(withIdentifier: K.identifierForTableView.identifierProductInStoreMain) as! ProductCell
+        productCell.productNameLabel.text = product.productName
+        productCell.productPriceLabel.text = product.productPrice
+        
+        return productCell
+    }
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        documentIDSelected = products[indexPath.row].documentId
+        self.performSegue(withIdentifier: K.segue.storeMainToProductDetailSegue, sender: self)
+    }
+    
+}
 
 class ProductCell: UITableViewCell{
+    @IBOutlet weak var productNameLabel: UILabel!
+    @IBOutlet weak var productPriceLabel: UILabel!
+    @IBOutlet weak var productImageView: UIImageView!
+    
     
 }
 
 class ProductDetailController: UIViewController{
+    @IBOutlet weak var productImageView: UIImageView!
+    @IBOutlet weak var productNameLabel: UILabel!
+    @IBOutlet weak var productPriceLabel: UILabel!
+    @IBOutlet weak var productRemainingLabel: UILabel!
+    @IBOutlet weak var productCategorylabel: UILabel!
+    @IBOutlet weak var productDetailLabel: UILabel!
+    @IBOutlet weak var storeNameLabel: UILabel!
     
+    @IBOutlet weak var promotionTableView: UITableView!
+    var storeName: String!
+    var productDocumentID: String!
+    var db = Firestore.firestore()
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        storeNameLabel.text = storeName
+        loadAllProductDetail()
+    }
+    
+    func loadAllProductDetail(){
+        db.collection(K.productCollection.productCollection).document(productDocumentID).getDocument { (documentSnapshot, error) in
+            if let e = error{
+                print("Error while loading product data with docID: \(e.localizedDescription)")
+            }else{
+                if let snapShotDocuments = documentSnapshot{
+                    if let data = snapShotDocuments.data(){
+                        if let productName = data[K.productCollection.productName] as? String, let productPrice = data[K.productCollection.productPrice] as? String, let productQuantity = data[K.productCollection.productQuantity] as? String, let productCategory = data[K.productCollection.productCategory] as? String,let productDetail = data[K.productCollection.productDetail] as? String{
+                            self.productNameLabel.text = productName
+                            self.productPriceLabel.text = productPrice
+                            self.productRemainingLabel.text = productQuantity
+                            self.productCategorylabel.text = productCategory
+                            self.productDetailLabel.text = productDetail
+                        }
+                    }
+                }
+            }
+        }
+    }
+    @IBAction func editProductPressed(_ sender: UIButton) {
+        self.performSegue(withIdentifier: K.segue.productDetailToEditProductSegue, sender: self)
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == K.segue.productDetailToEditProductSegue{
+            let destinationVC = segue.destination as! EditProductController
+            destinationVC.productDocumentID = productDocumentID
+        }
+    }
 }
 
-
-
+class EditProductController: UIViewController{
+    @IBOutlet weak var productNameLabel: UITextField!
+    @IBOutlet weak var productCategoryLabel: UITextField!
+    @IBOutlet weak var priceLabel: UITextField!
+    @IBOutlet weak var quantityLabel: UITextField!
+    @IBOutlet weak var productDetailLabel: UITextField!
+    
+    @IBOutlet weak var promotionTableView: UITableView!
+    var promotionDocumentID: [String] = []
+    var productDocumentID: String!
+    var db = Firestore.firestore()
+    override func viewDidLoad() {
+        super.viewDidLoad()
+    }
+    
+    func updateNotNil() -> Bool{
+        if productNameLabel.text != ""{
+            if productCategoryLabel.text != ""{
+                if priceLabel.text != ""{
+                    if quantityLabel.text != ""{
+                        if productDetailLabel.text != ""{
+                            if promotionDocumentID.count != 0{
+                                return true
+                            }else { return false }
+                        }else { return false }
+                    }else { return false }
+                }else { return false }
+            }else { return false }
+        }else { return false }
+    }
+    
+    @IBAction func submitPressed(_ sender: UIButton) {
+        if updateNotNil(){
+            
+        }else{
+            print("Some text fields is empty or promotion has not selected")
+        }
+    }
+    
+}

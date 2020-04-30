@@ -43,9 +43,9 @@ struct K {
         static let goToEditAddressSegue = "goToEditAddress"
         static let profileToShowCardSegue = "profileGoToShowCard"
         static let showCardToEditCardSegue = "showCardGoToEditCard"
-        static let profileToNewVendorSegue = "profileGoToNewVendor"
-        static let newVendorToStoreDetailSegue = "newVendotGoToStoreDetail"
-        static let profileToStoreDetailSegue = "profileGoToStoreDetail"
+        //static let profileToNewVendorSegue = "profileGoToNewVendor"
+        //static let newVendorToStoreDetailSegue = "newVendotGoToStoreDetail"
+        //static let profileToStoreDetailSegue = "profileGoToStoreDetail"
         static let storeDetialToEditAccountSegue = "storeDetailGoToEditAccount"
         static let storeDetailToEditStoreDetailSegue = "storeDetialGoToEditStoreDetail"
         static let storeDetailToWithdrawPageSegue = "storeDetailGoToWithDraw"
@@ -53,6 +53,9 @@ struct K {
         static let meToMainStore = "meToMainStore"
         static let mainStoreToAddProduct = "mainStoreToAddProduct"
         static let meToCreateStore = "meToCreateStore"
+        static let createStoreToMainStoreSegue = "createStoreToMainStoreSegue"
+        static let mainStoreToStoreDetailSegue = "mainStoreToStoreDetail"
+        static let productDetailToEditProductSegue = "productDetailToEditProduct"
     }
     
     struct identifierForTableView{
