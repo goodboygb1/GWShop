@@ -23,7 +23,8 @@ class searchCell: UITableViewCell {
     @IBOutlet weak var resultImage: UIImageView!
     @IBOutlet weak var resultNameLabel: UILabel!
     @IBOutlet weak var resultPriceLabel: UILabel!
-    var resultImageURL : String!
-    var resultProductID : String!        // prodcutID = DocumentID
+    var resultImageURL : String?
+    var resultProductID : String?        // prodcutID = DocumentID
+    var senderName : String?             // collect senderName
     
 }

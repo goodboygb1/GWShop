@@ -101,6 +101,7 @@ class SearchViewController: UIViewController {
                             let data = doc.data()
                             let docID = doc.documentID
                             
+                            
                             if let productNameCell = data[K.productCollection.productName] as? String
                                 ,  let productCategoryCell = data[K.productCollection.productCategory] as? String
                                 ,  let productDetailCell = data[K.productCollection.productDetail] as? String
@@ -108,12 +109,14 @@ class SearchViewController: UIViewController {
                                 , let productPriceCell = data[K.productCollection.productPrice] as? String
                                 , let productQuantity = data[K.productCollection.productQuantity] as? String
                                 , let senderFrom = data[K.productCollection.sender] as? String
+                                , let storeName = data[K.productCollection.storeName] as? String
                             {
                                 
                                 //  collect data from firebase
                                 
                                 print("all data wasn't empty")
-                                let newProduct = Product(productName: productNameCell, productDetail: productDetailCell, productCategory: productCategoryCell, productPrice: productPriceCell, productQuantity: productQuantity, productImageURL: productImageURLCell, documentId: docID, sender: senderFrom)
+                                print("\(storeName)")
+                                let newProduct = Product(productName: productNameCell, productDetail: productDetailCell, productCategory: productCategoryCell, productPrice: productPriceCell, productQuantity: productQuantity, productImageURL: productImageURLCell, documentId: docID, sender: senderFrom, storeName: storeName)
                                 // new product object
                                 
                                 self.product.append(newProduct)
@@ -129,7 +132,6 @@ class SearchViewController: UIViewController {
                                     // because download from data base was very long
                                 }
                             }
-                            
                         }
                     }
                     
@@ -156,7 +158,8 @@ extension SearchViewController : UITableViewDataSource,UITableViewDelegate {
         cell.resultPriceLabel.text  = productReturnToCell.productPrice
         cell.resultImageURL = productReturnToCell.productImageURL
         cell.resultProductID = productReturnToCell.documentId
-        cell.senderLabel.text = productReturnToCell.sender
+        cell.senderLabel.text = productReturnToCell.storeName
+        cell.senderName = productReturnToCell.sender
         
         // 1. create data 2. create cell 3. add data to cell 4. return cell
         

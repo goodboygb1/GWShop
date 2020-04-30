@@ -45,12 +45,13 @@ class AddProductInPromotionController: UIViewController {
                                 , let productPriceCell = data[K.productCollection.productPrice] as? String
                                 , let productQuantity = data[K.productCollection.productQuantity] as? String
                                 , let senderFrom = data[K.sender] as? String
+                                , let storeName = data[K.productCollection.storeName] as? String
                                 
                                 
                             {
                                 
-                                let newProduct = Product(productName: productNameCell, productDetail: productDetailCell, productCategory: productCategoryCell, productPrice: productPriceCell, productQuantity: productQuantity, productImageURL: productImageURLCell, documentId: docID, sender: senderFrom )
-                                
+                                let newProduct = Product(productName: productNameCell, productDetail: productDetailCell, productCategory: productCategoryCell, productPrice: productPriceCell, productQuantity: productQuantity, productImageURL: productImageURLCell, documentId: docID, sender: senderFrom, storeName: storeName )
+                                print("Storename = \(storeName)")
                                 self.product.append(newProduct)
                                 print("add success")
                                 DispatchQueue.main.async {

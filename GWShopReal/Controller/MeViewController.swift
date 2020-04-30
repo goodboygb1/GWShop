@@ -1076,8 +1076,9 @@ class StoreMainController: UIViewController{
                             if let productName = data[K.productCollection.productName] as? String,let productDetail = data[K.productCollection.productDetail] as? String
                                 ,let productCategory = data[K.productCollection.productCategory] as? String,let productPrice = data[K.productCollection.productPrice] as?  String,let productQuantity = data[K.productCollection.productQuantity] as? String,let ImageURL = data[K.productCollection.productImageURL] as? String,
                                 let senderFrom = data[K.productCollection.sender] as? String
+                                , let storeName = data[K.productCollection.storeName] as? String
                                  {
-                                self.products.append(Product(productName: productName, productDetail: productDetail, productCategory: productCategory, productPrice: productPrice, productQuantity: productQuantity, productImageURL: ImageURL, documentId: docID, sender:senderFrom))
+                                    self.products.append(Product(productName: productName, productDetail: productDetail, productCategory: productCategory, productPrice: productPrice, productQuantity: productQuantity, productImageURL: ImageURL, documentId: docID, sender:senderFrom, storeName: storeName))
                                 DispatchQueue.main.async {
                                     self.storeMainTableView.reloadData()
                                 }
@@ -1113,8 +1114,9 @@ class StoreMainController: UIViewController{
                                             if let productName = data[K.productCollection.productName] as? String,let productDetail = data[K.productCollection.productDetail] as? String
                                                 ,let productCategory = data[K.productCollection.productCategory] as? String,let productPrice = data[K.productCollection.productPrice] as?  String,let productQuantity = data[K.productCollection.productQuantity] as? String,let ImageURL = data[K.productCollection.productImageURL] as? String,
                                                 let senderFrom = data[K.productCollection.sender] as? String
+                                                , let storeName = data[K.productCollection.storeName] as? String
                                             {
-                                                self.products.append(Product(productName: productName, productDetail: productDetail, productCategory: productCategory, productPrice: productPrice, productQuantity: productQuantity, productImageURL: ImageURL, documentId: docID, sender: senderFrom ))
+                                                self.products.append(Product(productName: productName, productDetail: productDetail, productCategory: productCategory, productPrice: productPrice, productQuantity: productQuantity, productImageURL: ImageURL, documentId: docID, sender: senderFrom, storeName: storeName ))
                                                 
                                                 DispatchQueue.main.async {
                                                     self.storeMainTableView.reloadData()

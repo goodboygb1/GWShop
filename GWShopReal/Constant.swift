@@ -34,7 +34,7 @@ struct K {
     
     static let dateField = "date"
     static let sender = "sender"
-    static let vendorName = "vendorName"
+    
     
     struct segue{
         static let logoutToMainSegue = "logoutToMainSegue"
