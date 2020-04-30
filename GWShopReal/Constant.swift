@@ -56,6 +56,7 @@ struct K {
         static let createStoreToMainStoreSegue = "createStoreToMainStoreSegue"
         static let mainStoreToStoreDetailSegue = "mainStoreToStoreDetail"
         static let productDetailToEditProductSegue = "productDetailToEditProduct"
+        static let mainToSearchDetail = "mainToSearchDetail"
     }
     
     struct identifierForTableView{
