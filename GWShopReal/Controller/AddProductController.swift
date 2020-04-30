@@ -202,29 +202,32 @@ extension AddProductController {
         let userProductIsNotnil = userProductIsNotNilFunction()        // เช็คกรอกครบไหม
         let db = Firestore.firestore()
         let productCollection = db.collection(K.productCollection.productCollection)
-        
-        if userProductIsNotnil && (imageURL != K.other.empty) {        // ถ้ากรอกครบ
-            print("insirting data")
-            productCollection.addDocument(data: [ K.productCollection.productName:productNameTextField.text!,
-                                                  K.productCollection.productDetail:productDetailTextField.text!,
-                                                  K.productCollection.productCategory:productCategoryTextField.text!,
-                                                  K.productCollection.productPrice:productPriceTextField.text!,
-                                                  K.productCollection.productQuantity:productQuantityTextField.text!,
-                                                  K.productCollection.productImageURL:imageURL
-                                                                    // packing, add data
-            
-            ]) { (error) in                                         // can't add data
-                if let e = error{
-                    print("error from add product")
-                  self.updateStatus = false
-                    self.presentAlert(title: "Error", message: "Product wasn't added", actiontitle: "Dismiss")
-                } else {                                           // add data success
-                    self.updateStatus = true
-                    self.presentAlert(title: "Success", message: "Product was added", actiontitle: "Dismiss")
+      
+        if let emailSender = Auth.auth().currentUser?.email{
+            if userProductIsNotnil && (imageURL != K.other.empty) {
+                print("insirting data")
+                productCollection.addDocument(data: [ K.productCollection.productName:productNameTextField.text!,
+                                                      K.productCollection.productDetail:productDetailTextField.text!,
+                                                      K.productCollection.productCategory:productCategoryTextField.text!,
+                                                      K.productCollection.productPrice:productPriceTextField.text!,
+                                                      K.productCollection.productQuantity:productQuantityTextField.text!,
+                                                      K.productCollection.productImageURL:imageURL,
+                                                      K.sender: emailSender
+                    
+                ]) { (error) in
+                    if let e = error{
+                        print("error from add product: \(e.localizedDescription)")
+                      self.updateStatus = false
+                        self.presentAlert(title: "Error", message: "Product wasn't added", actiontitle: "Dismiss")
+                    } else {
+                        self.updateStatus = true
+                        self.presentAlert(title: "Success", message: "Product was added", actiontitle: "Dismiss")
+                    }
                 }
+                
             }
-            
         }
+        
         return updateStatus
     }
 }
