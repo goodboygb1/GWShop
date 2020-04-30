@@ -241,12 +241,12 @@
                         <segue destination="vbc-YI-Jo6" kind="presentation" identifier="logoutToMainSegue" modalPresentationStyle="fullScreen" id="5kE-mj-VJf"/>
                         <segue destination="uri-jH-N64" kind="show" identifier="profileGoToShowCard" id="ZZO-tS-hkJ"/>
                         <segue destination="TgO-oN-wVN" kind="show" identifier="meToCreateStore" id="gR9-IM-1YX"/>
-                        <segue destination="Mp1-TS-rnb" kind="show" identifier="meToMainStore" id="5Vj-b1-Ozd"/>
+                        <segue destination="8PM-0u-Hsr" kind="show" identifier="meToMainStore" id="5Vj-b1-Ozd"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="XKZ-Yu-1y0" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3812" y="-313"/>
+            <point key="canvasLocation" x="4225" y="-313"/>
         </scene>
         <!--Edit Profile Controller-->
         <scene sceneID="D0U-61-5Pn">
@@ -501,9 +501,158 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="htn-iD-zKx" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="6832.8000000000002" y="438.91625615763547"/>
+            <point key="canvasLocation" x="8655" y="1193"/>
         </scene>
-        <!--Store Main Controller-->
+        <!--Add Product In Promotion Controller-->
+        <scene sceneID="2Te-VV-Wul">
+            <objects>
+                <viewController id="guY-S2-xCi" customClass="AddProductInPromotionController" customModule="GWShopReal" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="28h-JJ-4Qn">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="bg-color" translatesAutoresizingMaskIntoConstraints="NO" id="YbL-1i-ef5">
+                                <rect key="frame" x="0.0" y="88" width="375" height="236"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </imageView>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="icon-promo" translatesAutoresizingMaskIntoConstraints="NO" id="S4z-IV-PHU">
+                                <rect key="frame" x="164" y="114" width="46" height="46"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </imageView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="เพิ่มโปรโมชั่น" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lIf-ib-Th5">
+                                <rect key="frame" x="111" y="171" width="153" height="48"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" name="SukhumvitSet-SemiBold" family="Sukhumvit Set" pointSize="30"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="เลือกสินค้าที่ต้องการเพิ่มโปรโมชั่นอย่างน้อย 1 ชนิด" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Gae-kA-39E">
+                                <rect key="frame" x="34" y="312" width="306" height="24"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" name="SukhumvitSet-SemiBold" family="Sukhumvit Set" pointSize="15"/>
+                                <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="90" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="BEK-JV-VgM">
+                                <rect key="frame" x="0.0" y="352" width="375" height="460"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                <prototypes>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="addProductInAddPromotionCell" rowHeight="90" id="kLU-Ni-rse" customClass="addProductInAddPromotionCell" customModule="GWShopReal" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="28" width="375" height="90"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="kLU-Ni-rse" id="eIF-ge-pcT">
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="90"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="H3F-Zp-V7U">
+                                                    <rect key="frame" x="15" y="5" width="80" height="80"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                </imageView>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="ราคา :" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rwr-QR-LUx">
+                                                    <rect key="frame" x="115" y="42" width="40" height="24"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    <fontDescription key="fontDescription" name="SukhumvitSet-SemiBold" family="Sukhumvit Set" pointSize="15"/>
+                                                    <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="product name" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dS1-Ka-nsy">
+                                                    <rect key="frame" x="187" y="20" width="91" height="24"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    <fontDescription key="fontDescription" name="SukhumvitSet-SemiBold" family="Sukhumvit Set" pointSize="15"/>
+                                                    <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="price" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wlO-BH-nfr">
+                                                    <rect key="frame" x="187" y="41" width="91" height="24"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    <fontDescription key="fontDescription" name="SukhumvitSet-SemiBold" family="Sukhumvit Set" pointSize="15"/>
+                                                    <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="ชื่อสินค้า :" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Gdd-Kk-JpD">
+                                                    <rect key="frame" x="115" y="20" width="60" height="24"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    <fontDescription key="fontDescription" name="SukhumvitSet-SemiBold" family="Sukhumvit Set" pointSize="15"/>
+                                                    <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                        </tableViewCellContentView>
+                                        <connections>
+                                            <outlet property="priceLabel" destination="wlO-BH-nfr" id="2Xc-jj-J9g"/>
+                                            <outlet property="productImage" destination="H3F-Zp-V7U" id="S1O-TN-or0"/>
+                                            <outlet property="productNameLable" destination="dS1-Ka-nsy" id="XQI-5G-ZOW"/>
+                                        </connections>
+                                    </tableViewCell>
+                                </prototypes>
+                                <connections>
+                                    <outlet property="dataSource" destination="guY-S2-xCi" id="gbo-rV-A2O"/>
+                                    <outlet property="delegate" destination="guY-S2-xCi" id="TRV-W2-tyE"/>
+                                </connections>
+                            </tableView>
+                            <textField opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="ค้นหาสินค้าที่คุณต้องการ" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Lqn-w8-3jz">
+                                <rect key="frame" x="44" y="227" width="287" height="34"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" name="SukhumvitSet-Text" family="Sukhumvit Set" pointSize="17"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                        </subviews>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <viewLayoutGuide key="safeArea" id="fz1-jN-FEh"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="xHm-gC-qNg"/>
+                    <connections>
+                        <outlet property="productInPromotionTableView" destination="BEK-JV-VgM" id="xin-EZ-qEq"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="qgB-MC-LtW" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="7549.6000000000004" y="-1732.0197044334975"/>
+        </scene>
+        <!--โปรโมชั่น-->
+        <scene sceneID="FX4-n6-uSy">
+            <objects>
+                <viewController id="rAS-Ei-XhS" customClass="PromotionController" customModule="GWShopReal" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="HEm-Md-Rnp">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="bg-color" highlighted="YES" adjustsImageSizeForAccessibilityContentSizeCategory="YES" translatesAutoresizingMaskIntoConstraints="NO" id="OrD-5T-dra">
+                                <rect key="frame" x="0.0" y="88" width="375" height="164"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </imageView>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="icon-promo" translatesAutoresizingMaskIntoConstraints="NO" id="vu6-6B-tol">
+                                <rect key="frame" x="164" y="116" width="46" height="46"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </imageView>
+                            <button opaque="NO" contentMode="scaleAspectFit" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tIb-UB-OvO">
+                                <rect key="frame" x="327" y="100" width="31" height="38"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="tintColor" red="0.80784313730000001" green="0.8980392157" blue="0.91764705879999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <state key="normal" image="plus" catalog="system"/>
+                                <connections>
+                                    <segue destination="guY-S2-xCi" kind="show" id="jNS-64-jO3"/>
+                                </connections>
+                            </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="โปรโมชั่น" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Aux-VP-oIf">
+                                <rect key="frame" x="135" y="170" width="105" height="48"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" name="SukhumvitSet-SemiBold" family="Sukhumvit Set" pointSize="30"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <viewLayoutGuide key="safeArea" id="Xlc-wc-c73"/>
+                    </view>
+                    <tabBarItem key="tabBarItem" title="โปรโมชั่น" image="รูปตรงปุ่มโปรโมชัน" id="YJb-HJ-iik"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="JVr-CT-aEx" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="7549.6000000000004" y="-1051.4778325123152"/>
+        </scene>
+        <!--หน้าแรก-->
         <scene sceneID="vWG-5D-QQP">
             <objects>
                 <viewController id="Mp1-TS-rnb" customClass="StoreMainController" customModule="GWShopReal" customModuleProvider="target" sceneMemberID="viewController">
@@ -623,6 +772,7 @@
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <viewLayoutGuide key="safeArea" id="CHh-Br-FAK"/>
                     </view>
+                    <tabBarItem key="tabBarItem" title="หน้าแรก" image="รูปบ้าน_หน้าแรก" id="ZtH-cC-NCY"/>
                     <navigationItem key="navigationItem" id="ugp-Ri-RLn"/>
                     <connections>
                         <outlet property="moneyTotalLabel" destination="yua-wB-GIt" id="cFC-dk-efX"/>
@@ -636,7 +786,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="hhl-VH-b3B" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="5853.6000000000004" y="-294.0886699507389"/>
+            <point key="canvasLocation" x="7550" y="-313"/>
         </scene>
         <!--Product Detail Controller-->
         <scene sceneID="mFr-H1-yMx">
@@ -760,7 +910,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="6sB-xQ-49F" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="6833" y="-294"/>
+            <point key="canvasLocation" x="7551" y="1193"/>
         </scene>
         <!--Show Address View Controller-->
         <scene sceneID="Dhd-hM-28c">
@@ -1267,12 +1417,12 @@
                         <outlet property="storePhoneTextField" destination="BhX-ll-4ZA" id="fHQ-6M-xiB"/>
                         <outlet property="storePostCodeTextField" destination="vjb-Gd-SMV" id="AlP-Lv-FAV"/>
                         <outlet property="storeProvinceTextField" destination="3hQ-D0-42o" id="bfU-dQ-Hks"/>
-                        <segue destination="Mp1-TS-rnb" kind="show" identifier="createStoreToMainStoreSegue" id="CZH-aa-RFa"/>
+                        <segue destination="8PM-0u-Hsr" kind="show" identifier="createStoreToMainStoreSegue" id="CZH-aa-RFa"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="fik-JS-fLb" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3873" y="-1045"/>
+            <point key="canvasLocation" x="4225" y="-1051"/>
         </scene>
         <!--Store Detail Controller-->
         <scene sceneID="egX-6i-HBu">
@@ -1489,7 +1639,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="TLa-9J-tJt" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="5854" y="-1096"/>
+            <point key="canvasLocation" x="8759.2000000000007" y="271.92118226600985"/>
         </scene>
         <!--With Draw Controller-->
         <scene sceneID="EcZ-ge-kfM">
@@ -1609,7 +1759,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="cDR-3K-jGJ" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="7092" y="-2075"/>
+            <point key="canvasLocation" x="9788" y="271.92118226600985"/>
         </scene>
         <!--Edit Store Detail Controller-->
         <scene sceneID="7Y8-Ng-dLl">
@@ -1751,7 +1901,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Y0v-vq-Xh7" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="4881" y="-1939"/>
+            <point key="canvasLocation" x="9788" y="-450"/>
         </scene>
         <!--Edit Account Controller-->
         <scene sceneID="57f-9a-Y2n">
@@ -1856,7 +2006,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Mjn-Se-BlT" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="5854" y="-1940"/>
+            <point key="canvasLocation" x="9788" y="-1188"/>
         </scene>
         <!--Add Product Controller-->
         <scene sceneID="TgA-gI-s3o">
@@ -2052,7 +2202,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="SnD-VF-bfe" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="7094" y="-1185"/>
+            <point key="canvasLocation" x="6503" y="1317"/>
         </scene>
         <!--Show Card View Controller-->
         <scene sceneID="6rG-od-9cb">
@@ -2340,6 +2490,26 @@
             </objects>
             <point key="canvasLocation" x="2299" y="220"/>
         </scene>
+        <!--Tab Bar Controller-->
+        <scene sceneID="kCM-DB-Vsw">
+            <objects>
+                <tabBarController automaticallyAdjustsScrollViewInsets="NO" id="8PM-0u-Hsr" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationItem key="navigationItem" id="lq6-r2-0nh"/>
+                    <tabBar key="tabBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="3Hq-sI-iMs">
+                        <rect key="frame" x="0.0" y="0.0" width="1000" height="1000"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    </tabBar>
+                    <connections>
+                        <segue destination="Mp1-TS-rnb" kind="relationship" relationship="viewControllers" id="kby-9V-Njb"/>
+                        <segue destination="rAS-Ei-XhS" kind="relationship" relationship="viewControllers" id="Adb-Ip-QgF"/>
+                    </connections>
+                </tabBarController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="mbS-gy-nRz" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="6506" y="-313"/>
+        </scene>
     </scenes>
     <inferredMetricsTieBreakers>
         <segue reference="5Vj-b1-Ozd"/>
@@ -2347,11 +2517,13 @@
     <resources>
         <image name="Gear" width="120" height="128"/>
         <image name="background" width="105" height="270.66665649414062"/>
+        <image name="bg-color" width="125" height="78.333335876464844"/>
         <image name="btn_ฉัน" width="14.666666984558105" height="18.666666030883789"/>
         <image name="cart" catalog="system" width="128" height="102"/>
         <image name="creditcard" catalog="system" width="128" height="91"/>
         <image name="creditcard.fill" catalog="system" width="128" height="91"/>
         <image name="house" catalog="system" width="128" height="110"/>
+        <image name="icon-promo" width="15.333333015441895" height="15.333333015441895"/>
         <image name="location-pin" width="128" height="128"/>
         <image name="magnifyingglass" catalog="system" width="128" height="115"/>
         <image name="palmSky" width="360" height="480"/>
@@ -2363,6 +2535,8 @@
         <image name="พื้นหลังสีฟ้า" width="125" height="72"/>
         <image name="รูปpricetagตรงราคา" width="8.6666669845581055" height="8.6666669845581055"/>
         <image name="รูปตรงคลัง" width="8.6666669845581055" height="8.6666669845581055"/>
+        <image name="รูปตรงปุ่มโปรโมชัน" width="12.666666984558105" height="10"/>
         <image name="รูปตรงหมวดหมู่สินค้า" width="9.3333330154418945" height="9.3333330154418945"/>
+        <image name="รูปบ้าน_หน้าแรก" width="11.333333015441895" height="9"/>
     </resources>
 </document>

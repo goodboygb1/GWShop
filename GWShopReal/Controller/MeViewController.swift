@@ -29,17 +29,20 @@ class ProfileController:UIViewController {
         tabBarController?.navigationItem.setHidesBackButton(true, animated: animated)
         tabBarController?.navigationController?.setNavigationBarHidden(true, animated: animated)
         navigationController?.setNavigationBarHidden(true, animated: animated)
+         tabBarController?.tabBar.isHidden = false
        
     }
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         navigationController?.setNavigationBarHidden(false, animated: animated)
         navigationItem.setHidesBackButton(false, animated: animated)
+        tabBarController?.tabBar.isHidden = true
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         loadProfileData()
+       
     }
     
     func loadProfileData(){

@@ -7,13 +7,17 @@
 //
 
 import Foundation
+import UIKit
 
 struct Product{
-    let productName: String
-    let productDetail: String
-    let productCategory: String
-    let productPrice: String
-    let productQuantity: String
-    let productImageURL: String
-    let documentId: String
+    var productName: String
+    var productDetail: String
+    var productCategory: String
+    var productPrice: String
+    var productQuantity: String
+    var productImageURL: String
+    var documentId: String
 }
+
+
+
