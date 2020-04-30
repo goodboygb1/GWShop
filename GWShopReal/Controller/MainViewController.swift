@@ -60,11 +60,13 @@ class MainViewController: UIViewController,UITextFieldDelegate {
     
 }
 
+//MARK: - SearchView
 
 class SearchViewController: UIViewController {
     
     var keywordForQuery : String?   // for query
     var product : [Product] = []    // product attribute array
+    var selectRowAtIndex : Int?      // check wether index was click
     
     @IBOutlet weak var searchResultTableView: UITableView!
     
@@ -79,8 +81,8 @@ class SearchViewController: UIViewController {
         
         let db = Firestore.firestore()
         let productCollect = db.collection(K.productCollection.productCollection)
-        let keywordFinal = keywordForQuery!
-        let keywordArray = [keywordFinal]
+        let keywordFinal = keywordForQuery!             // force unwrapping
+        let keywordArray = [keywordFinal]               // pack into array for query
         
         if keywordFinal != "" {        // if key for query is not empty
             productCollect.order(by: "productName").start(at: keywordArray).getDocuments { (querySnapshot, error) in
@@ -104,12 +106,14 @@ class SearchViewController: UIViewController {
                                 ,  let productDetailCell = data[K.productCollection.productDetail] as? String
                                 ,  let productImageURLCell = data[K.productCollection.productImageURL] as? String
                                 , let productPriceCell = data[K.productCollection.productPrice] as? String
-                                , let productQuantity = data[K.productCollection.productQuantity] as? String {
+                                , let productQuantity = data[K.productCollection.productQuantity] as? String
+                                , let senderFrom = data[K.productCollection.sender] as? String
+                            {
                                 
                                 //  collect data from firebase
                                 
                                 print("all data wasn't empty")
-                                let newProduct = Product(productName: productNameCell, productDetail: productDetailCell, productCategory: productCategoryCell, productPrice: productPriceCell, productQuantity: productQuantity, productImageURL: productImageURLCell, documentId: docID)
+                                let newProduct = Product(productName: productNameCell, productDetail: productDetailCell, productCategory: productCategoryCell, productPrice: productPriceCell, productQuantity: productQuantity, productImageURL: productImageURLCell, documentId: docID, sender: senderFrom)
                                 // new product object
                                 
                                 self.product.append(newProduct)
@@ -135,6 +139,8 @@ class SearchViewController: UIViewController {
     }
 }
 
+//MARK: - SearchView For TableView
+
 extension SearchViewController : UITableViewDataSource,UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -150,9 +156,41 @@ extension SearchViewController : UITableViewDataSource,UITableViewDelegate {
         cell.resultPriceLabel.text  = productReturnToCell.productPrice
         cell.resultImageURL = productReturnToCell.productImageURL
         cell.resultProductID = productReturnToCell.documentId
+        cell.senderLabel.text = productReturnToCell.sender
+        
+        // 1. create data 2. create cell 3. add data to cell 4. return cell
         
         return cell
         
     }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        
+        // if user click any row
+        
+        selectRowAtIndex = indexPath.row
+        performSegue(withIdentifier: K.segue.searchToProductDetail, sender: self)
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == K.segue.searchToProductDetail {
+            var destinationVC = segue.destination as! ProductDetail
+            destinationVC.productDetail = product[selectRowAtIndex!]
+        }
+    }
 }
+
+
+//MARK: - Product detail
+
+class ProductDetail: UIViewController {         // for add product detail
+    
+    var productDetail : Product?
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        print(productDetail?.sender)
+    }
+}
+
 

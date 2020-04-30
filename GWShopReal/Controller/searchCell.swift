@@ -19,6 +19,7 @@ class searchCell: UITableViewCell {
         super.setSelected(selected, animated: animated)
     }
     
+    @IBOutlet weak var senderLabel: UILabel!
     @IBOutlet weak var resultImage: UIImageView!
     @IBOutlet weak var resultNameLabel: UILabel!
     @IBOutlet weak var resultPriceLabel: UILabel!

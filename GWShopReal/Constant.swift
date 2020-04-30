@@ -34,6 +34,7 @@ struct K {
     
     static let dateField = "date"
     static let sender = "sender"
+    static let vendorName = "vendorName"
     
     struct segue{
         static let logoutToMainSegue = "logoutToMainSegue"
@@ -57,6 +58,7 @@ struct K {
         static let mainStoreToStoreDetailSegue = "mainStoreToStoreDetail"
         static let productDetailToEditProductSegue = "productDetailToEditProduct"
         static let mainToSearchDetail = "mainToSearchDetail"
+        static let searchToProductDetail = "searchToProductDetail"
     }
     
     struct identifierForTableView{
@@ -113,6 +115,8 @@ struct K {
         static let productPrice = "productPrice"
         static let productQuantity = "productQuantity"
         static let productImageURL = "productImageURL"
+        static let sender = "sender"
+         static let storeName = "storeName"
     }
     struct transaction{
         static let amountMoney = "amountMoney"

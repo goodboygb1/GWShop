@@ -29,62 +29,62 @@ class ProfileController:UIViewController {
         tabBarController?.navigationItem.setHidesBackButton(true, animated: animated)
         tabBarController?.navigationController?.setNavigationBarHidden(true, animated: animated)
         navigationController?.setNavigationBarHidden(true, animated: animated)
-         tabBarController?.tabBar.isHidden = false
+        tabBarController?.tabBar.isHidden = false
         
-       
+        
     }
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         navigationController?.setNavigationBarHidden(false, animated: animated)
         navigationItem.setHidesBackButton(false, animated: animated)
         tabBarController?.tabBar.isHidden = true
-
+        
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         loadProfileData()
-       
+        
     }
     
     func loadProfileData(){
         if let emailSender = Auth.auth().currentUser?.email!{
             db.collection(K.userDetailCollection).whereField(K.sender, isEqualTo: emailSender)
                 .getDocuments { (querySnapshot, error) in
-                if let e = error{
-                    
-                    let queryAlart = UIAlertController(title:"Error", message: "Please Fill email or password", preferredStyle: .alert)  // create alertview
-                    
-                    let alertAction = UIAlertAction(title: "Load profile error", style: .destructive) { (UIAlertAction) in           // create action button
-                       
-                    }
-                    queryAlart.addAction(alertAction)                // add action
-                    
-                    self.present(queryAlart, animated: true)
-                    
-                    print("Load profile form database error: \(e.localizedDescription)")
-                    
-                } else {
-                    if let snapShotDocuments = querySnapshot?.documents{
-                        let data = snapShotDocuments[0].data()
-                        if let email = data[K.sender] as? String,
-                           let firstName = data[K.firstName] as? String,
-                           let lastName = data[K.surname] as? String,
-                           let gender = data[K.gender] as? String,
-                           let dob = data[K.dateOfBirth] as? String,
-                           let phoneNumber = data[K.phoneNumber] as? String {
-                            DispatchQueue.main.async {
-                                self.headerNameLabel.text = "\(firstName) \(lastName)"
-                                self.emailLabel.text = email
-                                self.firstNameLabel.text = firstName
-                                self.lastNameLabel.text = lastName
-                                self.genderLabel.text = gender
-                                self.dateOfBirthLabel.text = dob
-                                self.phoneNumberLabel.text = phoneNumber
+                    if let e = error{
+                        
+                        let queryAlart = UIAlertController(title:"Error", message: "Please Fill email or password", preferredStyle: .alert)  // create alertview
+                        
+                        let alertAction = UIAlertAction(title: "Load profile error", style: .destructive) { (UIAlertAction) in           // create action button
+                            
+                        }
+                        queryAlart.addAction(alertAction)                // add action
+                        
+                        self.present(queryAlart, animated: true)
+                        
+                        print("Load profile form database error: \(e.localizedDescription)")
+                        
+                    } else {
+                        if let snapShotDocuments = querySnapshot?.documents{
+                            let data = snapShotDocuments[0].data()
+                            if let email = data[K.sender] as? String,
+                                let firstName = data[K.firstName] as? String,
+                                let lastName = data[K.surname] as? String,
+                                let gender = data[K.gender] as? String,
+                                let dob = data[K.dateOfBirth] as? String,
+                                let phoneNumber = data[K.phoneNumber] as? String {
+                                DispatchQueue.main.async {
+                                    self.headerNameLabel.text = "\(firstName) \(lastName)"
+                                    self.emailLabel.text = email
+                                    self.firstNameLabel.text = firstName
+                                    self.lastNameLabel.text = lastName
+                                    self.genderLabel.text = gender
+                                    self.dateOfBirthLabel.text = dob
+                                    self.phoneNumberLabel.text = phoneNumber
+                                }
                             }
-                         }
+                        }
                     }
-                }
             }
         }
         
@@ -96,7 +96,7 @@ class ProfileController:UIViewController {
     @IBAction func shopCartPressed(_ sender: UIButton) {
         
     }
-
+    
     @IBAction func storePressed(_ sender: UIButton) {
         if let emailSender = Auth.auth().currentUser?.email{
             db.collection(K.tableName.storeDetailTableName)/*.whereField(K.sender, isEqualTo: emailSender)*/.getDocuments { (querySnapshot, error) in
@@ -107,7 +107,7 @@ class ProfileController:UIViewController {
                         for doc in snapShotData{
                             let data = doc.data()
                             if let dataSender = data[K.sender] as? String{
-
+                                
                                 if dataSender == emailSender{
                                     self.performSegue(withIdentifier: K.segue.meToMainStore, sender: self)
                                 }
@@ -135,7 +135,7 @@ class ProfileController:UIViewController {
             performSegue(withIdentifier: K.segue.logoutToMainSegue, sender: self)
             
         } catch let signOutError as NSError {
-          print ("Error signing out: %@", signOutError)
+            print ("Error signing out: %@", signOutError)
         }
     }
     
@@ -184,7 +184,7 @@ class ShowAddressViewController:UIViewController{
                 if let e = error{
                     print("error while loading name in show address page: \(e.localizedDescription)")
                 }else{
-                   if let snapShotDocument = querySnapshot?.documents{
+                    if let snapShotDocument = querySnapshot?.documents{
                         for doc in snapShotDocument{
                             let data = doc.data()
                             let doc_id = doc.documentID
@@ -205,14 +205,14 @@ class ShowAddressViewController:UIViewController{
         }
         print("Successfully address loaded to array")
     }
-
+    
 }
 extension ShowAddressViewController: AddressDelegate{
     func didPressDelete(documentID: String) {
         db.collection(K.tableName.addressTableName).document(documentID).delete()
         loadAddressData()
     }
-
+    
 }
 
 extension ShowAddressViewController: UITableViewDataSource,UITableViewDelegate{
@@ -257,7 +257,7 @@ class AddressCell: UITableViewCell {
         super.awakeFromNib()
         // Initialization code
     }
-
+    
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
     }
@@ -293,7 +293,7 @@ class EditProfileController: UIViewController{
                         print("Error in update profile page: \(e.localizedDescription)")
                     }else{
                         print("got document")
-                         if let snapShotData = querySnapshot?.documents{
+                        if let snapShotData = querySnapshot?.documents{
                             snapShotData.first?.reference.updateData([
                                 K.firstName: self.firstNameTextField.text!,
                                 K.surname:  self.lastNameTextField.text!,
@@ -312,7 +312,7 @@ class EditProfileController: UIViewController{
                     }
                 }
             }
-        self.dismiss(animated: false, completion: nil)
+            self.dismiss(animated: false, completion: nil)
         }else {
             print("Some text fields did not have any text inside")
         }
@@ -359,24 +359,24 @@ class EditAddressController:UIViewController {
             let postCode = postCodeTextField.text!
             if let sender = Auth.auth().currentUser?.email{
                 db.collection(K.tableName.addressTableName) // still no addressID in this collection
-                .addDocument(data:  [
-                                   K.firstName: firstName,
-                                   K.surname: lastName,
-                                   K.phoneNumber : phoneNumber,
-                                   K.addressDetail: address,
-                                   K.district: district,
-                                   K.province: province,
-                                   K.postCode: postCode,
-                                   K.dateField: Date().timeIntervalSince1970,
-                                   K.sender: sender
-                ]) { (error) in
-                    if let e = error{
-                        print("Add new Address error: \(e.localizedDescription)")
-                    }
-                    else{
-                        print("Successfully added new address")
-                        self.navigationController?.popToRootViewController(animated: true)
-                    }
+                    .addDocument(data:  [
+                        K.firstName: firstName,
+                        K.surname: lastName,
+                        K.phoneNumber : phoneNumber,
+                        K.addressDetail: address,
+                        K.district: district,
+                        K.province: province,
+                        K.postCode: postCode,
+                        K.dateField: Date().timeIntervalSince1970,
+                        K.sender: sender
+                    ]) { (error) in
+                        if let e = error{
+                            print("Add new Address error: \(e.localizedDescription)")
+                        }
+                        else{
+                            print("Successfully added new address")
+                            self.navigationController?.popToRootViewController(animated: true)
+                        }
                 }
             }
         }else {
@@ -626,9 +626,9 @@ class NewVendorController: UIViewController{
                             if storePostCodeTextField.text != ""{
                                 if bankName != ""{
                                     if accountNameTextField.text != ""{
-                                            if accountNumberTextField.text != ""{
-                                                return true
-                                            }else { return false }
+                                        if accountNumberTextField.text != ""{
+                                            return true
+                                        }else { return false }
                                     }else { return false }
                                 }else { return false }
                             }else { return false }
@@ -659,33 +659,33 @@ class StoreDetailController :UIViewController{
         storeBankAccountTableView.dataSource = self
         loadStoreData()
     }
-   
+    
     
     func loadStoreData(){
         if let emailSender = Auth.auth().currentUser?.email{
             self.bankAccounts = []
             db.collection(K.tableName.storeDetailTableName).whereField(K.sender
                 , isEqualTo:  emailSender) .getDocuments { (querySnapshot, error) in
-                if let e = error{
-                    print("Error while loading store data: \(e.localizedDescription)")
-                }else{
-                    if let snapShotDocument = querySnapshot?.documents{
-                        let data = snapShotDocument[0].data()
-                        if let storeName = data[K.storeDetail.storeName] as? String,let storePhone = data[K.phoneNumber] as? String,let money = data[K.storeDetail.moneyTotal] as? Double,let storeAddress = data[K.storeDetail.addressDetail] as? String,let storeDistrict = data[K.storeDetail.district] as? String,let storeProvince = data[K.storeDetail.province] as? String,let storePostCode = data[K.storeDetail.postCode] as? String{
-                            DispatchQueue.main.async {
-                                self.storeNameLabel.text = storeName
-                                self.storePhoneNumberLabel.text = storePhone
-                                self.moneyTotalLabel.text = String(format: "%.2f", money)
-                                self.moneyTotal = money
-                                self.storeAddressLabel.text = storeAddress
-                                self.storeDistrictLabel.text = storeDistrict
-                                self.storeProvinceLabel.text = storeProvince
-                                self.storePostCodeLabel.text = storePostCode
+                    if let e = error{
+                        print("Error while loading store data: \(e.localizedDescription)")
+                    }else{
+                        if let snapShotDocument = querySnapshot?.documents{
+                            let data = snapShotDocument[0].data()
+                            if let storeName = data[K.storeDetail.storeName] as? String,let storePhone = data[K.phoneNumber] as? String,let money = data[K.storeDetail.moneyTotal] as? Double,let storeAddress = data[K.storeDetail.addressDetail] as? String,let storeDistrict = data[K.storeDetail.district] as? String,let storeProvince = data[K.storeDetail.province] as? String,let storePostCode = data[K.storeDetail.postCode] as? String{
+                                DispatchQueue.main.async {
+                                    self.storeNameLabel.text = storeName
+                                    self.storePhoneNumberLabel.text = storePhone
+                                    self.moneyTotalLabel.text = String(format: "%.2f", money)
+                                    self.moneyTotal = money
+                                    self.storeAddressLabel.text = storeAddress
+                                    self.storeDistrictLabel.text = storeDistrict
+                                    self.storeProvinceLabel.text = storeProvince
+                                    self.storePostCodeLabel.text = storePostCode
+                                }
+                                
                             }
-                            
                         }
                     }
-                }
             }
             db.collection(K.tableName.bankAccountTableName).whereField(K.sender
                 , isEqualTo:  emailSender).getDocuments { (querySnapshot, error) in
@@ -705,11 +705,11 @@ class StoreDetailController :UIViewController{
                                 }
                             }
                         }
-                }
+                    }
             }
         }
     }
-
+    
     @IBAction func addAccountPressed(_ sender: UIButton) {
         self.performSegue(withIdentifier: K.segue.storeDetialToEditAccountSegue, sender: self)
     }
@@ -839,37 +839,37 @@ class  EditStoreDetailController: UIViewController {
     @IBAction func submitPressed(_ sender: UIButton) {
         if NewStoreDetailNotNil(){
             if let emailSender = Auth.auth().currentUser?.email{
-                       db.collection(K.tableName.storeDetailTableName).whereField(K.sender, isEqualTo: emailSender).getDocuments { (querySnapshot, error) in
-                           if let e = error{
-                               print("Error while get store detail: \(e.localizedDescription)")
-                           }else{
-                               if let snapShotDocuments = querySnapshot?.documents{
-                                   snapShotDocuments.first?.reference.updateData([
-                                       K.sender: emailSender,
-                                       K.storeDetail.storeName: self.storeNameTextField.text!,
-                                       K.phoneNumber: self.phoneNumberTextField.text!,
-                                       K.storeDetail.addressDetail: self.storeDistrictTextField.text!,
-                                       K.storeDetail.district: self.storeProvinceTextField.text!,
-                                       K.storeDetail.province: self.storeProvinceTextField.text!,
-                                       K.storeDetail.postCode: self.postCodeTextField.text!,
-                                       K.dateField: Date().timeIntervalSince1970
-                                       ], completion: { (error) in
-                                           if let e = error{
-                                               print("Error while updating store detail: \(e.localizedDescription)")
-                                           }else{
-                                               print("Successfully updated store detail")
-                                           }
-                                   })
-                               }
-                               
-                           }
-                       }
-                    self.dismiss(animated: true, completion: nil)
-                   }else {
-                       print("Some text fields did not have any text inside")
-                   }
+                db.collection(K.tableName.storeDetailTableName).whereField(K.sender, isEqualTo: emailSender).getDocuments { (querySnapshot, error) in
+                    if let e = error{
+                        print("Error while get store detail: \(e.localizedDescription)")
+                    }else{
+                        if let snapShotDocuments = querySnapshot?.documents{
+                            snapShotDocuments.first?.reference.updateData([
+                                K.sender: emailSender,
+                                K.storeDetail.storeName: self.storeNameTextField.text!,
+                                K.phoneNumber: self.phoneNumberTextField.text!,
+                                K.storeDetail.addressDetail: self.storeDistrictTextField.text!,
+                                K.storeDetail.district: self.storeProvinceTextField.text!,
+                                K.storeDetail.province: self.storeProvinceTextField.text!,
+                                K.storeDetail.postCode: self.postCodeTextField.text!,
+                                K.dateField: Date().timeIntervalSince1970
+                                ], completion: { (error) in
+                                    if let e = error{
+                                        print("Error while updating store detail: \(e.localizedDescription)")
+                                    }else{
+                                        print("Successfully updated store detail")
+                                    }
+                            })
+                        }
+                        
+                    }
+                }
+                self.dismiss(animated: true, completion: nil)
+            }else {
+                print("Some text fields did not have any text inside")
+            }
         }
-       
+        
     }
     
     func NewStoreDetailNotNil()-> Bool{
@@ -906,7 +906,7 @@ class WithDrawController: UIViewController {
         bankAccountTableView.dataSource = self
         loadAccountData()
     }
-
+    
     func loadAccountData(){
         if let emailSender = Auth.auth().currentUser?.email{
             self.accounts = []
@@ -966,12 +966,12 @@ class WithDrawController: UIViewController {
                 }
             }else{
                 /*let alert = UIAlertController(title: "Can't withdraw", message: "Your money is not enough", preferredStyle: .alert)
-                alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))*/
+                 alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))*/
                 print("Your money is not enough")
             }
         }else{
             /*let alert = UIAlertController(title: "Can't withdraw", message: "Please select account for withdrawing money or type amount of money", preferredStyle: .alert)
-            alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))*/
+             alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))*/
             print("Please select account for withdrawing money or type amount of money")
         }
     }
@@ -1074,8 +1074,10 @@ class StoreMainController: UIViewController{
                             let data = doc.data()
                             let docID = doc.documentID
                             if let productName = data[K.productCollection.productName] as? String,let productDetail = data[K.productCollection.productDetail] as? String
-                                ,let productCategory = data[K.productCollection.productCategory] as? String,let productPrice = data[K.productCollection.productPrice] as?  String,let productQuantity = data[K.productCollection.productQuantity] as? String,let ImageURL = data[K.productCollection.productImageURL] as? String{
-                                self.products.append(Product(productName: productName, productDetail: productDetail, productCategory: productCategory, productPrice: productPrice, productQuantity: productQuantity, productImageURL: ImageURL, documentId: docID))
+                                ,let productCategory = data[K.productCollection.productCategory] as? String,let productPrice = data[K.productCollection.productPrice] as?  String,let productQuantity = data[K.productCollection.productQuantity] as? String,let ImageURL = data[K.productCollection.productImageURL] as? String,
+                                let senderFrom = data[K.productCollection.sender] as? String
+                                 {
+                                self.products.append(Product(productName: productName, productDetail: productDetail, productCategory: productCategory, productPrice: productPrice, productQuantity: productQuantity, productImageURL: ImageURL, documentId: docID, sender:senderFrom))
                                 DispatchQueue.main.async {
                                     self.storeMainTableView.reloadData()
                                 }
@@ -1093,47 +1095,49 @@ class StoreMainController: UIViewController{
     @IBAction func searchPressed(_ sender: UIButton) {
         if searchProductTextField.text != ""{
             self.products = []
-                   if let emailSender = Auth.auth().currentUser?.email{
-                       db.collection(K.productCollection.productCollection).whereField(K.sender, isEqualTo: emailSender) .getDocuments { (querySnapshot, error) in
-                           if let e = error{
-                               print("\(e.localizedDescription)")
-                           }else{
-                               if let snapShotDocuments = querySnapshot?.documents{
-                                   for doc in snapShotDocuments{
-                                       let data = doc.data()
-                                        let docID = doc.documentID
-                                       if let product = data[K.productCollection.productName] as? String{
-                                           let range = NSRange(location: 0, length: product.utf16.count)
-                                           do{
-                                               let regex = try! NSRegularExpression(pattern: self.searchProductTextField.text!, options: [])
-                                               if regex.firstMatch(in: product, options: [], range: range) != nil{
-                                                   print("\(product) Found")
-                                                    if let productName = data[K.productCollection.productName] as? String,let productDetail = data[K.productCollection.productDetail] as? String
-                                                        ,let productCategory = data[K.productCollection.productCategory] as? String,let productPrice = data[K.productCollection.productPrice] as?  String,let productQuantity = data[K.productCollection.productQuantity] as? String,let ImageURL = data[K.productCollection.productImageURL] as? String{
-                                                        self.products.append(Product(productName: productName, productDetail: productDetail, productCategory: productCategory, productPrice: productPrice, productQuantity: productQuantity, productImageURL: ImageURL, documentId: docID))
-                                                        
-                                                        DispatchQueue.main.async {
-                                                            self.storeMainTableView.reloadData()
-                                                        }
-                                                    }
-                                               }else{
-                                                   print("\(product) not found")
-                                               }
-                                           }catch{
-                                               print("error while regex")
-                                           }
-                                       }
-                                   }
-                               }
-                           }
-                       }
-                   }
-               }else{  print("Empty search field")
-                        searchProductTextField.placeholder = "Type product name"
-                        loadData()
-                   }
+            if let emailSender = Auth.auth().currentUser?.email{
+                db.collection(K.productCollection.productCollection).whereField(K.sender, isEqualTo: emailSender) .getDocuments { (querySnapshot, error) in
+                    if let e = error{
+                        print("\(e.localizedDescription)")
+                    }else{
+                        if let snapShotDocuments = querySnapshot?.documents{
+                            for doc in snapShotDocuments{
+                                let data = doc.data()
+                                let docID = doc.documentID
+                                if let product = data[K.productCollection.productName] as? String{
+                                    let range = NSRange(location: 0, length: product.utf16.count)
+                                    do{
+                                        let regex = try! NSRegularExpression(pattern: self.searchProductTextField.text!, options: [])
+                                        if regex.firstMatch(in: product, options: [], range: range) != nil{
+                                            print("\(product) Found")
+                                            if let productName = data[K.productCollection.productName] as? String,let productDetail = data[K.productCollection.productDetail] as? String
+                                                ,let productCategory = data[K.productCollection.productCategory] as? String,let productPrice = data[K.productCollection.productPrice] as?  String,let productQuantity = data[K.productCollection.productQuantity] as? String,let ImageURL = data[K.productCollection.productImageURL] as? String,
+                                                let senderFrom = data[K.productCollection.sender] as? String
+                                            {
+                                                self.products.append(Product(productName: productName, productDetail: productDetail, productCategory: productCategory, productPrice: productPrice, productQuantity: productQuantity, productImageURL: ImageURL, documentId: docID, sender: senderFrom ))
+                                                
+                                                DispatchQueue.main.async {
+                                                    self.storeMainTableView.reloadData()
+                                                }
+                                            }
+                                        }else{
+                                            print("\(product) not found")
+                                        }
+                                    }catch{
+                                        print("error while regex")
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }else{  print("Empty search field")
+            searchProductTextField.placeholder = "Type product name"
+            loadData()
+        }
     }
-
+    
     @IBAction func addProductPressed(_ sender: UIButton) {
         performSegue(withIdentifier: K.segue.mainStoreToAddProduct, sender: self)
     }
