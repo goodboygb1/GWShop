@@ -1028,6 +1028,7 @@ class StoreMainController: UIViewController{
     @IBOutlet weak var storeNameLabel: UILabel!
     @IBOutlet weak var moneyTotalLabel: UILabel!
     @IBOutlet weak var storeMainTableView: UITableView!
+    @IBOutlet weak var searchProductTextField: UITextField!
     
     var db = Firestore.firestore()
     var products: [Product] = []
@@ -1083,7 +1084,50 @@ class StoreMainController: UIViewController{
         self.performSegue(withIdentifier: K.segue.mainStoreToStoreDetailSegue, sender: self)
     }
     @IBAction func searchPressed(_ sender: UIButton) {
+        if searchProductTextField.text != ""{
+            self.products = []
+                   if let emailSender = Auth.auth().currentUser?.email{
+                       db.collection(K.productCollection.productCollection).whereField(K.sender, isEqualTo: emailSender) .getDocuments { (querySnapshot, error) in
+                           if let e = error{
+                               print("\(e.localizedDescription)")
+                           }else{
+                               if let snapShotDocuments = querySnapshot?.documents{
+                                   for doc in snapShotDocuments{
+                                       let data = doc.data()
+                                        let docID = doc.documentID
+                                       if let product = data[K.productCollection.productName] as? String{
+                                           let range = NSRange(location: 0, length: product.utf16.count)
+                                           do{
+                                               let regex = try! NSRegularExpression(pattern: self.searchProductTextField.text!, options: [])
+                                               if regex.firstMatch(in: product, options: [], range: range) != nil{
+                                                   print("\(product) Found")
+                                                    if let productName = data[K.productCollection.productName] as? String,let productDetail = data[K.productCollection.productDetail] as? String
+                                                        ,let productCategory = data[K.productCollection.productCategory] as? String,let productPrice = data[K.productCollection.productPrice] as?  String,let productQuantity = data[K.productCollection.productQuantity] as? String,let ImageURL = data[K.productCollection.productImageURL] as? String{
+                                                        self.products.append(Product(productName: productName, productDetail: productDetail, productCategory: productCategory, productPrice: productPrice, productQuantity: productQuantity, productImageURL: ImageURL, documentId: docID))
+                                                        
+                                                        DispatchQueue.main.async {
+                                                            self.storeMainTableView.reloadData()
+                                                        }
+                                                    }
+                                               }else{
+                                                   print("\(product) not found")
+                                               }
+                                           }catch{
+                                               print("error while regex")
+                                           }
+                                       }
+                                   }
+                               }
+                           }
+                       }
+                   }
+               }else{  print("Empty search field")
+                        searchProductTextField.placeholder = "Type product name"
+                        loadData()
+                   }
     }
+
+    
     @IBAction func addProductPressed(_ sender: UIButton) {
         performSegue(withIdentifier: K.segue.mainStoreToAddProduct, sender: self)
     }

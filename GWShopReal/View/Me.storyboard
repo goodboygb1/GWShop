@@ -541,7 +541,7 @@
                                     <action selector="searchPressed:" destination="Mp1-TS-rnb" eventType="touchUpInside" id="oef-05-nOH"/>
                                 </connections>
                             </button>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="100" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="A4t-qQ-DkU">
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="100" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="A4t-qQ-DkU">
                                 <rect key="frame" x="38" y="230" width="299" height="509"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
@@ -626,6 +626,7 @@
                     <navigationItem key="navigationItem" id="ugp-Ri-RLn"/>
                     <connections>
                         <outlet property="moneyTotalLabel" destination="yua-wB-GIt" id="cFC-dk-efX"/>
+                        <outlet property="searchProductTextField" destination="boF-Um-kaz" id="pgb-Ni-TLM"/>
                         <outlet property="storeMainTableView" destination="A4t-qQ-DkU" id="zCA-Oz-Beg"/>
                         <outlet property="storeNameLabel" destination="Y25-sE-exM" id="ZAC-7P-pZN"/>
                         <segue destination="N9U-qa-gqL" kind="show" identifier="storeMainGoToProductDetail" id="QKI-ml-hC5"/>
