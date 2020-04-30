@@ -205,6 +205,7 @@ class ShowAddressViewController:UIViewController{
 extension ShowAddressViewController: AddressDelegate{
     func didPressDelete(documentID: String) {
         db.collection(K.tableName.addressTableName).document(documentID).delete()
+        loadAddressData()
     }
 
 }
@@ -447,6 +448,7 @@ class ShowCardViewController: UIViewController{
 extension ShowCardViewController: CardViewCellDelegate{
     func didPressDelete(docID: String) {
         db.collection(K.tableName.cardDetailTableName).document(docID).delete()
+        loadCardData()
     }
     
     
@@ -1127,7 +1129,6 @@ class StoreMainController: UIViewController{
                    }
     }
 
-    
     @IBAction func addProductPressed(_ sender: UIButton) {
         performSegue(withIdentifier: K.segue.mainStoreToAddProduct, sender: self)
     }
