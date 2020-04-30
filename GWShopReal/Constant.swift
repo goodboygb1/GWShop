@@ -67,6 +67,7 @@ struct K {
         static let identifierBankAccountWithDraw = "accountForWithdrawIdentifier"
         static let identifierProductInStoreMain = "StoreMainProductIdentifier"
         static let addProductInAddPromotionCell = "addProductInAddPromotionCell"
+        static let searchCell = "searchCell"
     }
     struct cardDetail{
         static let cardNumber = "cardNumber"

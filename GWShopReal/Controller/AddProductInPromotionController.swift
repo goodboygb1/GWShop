@@ -48,7 +48,7 @@ class AddProductInPromotionController: UIViewController {
                                 let newProduct = Product(productName: productNameCell, productDetail: productDetailCell, productCategory: productCategoryCell, productPrice: productPriceCell, productQuantity: productQuantity, productImageURL: productImageURLCell, documentId: docID)
                                 
                                 self.product.append(newProduct)
-                                
+                                print("add success")
                                 DispatchQueue.main.async {
                                     self.productInPromotionTableView.reloadData()
                                 }
@@ -66,6 +66,7 @@ class AddProductInPromotionController: UIViewController {
 extension AddProductInPromotionController : UITableViewDataSource,UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        print(product.count)
         return product.count
     }
     
@@ -81,9 +82,4 @@ extension AddProductInPromotionController : UITableViewDataSource,UITableViewDel
         return cell
         
     }
-    
-    
-    
-    
-    
 }

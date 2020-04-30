@@ -30,6 +30,7 @@ class ProfileController:UIViewController {
         tabBarController?.navigationController?.setNavigationBarHidden(true, animated: animated)
         navigationController?.setNavigationBarHidden(true, animated: animated)
          tabBarController?.tabBar.isHidden = false
+        
        
     }
     override func viewWillDisappear(_ animated: Bool) {
@@ -37,6 +38,7 @@ class ProfileController:UIViewController {
         navigationController?.setNavigationBarHidden(false, animated: animated)
         navigationItem.setHidesBackButton(false, animated: animated)
         tabBarController?.tabBar.isHidden = true
+
     }
     
     override func viewDidLoad() {
