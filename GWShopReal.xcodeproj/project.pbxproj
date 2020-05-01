@@ -40,6 +40,7 @@
 		A33A279E2450A04200810BC5 /* Constant.swift in Sources */ = {isa = PBXBuildFile; fileRef = A33A279D2450A04200810BC5 /* Constant.swift */; };
 		A37003DC2450C6E8002B0066 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = A37003DB2450C6E8002B0066 /* GoogleService-Info.plist */; };
 		A37003DE2450CB08002B0066 /* userDetail.swift in Sources */ = {isa = PBXBuildFile; fileRef = A37003DD2450CB08002B0066 /* userDetail.swift */; };
+		A3701915245C94F800D15549 /* AddPromotionInProductController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3701914245C94F800D15549 /* AddPromotionInProductController.swift */; };
 		A37288702452220D00189286 /* NotificationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A372886F2452220D00189286 /* NotificationViewController.swift */; };
 		A3B434752451ECBC008E71EC /* HomePage.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A3B434742451ECBC008E71EC /* HomePage.storyboard */; };
 		A3B434772451ECCE008E71EC /* Notification.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A3B434762451ECCE008E71EC /* Notification.storyboard */; };
@@ -99,6 +100,7 @@
 		A33A279D2450A04200810BC5 /* Constant.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constant.swift; sourceTree = "<group>"; };
 		A37003DB2450C6E8002B0066 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		A37003DD2450CB08002B0066 /* userDetail.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = userDetail.swift; sourceTree = "<group>"; };
+		A3701914245C94F800D15549 /* AddPromotionInProductController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddPromotionInProductController.swift; sourceTree = SOURCE_ROOT; };
 		A372886F2452220D00189286 /* NotificationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationViewController.swift; sourceTree = "<group>"; };
 		A3B434742451ECBC008E71EC /* HomePage.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = HomePage.storyboard; sourceTree = "<group>"; };
 		A3B434762451ECCE008E71EC /* Notification.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Notification.storyboard; sourceTree = "<group>"; };
@@ -137,6 +139,7 @@
 			children = (
 				A3FC91B324521C5100475F40 /* MeViewController.swift */,
 				A3CB3BB424597F5200C9C0EC /* AddProductController.swift */,
+				A3701914245C94F800D15549 /* AddPromotionInProductController.swift */,
 				A3057A7D245B271700AE9991 /* addProductInAddPromotionCell.swift */,
 				A3057A7F245B278100AE9991 /* AddProductInPromotionController.swift */,
 				A3119578245AE29C006F6784 /* PromotionController.swift */,
@@ -401,6 +404,7 @@
 				8490DB2B24585E1600A2BD88 /* Card.swift in Sources */,
 				A3057A7E245B271700AE9991 /* addProductInAddPromotionCell.swift in Sources */,
 				A33A279C24509FAE00810BC5 /* MainViewController.swift in Sources */,
+				A3701915245C94F800D15549 /* AddPromotionInProductController.swift in Sources */,
 				A37003DE2450CB08002B0066 /* userDetail.swift in Sources */,
 				A3057A80245B278100AE9991 /* AddProductInPromotionController.swift in Sources */,
 				A331CBA1245C579400AADDC1 /* CategoryViewController.swift in Sources */,
