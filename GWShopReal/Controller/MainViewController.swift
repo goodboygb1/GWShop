@@ -36,6 +36,7 @@ class MainViewController: UIViewController,UITextFieldDelegate {
         navigationController?.setNavigationBarHidden(false, animated: animated)
     }
     
+
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         
         if searchTextField.text != ""{              // if user fill product name

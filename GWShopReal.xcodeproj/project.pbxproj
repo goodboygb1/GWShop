@@ -10,7 +10,9 @@
 		8433D16924570A77003C59E5 /* Address.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8433D16824570A77003C59E5 /* Address.swift */; };
 		8436DBC9245174EE00956EDA /* Pods_GWShopReal.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 22955FD222D677EA13792783 /* Pods_GWShopReal.framework */; };
 		8436DBCA245174EE00956EDA /* Pods_GWShopReal.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 22955FD222D677EA13792783 /* Pods_GWShopReal.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		843B267E245B527F00248175 /* Promotion.swift in Sources */ = {isa = PBXBuildFile; fileRef = 843B267D245B527F00248175 /* Promotion.swift */; };
 		844811DA245AA09900466CDF /* Product.swift in Sources */ = {isa = PBXBuildFile; fileRef = 844811D9245AA09900466CDF /* Product.swift */; };
+		8451856F245C677A00152229 /* AddPromotionInProductController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8451856E245C677A00152229 /* AddPromotionInProductController.swift */; };
 		8490DB2B24585E1600A2BD88 /* Card.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8490DB2A24585E1600A2BD88 /* Card.swift */; };
 		8490DB2D24588BC500A2BD88 /* Store.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8490DB2C24588BC500A2BD88 /* Store.swift */; };
 		8490DB2F24588D7000A2BD88 /* BankAccount.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8490DB2E24588D7000A2BD88 /* BankAccount.swift */; };
@@ -63,7 +65,9 @@
 		22955FD222D677EA13792783 /* Pods_GWShopReal.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_GWShopReal.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		6649F8358CCAC210AAB18B18 /* Pods-GWShopReal.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GWShopReal.release.xcconfig"; path = "Target Support Files/Pods-GWShopReal/Pods-GWShopReal.release.xcconfig"; sourceTree = "<group>"; };
 		8433D16824570A77003C59E5 /* Address.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Address.swift; sourceTree = "<group>"; };
+		843B267D245B527F00248175 /* Promotion.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Promotion.swift; sourceTree = "<group>"; };
 		844811D9245AA09900466CDF /* Product.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Product.swift; sourceTree = "<group>"; };
+		8451856E245C677A00152229 /* AddPromotionInProductController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddPromotionInProductController.swift; sourceTree = "<group>"; };
 		8490DB2A24585E1600A2BD88 /* Card.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Card.swift; sourceTree = "<group>"; };
 		8490DB2C24588BC500A2BD88 /* Store.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Store.swift; sourceTree = "<group>"; };
 		8490DB2E24588D7000A2BD88 /* BankAccount.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BankAccount.swift; sourceTree = "<group>"; };
@@ -180,6 +184,7 @@
 				A3057A7D245B271700AE9991 /* addProductInAddPromotionCell.swift */,
 				A3057A7F245B278100AE9991 /* AddProductInPromotionController.swift */,
 				A3119578245AE29C006F6784 /* PromotionController.swift */,
+				8451856E245C677A00152229 /* AddPromotionInProductController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -193,6 +198,7 @@
 				8490DB2C24588BC500A2BD88 /* Store.swift */,
 				8490DB2E24588D7000A2BD88 /* BankAccount.swift */,
 				844811D9245AA09900466CDF /* Product.swift */,
+				843B267D245B527F00248175 /* Promotion.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -348,6 +354,7 @@
 				A33A27832450995000810BC5 /* ViewController.swift in Sources */,
 				A33A279A24509FA100810BC5 /* RegisterViewController.swift in Sources */,
 				8490DB2F24588D7000A2BD88 /* BankAccount.swift in Sources */,
+				8451856F245C677A00152229 /* AddPromotionInProductController.swift in Sources */,
 				8433D16924570A77003C59E5 /* Address.swift in Sources */,
 				A33A279824509F9200810BC5 /* LoginController.swift in Sources */,
 				8490DB2D24588BC500A2BD88 /* Store.swift in Sources */,
@@ -358,6 +365,7 @@
 				A37003DE2450CB08002B0066 /* userDetail.swift in Sources */,
 				A3057A80245B278100AE9991 /* AddProductInPromotionController.swift in Sources */,
 				A33A277F2450995000810BC5 /* AppDelegate.swift in Sources */,
+				843B267E245B527F00248175 /* Promotion.swift in Sources */,
 				A33A27812450995000810BC5 /* SceneDelegate.swift in Sources */,
 				A3057A90245B48CF00AE9991 /* searchCell.swift in Sources */,
 				A3CB3BB524597F5200C9C0EC /* AddProductController.swift in Sources */,
