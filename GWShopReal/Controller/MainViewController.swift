@@ -29,16 +29,16 @@ class MainViewController: UIViewController,UITextFieldDelegate {
        
     }
     
-    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+    /*func textFieldShouldReturn(_ textField: UITextField) -> Bool {
 
         let searchKeyword = searchTextField.text
         
-        performSegue(withIdentifier: K.segue.mainToSearchDetail, sender: self)
+        self.performSegue(withIdentifier: K.segue.mainToSearchDetail, sender: self)
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        <#code#>
-    }
+     
+    }*/
     
  }
 

@@ -57,6 +57,8 @@ struct K {
         static let mainStoreToStoreDetailSegue = "mainStoreToStoreDetail"
         static let productDetailToEditProductSegue = "productDetailToEditProduct"
         static let mainToSearchDetail = "mainToSearchDetail"
+        static let promotionToAddPromotionSegue = "promotionToAddPromotion"
+        static let addProductPromotionToAddPromotionSegue = "addProductPromotionToAddPromotion"
     }
     
     struct identifierForTableView{
@@ -67,6 +69,9 @@ struct K {
         static let identifierBankAccountWithDraw = "accountForWithdrawIdentifier"
         static let identifierProductInStoreMain = "StoreMainProductIdentifier"
         static let addProductInAddPromotionCell = "addProductInAddPromotionCell"
+        static let identifierPromotionInProductDetailCell = "promotionInProductDetailIdentifier"
+        static let identifierpromotionInEditProduct = "promotionInEditProductIdentifier"
+        static let identifierpromotionInPromotionPage = "promotionInPromotionPageIdentifier"
     }
     struct cardDetail{
         static let cardNumber = "cardNumber"
@@ -81,6 +86,8 @@ struct K {
         static let storeDetailTableName = "vendor"
         static let bankAccountTableName = "bankAccount"
         static let transactionTableName = "transaction"
+        static let promotionTableName = "promotion"
+        static let hasPromotionTableName = "hasPromotion"
     }
     
     struct storeDetail {
@@ -116,6 +123,13 @@ struct K {
     struct transaction{
         static let amountMoney = "amountMoney"
         static let isApprove = "isApprove"
+    }
+    struct promotion{
+        static let promotionName = "promotionName"
+        static let promotionDetail = "promotionDetail"
+        static let discountPercent = "discountPercent"
+        static let minimumPrice = "minimumPrice"
+        static let validDate = "validDate"
     }
     
   

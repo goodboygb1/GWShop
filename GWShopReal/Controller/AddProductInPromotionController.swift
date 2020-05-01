@@ -14,7 +14,7 @@ class AddProductInPromotionController: UIViewController {
     
     @IBOutlet weak var productInPromotionTableView: UITableView!
     var product : [Product] = []
-    
+    var productDocumentID: [String] = []
     override func viewDidLoad() {
         super.viewDidLoad()
         productInPromotionTableView.dataSource = self
@@ -61,6 +61,21 @@ class AddProductInPromotionController: UIViewController {
             }
         }
     }
+    
+    @IBAction func nextPressed(_ sender: UIButton) {
+        if productDocumentID.count == 0{
+            print("Please select at least one item")
+        }else{
+            self.performSegue(withIdentifier: K.segue.addProductPromotionToAddPromotionSegue, sender: self)
+        }
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == K.segue.addProductPromotionToAddPromotionSegue{
+            let destinationVC = segue.destination as! AddPromotionInProductController
+            destinationVC.productDocumentID = productDocumentID
+        }
+    }
  }
 
 extension AddProductInPromotionController : UITableViewDataSource,UITableViewDelegate {
@@ -82,8 +97,13 @@ extension AddProductInPromotionController : UITableViewDataSource,UITableViewDel
         
     }
     
-    
-    
-    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        self.productDocumentID.append(product[indexPath.row].documentId)
+    }
+    func tableView(_ tableView: UITableView, didDeselectRowAt indexPath: IndexPath) {
+        if let index = productDocumentID.firstIndex(of: product[indexPath.row].documentId){
+            self.productDocumentID.remove(at: index)
+        }
+    }
     
 }

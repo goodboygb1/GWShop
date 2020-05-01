@@ -1102,9 +1102,10 @@ class StoreMainController: UIViewController{
                                         let docID = doc.documentID
                                        if let product = data[K.productCollection.productName] as? String{
                                            let range = NSRange(location: 0, length: product.utf16.count)
-                                           do{
-                                               let regex = try! NSRegularExpression(pattern: self.searchProductTextField.text!, options: [])
-                                               if regex.firstMatch(in: product, options: [], range: range) != nil{
+                                        do{     let lowerCaseProduct = product.lowercased()
+                                            let lowerCaseSearchText = self.searchProductTextField.text!.lowercased()
+                                               let regex = try! NSRegularExpression(pattern: lowerCaseSearchText, options: [])
+                                               if regex.firstMatch(in: lowerCaseProduct, options: [], range: range) != nil{
                                                    print("\(product) Found")
                                                     if let productName = data[K.productCollection.productName] as? String,let productDetail = data[K.productCollection.productDetail] as? String
                                                         ,let productCategory = data[K.productCollection.productCategory] as? String,let productPrice = data[K.productCollection.productPrice] as?  String,let productQuantity = data[K.productCollection.productQuantity] as? String,let ImageURL = data[K.productCollection.productImageURL] as? String{
@@ -1112,6 +1113,7 @@ class StoreMainController: UIViewController{
                                                         
                                                         DispatchQueue.main.async {
                                                             self.storeMainTableView.reloadData()
+                                                            self.searchProductTextField.text = ""
                                                         }
                                                     }
                                                }else{
@@ -1185,31 +1187,75 @@ class ProductDetailController: UIViewController{
     @IBOutlet weak var promotionTableView: UITableView!
     var storeName: String!
     var productDocumentID: String!
+    var promotions: [Promotion] = []
     var db = Firestore.firestore()
     override func viewDidLoad() {
         super.viewDidLoad()
         storeNameLabel.text = storeName
+        promotionTableView.dataSource = self
         loadAllProductDetail()
     }
     
     func loadAllProductDetail(){
-        db.collection(K.productCollection.productCollection).document(productDocumentID).getDocument { (documentSnapshot, error) in
-            if let e = error{
-                print("Error while loading product data with docID: \(e.localizedDescription)")
-            }else{
-                if let snapShotDocuments = documentSnapshot{
-                    if let data = snapShotDocuments.data(){
-                        if let productName = data[K.productCollection.productName] as? String, let productPrice = data[K.productCollection.productPrice] as? String, let productQuantity = data[K.productCollection.productQuantity] as? String, let productCategory = data[K.productCollection.productCategory] as? String,let productDetail = data[K.productCollection.productDetail] as? String{
-                            self.productNameLabel.text = productName
-                            self.productPriceLabel.text = productPrice
-                            self.productRemainingLabel.text = productQuantity
-                            self.productCategorylabel.text = productCategory
-                            self.productDetailLabel.text = productDetail
+        if let emailSender = Auth.auth().currentUser?.email{
+            self.promotions = []
+            db.collection(K.productCollection.productCollection).document(productDocumentID).getDocument { (documentSnapshot, error) in
+                if let e = error{
+                    print("Error while loading product data with docID: \(e.localizedDescription)")
+                }else{
+                    if let snapShotDocuments = documentSnapshot{
+                        if let data = snapShotDocuments.data(){
+                            if let productName = data[K.productCollection.productName] as? String, let productPrice = data[K.productCollection.productPrice] as? String, let productQuantity = data[K.productCollection.productQuantity] as? String, let productCategory = data[K.productCollection.productCategory] as? String,let productDetail = data[K.productCollection.productDetail] as? String{
+                                self.productNameLabel.text = productName
+                                self.productPriceLabel.text = productPrice
+                                self.productRemainingLabel.text = productQuantity
+                                self.productCategorylabel.text = productCategory
+                                self.productDetailLabel.text = productDetail
+                                print(self.productNameLabel.text!)              // got porductName
+                                // search for promotion in that productName (hasPromotion)
+                                self.db.collection(K.tableName.hasPromotionTableName).whereField(K.sender, isEqualTo: emailSender).whereField(K.productCollection.productName, isEqualTo: self.productNameLabel.text!).getDocuments { (querySnapshot, error) in
+                                    if let e = error{
+                                        print("error while checking promotions in product: \(e.localizedDescription)")
+                                    }else{
+                                        if let snapShotDocuments = querySnapshot?.documents{
+                                            for doc in snapShotDocuments{
+                                                let data = doc.data()
+                                                if let promotion = data[K.promotion.promotionName] as? String{
+                                                    print(promotion) // got promotionName
+                                                    // search specific promotion data
+                                                    self.db.collection(K.tableName.promotionTableName).whereField(K.sender, isEqualTo: emailSender).whereField(K.promotion.promotionName, isEqualTo: promotion).getDocuments { (querySnapshot, error) in
+                                                            if let e = error{
+                                                                print("Error while looping in promotionName: \(e.localizedDescription) ")
+                                                            }else{
+                                                                if let snapShotDocuments = querySnapshot?.documents{
+                                                                    for doc in snapShotDocuments{
+                                                                        let data = doc.data()
+                                                                        let docID = doc.documentID
+                                                                        if let promotionName = data[K.promotion.promotionName] as? String, let promotionDetail = data[K.promotion.promotionDetail] as? String,
+                                                                            let discountPercent = data[K.promotion.discountPercent] as? Int, let minimumPrice = data[K.promotion.minimumPrice] as? String,
+                                                                            let validDate = data[K.promotion.validDate] as? String{
+                                                                            self.promotions.append(Promotion(promotionName: promotionName, promotionDetail: promotionDetail, minimumPrice: minimumPrice, discountPercent: discountPercent, validDate: validDate, docID: docID))
+                                                                            print(self.promotions)
+                                                                            DispatchQueue.main.async {
+                                                                                self.promotionTableView.reloadData()
+                                                                            }
+                                                                        }
+                                                                    }
+                                                                }
+                                                            }
+                                                        }
+                                                }
+                                            }
+                                        }else {print("rip")}
+                                    }
+                                }
+                            }
                         }
                     }
                 }
             }
         }
+        
     }
     @IBAction func editProductPressed(_ sender: UIButton) {
         self.performSegue(withIdentifier: K.segue.productDetailToEditProductSegue, sender: self)
@@ -1219,34 +1265,75 @@ class ProductDetailController: UIViewController{
         if segue.identifier == K.segue.productDetailToEditProductSegue{
             let destinationVC = segue.destination as! EditProductController
             destinationVC.productDocumentID = productDocumentID
+            destinationVC.promotions = promotions
+            destinationVC.productName = self.productNameLabel.text
         }
     }
 }
 
-class EditProductController: UIViewController{
-    @IBOutlet weak var productNameLabel: UITextField!
-    @IBOutlet weak var productCategoryLabel: UITextField!
-    @IBOutlet weak var priceLabel: UITextField!
-    @IBOutlet weak var quantityLabel: UITextField!
-    @IBOutlet weak var productDetailLabel: UITextField!
+extension ProductDetailController: UITableViewDataSource,UITableViewDelegate{
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return promotions.count
+    }
     
-    @IBOutlet weak var promotionTableView: UITableView!
-    var promotionDocumentID: [String] = []
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let promotion = promotions[indexPath.row]
+        let promotionCell = promotionTableView.dequeueReusableCell(withIdentifier: K.identifierForTableView.identifierPromotionInProductDetailCell) as! promotionInProductDetailCell
+        promotionCell.promotionNameLabel.text = promotion.promotionName
+        promotionCell.promotionDetailLabel.text = promotion.promotionDetail
+        promotionCell.discountLabel.text = String(promotion.discountPercent)
+        promotionCell.minimumPriceLabel.text = promotion.minimumPrice
+        promotionCell.validDateLabel.text = promotion.validDate
+        
+        return promotionCell
+    }
+    
+    
+}
+
+class promotionInProductDetailCell:UITableViewCell{
+    @IBOutlet weak var promotionNameLabel: UILabel!
+    @IBOutlet weak var promotionDetailLabel: UILabel!
+    @IBOutlet weak var minimumPriceLabel: UILabel!
+    @IBOutlet weak var discountLabel: UILabel!
+    @IBOutlet weak var validDateLabel: UILabel!
+    
+}
+class EditProductController: UIViewController{
+    @IBOutlet weak var productNameTextField: UITextField!
+    @IBOutlet weak var productCategoryTextField: UITextField!
+    @IBOutlet weak var productPriceTextField: UITextField!
+    @IBOutlet weak var productQuantityTextField: UITextField!
+    @IBOutlet weak var productDetailTextField: UITextField!
+    
+    @IBOutlet weak var promotionInEditProductTableView: UITableView!
+    var promotions: [Promotion]!
+    var productName: String!
+    var updatedProductName: String!
     var productDocumentID: String!
+    var promotionName: [String] = []
     var db = Firestore.firestore()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        promotionInEditProductTableView.dataSource = self
+        promotionInEditProductTableView.delegate = self
+        loadPromotionData()
+    }
+    
+    func loadPromotionData(){
+        DispatchQueue.main.async {
+            self.promotionInEditProductTableView.reloadData()
+        }
     }
     
     func updateNotNil() -> Bool{
-        if productNameLabel.text != ""{
-            if productCategoryLabel.text != ""{
-                if priceLabel.text != ""{
-                    if quantityLabel.text != ""{
-                        if productDetailLabel.text != ""{
-                            if promotionDocumentID.count != 0{
+        if productNameTextField.text != ""{
+            if productCategoryTextField.text != ""{
+                if productPriceTextField.text != ""{
+                    if productQuantityTextField.text != ""{
+                        if productDetailTextField.text != ""{
                                 return true
-                            }else { return false }
                         }else { return false }
                     }else { return false }
                 }else { return false }
@@ -1254,12 +1341,82 @@ class EditProductController: UIViewController{
         }else { return false }
     }
     
-    @IBAction func submitPressed(_ sender: UIButton) {
+    @IBAction func submitPressed(_ sender: UIButton){
         if updateNotNil(){
-            
+            if let emailSender = Auth.auth().currentUser?.email{
+                db.collection(K.tableName.hasPromotionTableName).whereField(K.sender, isEqualTo: emailSender).whereField(K.productCollection.productName, isEqualTo: productName!).getDocuments { (querySnapshot, error) in
+                    if let e = error{
+                        print("error while updating hasPromotion data: \(e.localizedDescription)")
+                    }else{
+                        if let snapShotDocuments = querySnapshot?.documents{
+                            for doc in snapShotDocuments{
+                                let docID = doc.documentID
+                                self.db.collection(K.tableName.hasPromotionTableName).document(docID).delete()
+                            }
+                        }
+                        DispatchQueue.main.asyncAfter(deadline: .now() + 1.1){
+                            self.db.collection(K.productCollection.productCollection).document(self.productDocumentID).updateData([
+                                                       K.productCollection.productName: self.productNameTextField.text!,
+                                                   K.productCollection.productDetail: self.productDetailTextField.text!,
+                                                   K.productCollection.productPrice: self.productPriceTextField.text!,
+                                                   K.productCollection.productQuantity: self.productQuantityTextField.text!,
+                                                   K.productCollection.productCategory: self.productCategoryTextField.text!
+                                                   ])
+                            self.updatedProductName = self.productNameTextField.text!
+                            for selectedPromotion in self.promotionName{
+                                self.db.collection(K.tableName.hasPromotionTableName).addDocument(data: [
+                                    K.productCollection.productName: self.updatedProductName!,
+                                    K.promotion.promotionName: selectedPromotion,
+                                    K.sender: emailSender
+                                ])
+                            }
+                        }
+                        
+                    }
+                }
+  
+            }
+            print("Updated product successfully")
+            self.dismiss(animated: true, completion: nil)
         }else{
             print("Some text fields is empty or promotion has not selected")
         }
     }
     
+}
+
+extension EditProductController:UITableViewDataSource,UITableViewDelegate{
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return promotions!.count
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let promotion = promotions[indexPath.row]
+        let promotionCell = promotionInEditProductTableView.dequeueReusableCell(withIdentifier: K.identifierForTableView.identifierpromotionInEditProduct) as! promotionCell
+        promotionCell.promotionNameLabel.text = promotion.promotionName
+        promotionCell.promotionDetailLabel.text = promotion.promotionDetail
+        promotionCell.discountLabel.text = String(promotion.discountPercent)
+        promotionCell.minimumPriceLabel.text = promotion.minimumPrice
+        promotionCell.validDateLabel.text = promotion.validDate
+        
+        return promotionCell
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        self.promotionName.append(promotions[indexPath.row].promotionName)
+    }
+    
+    func tableView(_ tableView: UITableView, didDeselectRowAt indexPath: IndexPath) {
+        if let index = promotionName.firstIndex(of: promotions[indexPath.row].promotionName){
+            promotionName.remove(at: index)
+        }
+    }
+}
+
+class promotionCell:UITableViewCell{
+    @IBOutlet weak var promotionNameLabel: UILabel!
+    @IBOutlet weak var promotionDetailLabel: UILabel!
+    @IBOutlet weak var minimumPriceLabel: UILabel!
+    @IBOutlet weak var discountLabel: UILabel!
+    @IBOutlet weak var validDateLabel: UILabel!
 }
