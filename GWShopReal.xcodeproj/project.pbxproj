@@ -159,6 +159,7 @@
 				A33A277C2450995000810BC5 /* Products */,
 				E7900B4344D55E2898693214 /* Pods */,
 				BAFF2F7E8B856772304B114D /* Frameworks */,
+				A370190D245C88CC00D15549 /* Recovered References */,
 			);
 			sourceTree = "<group>";
 		};
@@ -230,6 +231,14 @@
 				843B267D245B527F00248175 /* Promotion.swift */,
 			);
 			path = Model;
+			sourceTree = "<group>";
+		};
+		A370190D245C88CC00D15549 /* Recovered References */ = {
+			isa = PBXGroup;
+			children = (
+				8451856E245C677A00152229 /* AddPromotionInProductController.swift */,
+			);
+			name = "Recovered References";
 			sourceTree = "<group>";
 		};
 		BAFF2F7E8B856772304B114D /* Frameworks */ = {
