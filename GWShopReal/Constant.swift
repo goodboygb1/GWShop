@@ -35,6 +35,7 @@ struct K {
     static let dateField = "date"
     static let sender = "sender"
     
+    
     struct segue{
         static let logoutToMainSegue = "logoutToMainSegue"
         static let goToProfileSegue = "goToProfile"
@@ -59,6 +60,7 @@ struct K {
         static let mainToSearchDetail = "mainToSearchDetail"
         static let promotionToAddPromotionSegue = "promotionToAddPromotion"
         static let addProductPromotionToAddPromotionSegue = "addProductPromotionToAddPromotion"
+        static let searchToProductDetail = "searchToProductDetail"
     }
     
     struct identifierForTableView{
@@ -72,6 +74,7 @@ struct K {
         static let identifierPromotionInProductDetailCell = "promotionInProductDetailIdentifier"
         static let identifierpromotionInEditProduct = "promotionInEditProductIdentifier"
         static let identifierpromotionInPromotionPage = "promotionInPromotionPageIdentifier"
+        static let searchCell = "searchCell"
     }
     struct cardDetail{
         static let cardNumber = "cardNumber"
@@ -119,6 +122,8 @@ struct K {
         static let productPrice = "productPrice"
         static let productQuantity = "productQuantity"
         static let productImageURL = "productImageURL"
+        static let sender = "sender"
+         static let storeName = "storeName"
     }
     struct transaction{
         static let amountMoney = "amountMoney"

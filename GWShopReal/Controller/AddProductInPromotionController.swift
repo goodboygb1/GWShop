@@ -39,21 +39,26 @@ class AddProductInPromotionController: UIViewController {
                             let docID = doc.documentID
                             
                             if let productNameCell = data[K.productCollection.productName] as? String
-                            ,  let productCategoryCell = data[K.productCollection.productCategory] as? String
-                            ,  let productDetailCell = data[K.productCollection.productDetail] as? String
-                            ,  let productImageURLCell = data[K.productCollection.productImageURL] as? String
-                            , let productPriceCell = data[K.productCollection.productPrice] as? String
-                            , let productQuantity = data[K.productCollection.productQuantity] as? String {
+                                ,  let productCategoryCell = data[K.productCollection.productCategory] as? String
+                                ,  let productDetailCell = data[K.productCollection.productDetail] as? String
+                                ,  let productImageURLCell = data[K.productCollection.productImageURL] as? String
+                                , let productPriceCell = data[K.productCollection.productPrice] as? String
+                                , let productQuantity = data[K.productCollection.productQuantity] as? String
+                                , let senderFrom = data[K.sender] as? String
+                                , let storeName = data[K.productCollection.storeName] as? String
                                 
-                                let newProduct = Product(productName: productNameCell, productDetail: productDetailCell, productCategory: productCategoryCell, productPrice: productPriceCell, productQuantity: productQuantity, productImageURL: productImageURLCell, documentId: docID)
                                 
+                            {
+                                
+                                let newProduct = Product(productName: productNameCell, productDetail: productDetailCell, productCategory: productCategoryCell, productPrice: productPriceCell, productQuantity: productQuantity, productImageURL: productImageURLCell, documentId: docID, sender: senderFrom, storeName: storeName )
+                                print("Storename = \(storeName)")
                                 self.product.append(newProduct)
-                                
+                                print("add success")
                                 DispatchQueue.main.async {
                                     self.productInPromotionTableView.reloadData()
                                 }
                             }
-                                
+                            
                         }
                     }
                     
@@ -61,6 +66,7 @@ class AddProductInPromotionController: UIViewController {
             }
         }
     }
+
     
     @IBAction func nextPressed(_ sender: UIButton) {
         if productDocumentID.count == 0{
@@ -77,10 +83,12 @@ class AddProductInPromotionController: UIViewController {
         }
     }
  }
+}
 
 extension AddProductInPromotionController : UITableViewDataSource,UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        print(product.count)
         return product.count
     }
     

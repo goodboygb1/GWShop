@@ -17,6 +17,8 @@ struct Product{
     var productQuantity: String
     var productImageURL: String
     var documentId: String
+    var sender : String
+    var storeName : String
 }
 
 

@@ -18,6 +18,7 @@
 		8490DB2F24588D7000A2BD88 /* BankAccount.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8490DB2E24588D7000A2BD88 /* BankAccount.swift */; };
 		A3057A7E245B271700AE9991 /* addProductInAddPromotionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3057A7D245B271700AE9991 /* addProductInAddPromotionCell.swift */; };
 		A3057A80245B278100AE9991 /* AddProductInPromotionController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3057A7F245B278100AE9991 /* AddProductInPromotionController.swift */; };
+		A3057A90245B48CF00AE9991 /* searchCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3057A8F245B48CF00AE9991 /* searchCell.swift */; };
 		A30CD899245316A00061FE27 /* SukhumvitSet-Thin.ttf in Resources */ = {isa = PBXBuildFile; fileRef = A30CD8932453169F0061FE27 /* SukhumvitSet-Thin.ttf */; };
 		A30CD89A245316A00061FE27 /* SukhumvitSet-Light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = A30CD8942453169F0061FE27 /* SukhumvitSet-Light.ttf */; };
 		A30CD89B245316A00061FE27 /* SukhumvitSet-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = A30CD8952453169F0061FE27 /* SukhumvitSet-Bold.ttf */; };
@@ -72,6 +73,7 @@
 		8490DB2E24588D7000A2BD88 /* BankAccount.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BankAccount.swift; sourceTree = "<group>"; };
 		A3057A7D245B271700AE9991 /* addProductInAddPromotionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = addProductInAddPromotionCell.swift; sourceTree = "<group>"; };
 		A3057A7F245B278100AE9991 /* AddProductInPromotionController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddProductInPromotionController.swift; sourceTree = "<group>"; };
+		A3057A8F245B48CF00AE9991 /* searchCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = searchCell.swift; sourceTree = "<group>"; };
 		A30CD8932453169F0061FE27 /* SukhumvitSet-Thin.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SukhumvitSet-Thin.ttf"; sourceTree = "<group>"; };
 		A30CD8942453169F0061FE27 /* SukhumvitSet-Light.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SukhumvitSet-Light.ttf"; sourceTree = "<group>"; };
 		A30CD8952453169F0061FE27 /* SukhumvitSet-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SukhumvitSet-Bold.ttf"; sourceTree = "<group>"; };
@@ -175,6 +177,7 @@
 				A33A279724509F9200810BC5 /* LoginController.swift */,
 				A33A279924509FA100810BC5 /* RegisterViewController.swift */,
 				A33A279B24509FAE00810BC5 /* MainViewController.swift */,
+				A3057A8F245B48CF00AE9991 /* searchCell.swift */,
 				A372886F2452220D00189286 /* NotificationViewController.swift */,
 				A3FC91B324521C5100475F40 /* MeViewController.swift */,
 				A3CB3BB424597F5200C9C0EC /* AddProductController.swift */,
@@ -364,6 +367,7 @@
 				A33A277F2450995000810BC5 /* AppDelegate.swift in Sources */,
 				843B267E245B527F00248175 /* Promotion.swift in Sources */,
 				A33A27812450995000810BC5 /* SceneDelegate.swift in Sources */,
+				A3057A90245B48CF00AE9991 /* searchCell.swift in Sources */,
 				A3CB3BB524597F5200C9C0EC /* AddProductController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

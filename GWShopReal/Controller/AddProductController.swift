@@ -12,7 +12,7 @@ import FirebaseStorage
 
 class AddProductController: UIViewController,UIImagePickerControllerDelegate,UINavigationControllerDelegate {
     
-   
+    var storeName : String?
     override func viewDidLoad() {
         super.viewDidLoad()
         addImageLable.layer.cornerRadius = addImageLable.frame.size.height/5
@@ -199,34 +199,62 @@ extension AddProductController {
     
     func uploadDataToFirebase(imageURL:String) -> Bool {    // for upload data to firebase
         
+       
         let userProductIsNotnil = userProductIsNotNilFunction()        // เช็คกรอกครบไหม
         let db = Firestore.firestore()
         let productCollection = db.collection(K.productCollection.productCollection)
-      
+        let venderCollection = db.collection(K.tableName.storeDetailTableName)
+       
         if let emailSender = Auth.auth().currentUser?.email{
-            if userProductIsNotnil && (imageURL != K.other.empty) {
-                print("insirting data")
-                productCollection.addDocument(data: [ K.productCollection.productName:productNameTextField.text!,
-                                                      K.productCollection.productDetail:productDetailTextField.text!,
-                                                      K.productCollection.productCategory:productCategoryTextField.text!,
-                                                      K.productCollection.productPrice:productPriceTextField.text!,
-                                                      K.productCollection.productQuantity:productQuantityTextField.text!,
-                                                      K.productCollection.productImageURL:imageURL,
-                                                      K.sender: emailSender
-                    
-                ]) { (error) in
-                    if let e = error{
-                        print("error from add product: \(e.localizedDescription)")
-                      self.updateStatus = false
-                        self.presentAlert(title: "Error", message: "Product wasn't added", actiontitle: "Dismiss")
-                    } else {
-                        self.updateStatus = true
-                        self.presentAlert(title: "Success", message: "Product was added", actiontitle: "Dismiss")
+           
+            venderCollection.whereField(K.sender, isEqualTo: emailSender).getDocuments { (querySnapshot, error) in
+                if error != nil {
+                    print("error can't find storeName")
+                } else {
+                    if let snapSnotQuery = querySnapshot?.documents {
+                        for doc in snapSnotQuery {
+                            let data = doc.data()
+                            if let nameOfStore = data[K.storeDetail.storeName] as? String
+                            {
+                                self.storeName = nameOfStore
+                                
+                               
+                            }
+                        }
                     }
                 }
                 
+                if userProductIsNotnil && (imageURL != K.other.empty) {
+                               let emailSender = Auth.auth().currentUser?.email!
+                               print("insirting data")
+                                
+                    productCollection.addDocument(data: [ K.productCollection.productName:self.productNameTextField.text!,
+                                                          K.productCollection.productDetail:self.productDetailTextField.text!,
+                                                          K.productCollection.productCategory:self.productCategoryTextField.text!,
+                                                          K.productCollection.productPrice:self.productPriceTextField.text!,
+                                                          K.productCollection.productQuantity:self.productQuantityTextField.text!,
+                                                                     K.productCollection.productImageURL:imageURL,
+                                                                     K.sender: emailSender!,
+                                                                     K.productCollection.storeName : self.storeName ?? "empty"
+                                   
+                               ]) { (error) in
+                                   if let e = error{
+                                       print("error from add product: \(e.localizedDescription)")
+                                     self.updateStatus = false
+                                       self.presentAlert(title: "Error", message: "Product wasn't added", actiontitle: "Dismiss")
+                                   } else {
+                                        
+                                       self.updateStatus = true
+                                       self.presentAlert(title: "Success", message: "Product was added", actiontitle: "Dismiss")
+                                   }
+                               }
+                               
+                           }
+                       
             }
         }
+            
+       
         
         return updateStatus
     }
