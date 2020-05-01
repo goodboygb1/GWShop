@@ -83,7 +83,7 @@ class AddProductInPromotionController: UIViewController {
         }
     }
  }
-}
+
 
 extension AddProductInPromotionController : UITableViewDataSource,UITableViewDelegate {
     

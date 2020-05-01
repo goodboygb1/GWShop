@@ -1090,9 +1090,11 @@ class StoreMainController: UIViewController{
             }
         }
     }
+    
     @IBAction func showStoreDetailPressed(_ sender: UIButton) {
         self.performSegue(withIdentifier: K.segue.mainStoreToStoreDetailSegue, sender: self)
     }
+    
     @IBAction func searchPressed(_ sender: UIButton) {
         if searchProductTextField.text != ""{
             self.products = []
@@ -1114,7 +1116,7 @@ class StoreMainController: UIViewController{
                                                    print("\(product) Found")
                                                     if let productName = data[K.productCollection.productName] as? String,let productDetail = data[K.productCollection.productDetail] as? String
                                                         ,let productCategory = data[K.productCollection.productCategory] as? String,let productPrice = data[K.productCollection.productPrice] as?  String,let productQuantity = data[K.productCollection.productQuantity] as? String,let ImageURL = data[K.productCollection.productImageURL] as? String{
-                                                        self.products.append(Product(productName: productName, productDetail: productDetail, productCategory: productCategory, productPrice: productPrice, productQuantity: productQuantity, productImageURL: ImageURL, documentId: docID))
+                                                        self.products.append(Product(productName: productName, productDetail: productDetail, productCategory: productCategory, productPrice: productPrice, productQuantity: productQuantity, productImageURL: ImageURL, documentId: docID,sender: emailSender,storeName: self.storeNameLabel.text!))
                                                         
                                                         DispatchQueue.main.async {
                                                             self.storeMainTableView.reloadData()
