@@ -24,6 +24,7 @@ class CategoryViewController: UIViewController {
         categoryTableView.dataSource = self
         activityIndicator.hidesWhenStopped = true
         activityIndicator.startAnimating()
+        print("start animate")
         loadProduct()
         
         
@@ -89,9 +90,7 @@ class CategoryViewController: UIViewController {
 extension CategoryViewController : UITableViewDelegate,UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if product.count == 0 {
-            self.activityIndicator.stopAnimating()
-        }
+        
         return product.count
     }
     
