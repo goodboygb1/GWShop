@@ -11,7 +11,7 @@ import Firebase
 
 class MainViewController: UIViewController,UITextFieldDelegate {
     
-    
+    var categorySearch : String?
     @IBOutlet weak var searchTextField: UITextField!
     
     override func viewDidLoad() {
@@ -56,10 +56,153 @@ class MainViewController: UIViewController,UITextFieldDelegate {
             let destinationVC = segue.destination as! SearchViewController
             destinationVC.keywordForQuery =
                 searchTextField.text                    // sent word for query to next view
+        } else if segue.identifier == K.segue.mainToCategoryProduct {
+            
+            let destinationVC = segue.destination as! CategoryViewController
+            destinationVC.categorySearch = self.categorySearch
+            
         }
     }
     
+    
+    @IBAction func manFashion(_ sender: UIButton) {
+        categorySearch = K.categoryList.menFashion
+        performSegue(withIdentifier: K.segue.mainToCategoryProduct, sender: self)
+    }
+    
+    @IBAction func wormanFashion(_ sender: UIButton) {
+        categorySearch = K.categoryList.womenFashion
+        performSegue(withIdentifier: K.segue.mainToCategoryProduct, sender: self)
+
+    }
+    
+    @IBAction func mobile(_ sender: UIButton) {
+        categorySearch = K.categoryList.mobile
+        performSegue(withIdentifier: K.segue.mainToCategoryProduct, sender: self)
+
+    }
+    @IBAction func foodSupport(_ sender: Any) {
+        categorySearch = K.categoryList.footSup
+        performSegue(withIdentifier: K.segue.mainToCategoryProduct, sender: self)
+
+    }
+    
+    @IBAction func toy(_ sender: UIButton) {
+        categorySearch = K.categoryList.toy
+        performSegue(withIdentifier: K.segue.mainToCategoryProduct, sender: self)
+
+    }
+    
+    @IBAction func watchAndGlasses(_ sender: UIButton) {
+        categorySearch = K.categoryList.watchAndGlasses
+        performSegue(withIdentifier: K.segue.mainToCategoryProduct, sender: self)
+
+    }
+    @IBAction func indoorAccessory(_ sender: UIButton) {
+        categorySearch = K.categoryList.indoorAccessory
+        performSegue(withIdentifier: K.segue.mainToCategoryProduct, sender: self)
+
+    }
+    
+    @IBAction func manShoes(_ sender: UIButton) {
+        categorySearch = K.categoryList.menShoes
+        performSegue(withIdentifier: K.segue.mainToCategoryProduct, sender: self)
+
+    }
+    
+    @IBAction func womanShoes(_ sender: UIButton) {
+        categorySearch = K.categoryList.womenShoes
+        performSegue(withIdentifier: K.segue.mainToCategoryProduct, sender: self)
+
+    }
+    @IBAction func bag(_ sender: UIButton) {
+        categorySearch = K.categoryList.bag
+        performSegue(withIdentifier: K.segue.mainToCategoryProduct, sender: self)
+
+    }
+    @IBAction func cosmetic(_ sender: UIButton) {
+        categorySearch = K.categoryList.cosmetic
+        performSegue(withIdentifier: K.segue.mainToCategoryProduct, sender: self)
+
+    }
+    @IBAction func computer(_ sender: UIButton) {
+        categorySearch = K.categoryList.computer
+        performSegue(withIdentifier: K.segue.mainToCategoryProduct, sender: self)
+
+    }
+    @IBAction func camera(_ sender: UIButton) {
+        categorySearch = K.categoryList.camera
+        performSegue(withIdentifier: K.segue.mainToCategoryProduct, sender: self)
+
+    }
+    @IBAction func jewelry(_ sender: UIButton) {
+        categorySearch = K.categoryList.jewelry
+        performSegue(withIdentifier: K.segue.mainToCategoryProduct, sender: self)
+
+    }
+    @IBAction func sport(_ sender: UIButton) {
+        categorySearch = K.categoryList.sport
+        performSegue(withIdentifier: K.segue.mainToCategoryProduct, sender: self)
+
+    }
+    @IBAction func foodAndBev(_ sender: UIButton) {
+        categorySearch = K.categoryList.foodAndBev
+        performSegue(withIdentifier: K.segue.mainToCategoryProduct, sender: self)
+
+    }
+    
+    @IBAction func indoorEntertainment(_ sender: UIButton) {
+        categorySearch = K.categoryList.indoorEntertainment
+        performSegue(withIdentifier: K.segue.mainToCategoryProduct, sender: self)
+
+    }
+    @IBAction func electronic(_ sender: UIButton) {
+        categorySearch = K.categoryList.electronic
+        performSegue(withIdentifier: K.segue.mainToCategoryProduct, sender: self)
+
+    }
+    @IBAction func game(_ sender: UIButton) {
+        categorySearch = K.categoryList.game
+        performSegue(withIdentifier: K.segue.mainToCategoryProduct, sender: self)
+
+    }
+    @IBAction func pet(_ sender: UIButton) {
+        categorySearch = K.categoryList.pet
+        performSegue(withIdentifier: K.segue.mainToCategoryProduct, sender: self)
+
+    }
+    @IBAction func car(_ sender: UIButton) {
+        categorySearch = K.categoryList.car
+        performSegue(withIdentifier: K.segue.mainToCategoryProduct, sender: self)
+
+    }
+    
+    @IBAction func stationary(_ sender: UIButton) {
+        categorySearch = K.categoryList.stationary
+        performSegue(withIdentifier: K.segue.mainToCategoryProduct, sender: self)
+
+    }
+    
+    @IBAction func ticket(_ sender: UIButton) {
+        categorySearch = K.categoryList.ticket
+        performSegue(withIdentifier: K.segue.mainToCategoryProduct, sender: self)
+
+    }
+    
+    @IBAction func others(_ sender: UIButton) {
+        categorySearch = K.categoryList.others
+        performSegue(withIdentifier: K.segue.mainToCategoryProduct, sender: self)
+
+    }
+    
+    
+    
+    
 }
+
+
+
+
 
 //MARK: - SearchView
 
@@ -76,6 +219,7 @@ class SearchViewController: UIViewController {
         searchResultTableView.delegate = self
         searchResultTableView.dataSource = self     // set data source
         loadProduct()
+        
     }
     
     func loadProduct()  {                 // load product attribute from firebase
@@ -153,14 +297,14 @@ extension SearchViewController : UITableViewDataSource,UITableViewDelegate {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         let productReturnToCell = product[indexPath.row]        // data in row
-        let cell = searchResultTableView.dequeueReusableCell(withIdentifier: K.identifierForTableView.searchCell) as! searchCell    // cell connect
+        let cell = searchResultTableView.dequeueReusableCell(withIdentifier: K.identifierForTableView.searchCell)
+            as! searchCell    // cell connect
         
         cell.resultNameLabel.text = productReturnToCell.productName
         cell.resultPriceLabel.text  = productReturnToCell.productPrice
         cell.resultImageURL = productReturnToCell.productImageURL
-        cell.resultProductID = productReturnToCell.documentId
-        cell.senderLabel.text = productReturnToCell.storeName
-        cell.senderName = productReturnToCell.sender
+        cell.storeNameLable.text = productReturnToCell.storeName
+        
         
         // 1. create data 2. create cell 3. add data to cell 4. return cell
         
@@ -178,7 +322,7 @@ extension SearchViewController : UITableViewDataSource,UITableViewDelegate {
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == K.segue.searchToProductDetail {
-            var destinationVC = segue.destination as! ProductDetail
+            let destinationVC = segue.destination as! ProductDetail
             destinationVC.productDetail = product[selectRowAtIndex!]
         }
     }

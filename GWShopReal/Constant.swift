@@ -61,6 +61,7 @@ struct K {
         static let promotionToAddPromotionSegue = "promotionToAddPromotion"
         static let addProductPromotionToAddPromotionSegue = "addProductPromotionToAddPromotion"
         static let searchToProductDetail = "searchToProductDetail"
+        static let mainToCategoryProduct = "mainToCategoryProduct"
     }
     
     struct identifierForTableView{
@@ -75,6 +76,7 @@ struct K {
         static let identifierpromotionInEditProduct = "promotionInEditProductIdentifier"
         static let identifierpromotionInPromotionPage = "promotionInPromotionPageIdentifier"
         static let searchCell = "searchCell"
+        static let categoryCellIdentifier = "categoryCellIdentifier"
     }
     struct cardDetail{
         static let cardNumber = "cardNumber"
@@ -137,7 +139,35 @@ struct K {
         static let validDate = "validDate"
     }
     
-  
+    
+    struct categoryList {
+        static let womenFashion = "เสื้อผ้าแฟชั่นผู้หญิง"
+         static let menFashion = "เสื้อผ้าแฟชั่นผู้ชาย"
+         static let mobile = "มือถือและอุปกรณ์เสริม"
+         static let footSup = "ผลิตภัณฑ์สุขภาพ"
+         static let toy = "ของเล่นสินค้าแม่และเด็ก"
+         static let indoorAccessory = "เครื่องใช้ภายในบ้าน"
+         static let menShoes = "รองเท้าผู้ชาย"
+         static let womenShoes = "รองเท้าผู้หญิง"
+        static let bag = "กระเป๋า"
+        static let cosmetic = "เครื่องสำอาง"
+        static let computer = "คอมพิวเตอร์"
+        static let camera = "กล้องและอุปกรณ์"
+        static let jewelry = "เครื่องประดับ"
+        static let sport = "กีฬาและอุปกรณ์"
+        static let foodAndBev = "อาหารและเครื่องดื่ม"
+        static let indoorEntertainment = "สื่อบันเทิงภายในบ้าน"
+        static let electronic = "เครื่องใช้ไฟฟ้าในบ้าน"
+        static let game = "เกมส์และอุปกรณ์เสริม"
+        static let pet = "สัตว์เลี้ยง"
+        static let car = "ยานยนต์"
+        static let stationary = "เครื่องเขียน"
+        static let ticket = "ตั๋วและบัตรกำนัน"
+        static let others = "อื่นๆ"
+        static let watchAndGlasses = "นาฬิกาและแว่นตา"
+
+    }
+
 
 }
 

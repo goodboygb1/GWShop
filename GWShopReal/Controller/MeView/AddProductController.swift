@@ -25,7 +25,7 @@ class AddProductController: UIViewController,UIImagePickerControllerDelegate,UIN
     
     let picker = UIPickerView()
     let imagePicker = UIImagePickerController()
-    let categoryTitle = ["เสื้อผ้าแฟชั่นผู้หญิง","เสื้อผ้าแฟชั่นผู้ชาย"]
+    let categoryTitle = [K.categoryList.womenFashion,K.categoryList.menFashion,K.categoryList.mobile,K.categoryList.footSup,K.categoryList.toy,K.categoryList.watchAndGlasses,K.categoryList.indoorAccessory,K.categoryList.menShoes,K.categoryList.womenShoes,K.categoryList.bag,K.categoryList.cosmetic,K.categoryList.computer,K.categoryList.camera,K.categoryList.jewelry,K.categoryList.sport,K.categoryList.foodAndBev,K.categoryList.indoorEntertainment,K.categoryList.electronic,K.categoryList.game,K.categoryList.pet,K.categoryList.ticket,K.categoryList.others]
     var imageForUpload : UIImage? = nil
     var updateStatus : Bool = false
     

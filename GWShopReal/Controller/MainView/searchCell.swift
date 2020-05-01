@@ -19,12 +19,11 @@ class searchCell: UITableViewCell {
         super.setSelected(selected, animated: animated)
     }
     
-    @IBOutlet weak var senderLabel: UILabel!
+    @IBOutlet weak var storeNameLable: UILabel!            //storeName
     @IBOutlet weak var resultImage: UIImageView!
     @IBOutlet weak var resultNameLabel: UILabel!
     @IBOutlet weak var resultPriceLabel: UILabel!
     var resultImageURL : String?
-    var resultProductID : String?        // prodcutID = DocumentID
-    var senderName : String?             // collect senderName
+   
     
 }
