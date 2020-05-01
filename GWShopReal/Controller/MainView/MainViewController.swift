@@ -27,14 +27,22 @@ class MainViewController: UIViewController,UITextFieldDelegate {
         tabBarController?.navigationItem.setHidesBackButton(true, animated: animated)
         tabBarController?.navigationController?.setNavigationBarHidden(true, animated: animated)
         navigationController?.setNavigationBarHidden(true, animated: animated)
+       
         
-        
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        tabBarController?.tabBar.isHidden = false
+        tabBarController?.tabBar.isHidden = false
     }
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         navigationController?.setNavigationBarHidden(false, animated: animated)
     }
+    
+    
     
 
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
