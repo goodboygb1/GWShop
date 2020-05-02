@@ -29,6 +29,7 @@ struct K {
     static let province = "province"
     static let district = "district"
     static let postCode = "postCode"
+    static let defaultAddress = "default"
     
     static let userDetailCollection = "userDetail"
     
@@ -77,6 +78,7 @@ struct K {
         static let identifierpromotionInPromotionPage = "promotionInPromotionPageIdentifier"
         static let searchCell = "searchCell"
         static let categoryCellIdentifier = "categoryCellIdentifier"
+        static let summaryProductViewCell = "summaryProductViewCell"
     }
     struct cardDetail{
         static let cardNumber = "cardNumber"
