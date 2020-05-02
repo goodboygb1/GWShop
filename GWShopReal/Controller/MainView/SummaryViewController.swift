@@ -37,6 +37,7 @@ class SummaryViewController: UIViewController {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == K.segue.summaryToSelectedAddress {
             let destinationVC = segue.destination as! SelectedAddressViewController
+            destinationVC.delegate = self
             destinationVC.addressForSelect = address
         }
     }
