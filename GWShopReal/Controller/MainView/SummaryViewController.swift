@@ -14,6 +14,7 @@ class SummaryViewController: UIViewController {
     
     @IBOutlet weak var summaryTableView: UITableView!
     
+    var addressSelectedByUser : Address?
     var address : [Address] = []
     var addressDefult : Address? = nil
     
@@ -21,8 +22,12 @@ class SummaryViewController: UIViewController {
         super.viewDidLoad()
         summaryTableView.delegate = self
         summaryTableView.dataSource = self
-        
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
         loadAddress()
+        
     }
     
     @IBAction func selectAddressButton(_ sender: Any) {
@@ -115,6 +120,8 @@ class SummaryViewController: UIViewController {
     }
 }
 
+//MARK: - extension for tableView
+
 extension SummaryViewController : UITableViewDelegate,UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return 1    }
@@ -140,7 +147,16 @@ extension SummaryViewController : UITableViewDelegate,UITableViewDataSource {
         
         return cell
         
-        
+    }
+    
+}
+
+//MARK: - extension for send back data
+
+extension SummaryViewController : changeAddressDelegate {
+    func changeAddress(From: Address) {
+        addressDefult = From
+        summaryTableView.reloadData()
     }
     
     

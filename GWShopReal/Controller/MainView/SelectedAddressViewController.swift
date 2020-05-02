@@ -8,11 +8,16 @@
 
 import UIKit
 
+protocol changeAddressDelegate {
+    func changeAddress(From : Address)
+}
+
 class SelectedAddressViewController: UIViewController {
 
     @IBOutlet weak var selectAddressTableView: UITableView!
     
     var addressForSelect : [Address]?
+    var delegate : changeAddressDelegate?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -20,10 +25,6 @@ class SelectedAddressViewController: UIViewController {
         selectAddressTableView.delegate = self
         selectAddressTableView.dataSource = self
     }
-    
-
-   
-
 }
 
 //MARK: - extension for table view
@@ -45,6 +46,11 @@ extension SelectedAddressViewController : UITableViewDelegate,UITableViewDataSou
         
         return cell
     
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let addressSelectedByUser = addressForSelect![indexPath.row]
+        delegate!.changeAddress(From: addressSelectedByUser)
     }
     
     
