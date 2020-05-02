@@ -1227,7 +1227,7 @@ class ProductDetailController: UIViewController{
                                 self.productRemainingLabel.text = productQuantity
                                 self.productCategorylabel.text = productCategory
                                 self.productDetailLabel.text = productDetail
-                                print(self.productNameLabel.text!)              // got porductName
+                                print(self.productNameLabel.text!)              // got productName
                                 // search for promotion in that productName (hasPromotion)
                                 self.db.collection(K.tableName.hasPromotionTableName).whereField(K.sender, isEqualTo: emailSender).whereField(K.productCollection.productName, isEqualTo: self.productNameLabel.text!).getDocuments { (querySnapshot, error) in
                                     if let e = error{
