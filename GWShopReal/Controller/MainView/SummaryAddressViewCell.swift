@@ -8,7 +8,7 @@
 
 import UIKit
 
-class SummaryProductViewCell: UITableViewCell {
+class SummaryAddressViewCell: UITableViewCell {
 
     override func awakeFromNib() {
         super.awakeFromNib()
