@@ -17,4 +17,5 @@ struct Address {
     let province: String
     let postCode: String
     let docID: String
+    let isDefultAddress : Bool   // check wether this address is defual or not
 }

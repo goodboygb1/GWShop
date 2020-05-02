@@ -29,6 +29,7 @@ struct K {
     static let province = "province"
     static let district = "district"
     static let postCode = "postCode"
+    static let defaultAddress = "default"
     
     static let userDetailCollection = "userDetail"
     
@@ -63,10 +64,12 @@ struct K {
         static let searchToProductDetail = "searchToProductDetail"
         static let categoryProductToProductDetailsegue = "categoryProductToProductDetail"
         static let mainToCategoryProduct = "mainToCategoryProduct"
+
+        static let summaryToSelectedAddress = "summaryToSelectedAddress"
         static let searchToCartSegue = "searchToCart"
         static let mainToCartSegue = "mainToCart"
         static let categoryToCartSegue = "categoryToCart"
-    }
+
     
     struct identifierForTableView{
         static let identifierAddress = "ReuseAddressCell"
@@ -81,8 +84,13 @@ struct K {
         static let identifierpromotionInPromotionPage = "promotionInPromotionPageIdentifier"
         static let searchCell = "searchCell"
         static let categoryCellIdentifier = "categoryCellIdentifier"
+
+        static let summaryProductViewCell = "summaryProductViewCell"
+        static let SelectedAddressCell = "SelectedAddressCell"
+
         static let promotionMainIdentifier = "promotionMainIdentifier"
         static let cartViewIdentifier = "cartViewIdentifier"
+
     }
     struct cardDetail{
         static let cardNumber = "cardNumber"

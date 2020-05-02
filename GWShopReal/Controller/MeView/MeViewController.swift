@@ -188,10 +188,16 @@ class ShowAddressViewController:UIViewController{
                         for doc in snapShotDocument{
                             let data = doc.data()
                             let doc_id = doc.documentID
-                            if let firstName = data[K.firstName] as? String, let lastName = data[K.surname] as? String, let phoneNumber = data[K.phoneNumber] as? String
-                                , let addressDetail = data[K.addressDetail] as? String, let district = data[K.district] as? String
-                                , let province = data[K.province] as? String, let postCode = data[K.postCode] as? String{
-                                let newAddress = Address(firstName: firstName,lastName: lastName, phoneNumber: phoneNumber, addressDetail: addressDetail, district: district, province: province, postCode: postCode,docID: doc_id)
+                            if let firstName = data[K.firstName] as? String
+                                , let lastName = data[K.surname] as? String
+                                , let phoneNumber = data[K.phoneNumber] as? String
+                                , let addressDetail = data[K.addressDetail] as? String
+                                , let district = data[K.district] as? String
+                                , let province = data[K.province] as? String
+                                , let postCode = data[K.postCode] as? String
+                                ,let defaultAddress = data[K.defaultAddress] as? Bool
+                            {
+                                let newAddress = Address(firstName: firstName,lastName: lastName, phoneNumber: phoneNumber, addressDetail: addressDetail, district: district, province: province, postCode: postCode,docID: doc_id, isDefultAddress: defaultAddress)
                                 self.addresses.append(newAddress)
                                 
                                 DispatchQueue.main.async {
@@ -368,7 +374,8 @@ class EditAddressController:UIViewController {
                         K.province: province,
                         K.postCode: postCode,
                         K.dateField: Date().timeIntervalSince1970,
-                        K.sender: sender
+                        K.sender: sender,
+                        K.defaultAddress : false
                     ]) { (error) in
                         if let e = error{
                             print("Add new Address error: \(e.localizedDescription)")
@@ -589,7 +596,8 @@ class NewVendorController: UIViewController{
                     K.storeDetail.province: storeProvince,
                     K.storeDetail.postCode: storePostCode,
                     K.storeDetail.moneyTotal: 0,
-                    K.dateField: Date().timeIntervalSince1970
+                    K.dateField: Date().timeIntervalSince1970,
+                    K.defaultAddress: true
                 ]) { (error) in
                     if let e = error{
                         print("Create new store error: \(e.localizedDescription)")

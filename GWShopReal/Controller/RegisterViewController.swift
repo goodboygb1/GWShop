@@ -136,7 +136,8 @@ class RegisterViewController: UIViewController{
                             K.district : self.districtTextField.text!,
                             K.postCode : self.postCodeTextField.text!,
                             K.dateField: Date().timeIntervalSince1970,
-                            K.sender: email
+                            K.sender: email,
+                            K.defaultAddress: true
                         ]) { (error) in
                             if let e = error{
                                 print("error while saving address to database: \(e.localizedDescription)")
