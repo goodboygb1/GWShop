@@ -69,7 +69,7 @@ struct K {
         static let searchToCartSegue = "searchToCart"
         static let mainToCartSegue = "mainToCart"
         static let categoryToCartSegue = "categoryToCart"
-
+    }
     
     struct identifierForTableView{
         static let identifierAddress = "ReuseAddressCell"
