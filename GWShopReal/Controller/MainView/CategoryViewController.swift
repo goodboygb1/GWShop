@@ -17,7 +17,7 @@ class CategoryViewController: UIViewController {
     
     var categorySearch : String?
     var product : [Product] = []
-    
+    var selectedRow: Int?
     override func viewDidLoad() {
         super.viewDidLoad()
         categoryTableView.delegate = self
@@ -81,23 +81,35 @@ class CategoryViewController: UIViewController {
         
     }
     
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == K.segue.categoryProductToProductDetailsegue{
+            let destinationVC = segue.destination as! ProductDetail
+            destinationVC.productDetail = product[selectedRow!]
+        }
+    }
     
+    @IBAction func cartPressed(_ sender: UIButton) {
+        self.performSegue(withIdentifier: K.segue.categoryToCartSegue, sender: self)
+    }
+
     
     
     
 }
 
 extension CategoryViewController : UITableViewDelegate,UITableViewDataSource {
+
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
         return product.count
     }
-    
+
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         let productForCell = product[indexPath.row]
         let cell = categoryTableView.dequeueReusableCell(withIdentifier: K.identifierForTableView.categoryCellIdentifier) as! categoryCell
+
         let url = URL(string: productForCell.productImageURL)!
         let resource = ImageResource(downloadURL: url)
         
@@ -105,6 +117,7 @@ extension CategoryViewController : UITableViewDelegate,UITableViewDataSource {
             
             self.activityIndicator.stopAnimating()
         }
+
         cell.productNameLable.text = productForCell.productName
         cell.productPriceLabel.text = productForCell.productPrice
         cell.storeNameLable.text = productForCell.storeName
@@ -112,4 +125,9 @@ extension CategoryViewController : UITableViewDelegate,UITableViewDataSource {
         return cell
     }
     
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        selectedRow = indexPath.row
+        self.performSegue(withIdentifier: K.segue.categoryProductToProductDetailsegue, sender: self)
+    }
+
 }

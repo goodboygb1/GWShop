@@ -61,7 +61,11 @@ struct K {
         static let promotionToAddPromotionSegue = "promotionToAddPromotion"
         static let addProductPromotionToAddPromotionSegue = "addProductPromotionToAddPromotion"
         static let searchToProductDetail = "searchToProductDetail"
+        static let categoryProductToProductDetailsegue = "categoryProductToProductDetail"
         static let mainToCategoryProduct = "mainToCategoryProduct"
+        static let searchToCartSegue = "searchToCart"
+        static let mainToCartSegue = "mainToCart"
+        static let categoryToCartSegue = "categoryToCart"
     }
     
     struct identifierForTableView{
@@ -77,6 +81,8 @@ struct K {
         static let identifierpromotionInPromotionPage = "promotionInPromotionPageIdentifier"
         static let searchCell = "searchCell"
         static let categoryCellIdentifier = "categoryCellIdentifier"
+        static let promotionMainIdentifier = "promotionMainIdentifier"
+        static let cartViewIdentifier = "cartViewIdentifier"
     }
     struct cardDetail{
         static let cardNumber = "cardNumber"
@@ -93,6 +99,7 @@ struct K {
         static let transactionTableName = "transaction"
         static let promotionTableName = "promotion"
         static let hasPromotionTableName = "hasPromotion"
+        static let cartTableName = "cart"
     }
     
     struct storeDetail {
@@ -167,7 +174,14 @@ struct K {
         static let watchAndGlasses = "นาฬิกาและแว่นตา"
 
     }
-
+    
+    struct cartDetail{
+        static let productDocID = "productID"
+        static let user = "userEmail"
+        static let promotionDocID = "promotionID"
+        static let quantity = "quantity"
+        
+    }
 
 }
 
