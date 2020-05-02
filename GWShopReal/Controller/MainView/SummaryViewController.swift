@@ -22,13 +22,10 @@ class SummaryViewController: UIViewController {
         super.viewDidLoad()
         summaryTableView.delegate = self
         summaryTableView.dataSource = self
+        loadAddress()
     }
     
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        loadAddress()
-        
-    }
+    
     
     @IBAction func selectAddressButton(_ sender: Any) {
         performSegue(withIdentifier: K.segue.summaryToSelectedAddress, sender: self)

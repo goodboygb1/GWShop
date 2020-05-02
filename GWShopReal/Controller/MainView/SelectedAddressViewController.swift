@@ -49,7 +49,9 @@ extension SelectedAddressViewController : UITableViewDelegate,UITableViewDataSou
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        
         let addressSelectedByUser = addressForSelect![indexPath.row]
+        print("User selected = \(addressSelectedByUser.firstName)")
         delegate!.changeAddress(From: addressSelectedByUser)
         navigationController?.popViewController(animated: true)
     }
