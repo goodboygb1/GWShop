@@ -19,5 +19,5 @@ class SummaryProductViewCell: UITableViewCell {
     @IBOutlet weak var recieverNameLable: UILabel!
     @IBOutlet weak var revieverPhoneNumberLable: UILabel!
     @IBOutlet weak var addressLable: UILabel!
-    
+    @IBOutlet weak var districtAndPostCodeLabel: UILabel!
 }

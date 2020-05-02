@@ -57,12 +57,15 @@ class SummaryViewController: UIViewController {
                                     let newAddress = Address(firstName: firstName, lastName: surname, phoneNumber: phoneNumber, addressDetail: addressDetail, district: distrinc, province: province, postCode: postCode, docID: docID, isDefultAddress: defaultAddress)
                                     
                                     self.address.append(newAddress)
-                                    if index == documentSnapshot.count {
+                                   
+                                    if index == (documentSnapshot.count-1){
+                                        print("check defult berfor reload table")
                                         self.addressDefultCheck()
+                                        DispatchQueue.main.async {
+                                            self.summaryTableView.reloadData()
+                                        }
                                     }
-                                    DispatchQueue.main.async {
-                                        self.summaryTableView.reloadData()
-                                    }
+                                    
                                     
                                     
                                 }
@@ -80,6 +83,7 @@ class SummaryViewController: UIViewController {
         for (index,addressDefultCheck) in address.enumerated() {
             if addressDefultCheck.isDefultAddress == true {
                 addressDefult = addressDefultCheck
+                print("Address default is \(addressDefultCheck.firstName)")
             } else {
                 print("Address is not defult")
             }
@@ -105,9 +109,20 @@ extension SummaryViewController : UITableViewDelegate,UITableViewDataSource {
         let addressForCell = addressDefult
         let cell = summaryTableView.dequeueReusableCell(withIdentifier: K.identifierForTableView.summaryProductViewCell) as! SummaryProductViewCell
         
-        cell.recieverNameLable.text = "\(addressForCell?.firstName) \(addressForCell?.lastName)"
-        cell.revieverPhoneNumberLable.text = addressForCell?.phoneNumber
-        cell.addressLable.text = "\(addressForCell?.addressDetail) \(addressForCell?.district) \(addressForCell?.province) \(addressForCell?.postCode)"
+        if let firstNameCell = addressForCell?.firstName
+            ,let lastNameCell = addressForCell?.lastName
+            ,let phoneNumberCell = addressForCell?.phoneNumber
+            ,let detailCell = addressForCell?.addressDetail
+            ,let districtCell = addressForCell?.district
+            ,let provinceCell = addressForCell?.province
+            ,let postCodeCell = addressForCell?.postCode
+        {
+            cell.recieverNameLable.text = "\(firstNameCell) \(lastNameCell)"
+            cell.revieverPhoneNumberLable.text = phoneNumberCell
+            cell.addressLable.text = "\(detailCell) \(provinceCell)"
+            cell.districtAndPostCodeLabel.text = "\(districtCell) \(postCodeCell)"
+        }
+        
         return cell
         
         
