@@ -25,7 +25,22 @@ class SummaryViewController: UIViewController {
         loadAddress()
     }
     
+    @IBAction func selectAddressButton(_ sender: Any) {
+        performSegue(withIdentifier: K.segue.summaryToSelectedAddress, sender: self)
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == K.segue.summaryToSelectedAddress {
+            let destinationVC = segue.destination as! SelectedAddressViewController
+            destinationVC.addressForSelect = address
+        }
+    }
+   
+    
+    
     func loadAddress()  {
+        
+        address = []
         let db = Firestore.firestore()
         let addressCollection = db.collection(K.tableName.addressTableName)
         

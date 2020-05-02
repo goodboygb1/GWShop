@@ -137,10 +137,10 @@
 			isa = PBXGroup;
 			children = (
 				A33A279B24509FAE00810BC5 /* MainViewController.swift */,
-				A3A6BF3B245D6FA000B8934B /* SummaryProductViewCell.swift */,
-				A3325D7A245DE40000F04998 /* SelectedAddressCell.swift */,
 				A3325D7C245DE41300F04998 /* SelectedAddressViewController.swift */,
+				A3325D7A245DE40000F04998 /* SelectedAddressCell.swift */,
 				A3A6BF3F245D729D00B8934B /* SummaryViewController.swift */,
+				A3A6BF3B245D6FA000B8934B /* SummaryProductViewCell.swift */,
 				A3057A8F245B48CF00AE9991 /* searchCell.swift */,
 				A3A6BF43245D75AA00B8934B /* presentAlert.swift */,
 				A331CBA2245C6ED300AADDC1 /* categoryCell.swift */,
