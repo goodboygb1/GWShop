@@ -203,6 +203,9 @@ class MainViewController: UIViewController,UITextFieldDelegate {
 
     }
     
+    @IBAction func cartPressed(_ sender: UIButton) {
+        self.performSegue(withIdentifier: K.segue.mainToCartSegue, sender: self)
+    }
     
     
     
@@ -292,6 +295,10 @@ class SearchViewController: UIViewController {
             }
         }
     }
+    
+    @IBAction func cartPressed(_ sender: UIButton) {
+        self.performSegue(withIdentifier: K.segue.searchToCartSegue, sender: self)
+    }
 }
 
 //MARK: - SearchView For TableView
@@ -341,12 +348,175 @@ extension SearchViewController : UITableViewDataSource,UITableViewDelegate {
 
 class ProductDetail: UIViewController {         // for add product detail
     
-    var productDetail : Product?
+    @IBOutlet weak var productNameLabel: UILabel!
+    @IBOutlet weak var productPriceLabel: UILabel!
+    @IBOutlet weak var productQuantityLabel: UILabel!
+    @IBOutlet weak var productCategoryLabel: UILabel!
+    @IBOutlet weak var productDetailLabel: UILabel!
+    @IBOutlet weak var storeNameLabel: UILabel!
     
+    @IBOutlet weak var promotionTableView: UITableView!
+    var productDetail : Product!
+    var promotions: [Promotion] = []
+    var selectedPromotionDocumentID: [String] = []
+    var db = Firestore.firestore()
     override func viewDidLoad() {
         super.viewDidLoad()
-        print(productDetail?.sender)
+        productNameLabel.text = productDetail.productName
+        productDetailLabel.text = productDetail.productDetail
+        productPriceLabel.text = productDetail.productPrice
+        productQuantityLabel.text = productDetail.productQuantity
+        productCategoryLabel.text = productDetail.productCategory
+        storeNameLabel.text = productDetail.storeName
+        promotionTableView.dataSource = self
+        promotionTableView.delegate = self
+        loadProductData()
     }
+    //ภพ1
+    func loadProductData(){
+        self.db.collection(K.tableName.hasPromotionTableName).whereField(K.sender, isEqualTo: productDetail.sender).whereField(K.productCollection.productName, isEqualTo: self.productNameLabel.text!).getDocuments { (querySnapshot, error) in
+            if let e = error{
+                print("error while checking promotions in product: \(e.localizedDescription)")
+            }else{
+                if let snapShotDocuments = querySnapshot?.documents{
+                    for doc in snapShotDocuments{
+                        let data = doc.data()
+                        if let promotion = data[K.promotion.promotionName] as? String{
+                            print(promotion) // got promotionName
+                            // search specific promotion data
+                            self.db.collection(K.tableName.promotionTableName).whereField(K.sender, isEqualTo: self.productDetail.sender).whereField(K.promotion.promotionName, isEqualTo: promotion).getDocuments { (querySnapshot, error) in
+                                    if let e = error{
+                                        print("Error while looping in promotionName: \(e.localizedDescription) ")
+                                    }else{
+                                        if let snapShotDocuments = querySnapshot?.documents{
+                                            for doc in snapShotDocuments{
+                                                let data = doc.data()
+                                                let docID = doc.documentID
+                                                if let promotionName = data[K.promotion.promotionName] as? String, let promotionDetail = data[K.promotion.promotionDetail] as? String,
+                                                    let discountPercent = data[K.promotion.discountPercent] as? Int, let minimumPrice = data[K.promotion.minimumPrice] as? String,
+                                                    let validDate = data[K.promotion.validDate] as? String{
+                                                    self.promotions.append(Promotion(promotionName: promotionName, promotionDetail: promotionDetail, minimumPrice: minimumPrice, discountPercent: discountPercent, validDate: validDate, docID: docID))
+                                                    //print(self.promotions)
+                                                    DispatchQueue.main.async {
+                                                        self.promotionTableView.reloadData()
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                        }
+                    }
+                }else {print("rip")}
+            }
+        }
+    }
+    
+    @IBAction func addCartPressed(_ sender: UIButton) {
+        
+        if let emailSender = Auth.auth().currentUser?.email{
+            db.collection(K.tableName.cartTableName).whereField(K.cartDetail.user, isEqualTo: emailSender).whereField(K.cartDetail.productDocID, isEqualTo: productDetail.documentId).getDocuments { (querySnapshot, error) in
+                if let e = error{
+                    print("Error while loading cart data: \(e.localizedDescription)")
+                }else{
+                    if let snapShotdocuments = querySnapshot?.documents{
+                        if snapShotdocuments.count == 0{
+                            if self.selectedPromotionDocumentID.count == 1{
+                                    self.db.collection(K.tableName.cartTableName).addDocument(data: [
+                                        K.cartDetail.productDocID: self.productDetail.documentId,
+                                        K.cartDetail.user: emailSender,
+                                        K.cartDetail.promotionDocID: self.selectedPromotionDocumentID[0],
+                                        K.cartDetail.quantity: 1,
+                                        K.storeDetail.storeName: self.productDetail.storeName,
+                                        K.productCollection.productPrice: self.productDetail.productPrice
+                                    ])
+                                self.navigationController?.popToRootViewController(animated: true)
+                            }else if self.selectedPromotionDocumentID.count == 0{
+                                self.db.collection(K.tableName.cartTableName).addDocument(data: [
+                                    K.cartDetail.productDocID: self.productDetail.documentId,
+                                    K.cartDetail.user: emailSender,
+                                    K.cartDetail.promotionDocID: "",
+                                    K.cartDetail.quantity: 1,
+                                    K.storeDetail.storeName: self.productDetail.storeName,
+                                    K.productCollection.productPrice: self.productDetail.productPrice
+                                ])
+                                self.navigationController?.popToRootViewController(animated: true)
+                            }else{
+                                print("Please choose only one promotion")
+                            }
+                        }else{
+                            let data = snapShotdocuments[0].data()
+                            let docID = snapShotdocuments[0].documentID
+                            if let quantiy = data[K.cartDetail.quantity] as? Int{
+                                if self.selectedPromotionDocumentID.count == 1{
+                                    self.db.collection(K.tableName.cartTableName).document(docID).updateData([
+                                        K.cartDetail.quantity: quantiy + 1,
+                                        K.cartDetail.promotionDocID: self.selectedPromotionDocumentID[0]
+                                    ])
+                                    self.navigationController?.popToRootViewController(animated: true)
+                                }else if self.selectedPromotionDocumentID.count == 0{
+                                    self.db.collection(K.tableName.cartTableName).document(docID).updateData([
+                                        K.cartDetail.quantity: quantiy + 1,
+                                        K.cartDetail.promotionDocID: ""
+                                    ])
+                                    self.navigationController?.popToRootViewController(animated: true)
+                                }else{
+                                    print("Please choose only one promotion")
+                                }
+                            }
+                            
+                        }
+                    }
+                    
+                }
+            }
+            
+        }
+        
+    }
+    
+    @IBAction func buyPressed(_ sender: UIButton) {
+        //print(promotions)
+        print(selectedPromotionDocumentID)
+    }
+}
+
+extension ProductDetail:UITableViewDataSource,UITableViewDelegate{
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return promotions.count
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+         let promotion = promotions[indexPath.row]
+        let promotionCell = promotionTableView.dequeueReusableCell(withIdentifier: K.identifierForTableView.promotionMainIdentifier) as! promotionMainCell
+               promotionCell.promotionNameLabel.text = promotion.promotionName
+               promotionCell.promotionDetailLabel.text = promotion.promotionDetail
+               promotionCell.discountPercentLabel.text = String(promotion.discountPercent)
+               promotionCell.minimumPriceLabel.text = promotion.minimumPrice
+               promotionCell.validDateLabel.text = promotion.validDate
+               
+               return promotionCell
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        self.selectedPromotionDocumentID.append(promotions[indexPath.row].docID)
+    }
+    
+    func tableView(_ tableView: UITableView, didDeselectRowAt indexPath: IndexPath) {
+        if let index = self.selectedPromotionDocumentID.firstIndex(of: promotions[indexPath.row].docID){
+            self.selectedPromotionDocumentID.remove(at: index)
+        }
+    }
+
+}
+
+class promotionMainCell: UITableViewCell{
+    @IBOutlet weak var promotionNameLabel: UILabel!
+    @IBOutlet weak var promotionDetailLabel: UILabel!
+    @IBOutlet weak var minimumPriceLabel: UILabel!
+    @IBOutlet weak var discountPercentLabel: UILabel!
+    @IBOutlet weak var validDateLabel: UILabel!
+    
 }
 
 
