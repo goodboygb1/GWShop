@@ -45,9 +45,9 @@
 		A33A279E2450A04200810BC5 /* Constant.swift in Sources */ = {isa = PBXBuildFile; fileRef = A33A279D2450A04200810BC5 /* Constant.swift */; };
 		A37003DC2450C6E8002B0066 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = A37003DB2450C6E8002B0066 /* GoogleService-Info.plist */; };
 		A37003DE2450CB08002B0066 /* userDetail.swift in Sources */ = {isa = PBXBuildFile; fileRef = A37003DD2450CB08002B0066 /* userDetail.swift */; };
-		A3701915245C94F800D15549 /* AddPromotionInProductController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3701914245C94F800D15549 /* AddPromotionInProductController.swift */; };
 		A37288702452220D00189286 /* NotificationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A372886F2452220D00189286 /* NotificationViewController.swift */; };
-		A3A6BF3C245D6FA000B8934B /* SummaryProductViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3A6BF3B245D6FA000B8934B /* SummaryProductViewCell.swift */; };
+		A37D03B2245E0B8000FA2283 /* ProductTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A37D03B1245E0B8000FA2283 /* ProductTableViewCell.swift */; };
+		A3A6BF3C245D6FA000B8934B /* SummaryAddressViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3A6BF3B245D6FA000B8934B /* SummaryAddressViewCell.swift */; };
 		A3A6BF40245D729D00B8934B /* SummaryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3A6BF3F245D729D00B8934B /* SummaryViewController.swift */; };
 		A3A6BF44245D75AA00B8934B /* presentAlert.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3A6BF43245D75AA00B8934B /* presentAlert.swift */; };
 		A3B434752451ECBC008E71EC /* HomePage.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A3B434742451ECBC008E71EC /* HomePage.storyboard */; };
@@ -115,7 +115,8 @@
 		A37003DD2450CB08002B0066 /* userDetail.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = userDetail.swift; sourceTree = "<group>"; };
 		A3701914245C94F800D15549 /* AddPromotionInProductController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddPromotionInProductController.swift; sourceTree = SOURCE_ROOT; };
 		A372886F2452220D00189286 /* NotificationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationViewController.swift; sourceTree = "<group>"; };
-		A3A6BF3B245D6FA000B8934B /* SummaryProductViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SummaryProductViewCell.swift; sourceTree = "<group>"; };
+		A37D03B1245E0B8000FA2283 /* ProductTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductTableViewCell.swift; sourceTree = "<group>"; };
+		A3A6BF3B245D6FA000B8934B /* SummaryAddressViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SummaryAddressViewCell.swift; sourceTree = "<group>"; };
 		A3A6BF3F245D729D00B8934B /* SummaryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SummaryViewController.swift; sourceTree = "<group>"; };
 		A3A6BF43245D75AA00B8934B /* presentAlert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = presentAlert.swift; sourceTree = "<group>"; };
 		A3B434742451ECBC008E71EC /* HomePage.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = HomePage.storyboard; sourceTree = "<group>"; };
@@ -146,7 +147,8 @@
 				A3325D7C245DE41300F04998 /* SelectedAddressViewController.swift */,
 				A3325D7A245DE40000F04998 /* SelectedAddressCell.swift */,
 				A3A6BF3F245D729D00B8934B /* SummaryViewController.swift */,
-				A3A6BF3B245D6FA000B8934B /* SummaryProductViewCell.swift */,
+				A3A6BF3B245D6FA000B8934B /* SummaryAddressViewCell.swift */,
+				A37D03B1245E0B8000FA2283 /* ProductTableViewCell.swift */,
 				A3057A8F245B48CF00AE9991 /* searchCell.swift */,
 				A3A6BF43245D75AA00B8934B /* presentAlert.swift */,
 				A331CBA2245C6ED300AADDC1 /* categoryCell.swift */,
@@ -254,8 +256,8 @@
 				8490DB2C24588BC500A2BD88 /* Store.swift */,
 				8490DB2E24588D7000A2BD88 /* BankAccount.swift */,
 				844811D9245AA09900466CDF /* Product.swift */,
-				843B267D245B527F00248175 /* Promotion.swift */,
 				843723EB245D5E9C00C35A3A /* Cart.swift */,
+				843B267D245B527F00248175 /* Promotion.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -428,12 +430,11 @@
 				844811DA245AA09900466CDF /* Product.swift in Sources */,
 				A3325D7D245DE41300F04998 /* SelectedAddressViewController.swift in Sources */,
 				A331CBA3245C6ED300AADDC1 /* categoryCell.swift in Sources */,
-				A3A6BF3C245D6FA000B8934B /* SummaryProductViewCell.swift in Sources */,
+				A3A6BF3C245D6FA000B8934B /* SummaryAddressViewCell.swift in Sources */,
 				8490DB2B24585E1600A2BD88 /* Card.swift in Sources */,
 				A3057A7E245B271700AE9991 /* addProductInAddPromotionCell.swift in Sources */,
 				A33A279C24509FAE00810BC5 /* MainViewController.swift in Sources */,
 				843D384A245C9494000A96D2 /* AddPromotionInProductController.swift in Sources */,
-
 				A37003DE2450CB08002B0066 /* userDetail.swift in Sources */,
 				A3057A80245B278100AE9991 /* AddProductInPromotionController.swift in Sources */,
 				A331CBA1245C579400AADDC1 /* CategoryViewController.swift in Sources */,
@@ -442,6 +443,7 @@
 				A33A27812450995000810BC5 /* SceneDelegate.swift in Sources */,
 				A3057A90245B48CF00AE9991 /* searchCell.swift in Sources */,
 				A3CB3BB524597F5200C9C0EC /* AddProductController.swift in Sources */,
+				A37D03B2245E0B8000FA2283 /* ProductTableViewCell.swift in Sources */,
 				A3A6BF44245D75AA00B8934B /* presentAlert.swift in Sources */,
 				A3A6BF40245D729D00B8934B /* SummaryViewController.swift in Sources */,
 				A3325D7B245DE40000F04998 /* SelectedAddressCell.swift in Sources */,

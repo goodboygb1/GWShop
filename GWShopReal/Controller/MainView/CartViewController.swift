@@ -100,17 +100,20 @@ class CartViewController: UIViewController {
     }
     
     @IBAction func checkOutPressed(_ sender: UIButton) {
-
+        performSegue(withIdentifier: K.segue.cartToSummary, sender: self)
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == ""{
-            //let destinationVC = segue.destination as! ""
-            //destinationVC. = totalPrice  -> totalPrice is [Double] of each product price
-            //destinationVC. = carts    -> carts stores all data in cart table
+        if segue.identifier == K.segue.cartToSummary {
+            let destinationVC = segue.destination as! SummaryViewController
+                destinationVC.totalPrize = totalPrice 
+                destinationVC.cart = carts    
         }
     }
 }
+
+
+
 extension CartViewController: UITableViewDataSource{
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return carts.count

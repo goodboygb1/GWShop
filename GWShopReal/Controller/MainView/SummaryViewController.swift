@@ -12,16 +12,23 @@ import Kingfisher
 
 class SummaryViewController: UIViewController {
     
-    @IBOutlet weak var summaryTableView: UITableView!
+    @IBOutlet weak var addressTableView: UITableView!
+    @IBOutlet weak var productTableView: UITableView!
+    
     
     var addressSelectedByUser : Address?
     var address : [Address] = []
     var addressDefult : Address? = nil
+    var totalPrize : [Double] = []
+    var cart : [Cart] = []
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        summaryTableView.delegate = self
-        summaryTableView.dataSource = self
+        addressTableView.delegate = self
+        addressTableView.dataSource = self
+        productTableView.dataSource = self
+        productTableView.delegate = self
+        
         loadAddress()
     }
     
@@ -34,11 +41,13 @@ class SummaryViewController: UIViewController {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == K.segue.summaryToSelectedAddress {
             let destinationVC = segue.destination as! SelectedAddressViewController
+            
             destinationVC.delegate = self
             destinationVC.addressForSelect = address
+            
         }
     }
-   
+    
     
     
     func loadAddress()  {
@@ -75,12 +84,12 @@ class SummaryViewController: UIViewController {
                                     let newAddress = Address(firstName: firstName, lastName: surname, phoneNumber: phoneNumber, addressDetail: addressDetail, district: distrinc, province: province, postCode: postCode, docID: docID, isDefultAddress: defaultAddress)
                                     
                                     self.address.append(newAddress)
-                                   
+                                    
                                     if index == (documentSnapshot.count-1){
                                         print("check defult berfor reload table")
                                         self.addressDefultCheck()
                                         DispatchQueue.main.async {
-                                            self.summaryTableView.reloadData()
+                                            self.addressTableView.reloadData()
                                         }
                                     }
                                     
@@ -122,28 +131,55 @@ class SummaryViewController: UIViewController {
 
 extension SummaryViewController : UITableViewDelegate,UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 1    }
+        if tableView == addressTableView {
+            return 1
+        } else
+//            if tableView == productTableView
+            {
+            return cart.count
+        }
+        
+    }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-        let addressForCell = addressDefult
-        let cell = summaryTableView.dequeueReusableCell(withIdentifier: K.identifierForTableView.summaryProductViewCell) as! SummaryProductViewCell
-        
-        if let firstNameCell = addressForCell?.firstName
-            ,let lastNameCell = addressForCell?.lastName
-            ,let phoneNumberCell = addressForCell?.phoneNumber
-            ,let detailCell = addressForCell?.addressDetail
-            ,let districtCell = addressForCell?.district
-            ,let provinceCell = addressForCell?.province
-            ,let postCodeCell = addressForCell?.postCode
-        {
-            cell.recieverNameLable.text = "\(firstNameCell) \(lastNameCell)"
-            cell.revieverPhoneNumberLable.text = phoneNumberCell
-            cell.addressLable.text = "\(detailCell) \(provinceCell)"
-            cell.districtAndPostCodeLabel.text = "\(districtCell) \(postCodeCell)"
+        if tableView == addressTableView {
+            let addressForCell = addressDefult
+            let cell = addressTableView.dequeueReusableCell(withIdentifier: K.identifierForTableView.summaryProductViewCell) as! SummaryAddressViewCell
+            
+            if let firstNameCell = addressForCell?.firstName
+                ,let lastNameCell = addressForCell?.lastName
+                ,let phoneNumberCell = addressForCell?.phoneNumber
+                ,let detailCell = addressForCell?.addressDetail
+                ,let districtCell = addressForCell?.district
+                ,let provinceCell = addressForCell?.province
+                ,let postCodeCell = addressForCell?.postCode
+            {
+                cell.recieverNameLable.text = "\(firstNameCell) \(lastNameCell)"
+                cell.revieverPhoneNumberLable.text = phoneNumberCell
+                cell.addressLable.text = "\(detailCell) \(provinceCell)"
+                cell.districtAndPostCodeLabel.text = "\(districtCell) \(postCodeCell)"
+            }
+            
+            return cell
+       
+        } else
+//            if tableView == productTableView
+            {
+            
+            let productForCell = cart[indexPath.row]
+            let TotalForEachForCell = totalPrize[indexPath.row]
+            let cell = productTableView.dequeueReusableCell(withIdentifier: K.identifierForTableView.productInSummary) as! ProductTableViewCell
+            
+            cell.productName.text = productForCell.productName
+            cell.priceForEach.text = ("\(productForCell.productPrice) ฿")
+            cell.quantity.text = String(productForCell.numberProduct)
+            cell.totalPriceForEach.text = String(TotalForEachForCell)
+            
+            
+            
+            return cell
         }
-        
-        return cell
         
     }
     
@@ -154,7 +190,7 @@ extension SummaryViewController : UITableViewDelegate,UITableViewDataSource {
 extension SummaryViewController : changeAddressDelegate {
     func changeAddress(From: Address) {
         addressDefult = From
-        summaryTableView.reloadData()
+        addressTableView.reloadData()
     }
     
     
