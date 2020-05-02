@@ -63,6 +63,7 @@ struct K {
         static let addProductPromotionToAddPromotionSegue = "addProductPromotionToAddPromotion"
         static let searchToProductDetail = "searchToProductDetail"
         static let mainToCategoryProduct = "mainToCategoryProduct"
+        static let summaryToSelectedAddress = "summaryToSelectedAddress"
     }
     
     struct identifierForTableView{
@@ -79,6 +80,7 @@ struct K {
         static let searchCell = "searchCell"
         static let categoryCellIdentifier = "categoryCellIdentifier"
         static let summaryProductViewCell = "summaryProductViewCell"
+        static let SelectedAddressCell = "SelectedAddressCell"
     }
     struct cardDetail{
         static let cardNumber = "cardNumber"
