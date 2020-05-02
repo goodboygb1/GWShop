@@ -12,6 +12,8 @@ import FirebaseStorage
 
 class AddProductController: UIViewController,UIImagePickerControllerDelegate,UINavigationControllerDelegate {
     
+    @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
+    
     var storeName : String?
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -21,11 +23,13 @@ class AddProductController: UIViewController,UIImagePickerControllerDelegate,UIN
         picker.delegate = self
         picker.dataSource = self
         productCategoryTextField.inputView = picker
+        activityIndicator.hidesWhenStopped = true
+        activityIndicator.style = .large
     }
     
     let picker = UIPickerView()
     let imagePicker = UIImagePickerController()
-    let categoryTitle = [K.categoryList.womenFashion,K.categoryList.menFashion,K.categoryList.mobile,K.categoryList.footSup,K.categoryList.toy,K.categoryList.watchAndGlasses,K.categoryList.indoorAccessory,K.categoryList.menShoes,K.categoryList.womenShoes,K.categoryList.bag,K.categoryList.cosmetic,K.categoryList.computer,K.categoryList.camera,K.categoryList.jewelry,K.categoryList.sport,K.categoryList.foodAndBev,K.categoryList.indoorEntertainment,K.categoryList.electronic,K.categoryList.game,K.categoryList.pet,K.categoryList.ticket,K.categoryList.others]
+    let categoryTitle = [K.categoryList.womenFashion,K.categoryList.menFashion,K.categoryList.mobile,K.categoryList.footSup,K.categoryList.toy,K.categoryList.watchAndGlasses,K.categoryList.indoorAccessory,K.categoryList.menShoes,K.categoryList.womenShoes,K.categoryList.bag,K.categoryList.cosmetic,K.categoryList.computer,K.categoryList.camera,K.categoryList.jewelry,K.categoryList.sport,K.categoryList.foodAndBev,K.categoryList.indoorEntertainment,K.categoryList.electronic,K.categoryList.game,K.categoryList.pet,K.categoryList.car,K.categoryList.stationary,K.categoryList.ticket,K.categoryList.others]
     var imageForUpload : UIImage? = nil
     var updateStatus : Bool = false
     
@@ -84,6 +88,7 @@ class AddProductController: UIViewController,UIImagePickerControllerDelegate,UIN
     
     @IBAction func addProductButton(_ sender: UIButton) {
         uploadImage()
+        
     }
     
     
@@ -136,6 +141,8 @@ extension AddProductController {
     
     func uploadImage()  {
         
+        activityIndicator.startAnimating()
+        print("Start indicator")
         guard let imageSelect = self.imageForUpload else {     //add image for upload
             print("Image is nil")
             presentAlert(title: "Image Error", message: "Please select image", actiontitle: "Dismiss")
@@ -250,7 +257,9 @@ extension AddProductController {
                                }
                                
                            }
-                       
+               
+                self.activityIndicator.stopAnimating()
+                print("Stop indicator")
             }
         }
             

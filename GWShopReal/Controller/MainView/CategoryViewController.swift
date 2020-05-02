@@ -8,10 +8,12 @@
 
 import UIKit
 import Firebase
+import Kingfisher
 
 class CategoryViewController: UIViewController {
-
+    
     @IBOutlet weak var categoryTableView: UITableView!
+    @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
     
     var categorySearch : String?
     var product : [Product] = []
@@ -20,11 +22,18 @@ class CategoryViewController: UIViewController {
         super.viewDidLoad()
         categoryTableView.delegate = self
         categoryTableView.dataSource = self
+        activityIndicator.hidesWhenStopped = true
+        activityIndicator.startAnimating()
+        print("start animate")
         loadProduct()
+        
+        
         
     }
     
     func loadProduct()  {
+        
+        
         
         let db = Firestore.firestore()
         let productCollection = db.collection(K.productCollection.productCollection)
@@ -37,6 +46,9 @@ class CategoryViewController: UIViewController {
                 print(self.categorySearch!)
                 if let snapShotDocument = querySnapshot?.documents {
                     
+                    if snapShotDocument.count == 0 {
+                        self.activityIndicator.stopAnimating()
+                    }
                     for doc in snapShotDocument {
                         let docID = doc.documentID
                         let data = doc.data()
@@ -51,18 +63,21 @@ class CategoryViewController: UIViewController {
                             , let storeName = data[K.productCollection.storeName] as? String {
                             
                             let newProduct = Product(productName: productNameCell, productDetail: productDetailCell, productCategory: productCategoryCell, productPrice: productPriceCell, productQuantity: productQuantityCell, productImageURL: productImageURLCell, documentId: docID, sender: senderFrom, storeName: storeName)
-                           
+                            
                             self.product.append(newProduct)
+                            
                             DispatchQueue.main.async {
                                 self.categoryTableView.reloadData()
                             }
+                            
                         }
                         
                     }
                 }
             }
+            
         }
-       
+        
         
     }
     
@@ -76,21 +91,33 @@ class CategoryViewController: UIViewController {
     @IBAction func cartPressed(_ sender: UIButton) {
         self.performSegue(withIdentifier: K.segue.categoryToCartSegue, sender: self)
     }
-    
 
+    
+    
+    
 }
 
 extension CategoryViewController : UITableViewDelegate,UITableViewDataSource {
 
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        product.count
+        
+        return product.count
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         let productForCell = product[indexPath.row]
         let cell = categoryTableView.dequeueReusableCell(withIdentifier: K.identifierForTableView.categoryCellIdentifier) as! categoryCell
+
+        let url = URL(string: productForCell.productImageURL)!
+        let resource = ImageResource(downloadURL: url)
         
+        cell.productImage.kf.setImage(with: resource) { (result) in
+            
+            self.activityIndicator.stopAnimating()
+        }
+
         cell.productNameLable.text = productForCell.productName
         cell.productPriceLabel.text = productForCell.productPrice
         cell.storeNameLable.text = productForCell.storeName
