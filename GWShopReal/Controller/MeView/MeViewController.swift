@@ -528,6 +528,7 @@ class EditCardController:UIViewController {
                     K.cardDetail.cardNumber: cardNumber,
                     K.cardDetail.expiredDate: expiredDate,
                     K.cardDetail.cvvNumber: cvv,
+                    K.cardDetail.isDefultCard : false,
                     K.sender: emailSender,
                     K.dateField: Date().timeIntervalSince1970
                 ]) { (error) in
