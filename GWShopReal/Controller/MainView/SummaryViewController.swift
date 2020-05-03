@@ -9,11 +9,13 @@
 import UIKit
 import Firebase
 import Kingfisher
+import BEMCheckBox
 
 class SummaryViewController: UIViewController {
     
     @IBOutlet weak var addressTableView: UITableView!
     @IBOutlet weak var productTableView: UITableView!
+    @IBOutlet weak var creditCardTableView: UITableView!
     
     
     var addressSelectedByUser : Address?
@@ -21,6 +23,8 @@ class SummaryViewController: UIViewController {
     var addressDefult : Address? = nil
     var totalPrize : [Double] = []
     var cart : [Cart] = []
+    var creditCard : [Card] = []
+    var creditCardDefault : Card? = nil
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -28,11 +32,37 @@ class SummaryViewController: UIViewController {
         addressTableView.dataSource = self
         productTableView.dataSource = self
         productTableView.delegate = self
+        creditCardTableView.delegate = self
+        creditCardTableView.dataSource = self
         
         loadAddress()
+        loadCardData()
+        creditCardButton.on = true
+        
     }
     
     
+    @IBOutlet weak var creditCardButton: BEMCheckBox!
+    @IBOutlet weak var payAtHomeButton: BEMCheckBox!
+    
+    @IBAction func payAtHomePress(_ sender: BEMCheckBox) {
+         
+         //ถ้ากดจ่ายที่บ้านให้ซ่อน credit card tableview
+         // uncheck creditcard
+        
+        creditCardButton.on = false
+        creditCardTableView.isHidden = true
+    
+    }
+    
+    @IBAction func creditCardPressed(_ sender: BEMCheckBox) {
+        //ถ้ากดจ่ายผ่านบัตรใช้โชว์บัตรและโหลดข้อมูลมา
+        // vuncheck pay at home
+        
+        payAtHomeButton.on = false
+        creditCardTableView.isHidden = false
+        creditCardTableView.reloadData()
+    }
     
     @IBAction func selectAddressButton(_ sender: Any) {
         performSegue(withIdentifier: K.segue.summaryToSelectedAddress, sender: self)
@@ -86,7 +116,6 @@ class SummaryViewController: UIViewController {
                                     self.address.append(newAddress)
                                     
                                     if index == (documentSnapshot.count-1){
-                                        print("check defult berfor reload table")
                                         self.addressDefultCheck()
                                         DispatchQueue.main.async {
                                             self.addressTableView.reloadData()
@@ -105,17 +134,78 @@ class SummaryViewController: UIViewController {
         }
     }
     
-    func addressDefultCheck() {
+    func loadCardData() {
         
-        for (index,addressDefultCheck) in address.enumerated() {
+        creditCard = []
+        if let emailSender = Auth.auth().currentUser?.email{
+           let db = Firestore.firestore()
+            db.collection(K.tableName.cardDetailTableName).whereField(K.sender, isEqualTo: emailSender).getDocuments { (querySnapshot, error) in
+                if let e = error{
+                    print("Error in show card page: \(e.localizedDescription)")
+                }else{
+                    if let snapShotDocuments = querySnapshot?.documents{
+                       
+                        if snapShotDocuments.count != 0 {
+                            print("card is not empty")
+                        } else {
+                            print("card is empty")
+                        }
+                        
+                        for (index,doc) in snapShotDocuments.enumerated() {
+                            
+                            let data = doc.data()
+                            let docID = doc.documentID
+                            if let cardName = data[K.cardDetail.cardName] as? String
+                                , let cardNumber = data[K.cardDetail.cardNumber] as? String
+                                , let expiredDate = data[K.cardDetail.expiredDate] as? String
+                                ,let cvv = data[K.cardDetail.cvvNumber] as? String
+                                ,let isDefultCard = data[K.cardDetail.isDefultCard] as? Bool
+                            {
+                                self.creditCard.append(Card(cardNumber: cardNumber, cardName: cardName, expiredDate: expiredDate, cvv: cvv, docID: docID, isDefultCard: isDefultCard))
+                                
+                                print("index = \(index)")
+                                
+                                if index == (snapShotDocuments.count-1) {
+                                    self.cardDefaultCheck()
+                                    DispatchQueue.main.async {
+                                        self.creditCardTableView.reloadData()
+                                    }
+                                }
+                               
+                                
+                                
+                            }
+                        }
+                    }
+                    
+                }
+            }
+        }
+    }
+    
+    func addressDefultCheck() {     // for check which address is default
+        
+        for (_,addressDefultCheck) in address.enumerated() {
             if addressDefultCheck.isDefultAddress == true {
                 addressDefult = addressDefultCheck
-                print("Address default is \(addressDefultCheck.firstName)")
+                
             } else {
                 print("Address is not defult")
             }
         }
     }
+    
+    func cardDefaultCheck()  {
+        for (_,creditCardDefultCheck) in creditCard.enumerated() {
+            if creditCardDefultCheck.isDefultCard == true {
+                creditCardDefault = creditCardDefultCheck
+               
+            } else {
+                print("card is not defult")
+            }
+        }
+    }
+    
     
     func presentAlert(title:String,message:String,actiontitle:String)  {
         
@@ -125,7 +215,29 @@ class SummaryViewController: UIViewController {
         alert.addAction(action)
         self.present(alert, animated: true, completion: nil)
     }
-}
+    
+    }
+    
+    func showOnly4LastDigit(cardNumber : String) -> String {
+        
+        var card4LastDigit : String = ""
+        
+        for (index,cardDigit) in cardNumber.enumerated() {
+            
+            if index+1 <= cardNumber.count-4 {
+                card4LastDigit.append("X")
+            } else {
+                card4LastDigit.append("\(cardDigit)")
+            }
+        }
+        print(card4LastDigit)
+        return card4LastDigit
+    }
+
+
+
+
+
 
 //MARK: - extension for tableView
 
@@ -133,10 +245,11 @@ extension SummaryViewController : UITableViewDelegate,UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if tableView == addressTableView {
             return 1
-        } else
-//            if tableView == productTableView
-            {
+        } else if tableView == productTableView {
             return cart.count
+        } else {
+            
+            return 1
         }
         
     }
@@ -144,6 +257,8 @@ extension SummaryViewController : UITableViewDelegate,UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         if tableView == addressTableView {
+            print("reload addres table")
+            
             let addressForCell = addressDefult
             let cell = addressTableView.dequeueReusableCell(withIdentifier: K.identifierForTableView.summaryProductViewCell) as! SummaryAddressViewCell
             
@@ -162,11 +277,12 @@ extension SummaryViewController : UITableViewDelegate,UITableViewDataSource {
             }
             
             return cell
-       
+            
         } else
-//            if tableView == productTableView
+            if tableView == productTableView
             {
             
+            print("reload product table")
             let productForCell = cart[indexPath.row]
             let TotalForEachForCell = totalPrize[indexPath.row]
             let cell = productTableView.dequeueReusableCell(withIdentifier: K.identifierForTableView.productInSummary) as! ProductTableViewCell
@@ -176,8 +292,23 @@ extension SummaryViewController : UITableViewDelegate,UITableViewDataSource {
             cell.quantity.text = String(productForCell.numberProduct)
             cell.totalPriceForEach.text = String(TotalForEachForCell)
             
+            return cell
             
+    
             
+        } else {
+                       let creditCardForCell = creditCardDefault
+                       let cell = creditCardTableView.dequeueReusableCell(withIdentifier: K.identifierForTableView.creditCardinSummary) as! CreditCardTableViewCell
+                
+                
+                if let cardNameForCell = creditCardForCell?.cardName,
+                    let cardNumberForCell = creditCardForCell?.cardNumber {
+                    cell.cardHolderName.text = cardNameForCell
+                    cell.creditCardNumber.text = cardNumberForCell
+                
+                }
+                
+                     
             return cell
         }
         

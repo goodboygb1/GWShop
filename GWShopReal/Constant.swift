@@ -92,6 +92,7 @@ struct K {
         static let promotionMainIdentifier = "promotionMainIdentifier"
         static let cartViewIdentifier = "cartViewIdentifier"
         static let productInSummary = "productInSummary"
+        static let creditCardinSummary = "creditCardinSummary"
 
     }
     struct cardDetail{
@@ -99,6 +100,7 @@ struct K {
         static let cardName = "nameCardHolder"
         static let cvvNumber = "cvv"
         static let expiredDate = "expiredDate"
+        static let isDefultCard = "isDefultCard"
     }
     
     struct tableName {

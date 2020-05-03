@@ -53,6 +53,7 @@
 		A3B434752451ECBC008E71EC /* HomePage.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A3B434742451ECBC008E71EC /* HomePage.storyboard */; };
 		A3B434772451ECCE008E71EC /* Notification.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A3B434762451ECCE008E71EC /* Notification.storyboard */; };
 		A3B434792451ECDB008E71EC /* Me.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A3B434782451ECDB008E71EC /* Me.storyboard */; };
+		A3B4E990245EC68200683578 /* CreditCardTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3B4E98F245EC68200683578 /* CreditCardTableViewCell.swift */; };
 		A3CB3BB524597F5200C9C0EC /* AddProductController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3CB3BB424597F5200C9C0EC /* AddProductController.swift */; };
 		A3FC91B424521C5100475F40 /* MeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3FC91B324521C5100475F40 /* MeViewController.swift */; };
 		A3FEBC0024523BB200E3827B /* splitWay.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A3FEBBFF24523BB200E3827B /* splitWay.storyboard */; };
@@ -122,6 +123,7 @@
 		A3B434742451ECBC008E71EC /* HomePage.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = HomePage.storyboard; sourceTree = "<group>"; };
 		A3B434762451ECCE008E71EC /* Notification.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Notification.storyboard; sourceTree = "<group>"; };
 		A3B434782451ECDB008E71EC /* Me.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Me.storyboard; sourceTree = "<group>"; };
+		A3B4E98F245EC68200683578 /* CreditCardTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreditCardTableViewCell.swift; sourceTree = "<group>"; };
 		A3CB3BB424597F5200C9C0EC /* AddProductController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddProductController.swift; sourceTree = "<group>"; };
 		A3FC91B324521C5100475F40 /* MeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MeViewController.swift; sourceTree = "<group>"; };
 		A3FEBBFF24523BB200E3827B /* splitWay.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = splitWay.storyboard; sourceTree = "<group>"; };
@@ -148,6 +150,7 @@
 				A3325D7A245DE40000F04998 /* SelectedAddressCell.swift */,
 				A3A6BF3F245D729D00B8934B /* SummaryViewController.swift */,
 				A3A6BF3B245D6FA000B8934B /* SummaryAddressViewCell.swift */,
+				A3B4E98F245EC68200683578 /* CreditCardTableViewCell.swift */,
 				A37D03B1245E0B8000FA2283 /* ProductTableViewCell.swift */,
 				A3057A8F245B48CF00AE9991 /* searchCell.swift */,
 				A3A6BF43245D75AA00B8934B /* presentAlert.swift */,
@@ -436,6 +439,7 @@
 				A33A279C24509FAE00810BC5 /* MainViewController.swift in Sources */,
 				843D384A245C9494000A96D2 /* AddPromotionInProductController.swift in Sources */,
 				A37003DE2450CB08002B0066 /* userDetail.swift in Sources */,
+				A3B4E990245EC68200683578 /* CreditCardTableViewCell.swift in Sources */,
 				A3057A80245B278100AE9991 /* AddProductInPromotionController.swift in Sources */,
 				A331CBA1245C579400AADDC1 /* CategoryViewController.swift in Sources */,
 				A33A277F2450995000810BC5 /* AppDelegate.swift in Sources */,

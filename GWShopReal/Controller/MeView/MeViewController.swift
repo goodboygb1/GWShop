@@ -425,7 +425,7 @@ class ShowCardViewController: UIViewController{
         loadCardData()
     }
     
-    func loadCardData(){
+    func loadCardData() {
         if let emailSender = Auth.auth().currentUser?.email{
             self.cards = []
             db.collection(K.tableName.cardDetailTableName).whereField(K.sender, isEqualTo: emailSender).getDocuments { (querySnapshot, error) in
@@ -436,9 +436,13 @@ class ShowCardViewController: UIViewController{
                         for doc in snapShotDocuments{
                             let data = doc.data()
                             let docID = doc.documentID
-                            if let cardName = data[K.cardDetail.cardName] as? String, let cardNumber = data[K.cardDetail.cardNumber] as? String, let expiredDate = data[K.cardDetail.expiredDate] as? String
-                                ,let cvv = data[K.cardDetail.cvvNumber] as? String{
-                                self.cards.append(Card(cardNumber: cardNumber, cardName: cardName, expiredDate: expiredDate, cvv: cvv, docID: docID))
+                            if let cardName = data[K.cardDetail.cardName] as? String
+                                , let cardNumber = data[K.cardDetail.cardNumber] as? String
+                                , let expiredDate = data[K.cardDetail.expiredDate] as? String
+                                ,let cvv = data[K.cardDetail.cvvNumber] as? String
+                                ,let isDefultCard = data[K.cardDetail.isDefultCard] as? Bool
+                            {
+                                self.cards.append(Card(cardNumber: cardNumber, cardName: cardName, expiredDate: expiredDate, cvv: cvv, docID: docID, isDefultCard: isDefultCard))
                                 
                                 DispatchQueue.main.async {
                                     self.cardTableView.reloadData()
