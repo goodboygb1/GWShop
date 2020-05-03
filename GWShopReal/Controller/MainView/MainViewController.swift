@@ -409,7 +409,7 @@ class ProductDetail: UIViewController {         // for add product detail
     }
     //ภพ1
     func loadProductData(){
-        self.db.collection(K.tableName.hasPromotionTableName).whereField(K.sender, isEqualTo: productDetail.sender).whereField(K.productCollection.productName, isEqualTo: self.productNameLabel.text!).getDocuments { (querySnapshot, error) in
+        self.db.collection(K.tableName.hasPromotionTableName).whereField(K.sender, isEqualTo: productDetail.sender).whereField(K.productCollection.productDocID, isEqualTo: self.productDetail.documentId).getDocuments { (querySnapshot, error) in
             if let e = error{
                 print("error while checking promotions in product: \(e.localizedDescription)")
             }else{

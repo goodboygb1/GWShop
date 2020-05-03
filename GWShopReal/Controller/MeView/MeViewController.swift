@@ -1229,7 +1229,7 @@ class ProductDetailController: UIViewController{
                                 self.productDetailLabel.text = productDetail
                                 print(self.productNameLabel.text!)              // got productName
                                 // search for promotion in that productName (hasPromotion)
-                                self.db.collection(K.tableName.hasPromotionTableName).whereField(K.sender, isEqualTo: emailSender).whereField(K.productCollection.productName, isEqualTo: self.productNameLabel.text!).getDocuments { (querySnapshot, error) in
+                                self.db.collection(K.tableName.hasPromotionTableName).whereField(K.sender, isEqualTo: emailSender).whereField(K.productCollection.productDocID  , isEqualTo: self.productDocumentID!).getDocuments { (querySnapshot, error) in
                                     if let e = error{
                                         print("error while checking promotions in product: \(e.localizedDescription)")
                                     }else{
@@ -1360,7 +1360,7 @@ class EditProductController: UIViewController{
     @IBAction func submitPressed(_ sender: UIButton){
         if updateNotNil(){
             if let emailSender = Auth.auth().currentUser?.email{
-                db.collection(K.tableName.hasPromotionTableName).whereField(K.sender, isEqualTo: emailSender).whereField(K.productCollection.productName, isEqualTo: productName!).getDocuments { (querySnapshot, error) in
+                db.collection(K.tableName.hasPromotionTableName).whereField(K.sender, isEqualTo: emailSender).whereField(K.productCollection.productDocID, isEqualTo: productDocumentID!).getDocuments { (querySnapshot, error) in
                     if let e = error{
                         print("error while updating hasPromotion data: \(e.localizedDescription)")
                     }else{
@@ -1381,7 +1381,7 @@ class EditProductController: UIViewController{
                             self.updatedProductName = self.productNameTextField.text!
                             for selectedPromotion in self.promotionName{
                                 self.db.collection(K.tableName.hasPromotionTableName).addDocument(data: [
-                                    K.productCollection.productName: self.updatedProductName!,
+                                    K.productCollection.productDocID: self.productDocumentID!,
                                     K.promotion.promotionName: selectedPromotion,
                                     K.sender: emailSender
                                 ])

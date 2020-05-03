@@ -54,22 +54,12 @@ class AddPromotionInProductController: UIViewController {
                 ])
                 print("Successfully added promotion")
                 for productDoc in productDocumentID{
-                    db.collection(K.productCollection.productCollection).document(productDoc).getDocument { (documentSnapshot, error) in
-                        if let e = error{
-                            print("Error while loading product Name: \(e.localizedDescription)")
-                        }else{
-                            if let data = documentSnapshot?.data(){
-                                if let productName = data[K.productCollection.productName]{
-                                    self.db.collection(K.tableName.hasPromotionTableName).addDocument(data: [
-                                        K.productCollection.productName: productName,
-                                        K.promotion.promotionName: self.promotionNameTextField.text!,
-                                        K.sender: emailSender
-                                       ])
-                                }
-                            }
-                        }
+                    self.db.collection(K.tableName.hasPromotionTableName).addDocument(data: [
+                            K.productCollection.productDocID: productDoc,
+                            K.promotion.promotionName: self.promotionNameTextField.text!,
+                            K.sender: emailSender
+                           ])
                     }
-                }
                 print("Successfully added new hasPromotion document")
                 self.dismiss(animated: true, completion: nil)
             }
