@@ -17,6 +17,10 @@ class SummaryViewController: UIViewController {
     @IBOutlet weak var productTableView: UITableView!
     @IBOutlet weak var creditCardTableView: UITableView!
     
+    @IBAction func selectCreditCardBUtton(_ sender: UIButton) {
+        performSegue(withIdentifier: K.segue.summaryToSelectCreditCard, sender: self)
+    }
+    
     
     var addressSelectedByUser : Address?
     var address : [Address] = []
@@ -70,11 +74,16 @@ class SummaryViewController: UIViewController {
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == K.segue.summaryToSelectedAddress {
-            let destinationVC = segue.destination as! SelectedAddressViewController
             
+            let destinationVC = segue.destination as! SelectedAddressViewController
             destinationVC.delegate = self
             destinationVC.addressForSelect = address
             
+        } else if segue.identifier == K.segue.summaryToSelectCreditCard {
+            
+            let destinationVC = segue.destination as! SelectCreditCardViewController
+            destinationVC.delegate = self
+            destinationVC.creditCard = creditCard
         }
     }
     
@@ -318,11 +327,18 @@ extension SummaryViewController : UITableViewDelegate,UITableViewDataSource {
 
 //MARK: - extension for send back data
 
-extension SummaryViewController : changeAddressDelegate {
+extension SummaryViewController : changeAddressDelegate,changeCreditCardDelegate {
+    func changeCreditCard(From: Card) {
+        creditCardDefault = From
+        creditCardTableView.reloadData()
+    }
+    
     func changeAddress(From: Address) {
         addressDefult = From
         addressTableView.reloadData()
     }
+    
+    
     
     
 }

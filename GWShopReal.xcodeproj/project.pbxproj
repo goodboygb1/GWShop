@@ -54,6 +54,8 @@
 		A3B434772451ECCE008E71EC /* Notification.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A3B434762451ECCE008E71EC /* Notification.storyboard */; };
 		A3B434792451ECDB008E71EC /* Me.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A3B434782451ECDB008E71EC /* Me.storyboard */; };
 		A3B4E990245EC68200683578 /* CreditCardTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3B4E98F245EC68200683578 /* CreditCardTableViewCell.swift */; };
+		A3B4E992245EE12000683578 /* SelectCreditCardTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3B4E991245EE12000683578 /* SelectCreditCardTableViewCell.swift */; };
+		A3B4E994245EE13500683578 /* SelectCreditCardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3B4E993245EE13500683578 /* SelectCreditCardViewController.swift */; };
 		A3CB3BB524597F5200C9C0EC /* AddProductController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3CB3BB424597F5200C9C0EC /* AddProductController.swift */; };
 		A3FC91B424521C5100475F40 /* MeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3FC91B324521C5100475F40 /* MeViewController.swift */; };
 		A3FEBC0024523BB200E3827B /* splitWay.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A3FEBBFF24523BB200E3827B /* splitWay.storyboard */; };
@@ -124,6 +126,8 @@
 		A3B434762451ECCE008E71EC /* Notification.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Notification.storyboard; sourceTree = "<group>"; };
 		A3B434782451ECDB008E71EC /* Me.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Me.storyboard; sourceTree = "<group>"; };
 		A3B4E98F245EC68200683578 /* CreditCardTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreditCardTableViewCell.swift; sourceTree = "<group>"; };
+		A3B4E991245EE12000683578 /* SelectCreditCardTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectCreditCardTableViewCell.swift; sourceTree = "<group>"; };
+		A3B4E993245EE13500683578 /* SelectCreditCardViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectCreditCardViewController.swift; sourceTree = "<group>"; };
 		A3CB3BB424597F5200C9C0EC /* AddProductController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddProductController.swift; sourceTree = "<group>"; };
 		A3FC91B324521C5100475F40 /* MeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MeViewController.swift; sourceTree = "<group>"; };
 		A3FEBBFF24523BB200E3827B /* splitWay.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = splitWay.storyboard; sourceTree = "<group>"; };
@@ -152,6 +156,8 @@
 				A3A6BF3B245D6FA000B8934B /* SummaryAddressViewCell.swift */,
 				A3B4E98F245EC68200683578 /* CreditCardTableViewCell.swift */,
 				A37D03B1245E0B8000FA2283 /* ProductTableViewCell.swift */,
+				A3B4E991245EE12000683578 /* SelectCreditCardTableViewCell.swift */,
+				A3B4E993245EE13500683578 /* SelectCreditCardViewController.swift */,
 				A3057A8F245B48CF00AE9991 /* searchCell.swift */,
 				A3A6BF43245D75AA00B8934B /* presentAlert.swift */,
 				A331CBA2245C6ED300AADDC1 /* categoryCell.swift */,
@@ -426,6 +432,7 @@
 				843D384C245CB4AA000A96D2 /* CartViewController.swift in Sources */,
 				8490DB2F24588D7000A2BD88 /* BankAccount.swift in Sources */,
 				8451856F245C677A00152229 /* AddPromotionInProductController.swift in Sources */,
+				A3B4E992245EE12000683578 /* SelectCreditCardTableViewCell.swift in Sources */,
 				8433D16924570A77003C59E5 /* Address.swift in Sources */,
 				843723EC245D5E9C00C35A3A /* Cart.swift in Sources */,
 				A33A279824509F9200810BC5 /* LoginController.swift in Sources */,
@@ -443,6 +450,7 @@
 				A3057A80245B278100AE9991 /* AddProductInPromotionController.swift in Sources */,
 				A331CBA1245C579400AADDC1 /* CategoryViewController.swift in Sources */,
 				A33A277F2450995000810BC5 /* AppDelegate.swift in Sources */,
+				A3B4E994245EE13500683578 /* SelectCreditCardViewController.swift in Sources */,
 				843B267E245B527F00248175 /* Promotion.swift in Sources */,
 				A33A27812450995000810BC5 /* SceneDelegate.swift in Sources */,
 				A3057A90245B48CF00AE9991 /* searchCell.swift in Sources */,
