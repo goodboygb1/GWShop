@@ -133,6 +133,7 @@ struct K {
         static let productImageURL = "productImageURL"
         static let sender = "sender"
          static let storeName = "storeName"
+        static let productDocID = "productID"
     }
     struct transaction{
         static let amountMoney = "amountMoney"
