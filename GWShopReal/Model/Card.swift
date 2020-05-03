@@ -14,4 +14,5 @@ struct Card{
     let expiredDate: String
     let cvv: String
     let docID: String
+    let isDefultCard : Bool
 }

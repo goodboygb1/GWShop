@@ -13,6 +13,7 @@ import Kingfisher
 
 class MainViewController: UIViewController,UITextFieldDelegate {
     
+    
     var categorySearch : String?
     @IBOutlet weak var searchTextField: UITextField!
     

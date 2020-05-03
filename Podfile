@@ -11,7 +11,7 @@ target 'GWShopReal' do
   pod 'Firebase/Firestore'
   pod 'Firebase/Storage'
   pod 'Kingfisher', '~> 5.13.4'
-  
+  pod 'BEMCheckBox'
 
 end
 
