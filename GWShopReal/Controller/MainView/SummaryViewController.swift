@@ -13,9 +13,11 @@ import BEMCheckBox
 
 class SummaryViewController: UIViewController {
     
+    @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
     @IBOutlet weak var addressTableView: UITableView!
     @IBOutlet weak var productTableView: UITableView!
     @IBOutlet weak var creditCardTableView: UITableView!
+    
     
     @IBAction func selectCreditCardBUtton(_ sender: UIButton) {
         performSegue(withIdentifier: K.segue.summaryToSelectCreditCard, sender: self)
@@ -46,12 +48,9 @@ class SummaryViewController: UIViewController {
         loadCardData()
         creditCardButton.on = true
         
-        for price in totalPrize {                       //calculate total Price
-            totolMoney += price
-        }
         totalMoenyLabel.text = "฿\(totolMoney) "
         
-        
+        activityIndicator.hidesWhenStopped = true
        
         
     }
@@ -105,13 +104,19 @@ class SummaryViewController: UIViewController {
         findNumberOfVendor()
         if orderSepByVendor.count != 0 {
             sendDataToFirebase()
+            activityIndicator.startAnimating()
+            
+            
+            
+            
+            
+            
         } else {
             print("order is empty")
+            presentAlert(title: "Empty Cart", message: "Please add something to cart", actiontitle: "Dismiss")
         }
         
-        for vendorName in orderSepByVendor {
-            print(vendorName.productInOrder[0].storeName)
-        }
+        
         
     }
     
@@ -141,9 +146,18 @@ class SummaryViewController: UIViewController {
                     for productInOrder in orderUpload.productInOrder {
                         
                         orderDetailCollection.addDocument(data: [ K.orderDetailCollection.orderID : orderUpload.orderID,
-                            K.orderDetailCollection.productID : productInOrder.documentID,
-                            K.orderDetailCollection.quantity : productInOrder.numberProduct
-                        ])
+                        K.orderDetailCollection.productID : productInOrder.documentID,
+                        K.orderDetailCollection.quantity : productInOrder.numberProduct]) { (error) in
+                            
+                            self.activityIndicator.stopAnimating()
+                            let alert = UIAlertController(title: "Success", message: "Order success, Wating for amazing time" , preferredStyle:.alert)
+                            let action = UIAlertAction(title: "Dismiss", style: .default) { (UIAlertAction) in
+                                self.navigationController?.popViewController(animated: true)
+                            }
+                            
+                            alert.addAction(action)
+                            self.present(alert,animated: true,completion: nil)
+                            }
                         
                      
                     
@@ -164,6 +178,8 @@ class SummaryViewController: UIViewController {
                                               K.paymentCollection.dateOfPurchase : getCurrentDateTime(),
                                               K.paymentCollection.totalPrice : totolMoney
         ])
+        
+        
     }
     
     var orderSepByVendor : [order] = []          // order array
@@ -497,7 +513,7 @@ extension SummaryViewController : changeAddressDelegate,changeCreditCardDelegate
         addressDefult = From
         addressTableView.reloadData()
     }
-    
+   
     
     
     
