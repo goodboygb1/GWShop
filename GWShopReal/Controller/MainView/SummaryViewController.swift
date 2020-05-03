@@ -21,7 +21,7 @@ class SummaryViewController: UIViewController {
         performSegue(withIdentifier: K.segue.summaryToSelectCreditCard, sender: self)
     }
     
-    
+
     var addressSelectedByUser : Address?
     var address : [Address] = []
     var addressDefult : Address? = nil
@@ -29,6 +29,8 @@ class SummaryViewController: UIViewController {
     var cart : [Cart] = []
     var creditCard : [Card] = []
     var creditCardDefault : Card? = nil
+    var totolMoney : Double = 0
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -43,16 +45,35 @@ class SummaryViewController: UIViewController {
         loadCardData()
         creditCardButton.on = true
         
+        for price in totalPrize {                       //calculate total Price
+            totolMoney += price
+        }
+        totalMoenyLabel.text = "฿\(totolMoney) "
+        
+        
+       
+        
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+         tabBarController?.tabBar.isHidden = true
+    }
     
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        tabBarController?.tabBar.isHidden = false
+        
+    }
+    
+    @IBOutlet weak var totalMoenyLabel: UILabel!
     @IBOutlet weak var creditCardButton: BEMCheckBox!
     @IBOutlet weak var payAtHomeButton: BEMCheckBox!
     
     @IBAction func payAtHomePress(_ sender: BEMCheckBox) {
          
-         //ถ้ากดจ่ายที่บ้านให้ซ่อน credit card tableview
-         // uncheck creditcard
+                                                //ถ้ากดจ่ายที่บ้านให้ซ่อน credit card tableview
+                                                // uncheck creditcard
         
         creditCardButton.on = false
         creditCardTableView.isHidden = true
@@ -60,13 +81,14 @@ class SummaryViewController: UIViewController {
     }
     
     @IBAction func creditCardPressed(_ sender: BEMCheckBox) {
-        //ถ้ากดจ่ายผ่านบัตรใช้โชว์บัตรและโหลดข้อมูลมา
-        // vuncheck pay at home
+                                                //ถ้ากดจ่ายผ่านบัตรใช้โชว์บัตรและโหลดข้อมูลมา
+                                                // vuncheck pay at home
         
         payAtHomeButton.on = false
         creditCardTableView.isHidden = false
         creditCardTableView.reloadData()
     }
+    
     
     @IBAction func selectAddressButton(_ sender: Any) {
         performSegue(withIdentifier: K.segue.summaryToSelectedAddress, sender: self)
