@@ -1037,7 +1037,7 @@
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="1050"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Sbj-sz-HZv">
-                                        <rect key="frame" x="0.0" y="0.0" width="375" height="1100"/>
+                                        <rect key="frame" x="0.0" y="-6" width="375" height="1100"/>
                                         <subviews>
                                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="background" translatesAutoresizingMaskIntoConstraints="NO" id="mgG-Uy-Lwx">
                                                 <rect key="frame" x="0.0" y="-3" width="375" height="65"/>
@@ -1076,7 +1076,7 @@
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                 <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                                 <prototypes>
-                                                    <tableViewCell clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" restorationIdentifier="summaryProductViewCell" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="summaryProductViewCell" rowHeight="128" id="9Jx-he-wa7" customClass="SummaryAddressViewCell" customModule="GWShopReal" customModuleProvider="target">
+                                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" restorationIdentifier="summaryProductViewCell" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="summaryProductViewCell" rowHeight="128" id="9Jx-he-wa7" customClass="SummaryAddressViewCell" customModule="GWShopReal" customModuleProvider="target">
                                                         <rect key="frame" x="0.0" y="28" width="375" height="128"/>
                                                         <autoresizingMask key="autoresizingMask"/>
                                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="9Jx-he-wa7" id="ljN-87-dQq">
@@ -1137,14 +1137,14 @@
                                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                                 </imageView>
                                                                 <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="btn_select" translatesAutoresizingMaskIntoConstraints="NO" id="DBP-uu-jtY">
-                                                                    <rect key="frame" x="343" y="53" width="24" height="43"/>
+                                                                    <rect key="frame" x="343" y="41" width="24" height="43"/>
                                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                                 </imageView>
-                                                                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vIQ-7b-hOp">
-                                                                    <rect key="frame" x="340" y="49" width="27" height="49"/>
+                                                                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="AeA-Sr-TOc">
+                                                                    <rect key="frame" x="329" y="24" width="46" height="72"/>
                                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                                     <connections>
-                                                                        <action selector="selectAddressButton:" destination="S2o-FQ-aCS" eventType="touchUpInside" id="7pj-X6-k6O"/>
+                                                                        <action selector="selectAddress:" destination="S2o-FQ-aCS" eventType="touchUpInside" id="vxX-EZ-igC"/>
                                                                     </connections>
                                                                 </button>
                                                             </subviews>
@@ -1225,34 +1225,6 @@
                                                             <rect key="frame" x="0.0" y="0.0" width="375" height="82"/>
                                                             <autoresizingMask key="autoresizingMask"/>
                                                             <subviews>
-                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="XXX" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="EU5-8H-0RN">
-                                                                    <rect key="frame" x="202" y="39" width="158" height="27"/>
-                                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                                    <fontDescription key="fontDescription" name="SukhumvitSet-Text" family="Sukhumvit Set" pointSize="17"/>
-                                                                    <nil key="textColor"/>
-                                                                    <nil key="highlightedColor"/>
-                                                                </label>
-                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="XXX" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qSy-su-3aD">
-                                                                    <rect key="frame" x="184" y="11" width="158" height="27"/>
-                                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                                    <fontDescription key="fontDescription" name="SukhumvitSet-Text" family="Sukhumvit Set" pointSize="17"/>
-                                                                    <nil key="textColor"/>
-                                                                    <nil key="highlightedColor"/>
-                                                                </label>
-                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="เลขบัตร :" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VAX-lT-uL1">
-                                                                    <rect key="frame" x="114" y="11" width="62" height="27"/>
-                                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                                    <fontDescription key="fontDescription" name="SukhumvitSet-Text" family="Sukhumvit Set" pointSize="17"/>
-                                                                    <nil key="textColor"/>
-                                                                    <nil key="highlightedColor"/>
-                                                                </label>
-                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="เจ้าของบัตร" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5Ny-5o-oJD">
-                                                                    <rect key="frame" x="114" y="39" width="80" height="27"/>
-                                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                                    <fontDescription key="fontDescription" name="SukhumvitSet-Text" family="Sukhumvit Set" pointSize="17"/>
-                                                                    <nil key="textColor"/>
-                                                                    <nil key="highlightedColor"/>
-                                                                </label>
                                                                 <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="btn_select" translatesAutoresizingMaskIntoConstraints="NO" id="QJ9-0Y-Hs8">
                                                                     <rect key="frame" x="336" y="21" width="24" height="43"/>
                                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -1264,6 +1236,34 @@
                                                                         <action selector="selectCreditCardBUtton:" destination="S2o-FQ-aCS" eventType="touchUpInside" id="2vH-jP-2N6"/>
                                                                     </connections>
                                                                 </button>
+                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="XXX" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="EU5-8H-0RN">
+                                                                    <rect key="frame" x="112" y="42" width="158" height="27"/>
+                                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                                    <fontDescription key="fontDescription" name="SukhumvitSet-Text" family="Sukhumvit Set" pointSize="17"/>
+                                                                    <nil key="textColor"/>
+                                                                    <nil key="highlightedColor"/>
+                                                                </label>
+                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="XXX" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qSy-su-3aD">
+                                                                    <rect key="frame" x="94" y="14" width="158" height="27"/>
+                                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                                    <fontDescription key="fontDescription" name="SukhumvitSet-Text" family="Sukhumvit Set" pointSize="17"/>
+                                                                    <nil key="textColor"/>
+                                                                    <nil key="highlightedColor"/>
+                                                                </label>
+                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="เลขบัตร :" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VAX-lT-uL1">
+                                                                    <rect key="frame" x="24" y="14" width="62" height="27"/>
+                                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                                    <fontDescription key="fontDescription" name="SukhumvitSet-Text" family="Sukhumvit Set" pointSize="17"/>
+                                                                    <nil key="textColor"/>
+                                                                    <nil key="highlightedColor"/>
+                                                                </label>
+                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="เจ้าของบัตร" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5Ny-5o-oJD">
+                                                                    <rect key="frame" x="24" y="42" width="80" height="27"/>
+                                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                                    <fontDescription key="fontDescription" name="SukhumvitSet-Text" family="Sukhumvit Set" pointSize="17"/>
+                                                                    <nil key="textColor"/>
+                                                                    <nil key="highlightedColor"/>
+                                                                </label>
                                                             </subviews>
                                                         </tableViewCellContentView>
                                                         <connections>
@@ -1357,6 +1357,9 @@
                                                 <state key="normal" title="ยืนยัน">
                                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 </state>
+                                                <connections>
+                                                    <action selector="sendOrderPress:" destination="S2o-FQ-aCS" eventType="touchUpInside" id="7Bm-7p-cUd"/>
+                                                </connections>
                                             </button>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="ค่าจัดส่ง : " textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jYC-lW-9Wc">
                                                 <rect key="frame" x="24" y="949" width="68" height="26"/>
@@ -1402,12 +1405,12 @@
                                     </view>
                                 </subviews>
                                 <constraints>
-                                    <constraint firstItem="Sbj-sz-HZv" firstAttribute="top" secondItem="imK-tR-UzM" secondAttribute="top" id="3QF-lb-CXI"/>
-                                    <constraint firstItem="Sbj-sz-HZv" firstAttribute="width" secondItem="imK-tR-UzM" secondAttribute="width" id="Ijw-me-jN2"/>
-                                    <constraint firstItem="Sbj-sz-HZv" firstAttribute="leading" secondItem="imK-tR-UzM" secondAttribute="leading" id="N8N-cq-qJ5"/>
-                                    <constraint firstItem="Sbj-sz-HZv" firstAttribute="height" secondItem="imK-tR-UzM" secondAttribute="height" priority="250" id="b6t-X7-Xy6"/>
-                                    <constraint firstAttribute="trailing" secondItem="Sbj-sz-HZv" secondAttribute="trailing" id="gd4-cZ-zfm"/>
-                                    <constraint firstAttribute="bottom" secondItem="Sbj-sz-HZv" secondAttribute="bottom" id="vzR-rd-SO1"/>
+                                    <constraint firstItem="Sbj-sz-HZv" firstAttribute="height" secondItem="imK-tR-UzM" secondAttribute="height" multiplier="1.04762" priority="250" id="7is-VD-P6K"/>
+                                    <constraint firstAttribute="trailing" secondItem="Sbj-sz-HZv" secondAttribute="trailing" id="B5R-gu-90v"/>
+                                    <constraint firstAttribute="bottom" secondItem="Sbj-sz-HZv" secondAttribute="bottom" constant="-38" id="Q4l-5L-qGV"/>
+                                    <constraint firstItem="Sbj-sz-HZv" firstAttribute="top" secondItem="imK-tR-UzM" secondAttribute="top" constant="-6" id="j0R-BC-Yrh"/>
+                                    <constraint firstItem="Sbj-sz-HZv" firstAttribute="width" secondItem="imK-tR-UzM" secondAttribute="width" id="mwf-47-iG4"/>
+                                    <constraint firstItem="Sbj-sz-HZv" firstAttribute="leading" secondItem="imK-tR-UzM" secondAttribute="leading" id="oiM-da-idj"/>
                                 </constraints>
                             </scrollView>
                         </subviews>

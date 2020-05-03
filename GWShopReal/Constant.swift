@@ -114,6 +114,7 @@ struct K {
         static let promotionTableName = "promotion"
         static let hasPromotionTableName = "hasPromotion"
         static let cartTableName = "cart"
+        static let orderCollection = "orderCollection"
     }
     
     struct storeDetail {
@@ -197,6 +198,31 @@ struct K {
         static let quantity = "quantity"
         
     }
+    
+    struct order {
+        static let orderID = "orderID"
+        static let vendorName = "vendorName"
+        static let userName = "userName"
+        static let paymentID = "paymentID"
+        static let phoneNumber = "phoneNumber"
+        static let promotionID = "promotionID"
+        static let addressID = "addressID"
+    }
+    
+    struct orderDetailCollection {
+        static let orderDetailCollection = "orderDetailCollection"
+        static let orderID = "oderID"
+        static let productID = "productID"
+        static let quantity = "quantity"
+    }
 
+    struct paymentCollection {
+        static let paymentCollection = "paymentCollection"
+        static let paymentMethod = "paymentMethod"
+        static let paymentID = "paymentID"
+        static let cardNumber = "cardNumber"
+        static let dateOfPurchase = "dateOfPurchase"
+        static let totalPrice = "totalPrice"
+    }
 }
 

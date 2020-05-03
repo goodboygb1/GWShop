@@ -447,6 +447,7 @@ class ShowCardViewController: UIViewController{
                                 DispatchQueue.main.async {
                                     self.cardTableView.reloadData()
                                 }
+                                
                             }
                         }
                     }

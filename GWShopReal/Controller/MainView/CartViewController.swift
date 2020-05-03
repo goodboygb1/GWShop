@@ -22,7 +22,6 @@ class CartViewController: UIViewController {
         cartTableView.dataSource = self
         loadCartData()
         loadTotalPrice()
-        
     }
     
     func loadCartData() {
@@ -107,7 +106,12 @@ class CartViewController: UIViewController {
         if segue.identifier == K.segue.cartToSummary {
             let destinationVC = segue.destination as! SummaryViewController
                 destinationVC.totalPrize = totalPrice 
-                destinationVC.cart = carts    
+                destinationVC.cart = carts
+            print(carts[0].productName)
+                   print(totalPrice[0])
+                   
+                   print(carts[1].productName)
+                   print(totalPrice[1])
         }
     }
 }
