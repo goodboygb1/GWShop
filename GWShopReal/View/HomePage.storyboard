@@ -1392,6 +1392,10 @@
                                                 <color key="textColor" systemColor="systemRedColor" red="1" green="0.23137254900000001" blue="0.18823529410000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
+                                            <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" style="medium" translatesAutoresizingMaskIntoConstraints="NO" id="E26-tI-rn8">
+                                                <rect key="frame" x="177" y="667" width="20" height="20"/>
+                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            </activityIndicatorView>
                                         </subviews>
                                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                         <constraints>
@@ -1426,6 +1430,7 @@
                     <navigationItem key="navigationItem" id="mpx-Jv-NaW"/>
                     <size key="freeformSize" width="375" height="1050"/>
                     <connections>
+                        <outlet property="activityIndicator" destination="E26-tI-rn8" id="rw4-Yd-CYM"/>
                         <outlet property="addressTableView" destination="9XA-Jr-jtN" id="Efr-ci-mZ2"/>
                         <outlet property="creditCardButton" destination="Lat-wQ-diP" id="XPs-zA-HNr"/>
                         <outlet property="creditCardTableView" destination="xdS-fw-jzr" id="nME-pR-jCM"/>
@@ -1682,7 +1687,7 @@
     </scenes>
     <inferredMetricsTieBreakers>
         <segue reference="oQX-pF-Rre"/>
-        <segue reference="rFj-fK-sbQ"/>
+        <segue reference="DFL-w2-MaH"/>
     </inferredMetricsTieBreakers>
     <resources>
         <image name="Logo-GW-white" width="166.66667175292969" height="166.66667175292969"/>
