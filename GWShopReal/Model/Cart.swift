@@ -14,4 +14,6 @@ struct Cart{
     let productPrice: String
     let numberProduct: Int
     let documentID: String
+    let productDocumentID: String
+    let realPrice: Double = 0.0
 }
