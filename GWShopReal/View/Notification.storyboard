@@ -24,11 +24,11 @@
             </objects>
             <point key="canvasLocation" x="5389.8550724637689" y="-49.553571428571423"/>
         </scene>
-        <!--การแจ้งเตือน-->
+        <!--ออเดอร์ของฉัน-->
         <scene sceneID="cGc-bq-sj3">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" navigationBarHidden="YES" id="Phg-yE-Uci" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="การแจ้งเตือน" image="btn_การแจ้งเตือน" selectedImage="btn_การแจ้งเตือน" id="90E-Th-qn2"/>
+                    <tabBarItem key="tabBarItem" title="ออเดอร์ของฉัน" image="btn_การแจ้งเตือน" selectedImage="btn_การแจ้งเตือน" id="90E-Th-qn2"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="KSd-Jz-cGg">
                         <autoresizingMask key="autoresizingMask"/>
