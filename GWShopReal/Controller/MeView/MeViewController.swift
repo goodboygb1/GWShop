@@ -109,9 +109,11 @@ class ProfileController:UIViewController {
                             if let dataSender = data[K.sender] as? String{
                                 if dataSender == emailSender{
                                     self.performSegue(withIdentifier: K.segue.meToMainStore, sender: self)
+                                    break
                                 }
                                 else if dataSender != emailSender{
                                     self.performSegue(withIdentifier: K.segue.meToCreateStore, sender: self)
+                                    break
                                 }
                             }
                         }

@@ -15,6 +15,8 @@
 		843D384A245C9494000A96D2 /* AddPromotionInProductController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 843D3849245C9494000A96D2 /* AddPromotionInProductController.swift */; };
 		843D384C245CB4AA000A96D2 /* CartViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 843D384B245CB4AA000A96D2 /* CartViewController.swift */; };
 		844811DA245AA09900466CDF /* Product.swift in Sources */ = {isa = PBXBuildFile; fileRef = 844811D9245AA09900466CDF /* Product.swift */; };
+		844AB1A6246088C700738CC2 /* SendProductViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 844AB1A5246088C700738CC2 /* SendProductViewController.swift */; };
+		844AB1A824608DBE00738CC2 /* OrderedProduct.swift in Sources */ = {isa = PBXBuildFile; fileRef = 844AB1A724608DBE00738CC2 /* OrderedProduct.swift */; };
 		8451856F245C677A00152229 /* AddPromotionInProductController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8451856E245C677A00152229 /* AddPromotionInProductController.swift */; };
 		8490DB2B24585E1600A2BD88 /* Card.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8490DB2A24585E1600A2BD88 /* Card.swift */; };
 		8490DB2D24588BC500A2BD88 /* Store.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8490DB2C24588BC500A2BD88 /* Store.swift */; };
@@ -89,6 +91,8 @@
 		843D3849245C9494000A96D2 /* AddPromotionInProductController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddPromotionInProductController.swift; sourceTree = SOURCE_ROOT; };
 		843D384B245CB4AA000A96D2 /* CartViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CartViewController.swift; sourceTree = "<group>"; };
 		844811D9245AA09900466CDF /* Product.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Product.swift; sourceTree = "<group>"; };
+		844AB1A5246088C700738CC2 /* SendProductViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SendProductViewController.swift; sourceTree = "<group>"; };
+		844AB1A724608DBE00738CC2 /* OrderedProduct.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrderedProduct.swift; sourceTree = "<group>"; };
 		8451856E245C677A00152229 /* AddPromotionInProductController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddPromotionInProductController.swift; sourceTree = "<group>"; };
 		8490DB2A24585E1600A2BD88 /* Card.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Card.swift; sourceTree = "<group>"; };
 		8490DB2C24588BC500A2BD88 /* Store.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Store.swift; sourceTree = "<group>"; };
@@ -190,6 +194,7 @@
 				A3057A7F245B278100AE9991 /* AddProductInPromotionController.swift */,
 				A3119578245AE29C006F6784 /* PromotionController.swift */,
 				843D3849245C9494000A96D2 /* AddPromotionInProductController.swift */,
+				844AB1A5246088C700738CC2 /* SendProductViewController.swift */,
 			);
 			path = MeView;
 			sourceTree = "<group>";
@@ -282,6 +287,7 @@
 				A372238C245F22A600B31B7A /* Order.swift */,
 				843B267D245B527F00248175 /* Promotion.swift */,
 				A3C1C2E92460421700614FFE /* date.swift */,
+				844AB1A724608DBE00738CC2 /* OrderedProduct.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -445,6 +451,7 @@
 				A33A27832450995000810BC5 /* ViewController.swift in Sources */,
 				A3C1C2F4246082D100614FFE /* ShowAllProductSellInOneDayTableViewCell.swift in Sources */,
 				A33A279A24509FA100810BC5 /* RegisterViewController.swift in Sources */,
+				844AB1A824608DBE00738CC2 /* OrderedProduct.swift in Sources */,
 				843D384C245CB4AA000A96D2 /* CartViewController.swift in Sources */,
 				8490DB2F24588D7000A2BD88 /* BankAccount.swift in Sources */,
 				8451856F245C677A00152229 /* AddPromotionInProductController.swift in Sources */,
@@ -476,6 +483,7 @@
 				A3C1C2F62460832100614FFE /* ShowAllProductViewController.swift in Sources */,
 				A37D03B2245E0B8000FA2283 /* ProductTableViewCell.swift in Sources */,
 				A3A6BF44245D75AA00B8934B /* presentAlert.swift in Sources */,
+				844AB1A6246088C700738CC2 /* SendProductViewController.swift in Sources */,
 				A3A6BF40245D729D00B8934B /* SummaryViewController.swift in Sources */,
 				A3C1C2EA2460421700614FFE /* date.swift in Sources */,
 				A3325D7B245DE40000F04998 /* SelectedAddressCell.swift in Sources */,
