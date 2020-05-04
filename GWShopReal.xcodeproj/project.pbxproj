@@ -57,6 +57,8 @@
 		A3B4E990245EC68200683578 /* CreditCardTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3B4E98F245EC68200683578 /* CreditCardTableViewCell.swift */; };
 		A3B4E992245EE12000683578 /* SelectCreditCardTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3B4E991245EE12000683578 /* SelectCreditCardTableViewCell.swift */; };
 		A3B4E994245EE13500683578 /* SelectCreditCardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3B4E993245EE13500683578 /* SelectCreditCardViewController.swift */; };
+		A3C1C2E82460415100614FFE /* AllProductSoldInOneDayReportViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3C1C2E72460415100614FFE /* AllProductSoldInOneDayReportViewController.swift */; };
+		A3C1C2EA2460421700614FFE /* date.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3C1C2E92460421700614FFE /* date.swift */; };
 		A3CB3BB524597F5200C9C0EC /* AddProductController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3CB3BB424597F5200C9C0EC /* AddProductController.swift */; };
 		A3FC91B424521C5100475F40 /* MeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3FC91B324521C5100475F40 /* MeViewController.swift */; };
 		A3FEBC0024523BB200E3827B /* splitWay.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A3FEBBFF24523BB200E3827B /* splitWay.storyboard */; };
@@ -130,6 +132,8 @@
 		A3B4E98F245EC68200683578 /* CreditCardTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreditCardTableViewCell.swift; sourceTree = "<group>"; };
 		A3B4E991245EE12000683578 /* SelectCreditCardTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectCreditCardTableViewCell.swift; sourceTree = "<group>"; };
 		A3B4E993245EE13500683578 /* SelectCreditCardViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectCreditCardViewController.swift; sourceTree = "<group>"; };
+		A3C1C2E72460415100614FFE /* AllProductSoldInOneDayReportViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AllProductSoldInOneDayReportViewController.swift; sourceTree = "<group>"; };
+		A3C1C2E92460421700614FFE /* date.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = date.swift; sourceTree = "<group>"; };
 		A3CB3BB424597F5200C9C0EC /* AddProductController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddProductController.swift; sourceTree = "<group>"; };
 		A3FC91B324521C5100475F40 /* MeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MeViewController.swift; sourceTree = "<group>"; };
 		A3FEBBFF24523BB200E3827B /* splitWay.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = splitWay.storyboard; sourceTree = "<group>"; };
@@ -172,6 +176,7 @@
 		A331CB9E245C56FE00AADDC1 /* MeView */ = {
 			isa = PBXGroup;
 			children = (
+				A3C1C2E72460415100614FFE /* AllProductSoldInOneDayReportViewController.swift */,
 				A3FC91B324521C5100475F40 /* MeViewController.swift */,
 				A3CB3BB424597F5200C9C0EC /* AddProductController.swift */,
 				A3701914245C94F800D15549 /* AddPromotionInProductController.swift */,
@@ -270,6 +275,7 @@
 				843723EB245D5E9C00C35A3A /* Cart.swift */,
 				A372238C245F22A600B31B7A /* Order.swift */,
 				843B267D245B527F00248175 /* Promotion.swift */,
+				A3C1C2E92460421700614FFE /* date.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -455,6 +461,7 @@
 				A33A277F2450995000810BC5 /* AppDelegate.swift in Sources */,
 				A3B4E994245EE13500683578 /* SelectCreditCardViewController.swift in Sources */,
 				843B267E245B527F00248175 /* Promotion.swift in Sources */,
+				A3C1C2E82460415100614FFE /* AllProductSoldInOneDayReportViewController.swift in Sources */,
 				A33A27812450995000810BC5 /* SceneDelegate.swift in Sources */,
 				A3057A90245B48CF00AE9991 /* searchCell.swift in Sources */,
 				A372238D245F22A600B31B7A /* Order.swift in Sources */,
@@ -462,6 +469,7 @@
 				A37D03B2245E0B8000FA2283 /* ProductTableViewCell.swift in Sources */,
 				A3A6BF44245D75AA00B8934B /* presentAlert.swift in Sources */,
 				A3A6BF40245D729D00B8934B /* SummaryViewController.swift in Sources */,
+				A3C1C2EA2460421700614FFE /* date.swift in Sources */,
 				A3325D7B245DE40000F04998 /* SelectedAddressCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
