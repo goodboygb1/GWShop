@@ -240,5 +240,7 @@ struct K {
         static let dateOfPurchase = "dateOfPurchase"
         static let totalPrice = "totalPrice"
     }
+    
+
 }
 

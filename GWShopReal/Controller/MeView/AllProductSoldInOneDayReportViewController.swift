@@ -9,16 +9,16 @@
 import UIKit
 
 class AllProductSoldInOneDayReportViewController: UIViewController {
-
+    
     var splitDate : [String] = []
     var dateString : String = ""
     
     @IBOutlet weak var datePickerLabel: UIDatePicker!
     
     @IBAction func datePicker(_ sender: UIDatePicker) {
-       
-       firstTimeSetDate()
         
+        firstTimeSetDate()
+        splitStringAndPackIntoArray()
         
     }
     
@@ -30,51 +30,80 @@ class AllProductSoldInOneDayReportViewController: UIViewController {
     }
     
     override func viewDidLoad() {
-           super.viewDidLoad()
-            firstTimeSetDate()
+        super.viewDidLoad()
+        firstTimeSetDate()
+        splitStringAndPackIntoArray()
         showReportLable.layer.cornerRadius = showReportLable.frame.size.height/5
-           
-       }
+        
+    }
     
     func firstTimeSetDate()  {                                  //set date if user don't slide picker
-         let dateFormmater = DateFormatter()
-               dateFormmater.dateFormat = "dd MM yyyy"
-               dateString = dateFormmater.string(from: datePickerLabel.date)
+        let dateFormmater = DateFormatter()
+        dateFormmater.dateFormat = "dd MM yyyy"
+        dateString = dateFormmater.string(from: datePickerLabel.date)
     }
     
     func splitStringAndPackIntoArray()  {
         var splitArray = dateString.components(separatedBy: " ")    // split
         
+        switch splitArray[0] {
+        case "01":
+            splitArray[0] = "1"
+        case "02":
+            splitArray[0] = "2"
+        case "03":
+            splitArray[0] = "3"
+        case "04":
+            splitArray[0] = "4"
+        case "05":
+            splitArray[0] = "5"
+        case "06":
+            splitArray[0] = "6"
+        case "07":
+            splitArray[0] = "7"
+        case "08":
+            splitArray[0] = "8"
+        case "09":
+            splitArray[0] = "9"
+        default:
+            splitArray[0] = splitArray[0]
+        }
+        
+        
+        
+        
+        
         switch splitArray[1] {                                      // change month to alphabet
         case "01":
             splitArray[1] = "January"
-            case "02":
-                       splitArray[1] = "Febuary"
-            case "03":
-                       splitArray[1] = "March"
-            case "04":
-                       splitArray[1] = "April"
-            case "05":
-                       splitArray[1] = "May"
-            case "06":
-                       splitArray[1] = "June"
-            case "07":
-                       splitArray[1] = "July"
-             case "08":
-                        splitArray[1] = "August"
-            case "09":
-                       splitArray[1] = "September"
-            case "10":
-                       splitArray[1] = "October"
-            case "11":
-                       splitArray[1] = "November"
-            case "12":
-                       splitArray[1] = "December"
+        case "02":
+            splitArray[1] = "Febuary"
+        case "03":
+            splitArray[1] = "March"
+        case "04":
+            splitArray[1] = "April"
+        case "05":
+            splitArray[1] = "May"
+        case "06":
+            splitArray[1] = "June"
+        case "07":
+            splitArray[1] = "July"
+        case "08":
+            splitArray[1] = "August"
+        case "09":
+            splitArray[1] = "September"
+        case "10":
+            splitArray[1] = "October"
+        case "11":
+            splitArray[1] = "November"
+        case "12":
+            splitArray[1] = "December"
         default:
             splitArray[1] = "empty"
         }
         
         splitDate = splitArray
+        print(splitDate)
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
