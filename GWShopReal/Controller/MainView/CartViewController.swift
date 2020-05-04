@@ -25,9 +25,9 @@ class CartViewController: UIViewController, reloadAfterFinishedOrder {
         cartTableView.dataSource = self
         loadCartData()
         loadTotalPrice()
-        
     }
     
+
     func reloadTable() {
        carts = []
        cartTableView.reloadData()
@@ -60,7 +60,7 @@ class CartViewController: UIViewController, reloadAfterFinishedOrder {
                                     }else{
                                         let data = documentSnapshot?.data()
                                         if let productName = data![K.productCollection.productName] as? String{
-                                            self.carts.append(Cart(storeName: storeName, productName: productName, productPrice: productPrice, numberProduct: number, documentID: docID,productDocumentID: productDocID, imageURL: imageURL))
+                                            self.carts.append(Cart(storeName: storeName, productName: productName, productPrice: productPrice, numberProduct: number, documentID: docID,productDocumentID: productDocID, realPrice: 0.0, imageURL: imageURL))
                                             DispatchQueue.main.async {
                                                 self.cartTableView.reloadData()
                                             }
@@ -115,9 +115,22 @@ class CartViewController: UIViewController, reloadAfterFinishedOrder {
             }
         }
     }
+    func updateCart(){
+        print("updating cart data")
+        for index in 0..<carts.count{
+            for total in totalPrice{
+                if carts[index].productDocumentID == total.key{
+                    carts[index].changeRealPrice(realPrice: total.value)
+                    //print(cart_)
+                }
+            }
+        }
+    }
     
     @IBAction func checkOutPressed(_ sender: UIButton) {
-        performSegue(withIdentifier: K.segue.cartToSummary, sender: self)
+        updateCart()
+        self.performSegue(withIdentifier: K.segue.cartToSummary, sender: self)
+        
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {

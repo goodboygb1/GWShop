@@ -15,7 +15,7 @@ struct Cart{
     let numberProduct: Int
     let documentID: String
     let productDocumentID: String
-    var realPrice: Double = 0.0
+    var realPrice: Double 
     let imageURL : String
     
     mutating func changeRealPrice(realPrice: Double){
