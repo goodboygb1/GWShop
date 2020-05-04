@@ -35,6 +35,7 @@ class ShowAllProductViewController: UIViewController {
         let vendorCollection = db.collection(K.tableName.storeDetailTableName)
         
         if let email = Auth.auth().currentUser?.email {     // query for find vendor name from email
+            
             vendorCollection.whereField(K.sender, isEqualTo: email).getDocuments { (querySnapShot, error) in
                 if let e = error {
                     print("error form query vendorName \(e.localizedDescription)")
@@ -46,20 +47,32 @@ class ShowAllProductViewController: UIViewController {
                             if let vendorName = data[K.storeDetail.storeName]
                             {
                                 print("vender name from query = \(vendorName)")
-                                
+                                                                                // query for find order
+                               
                                 let orderCollection = db.collection(K.tableName.orderCollection)
                                 orderCollection
-                                    .whereField(K.sender, isEqualTo: email).getDocuments { (snapShotQuery2, error) in
+                                    .whereField(K.order.vendorName, isEqualTo: vendorName).getDocuments { (snapShotQuery2, error) in
                                         if let e = error {
                                             print("error can't find order")
                                         } else {
+                                           
                                             if let snapshotDocument2 = snapShotQuery2?.documents {
-                                                for doc2 in snapshotDocument2 {
+                                                print("order number = \(snapshotDocument2.count)")
+                                                
+                                                for (index,doc2) in snapshotDocument2.enumerated() {
                                                     let data = doc2.data()
                                                     if let day = data[K.order.dateOfPurchase] as? String
                                                         ,let total = data[K.order.total] as? Double {
                                                         let newShowAllProduct = ShowAllProductSellInOneDay(day: day, totalPrice: total)
                                                         self.dataForCheck.append(newShowAllProduct)
+                                                        
+                                                        if index == (snapshotDocument2.count-1) {
+                                                            self.findOrderThatSameAsTheDayThatUserWant()
+                                                            DispatchQueue.main.async {
+                                                                self.showAllSaleTableView.reloadData()
+                                                            }
+                                                        }
+                                                        
                                                     }
                                                 }
                                             }
@@ -71,7 +84,7 @@ class ShowAllProductViewController: UIViewController {
                 }
                 
                 // function here
-                self.findOrderThatSameAsTheDayThatUserWant()
+                
                 
             }
         }
@@ -80,12 +93,13 @@ class ShowAllProductViewController: UIViewController {
     
     func findOrderThatSameAsTheDayThatUserWant()  {
                                                                     // find order same as the day user choose
+        
         for data in dataForCheck {
             if data.day.contains(dateSplitArray[0]) {
                 if data.day.contains(dateSplitArray[1]) {
                     if data.day.contains(dateSplitArray[2]) {
-                        print(data.day)
-                        print(data.totalPrice)
+                        
+                        let newData = ShowAllProductSellInOneDay(day: "\(dateSplitArray[0]) \(dateSplitArray[1]) \(dateSplitArray[2])", totalPrice: data.totalPrice)
                         dataForPutIncell.append(data)
                     }
                 }
