@@ -46,6 +46,33 @@ class AllProductSoldInOneDayReportViewController: UIViewController {
     func splitStringAndPackIntoArray()  {
         var splitArray = dateString.components(separatedBy: " ")    // split
         
+        switch splitArray[0] {
+        case "01":
+            splitArray[0] = "1"
+        case "02":
+            splitArray[0] = "2"
+        case "03":
+            splitArray[0] = "3"
+        case "04":
+            splitArray[0] = "4"
+        case "05":
+            splitArray[0] = "5"
+        case "06":
+            splitArray[0] = "6"
+        case "07":
+            splitArray[0] = "7"
+        case "08":
+            splitArray[0] = "8"
+        case "09":
+            splitArray[0] = "9"
+        default:
+            splitArray[0] = splitArray[0]
+        }
+        
+        
+        
+        
+        
         switch splitArray[1] {                                      // change month to alphabet
         case "01":
             splitArray[1] = "January"
