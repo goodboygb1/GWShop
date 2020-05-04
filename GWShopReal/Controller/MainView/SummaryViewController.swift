@@ -41,23 +41,23 @@ class SummaryViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+    
         addressTableView.delegate = self
         addressTableView.dataSource = self
         productTableView.dataSource = self
         productTableView.delegate = self
         creditCardTableView.delegate = self
         creditCardTableView.dataSource = self
+
+        self.loadAddress()
+        self.loadCardData()
+        self.creditCardButton.on = true
+        //print(self.cart)
+        self.totalMoney = self.totalPrize.values.reduce(0, +) + 50
+        self.totalMoenyLabel.text = "฿\(self.totalMoney) "
+        self.activityIndicator.hidesWhenStopped = true
         
-        loadAddress()
-        loadCardData()
-        creditCardButton.on = true
-        print(totalPrize, cart)
-        totalMoney = totalPrize.values.reduce(0, +) + 50
-        totalMoenyLabel.text = "฿\(totalMoney) "
-        
-        activityIndicator.hidesWhenStopped = true
-        
-        
+
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -120,6 +120,7 @@ class SummaryViewController: UIViewController {
         
     }
     
+
     func sendDataToFirebase()  {
         let db = Firestore.firestore()
         let orderCollection = db.collection(K.tableName.orderCollection)
@@ -204,7 +205,9 @@ class SummaryViewController: UIViewController {
             DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
                 self.updateMoneyTotal()
             }
-            
+            DispatchQueue.main.asyncAfter(deadline: .now() + 3.5){
+               
+            }
             
             
             
@@ -218,46 +221,34 @@ class SummaryViewController: UIViewController {
                                               K.paymentCollection.totalPrice : totalMoney
         ])
         
-        
+        updateMoneyTotal()
     }
     // update money in each order
+
     func updateMoneyTotal(){
         let db = Firestore.firestore()
         for order in orderSepByVendor{
+            var eachStoreMoney = 0.0
+            for orderPrice in order.productInOrder{
+                eachStoreMoney = eachStoreMoney + orderPrice.realPrice
+            }
+            
             db.collection(K.tableName.orderCollection).whereField(K.order.orderID, isEqualTo: order.orderID).getDocuments { (querySnapshot, error) in
                 if let e = error{
-                    print(e.localizedDescription)
+                    print(1,e.localizedDescription)
                 }else{
                     if let snapShotDocuments = querySnapshot?.documents{
                         let data = snapShotDocuments[0].data() // got storeName
                         if let storeName = data[K.order.vendorName] as? String{
-                            
-                            db.collection(K.orderDetailCollection.orderDetailCollection).whereField(K.orderDetailCollection.orderID, isEqualTo: order.orderID).getDocuments { (querySnapshots, error) in
+                            db.collection(K.tableName.storeDetailTableName).whereField(K.storeDetail.storeName, isEqualTo: storeName).getDocuments { (query, error) in
                                 if let e = error{
-                                    print(e.localizedDescription)
+                                    print(3,e.localizedDescription)
                                 }else{
-                                    if let snapShotDocs = querySnapshots?.documents{
-                                        for doc in snapShotDocs{
-                                            let data = doc.data()
-                                            if let price = data[K.orderDetailCollection.priceInProduct] as? Double{
-                                                db.collection(K.storeDetail.moneyTotal).whereField(K.storeDetail.storeName, isEqualTo: storeName).getDocuments { (query, error) in
-                                                    if let e = error{
-                                                        print(e.localizedDescription)
-                                                    }else{
-                                                        if let snapShot = query?.documents{
-                                                            let data = snapShot[0].data()
-                                                            if let oldMoneyTotal = data[K.storeDetail.moneyTotal] as? Double{
-                                                                snapShot.first?.reference.updateData([
-                                                                            K.storeDetail.moneyTotal: oldMoneyTotal + price
-                                                                            ])
-                                                            }
-                                                           
-                                                        }
-                                                    }
-                                                }
-                                            }
-                                            
-                                        }
+                                    if let snapShot = query?.documents{
+                                        snapShot.first?.reference.updateData([
+                                            K.storeDetail.moneyTotal: eachStoreMoney
+                                        ])
+                                       
                                     }
                                 }
                             }

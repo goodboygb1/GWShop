@@ -107,11 +107,10 @@ class ProfileController:UIViewController {
                         for doc in snapShotData{
                             let data = doc.data()
                             if let dataSender = data[K.sender] as? String{
-                                
                                 if dataSender == emailSender{
                                     self.performSegue(withIdentifier: K.segue.meToMainStore, sender: self)
                                 }
-                                else{
+                                else if dataSender != emailSender{
                                     self.performSegue(withIdentifier: K.segue.meToCreateStore, sender: self)
                                 }
                             }
