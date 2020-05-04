@@ -61,6 +61,8 @@
 		A3B4E994245EE13500683578 /* SelectCreditCardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3B4E993245EE13500683578 /* SelectCreditCardViewController.swift */; };
 		A3C1C2E82460415100614FFE /* AllProductSoldInOneDayReportViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3C1C2E72460415100614FFE /* AllProductSoldInOneDayReportViewController.swift */; };
 		A3C1C2EA2460421700614FFE /* date.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3C1C2E92460421700614FFE /* date.swift */; };
+		A3C1C2F4246082D100614FFE /* ShowAllProductSellInOneDayTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3C1C2F3246082D100614FFE /* ShowAllProductSellInOneDayTableViewCell.swift */; };
+		A3C1C2F62460832100614FFE /* ShowAllProductViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3C1C2F52460832100614FFE /* ShowAllProductViewController.swift */; };
 		A3CB3BB524597F5200C9C0EC /* AddProductController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3CB3BB424597F5200C9C0EC /* AddProductController.swift */; };
 		A3FC91B424521C5100475F40 /* MeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3FC91B324521C5100475F40 /* MeViewController.swift */; };
 		A3FEBC0024523BB200E3827B /* splitWay.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A3FEBBFF24523BB200E3827B /* splitWay.storyboard */; };
@@ -138,6 +140,8 @@
 		A3B4E993245EE13500683578 /* SelectCreditCardViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectCreditCardViewController.swift; sourceTree = "<group>"; };
 		A3C1C2E72460415100614FFE /* AllProductSoldInOneDayReportViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AllProductSoldInOneDayReportViewController.swift; sourceTree = "<group>"; };
 		A3C1C2E92460421700614FFE /* date.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = date.swift; sourceTree = "<group>"; };
+		A3C1C2F3246082D100614FFE /* ShowAllProductSellInOneDayTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShowAllProductSellInOneDayTableViewCell.swift; sourceTree = "<group>"; };
+		A3C1C2F52460832100614FFE /* ShowAllProductViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShowAllProductViewController.swift; sourceTree = "<group>"; };
 		A3CB3BB424597F5200C9C0EC /* AddProductController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddProductController.swift; sourceTree = "<group>"; };
 		A3FC91B324521C5100475F40 /* MeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MeViewController.swift; sourceTree = "<group>"; };
 		A3FEBBFF24523BB200E3827B /* splitWay.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = splitWay.storyboard; sourceTree = "<group>"; };
@@ -181,6 +185,8 @@
 			isa = PBXGroup;
 			children = (
 				A3C1C2E72460415100614FFE /* AllProductSoldInOneDayReportViewController.swift */,
+				A3C1C2F52460832100614FFE /* ShowAllProductViewController.swift */,
+				A3C1C2F3246082D100614FFE /* ShowAllProductSellInOneDayTableViewCell.swift */,
 				A3FC91B324521C5100475F40 /* MeViewController.swift */,
 				A3CB3BB424597F5200C9C0EC /* AddProductController.swift */,
 				A3701914245C94F800D15549 /* AddPromotionInProductController.swift */,
@@ -443,6 +449,7 @@
 				A3FC91B424521C5100475F40 /* MeViewController.swift in Sources */,
 				A33A279E2450A04200810BC5 /* Constant.swift in Sources */,
 				A33A27832450995000810BC5 /* ViewController.swift in Sources */,
+				A3C1C2F4246082D100614FFE /* ShowAllProductSellInOneDayTableViewCell.swift in Sources */,
 				A33A279A24509FA100810BC5 /* RegisterViewController.swift in Sources */,
 				844AB1A824608DBE00738CC2 /* OrderedProduct.swift in Sources */,
 				843D384C245CB4AA000A96D2 /* CartViewController.swift in Sources */,
@@ -473,6 +480,7 @@
 				A3057A90245B48CF00AE9991 /* searchCell.swift in Sources */,
 				A372238D245F22A600B31B7A /* Order.swift in Sources */,
 				A3CB3BB524597F5200C9C0EC /* AddProductController.swift in Sources */,
+				A3C1C2F62460832100614FFE /* ShowAllProductViewController.swift in Sources */,
 				A37D03B2245E0B8000FA2283 /* ProductTableViewCell.swift in Sources */,
 				A3A6BF44245D75AA00B8934B /* presentAlert.swift in Sources */,
 				844AB1A6246088C700738CC2 /* SendProductViewController.swift in Sources */,

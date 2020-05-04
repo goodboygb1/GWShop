@@ -12,4 +12,6 @@ struct order {
     let orderID : String
     let productInOrder : [Cart]
     let orderStatus : Bool
+    let DateOfPerChase : String
+    let total : Double
 }
