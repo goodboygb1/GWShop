@@ -210,6 +210,8 @@ struct K {
         static let promotionID = "promotionID"
         static let addressID = "addressID"
         static let orderStatus = "orderStatus"
+        static let dateOfPurchase = "dateOfPurchase"
+        static let total = "total"
     }
     
     struct orderDetailCollection {

@@ -31,13 +31,14 @@ class SummaryViewController: UIViewController {
     var addressSelectedByUser : Address?
     var address : [Address] = []
     var addressDefult : Address? = nil
-    var totalPrize : [String: Double] = [:]
+    var totalPrize : [String: Double] = [:]         // total for each product
     var cart : [Cart] = []
     var creditCard : [Card] = []
     var creditCardDefault : Card? = nil
     var totalMoney : Double = 0
     var paymentMethod : String = ""
-    var delegate : reloadAfterFinishedOrder? 
+    var delegate : reloadAfterFinishedOrder?
+    var dateOfPurchase : String?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -56,7 +57,7 @@ class SummaryViewController: UIViewController {
         self.totalMoney = self.totalPrize.values.reduce(0, +) + 50
         self.totalMoenyLabel.text = "฿\(self.totalMoney) "
         self.activityIndicator.hidesWhenStopped = true
-        
+        dateOfPurchase = getCurrentDateTime()
 
     }
     
@@ -127,15 +128,20 @@ class SummaryViewController: UIViewController {
         let paymentID = (Auth.auth().currentUser?.email)!+String(Date().timeIntervalSince1970)
         // paymentID
         
+        
         for orderUpload in orderSepByVendor {
             // upload orderCollection
+            
             orderCollection.addDocument(data: [ K.order.orderID : orderUpload.orderID ,
                                                 K.order.vendorName : orderUpload.productInOrder[0].storeName,
                                                 K.order.userName : Auth.auth().currentUser?.email,
                                                 K.order.paymentID : paymentID,
                                                 K.order.phoneNumber : addressDefult?.phoneNumber,
                                                 K.order.addressID : addressDefult?.docID,
-                                                K.order.orderStatus : orderUpload.orderStatus
+                                                K.order.orderStatus : orderUpload.orderStatus,
+                                                K.order.dateOfPurchase : orderUpload.DateOfPerChase,
+                                                K.order.total : orderUpload.total
+                
             ]) { (error) in
                 
                 if let e = error {
@@ -213,11 +219,12 @@ class SummaryViewController: UIViewController {
             
         }
         // for upload payment collection
+        let datePurchase = getCurrentDateTime()
         let paymentCollection = db.collection(K.paymentCollection.paymentCollection)
         paymentCollection.addDocument(data: [ K.paymentCollection.paymentID : paymentID,
                                               K.paymentCollection.paymentMethod : paymentMethod,
                                               K.paymentCollection.cardNumber : creditCardDefault?.cardNumber ?? "",
-                                              K.paymentCollection.dateOfPurchase : getCurrentDateTime(),
+                                              K.paymentCollection.dateOfPurchase :datePurchase,
                                               K.paymentCollection.totalPrice : totalMoney
         ])
         
@@ -280,14 +287,21 @@ class SummaryViewController: UIViewController {
                 
                 let orderIDFor = randomString(length: 10) + String(Date().timeIntervalSince1970)
                 
-                let newOrder = order(orderID: orderIDFor, productInOrder: productSepByVender, orderStatus: false)
+                let newOrder = order(orderID: orderIDFor, productInOrder: productSepByVender, orderStatus: false, DateOfPerChase: dateOfPurchase! , total: findToTalInOrder(from: productSepByVender))
+                    
                 
                 orderSepByVendor.append(newOrder)
             }
         }
     }
     
-    
+    func findToTalInOrder(from productSep : [Cart]) -> Double {     // find total price in one order
+        var total : Double = 0.0
+        for product in productSep {
+            total += product.realPrice
+        }
+        return total
+    }
     
     func isVenderExistAlready(For vendorName : String) -> Bool {
         

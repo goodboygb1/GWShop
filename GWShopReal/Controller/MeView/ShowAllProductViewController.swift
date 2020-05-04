@@ -11,7 +11,7 @@ import UIKit
 class ShowAllProductViewController: UIViewController {
 
     
-    var dateSplitArray = [String] = []
+    var dateSplitArray : [String] = []
     
     
     
@@ -23,6 +23,9 @@ class ShowAllProductViewController: UIViewController {
 
     }
     
+    func loadData() {
+        
+    }
 
 
 }
