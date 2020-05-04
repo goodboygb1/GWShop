@@ -27,11 +27,11 @@ class SummaryViewController: UIViewController {
     var addressSelectedByUser : Address?
     var address : [Address] = []
     var addressDefult : Address? = nil
-    var totalPrize : [Double] = []
+    var totalPrize : [String: Double] = [:]
     var cart : [Cart] = []
     var creditCard : [Card] = []
     var creditCardDefault : Card? = nil
-    var totolMoney : Double = 0
+    var totalMoney : Double = 0
     var paymentMethod : String = ""
     
     
@@ -47,8 +47,9 @@ class SummaryViewController: UIViewController {
         loadAddress()
         loadCardData()
         creditCardButton.on = true
-        
-        totalMoenyLabel.text = "฿\(totolMoney) "
+        print(totalPrize, cart)
+        totalMoney = totalPrize.values.reduce(0, +) + 50
+        totalMoenyLabel.text = "฿\(totalMoney) "
         
         activityIndicator.hidesWhenStopped = true
        
@@ -142,14 +143,16 @@ class SummaryViewController: UIViewController {
                     // upload order detail collection
                     
                     let orderDetailCollection = db.collection(K.orderDetailCollection.orderDetailCollection)
-                    
+                    var totalPrizeEachProductIndex = 0
                     for productInOrder in orderUpload.productInOrder {
                         
                         orderDetailCollection.addDocument(data: [ K.orderDetailCollection.orderID : orderUpload.orderID,
-                        K.orderDetailCollection.productID : productInOrder.documentID,
-                        K.orderDetailCollection.quantity : productInOrder.numberProduct]) { (error) in
-                            
-                            self.activityIndicator.stopAnimating()
+                        K.orderDetailCollection.productID : productInOrder.productDocumentID,
+                        K.orderDetailCollection.quantity : productInOrder.numberProduct,
+                        K.orderDetailCollection.priceInProduct: self.totalPrize[productInOrder.productDocumentID]!
+                        ]) { (error) in
+                            totalPrizeEachProductIndex = totalPrizeEachProductIndex + 1
+                            self.activityIndicator.stopAnimating() 
                             let alert = UIAlertController(title: "Success", message: "Order success, Wating for amazing time" , preferredStyle:.alert)
                             let action = UIAlertAction(title: "Dismiss", style: .default) { (UIAlertAction) in
                                 self.navigationController?.popViewController(animated: true)
@@ -159,7 +162,22 @@ class SummaryViewController: UIViewController {
                             self.present(alert,animated: true,completion: nil)
                             }
                         
-                     
+                        let productDetailCollection = db.collection(K.productCollection.productCollection)
+                        productDetailCollection.document(productInOrder.productDocumentID).getDocument { (documentSnapshot, error) in
+                            if let e = error{
+                                print("Error while updating quantity data: \(e.localizedDescription)")
+                            }else{
+                                if let data = documentSnapshot?.data(){
+                                    if let quantity = data[K.productCollection.productQuantity] as? String{
+                                        let intQuantity = Int(quantity)
+                                        productDetailCollection.document(productInOrder.productDocumentID).updateData([
+                                            K.productCollection.productQuantity: String( intQuantity! - productInOrder.numberProduct)
+                                        ])
+                                    }
+                                }
+                                
+                            }
+                        }
                     
                     }
                 }
@@ -176,7 +194,7 @@ class SummaryViewController: UIViewController {
                                               K.paymentCollection.paymentMethod : paymentMethod,
                                               K.paymentCollection.cardNumber : creditCardDefault?.cardNumber ?? "",
                                               K.paymentCollection.dateOfPurchase : getCurrentDateTime(),
-                                              K.paymentCollection.totalPrice : totolMoney
+                                              K.paymentCollection.totalPrice : totalMoney
         ])
         
         
@@ -469,13 +487,14 @@ extension SummaryViewController : UITableViewDelegate,UITableViewDataSource {
                 
                 print("reload product table")
                 let productForCell = cart[indexPath.row]
-                let TotalForEachForCell = totalPrize[indexPath.row]
+                //let TotalForEachForCell = totalPrize.values[indexPath.row]
+                let TotalForEachForCell = totalPrize[cart[indexPath.row].productDocumentID]
                 let cell = productTableView.dequeueReusableCell(withIdentifier: K.identifierForTableView.productInSummary) as! ProductTableViewCell
                 
                 cell.productName.text = productForCell.productName
                 cell.priceForEach.text = ("\(productForCell.productPrice) ฿")
                 cell.quantity.text = String(productForCell.numberProduct)
-                cell.totalPriceForEach.text = String(TotalForEachForCell)
+                cell.totalPriceForEach.text = String(TotalForEachForCell!)
                 
                 return cell
                 

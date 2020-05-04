@@ -15,7 +15,7 @@ class CartViewController: UIViewController {
     
     var db = Firestore.firestore()
     var carts: [Cart] = []
-    var totalPrice: [Double] = []
+    var totalPrice: [String: Double] = [:]
     var NetPrice: Double = 0.0
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -42,7 +42,7 @@ class CartViewController: UIViewController {
                                     }else{
                                         let data = documentSnapshot?.data()
                                         if let productName = data![K.productCollection.productName] as? String{
-                                            self.carts.append(Cart(storeName: storeName, productName: productName, productPrice: productPrice, numberProduct: number, documentID: docID))
+                                            self.carts.append(Cart(storeName: storeName, productName: productName, productPrice: productPrice, numberProduct: number, documentID: docID,productDocumentID: productDocID))
                                             DispatchQueue.main.async {
                                                 self.cartTableView.reloadData()
                                             }
@@ -60,7 +60,7 @@ class CartViewController: UIViewController {
     }
     
     func loadTotalPrice(){
-        self.totalPrice = []
+        self.totalPrice = [:]
         if let emailSender = Auth.auth().currentUser?.email{
             db.collection(K.tableName.cartTableName).whereField(K.cartDetail.user, isEqualTo: emailSender).getDocuments { (querySnapshot, error) in
                 if let e = error{
@@ -69,26 +69,26 @@ class CartViewController: UIViewController {
                     if let snapShotDocuments = querySnapshot?.documents{
                         for doc in snapShotDocuments{
                             let data = doc.data()
-                            if let quantity = data[K.cartDetail.quantity] as? Int, let price = data[K.productCollection.productPrice] as? String,let promotionDocID = data[K.cartDetail.promotionDocID] as? String{
+                            if let quantity = data[K.cartDetail.quantity] as? Int, let price = data[K.productCollection.productPrice] as? String,let promotionDocID = data[K.cartDetail.promotionDocID] as? String, let productDocID = data[K.productCollection.productDocID] as? String{
                                 let priceInDoubleFormat = Double(price)
                                 let totalPricePerProduct = Double(quantity) * priceInDoubleFormat!
                                 if promotionDocID == ""{
-                                    self.totalPrice.append(totalPricePerProduct)
+                                    self.totalPrice[productDocID] = totalPricePerProduct
                                 }else{
                                     self.db.collection(K.tableName.promotionTableName).document(promotionDocID).getDocument { (documentSnapshot, error) in
                                         let data = documentSnapshot?.data()
                                         if let minimumPrice = data![K.promotion.minimumPrice] as? String, let discountPercent = data![K.promotion.discountPercent] as? Int{
                                             let minimumPriceInDoubleFormat = Double(minimumPrice)
                                             if minimumPriceInDoubleFormat! > totalPricePerProduct{
-                                                self.totalPrice.append(totalPricePerProduct)
+                                                self.totalPrice[productDocID] = totalPricePerProduct
                                             }else{
-                                                self.totalPrice.append(totalPricePerProduct - (totalPricePerProduct * (Double(discountPercent) / 100)))
+                                                self.totalPrice[productDocID] = totalPricePerProduct - (totalPricePerProduct * (Double(discountPercent) / 100))
                                             }
                                         }
-                                        self.totalPriceLabel.text = String(format: "%.2f", self.totalPrice.reduce(0, +))
+                                        self.totalPriceLabel.text = String(format: "%.2f", self.totalPrice.values.reduce(0, +))
                                     }
                                 }
-                                self.totalPriceLabel.text = String(format: "%.2f", self.totalPrice.reduce(0, +))
+                                self.totalPriceLabel.text = String(format: "%.2f", self.totalPrice.values.reduce(0, +))
                             }
                         }
                         
@@ -105,13 +105,13 @@ class CartViewController: UIViewController {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == K.segue.cartToSummary {
             let destinationVC = segue.destination as! SummaryViewController
-                destinationVC.totalPrize = totalPrice 
+            destinationVC.totalPrize = totalPrice
                 destinationVC.cart = carts
-            print(carts[0].productName)
+            /*print(carts[0].productName)
                    print(totalPrice[0])
                    
                    print(carts[1].productName)
-                   print(totalPrice[1])
+                   print(totalPrice[1])*/
         }
     }
 }

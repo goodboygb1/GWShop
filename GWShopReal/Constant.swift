@@ -214,6 +214,7 @@ struct K {
         static let orderID = "oderID"
         static let productID = "productID"
         static let quantity = "quantity"
+        static let priceInProduct = "price"
     }
 
     struct paymentCollection {
