@@ -464,7 +464,8 @@ class ProductDetail: UIViewController {         // for add product detail
                                         K.cartDetail.promotionDocID: self.selectedPromotionDocumentID[0],
                                         K.cartDetail.quantity: 1,
                                         K.storeDetail.storeName: self.productDetail.storeName,
-                                        K.productCollection.productPrice: self.productDetail.productPrice
+                                        K.productCollection.productPrice: self.productDetail.productPrice,
+                                        K.productCollection.productImageURL : self.productDetail.productImageURL
                                     ])
                                 self.navigationController?.popToRootViewController(animated: true)
                             }else if self.selectedPromotionDocumentID.count == 0{
@@ -474,7 +475,8 @@ class ProductDetail: UIViewController {         // for add product detail
                                     K.cartDetail.promotionDocID: "",
                                     K.cartDetail.quantity: 1,
                                     K.storeDetail.storeName: self.productDetail.storeName,
-                                    K.productCollection.productPrice: self.productDetail.productPrice
+                                    K.productCollection.productPrice: self.productDetail.productPrice,
+                                     K.productCollection.productImageURL : self.productDetail.productImageURL
                                 ])
                                 self.navigationController?.popToRootViewController(animated: true)
                             }else{

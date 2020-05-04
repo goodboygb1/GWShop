@@ -8,8 +8,9 @@
 
 import UIKit
 import Firebase
-class CartViewController: UIViewController {
-
+class CartViewController: UIViewController, reloadAfterFinishedOrder {
+    
+    
     @IBOutlet weak var cartTableView: UITableView!
     @IBOutlet weak var totalPriceLabel: UILabel!
     
@@ -17,12 +18,25 @@ class CartViewController: UIViewController {
     var carts: [Cart] = []
     var totalPrice: [String: Double] = [:]
     var NetPrice: Double = 0.0
+   
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         cartTableView.dataSource = self
         loadCartData()
         loadTotalPrice()
+        
     }
+    
+    func reloadTable() {
+       carts = []
+       cartTableView.reloadData()
+        
+        totalPrice = [:]
+        totalPriceLabel.text = String(0)
+        
+    }
+    
     
     func loadCartData() {
         if let emailSender = Auth.auth().currentUser?.email{
@@ -35,14 +49,18 @@ class CartViewController: UIViewController {
                         for cart in snapShotDocuments{
                             let data = cart.data()
                             let docID = cart.documentID
-                            if let storeName = data[K.storeDetail.storeName] as? String, let productPrice = data[K.productCollection.productPrice] as? String,let number = data[K.cartDetail.quantity] as? Int,let productDocID = data[K.cartDetail.productDocID] as? String{
+                            if let storeName = data[K.storeDetail.storeName] as? String, let productPrice = data[K.productCollection.productPrice] as? String,
+                                let number = data[K.cartDetail.quantity] as? Int,
+                                let productDocID = data[K.cartDetail.productDocID] as? String,
+                                let imageURL = data[K.productCollection.productImageURL] as? String
+                            {
                                 self.db.collection(K.productCollection.productCollection).document(productDocID).getDocument { (documentSnapshot, error) in
                                     if let e = error{
                                         print("error while loading product name: \(e.localizedDescription)")
                                     }else{
                                         let data = documentSnapshot?.data()
                                         if let productName = data![K.productCollection.productName] as? String{
-                                            self.carts.append(Cart(storeName: storeName, productName: productName, productPrice: productPrice, numberProduct: number, documentID: docID,productDocumentID: productDocID))
+                                            self.carts.append(Cart(storeName: storeName, productName: productName, productPrice: productPrice, numberProduct: number, documentID: docID,productDocumentID: productDocID, imageURL: imageURL))
                                             DispatchQueue.main.async {
                                                 self.cartTableView.reloadData()
                                             }
@@ -106,12 +124,9 @@ class CartViewController: UIViewController {
         if segue.identifier == K.segue.cartToSummary {
             let destinationVC = segue.destination as! SummaryViewController
             destinationVC.totalPrize = totalPrice
-                destinationVC.cart = carts
-            /*print(carts[0].productName)
-                   print(totalPrice[0])
-                   
-                   print(carts[1].productName)
-                   print(totalPrice[1])*/
+            destinationVC.cart = carts
+            destinationVC.delegate = self
+            
         }
     }
 }
@@ -135,7 +150,7 @@ extension CartViewController: UITableViewDataSource{
         cartCell.delegate = self
         return cartCell
     }
-
+    
 }
 
 extension CartViewController:CartCellDelegate{
@@ -164,7 +179,7 @@ class CartTableViewCell:UITableViewCell{
     @IBOutlet weak var numberLabel: UILabel!
     @IBOutlet weak var productImageView: UIImageView!
     @IBOutlet weak var cartDocumentIDLabel: UILabel!
-
+    
     @IBOutlet weak var numberStepper: UIStepper!
     
     var delegate: CartCellDelegate?

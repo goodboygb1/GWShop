@@ -22,4 +22,5 @@ class ProductTableViewCell: UITableViewCell {
     
     @IBOutlet weak var totalPriceForEach: UILabel!
     
+    @IBOutlet weak var productImage: UIImageView!
 }

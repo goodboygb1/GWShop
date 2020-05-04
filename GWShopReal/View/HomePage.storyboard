@@ -1342,6 +1342,7 @@
                                                         </tableViewCellContentView>
                                                         <connections>
                                                             <outlet property="priceForEach" destination="xcC-FS-jtp" id="pZq-U3-0Dr"/>
+                                                            <outlet property="productImage" destination="ZOw-Me-ic7" id="awM-LE-JBY"/>
                                                             <outlet property="productName" destination="voT-hm-g1l" id="Rg0-gP-Io3"/>
                                                             <outlet property="quantity" destination="TQS-aO-HM6" id="0bP-Ms-ZPb"/>
                                                             <outlet property="totalPriceForEach" destination="Bn4-lp-pBb" id="8HC-EC-Vge"/>

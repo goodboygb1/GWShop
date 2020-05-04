@@ -207,6 +207,7 @@ struct K {
         static let phoneNumber = "phoneNumber"
         static let promotionID = "promotionID"
         static let addressID = "addressID"
+        static let orderStatus = "orderStatus"
     }
     
     struct orderDetailCollection {

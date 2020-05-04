@@ -11,6 +11,10 @@ import Firebase
 import Kingfisher
 import BEMCheckBox
 
+protocol reloadAfterFinishedOrder {
+    func reloadTable()
+}
+
 class SummaryViewController: UIViewController {
     
     @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
@@ -33,7 +37,7 @@ class SummaryViewController: UIViewController {
     var creditCardDefault : Card? = nil
     var totalMoney : Double = 0
     var paymentMethod : String = ""
-    
+    var delegate : reloadAfterFinishedOrder? 
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -52,7 +56,7 @@ class SummaryViewController: UIViewController {
         totalMoenyLabel.text = "฿\(totalMoney) "
         
         activityIndicator.hidesWhenStopped = true
-       
+        
         
     }
     
@@ -107,11 +111,6 @@ class SummaryViewController: UIViewController {
             sendDataToFirebase()
             activityIndicator.startAnimating()
             
-            
-            
-            
-            
-            
         } else {
             print("order is empty")
             presentAlert(title: "Empty Cart", message: "Please add something to cart", actiontitle: "Dismiss")
@@ -135,6 +134,7 @@ class SummaryViewController: UIViewController {
                                                 K.order.paymentID : paymentID,
                                                 K.order.phoneNumber : addressDefult?.phoneNumber,
                                                 K.order.addressID : addressDefult?.docID,
+                                                K.order.orderStatus : orderUpload.orderStatus
             ]) { (error) in
                 
                 if let e = error {
@@ -147,20 +147,13 @@ class SummaryViewController: UIViewController {
                     for productInOrder in orderUpload.productInOrder {
                         
                         orderDetailCollection.addDocument(data: [ K.orderDetailCollection.orderID : orderUpload.orderID,
-                        K.orderDetailCollection.productID : productInOrder.productDocumentID,
-                        K.orderDetailCollection.quantity : productInOrder.numberProduct,
-                        K.orderDetailCollection.priceInProduct: self.totalPrize[productInOrder.productDocumentID]!
+                                                                  K.orderDetailCollection.productID : productInOrder.productDocumentID,
+                                                                  K.orderDetailCollection.quantity : productInOrder.numberProduct,
+                                                                  K.orderDetailCollection.priceInProduct: self.totalPrize[productInOrder.productDocumentID]!
                         ]) { (error) in
                             totalPrizeEachProductIndex = totalPrizeEachProductIndex + 1
-                            self.activityIndicator.stopAnimating() 
-                            let alert = UIAlertController(title: "Success", message: "Order success, Wating for amazing time" , preferredStyle:.alert)
-                            let action = UIAlertAction(title: "Dismiss", style: .default) { (UIAlertAction) in
-                                self.navigationController?.popViewController(animated: true)
-                            }
                             
-                            alert.addAction(action)
-                            self.present(alert,animated: true,completion: nil)
-                            }
+                        }
                         
                         let productDetailCollection = db.collection(K.productCollection.productCollection)
                         productDetailCollection.document(productInOrder.productDocumentID).getDocument { (documentSnapshot, error) in
@@ -172,13 +165,41 @@ class SummaryViewController: UIViewController {
                                         let intQuantity = Int(quantity)
                                         productDetailCollection.document(productInOrder.productDocumentID).updateData([
                                             K.productCollection.productQuantity: String( intQuantity! - productInOrder.numberProduct)
-                                        ])
+                                        ]) { (error) in
+                                            if let e = error {
+                                                print(e.localizedDescription)
+                                            } else {
+                                                let cartCol = db.collection(K.tableName.cartTableName)
+                                                cartCol.document(productInOrder.documentID).delete { (error) in
+                                                    if  let e = error {
+                                                        print("delete failed")
+                                                    } else {
+                                                        self.activityIndicator.stopAnimating()
+                                                        let alert = UIAlertController(title: "สำเร็จ", message: "ออเดอร์จะถูกจัดส่งจากร้านค้า" , preferredStyle:.alert)
+                                                        let action = UIAlertAction(title: "Dismiss", style: .default) { (UIAlertAction) in
+                                                            
+                                                            if let delegate = self.delegate?.reloadTable()
+                                                            {
+                                                                print("reload delegate success")
+                                                            } else {
+                                                                print("reload delegate error")
+                                                            }
+                                                            
+                                                            self.navigationController?.popViewController(animated: true)
+                                                        }
+                                                        
+                                                        alert.addAction(action)
+                                                        self.present(alert,animated: true,completion: nil)
+                                                    }
+                                                }
+                                            }
+                                        }
                                     }
                                 }
                                 
                             }
                         }
-                    
+                        
                     }
                 }
             }
@@ -220,14 +241,14 @@ class SummaryViewController: UIViewController {
                 
                 let orderIDFor = randomString(length: 10) + String(Date().timeIntervalSince1970)
                 
-                let newOrder = order(orderID: orderIDFor, productInOrder: productSepByVender)
+                let newOrder = order(orderID: orderIDFor, productInOrder: productSepByVender, orderStatus: false)
                 
                 orderSepByVendor.append(newOrder)
             }
         }
     }
     
-   
+    
     
     func isVenderExistAlready(For vendorName : String) -> Bool {
         
@@ -402,21 +423,21 @@ class SummaryViewController: UIViewController {
     }
     
     func randomString(length: Int) -> String {
-           let letters = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789"
-           return String((0..<length).map{ _ in letters.randomElement()! })
-       }
+        let letters = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789"
+        return String((0..<length).map{ _ in letters.randomElement()! })
+    }
     
     
     func getCurrentDateTime() -> String {
-       
+        
         let currentDateTime = Date()            // get current time
-            
+        
         let formatter = DateFormatter()         // set format and style
         formatter.timeStyle = .medium
         formatter.dateStyle = .long
         
         let dateAndTimeString = formatter.string(from: currentDateTime)
-                                                // get date from object
+        // get date from object
         return dateAndTimeString
     }
 }
@@ -490,7 +511,9 @@ extension SummaryViewController : UITableViewDelegate,UITableViewDataSource {
                 //let TotalForEachForCell = totalPrize.values[indexPath.row]
                 let TotalForEachForCell = totalPrize[cart[indexPath.row].productDocumentID]
                 let cell = productTableView.dequeueReusableCell(withIdentifier: K.identifierForTableView.productInSummary) as! ProductTableViewCell
-                
+                let url = URL(string: productForCell.imageURL)!
+                let resource = ImageResource(downloadURL: url)
+                cell.productImage.kf.setImage(with: url)
                 cell.productName.text = productForCell.productName
                 cell.priceForEach.text = ("\(productForCell.productPrice) ฿")
                 cell.quantity.text = String(productForCell.numberProduct)
@@ -532,8 +555,7 @@ extension SummaryViewController : changeAddressDelegate,changeCreditCardDelegate
         addressDefult = From
         addressTableView.reloadData()
     }
-   
-    
-    
-    
 }
+
+
+

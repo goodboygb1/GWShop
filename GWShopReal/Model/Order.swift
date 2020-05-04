@@ -11,4 +11,5 @@ import Foundation
 struct order {
     let orderID : String
     let productInOrder : [Cart]
+    let orderStatus : Bool
 }
