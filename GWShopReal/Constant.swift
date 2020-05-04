@@ -71,6 +71,7 @@ struct K {
         static let categoryToCartSegue = "categoryToCart"
         static let cartToSummary = "cartToSummary"
         static let summaryToSelectCreditCard = "summaryToSelectCreditCard"
+        static let listOrderToOrderDetail = "listOrderToOrderDetail"
     }
     
     struct identifierForTableView{
@@ -95,6 +96,8 @@ struct K {
         static let productInSummary = "productInSummary"
         static let creditCardinSummary = "creditCardinSummary"
         static let SelectedCreditCardCell = "SelectedCreditCardCell"
+        static let orderInSendProduct = "orderInSendProduct"
+        static let orderDetailIdentifier = "orderDetailIdentifier"
 
     }
     struct cardDetail{
@@ -208,6 +211,7 @@ struct K {
         static let promotionID = "promotionID"
         static let addressID = "addressID"
         static let orderStatus = "orderStatus"
+        static let dateOfPurchase = "dateOfPurchase"
     }
     
     struct orderDetailCollection {
