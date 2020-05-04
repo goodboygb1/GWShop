@@ -154,7 +154,6 @@ class SummaryViewController: UIViewController {
                             totalPrizeEachProductIndex = totalPrizeEachProductIndex + 1
                             
                         }
-                        
                         let productDetailCollection = db.collection(K.productCollection.productCollection)
                         productDetailCollection.document(productInOrder.productDocumentID).getDocument { (documentSnapshot, error) in
                             if let e = error{
@@ -196,14 +195,15 @@ class SummaryViewController: UIViewController {
                                         }
                                     }
                                 }
-                                
                             }
                         }
-                        
                     }
                 }
             }
             
+            DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
+                self.updateMoneyTotal()
+            }
             
             
             
@@ -220,6 +220,54 @@ class SummaryViewController: UIViewController {
         
         
     }
+    // update money in each order
+    func updateMoneyTotal(){
+        let db = Firestore.firestore()
+        for order in orderSepByVendor{
+            db.collection(K.tableName.orderCollection).whereField(K.order.orderID, isEqualTo: order.orderID).getDocuments { (querySnapshot, error) in
+                if let e = error{
+                    print(e.localizedDescription)
+                }else{
+                    if let snapShotDocuments = querySnapshot?.documents{
+                        let data = snapShotDocuments[0].data() // got storeName
+                        if let storeName = data[K.order.vendorName] as? String{
+                            
+                            db.collection(K.orderDetailCollection.orderDetailCollection).whereField(K.orderDetailCollection.orderID, isEqualTo: order.orderID).getDocuments { (querySnapshots, error) in
+                                if let e = error{
+                                    print(e.localizedDescription)
+                                }else{
+                                    if let snapShotDocs = querySnapshots?.documents{
+                                        for doc in snapShotDocs{
+                                            let data = doc.data()
+                                            if let price = data[K.orderDetailCollection.priceInProduct] as? Double{
+                                                db.collection(K.storeDetail.moneyTotal).whereField(K.storeDetail.storeName, isEqualTo: storeName).getDocuments { (query, error) in
+                                                    if let e = error{
+                                                        print(e.localizedDescription)
+                                                    }else{
+                                                        if let snapShot = query?.documents{
+                                                            let data = snapShot[0].data()
+                                                            if let oldMoneyTotal = data[K.storeDetail.moneyTotal] as? Double{
+                                                                snapShot.first?.reference.updateData([
+                                                                            K.storeDetail.moneyTotal: oldMoneyTotal + price
+                                                                            ])
+                                                            }
+                                                           
+                                                        }
+                                                    }
+                                                }
+                                            }
+                                            
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+    
     
     var orderSepByVendor : [order] = []          // order array
     
