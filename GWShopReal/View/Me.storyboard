@@ -3234,7 +3234,7 @@
         <!--รายงาน-->
         <scene sceneID="n6m-DF-2Mh">
             <objects>
-                <viewController id="0y4-q3-tcc" sceneMemberID="viewController">
+                <viewController id="0y4-q3-tcc" customClass="ReportViewController" customModule="GWShopReal" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="Kz6-bs-lR1">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -3276,6 +3276,7 @@
                                 <rect key="frame" x="0.0" y="368" width="375" height="59"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <connections>
+                                    <action selector="topFivePressed:" destination="0y4-q3-tcc" eventType="touchUpInside" id="kQO-jX-izt"/>
                                     <segue destination="MXT-kj-4Ze" kind="show" identifier="topFiveProductInMonth" id="iBQ-T7-YaL"/>
                                 </connections>
                             </button>
