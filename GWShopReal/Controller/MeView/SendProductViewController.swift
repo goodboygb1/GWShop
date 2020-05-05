@@ -106,6 +106,7 @@ class ShowOrderDetailViewController:UIViewController{
     @IBOutlet weak var postCodeLabel: UILabel!
     @IBOutlet weak var nameLabel: UILabel!
     @IBOutlet weak var phoneNumberLabel: UILabel!
+    @IBOutlet weak var dateOfPurchasedLabel: UILabel!
     
     var orderedProduct: OrderedProduct!
     var orderedProductDetail: [OrderedProductDetail] = []
@@ -115,11 +116,14 @@ class ShowOrderDetailViewController:UIViewController{
         super.viewDidLoad()
         orderDetailTableView.dataSource = self
         orderDetailTableView.delegate = self
+        
         loadEachData()
     }
     
     func loadEachData(){
         orderedProductDetail = []
+        let dateArray = orderedProduct.datePurchased.components(separatedBy: " ")
+        dateOfPurchasedLabel.text = "\(dateArray[0]) \(dateArray[1]) \(dateArray[3])"
         db.collection(K.tableName.addressTableName).document(orderedProduct.addressID).getDocument { (documents, error) in
             if let e = error{
                 print(e.localizedDescription)

@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		8433D16924570A77003C59E5 /* Address.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8433D16824570A77003C59E5 /* Address.swift */; };
+		84340E5624613C1100CB2CC1 /* TopFiveProductController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84340E5524613C1100CB2CC1 /* TopFiveProductController.swift */; };
+		84340E59246141FF00CB2CC1 /* TopFiveProduct.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84340E58246141FF00CB2CC1 /* TopFiveProduct.swift */; };
 		8436DBC9245174EE00956EDA /* Pods_GWShopReal.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 22955FD222D677EA13792783 /* Pods_GWShopReal.framework */; };
 		8436DBCA245174EE00956EDA /* Pods_GWShopReal.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 22955FD222D677EA13792783 /* Pods_GWShopReal.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		843723EC245D5E9C00C35A3A /* Cart.swift in Sources */ = {isa = PBXBuildFile; fileRef = 843723EB245D5E9C00C35A3A /* Cart.swift */; };
@@ -86,6 +88,8 @@
 		22955FD222D677EA13792783 /* Pods_GWShopReal.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_GWShopReal.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		6649F8358CCAC210AAB18B18 /* Pods-GWShopReal.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GWShopReal.release.xcconfig"; path = "Target Support Files/Pods-GWShopReal/Pods-GWShopReal.release.xcconfig"; sourceTree = "<group>"; };
 		8433D16824570A77003C59E5 /* Address.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Address.swift; sourceTree = "<group>"; };
+		84340E5524613C1100CB2CC1 /* TopFiveProductController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopFiveProductController.swift; sourceTree = "<group>"; };
+		84340E58246141FF00CB2CC1 /* TopFiveProduct.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopFiveProduct.swift; sourceTree = "<group>"; };
 		843723EB245D5E9C00C35A3A /* Cart.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Cart.swift; sourceTree = "<group>"; };
 		843B267D245B527F00248175 /* Promotion.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Promotion.swift; sourceTree = "<group>"; };
 		843D3849245C9494000A96D2 /* AddPromotionInProductController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddPromotionInProductController.swift; sourceTree = SOURCE_ROOT; };
@@ -195,6 +199,7 @@
 				A3119578245AE29C006F6784 /* PromotionController.swift */,
 				843D3849245C9494000A96D2 /* AddPromotionInProductController.swift */,
 				844AB1A5246088C700738CC2 /* SendProductViewController.swift */,
+				84340E5524613C1100CB2CC1 /* TopFiveProductController.swift */,
 			);
 			path = MeView;
 			sourceTree = "<group>";
@@ -288,6 +293,7 @@
 				843B267D245B527F00248175 /* Promotion.swift */,
 				A3C1C2E92460421700614FFE /* date.swift */,
 				844AB1A724608DBE00738CC2 /* OrderedProduct.swift */,
+				84340E58246141FF00CB2CC1 /* TopFiveProduct.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -466,6 +472,7 @@
 				A3A6BF3C245D6FA000B8934B /* SummaryAddressViewCell.swift in Sources */,
 				8490DB2B24585E1600A2BD88 /* Card.swift in Sources */,
 				A3057A7E245B271700AE9991 /* addProductInAddPromotionCell.swift in Sources */,
+				84340E59246141FF00CB2CC1 /* TopFiveProduct.swift in Sources */,
 				A33A279C24509FAE00810BC5 /* MainViewController.swift in Sources */,
 				843D384A245C9494000A96D2 /* AddPromotionInProductController.swift in Sources */,
 				A37003DE2450CB08002B0066 /* userDetail.swift in Sources */,
@@ -479,6 +486,7 @@
 				A33A27812450995000810BC5 /* SceneDelegate.swift in Sources */,
 				A3057A90245B48CF00AE9991 /* searchCell.swift in Sources */,
 				A372238D245F22A600B31B7A /* Order.swift in Sources */,
+				84340E5624613C1100CB2CC1 /* TopFiveProductController.swift in Sources */,
 				A3CB3BB524597F5200C9C0EC /* AddProductController.swift in Sources */,
 				A3C1C2F62460832100614FFE /* ShowAllProductViewController.swift in Sources */,
 				A37D03B2245E0B8000FA2283 /* ProductTableViewCell.swift in Sources */,
