@@ -23,6 +23,7 @@ class RegisterViewController: UIViewController{
     @IBOutlet weak var dateTextField: UITextField!
     @IBOutlet weak var genderSegment: UISegmentedControl!
     
+    @IBOutlet weak var registerLabel: UIButton!
     var gender : String!
     let db = Firestore.firestore()
     var user: userDetail!
@@ -31,6 +32,8 @@ class RegisterViewController: UIViewController{
     override func viewDidLoad() {
         super.viewDidLoad()
         gender = genderSegment.titleForSegment(at: genderSegment.selectedSegmentIndex)!
+        registerLabel.layer.cornerRadius = registerLabel.frame.size.height/5
+        
     }
     
     @IBAction func showDatePicker(_ sender: UITextField) {
@@ -114,7 +117,8 @@ class RegisterViewController: UIViewController{
                                 K.gender : self.gender!,
                                 K.phoneNumber : self.phoneNumberTextField.text!,
                                 K.dateOfBirth : self.dateTextField.text!,
-                                K.sender : email
+                                K.sender : email,
+                                K.imageURL : ""
                         ]
                         
                         self.db.collection(K.userDetailCollection).addDocument(data:  detailForSendToFirebase) { (error) in
@@ -168,6 +172,9 @@ class RegisterViewController: UIViewController{
             
         }
     }
+    
+    
+       
 
     
     func userDetailIsNotNilFunction() -> Bool { // เช็คว่ากรอกครบทุกช่องแล้ว

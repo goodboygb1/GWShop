@@ -12,8 +12,17 @@ import Kingfisher
 
 class OrderDetailViewController: UIViewController {
     
-    var orderForQuery : OrderedProduct?     //รับมาจากหน้าที่แล้ว
+    @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
+    @IBOutlet weak var phoneNumberLabel: UILabel!
+    @IBOutlet weak var datePurchaseLabel: UILabel!
+    @IBOutlet weak var nameLabel: UILabel!
+    @IBOutlet weak var addressLabel: UILabel!
+    @IBOutlet weak var provienceLabel: UILabel!
+    @IBOutlet weak var postCodeLabel: UILabel!
+    
+    var orderForQuery : OrderedProduct?                                 //รับมาจากหน้าที่แล้ว
     var orderDetailForShow : [OrderedProductDetail] = []                // cart for show
+    var addressForLabel : Address?
     
     @IBOutlet weak var orderDetailTableView: UITableView!
     
@@ -24,7 +33,7 @@ class OrderDetailViewController: UIViewController {
         orderDetailTableView.delegate = self
         orderDetailTableView.dataSource = self
         loadOrder(from: orderIDForQuery!)
-       
+        activityIndicator.hidesWhenStopped = true
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -41,6 +50,7 @@ class OrderDetailViewController: UIViewController {
     
     func loadOrder(from orderIDForQuery : String)  {
         
+        activityIndicator.startAnimating()
         let db = Firestore.firestore()
         let orderDetailCollection = db.collection(K.orderDetailCollection.orderDetailCollection)
         
@@ -81,7 +91,9 @@ class OrderDetailViewController: UIViewController {
                                                     DispatchQueue.main.async {
                                                         self.orderDetailTableView.reloadData()
                                                     }
+                                                    self.loadAddress()
                                                 }
+                                            self.activityIndicator.stopAnimating()
                                             
                                         }
                                     }
@@ -100,6 +112,38 @@ class OrderDetailViewController: UIViewController {
             }
         }
         
+    func loadAddress()  {
+        let db = Firestore.firestore()
+        let addressCollection = db.collection(K.tableName.addressTableName)
+        addressCollection.document(orderForQuery!.addressID).getDocument { (snapshotQuery, error) in
+            if let e = error {
+                print(e.localizedDescription)
+            } else {
+                if let data = snapshotQuery?.data() {
+                    if let firstName = data[K.firstName] as? String,
+                        let lastName = data[K.surname] as? String,
+                        let addressDetail = data[K.addressDetail] as? String,
+                        let province = data[K.province] as? String,
+                        let district = data[K.district] as? String,
+                        let postCode = data[K.postCode] as? String,
+                        let phoneNumber = data[K.phoneNumber] as? String
+                    {
+                        
+                        DispatchQueue.main.async {
+                            self.nameLabel.text = "\(firstName) \(lastName)"
+                            self.phoneNumberLabel.text = phoneNumber
+                            self.addressLabel.text = addressDetail
+                            self.provienceLabel.text = "\(province) \(district)"
+                            self.postCodeLabel.text = postCode
+                            self.datePurchaseLabel.text = self.orderForQuery?.datePurchased
+                        }
+                        
+                        
+                    }
+                }
+            }
+        }
+    }
         
     }
 

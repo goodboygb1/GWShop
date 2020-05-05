@@ -19,5 +19,6 @@ struct userDetail {
         let province : String
         let district : String
         let postCode : Int
+    let imageURL : String
     }
 

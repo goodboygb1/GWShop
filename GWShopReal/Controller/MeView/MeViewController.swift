@@ -8,6 +8,7 @@
 
 import UIKit
 import Firebase
+import Kingfisher
 
 
 class ProfileController:UIViewController {
@@ -20,6 +21,10 @@ class ProfileController:UIViewController {
     @IBOutlet weak var dateOfBirthLabel: UILabel!
     @IBOutlet weak var phoneNumberLabel: UILabel!
     @IBOutlet weak var headerNameLabel: UILabel!
+    @IBOutlet weak var showAddressLabel: UIButton!
+    @IBOutlet weak var showCreditCardLabel: UIButton!
+    @IBOutlet weak var logOutLabel: UIButton!
+    
     
     var db = Firestore.firestore()
     var user: [userDetail] = []
@@ -38,7 +43,9 @@ class ProfileController:UIViewController {
         navigationController?.setNavigationBarHidden(false, animated: animated)
         navigationItem.setHidesBackButton(false, animated: animated)
         tabBarController?.tabBar.isHidden = true
-        
+        showAddressLabel.layer.cornerRadius = showAddressLabel.frame.size.height/5
+        showCreditCardLabel.layer.cornerRadius = showCreditCardLabel.frame.size.height/5
+        logOutLabel.layer.cornerRadius = logOutLabel.frame.size.height/5
     }
     
     override func viewDidLoad() {
@@ -72,7 +79,15 @@ class ProfileController:UIViewController {
                                 let lastName = data[K.surname] as? String,
                                 let gender = data[K.gender] as? String,
                                 let dob = data[K.dateOfBirth] as? String,
-                                let phoneNumber = data[K.phoneNumber] as? String {
+                                let phoneNumber = data[K.phoneNumber] as? String,
+                                let ImageURL = data[K.imageURL] as? String {
+                                
+                                if let url = URL(string: ImageURL) {
+                                let resource = ImageResource(downloadURL: url)
+                                    DispatchQueue.main.async {
+                                         self.profileImageView.kf.setImage(with: resource)
+                                    }
+                                }
                                 DispatchQueue.main.async {
                                     self.headerNameLabel.text = "\(firstName) \(lastName)"
                                     self.emailLabel.text = email
@@ -81,6 +96,7 @@ class ProfileController:UIViewController {
                                     self.genderLabel.text = gender
                                     self.dateOfBirthLabel.text = dob
                                     self.phoneNumberLabel.text = phoneNumber
+                                   
                                 }
                             }
                         }
@@ -274,7 +290,8 @@ class AddressCell: UITableViewCell {
     
 }
 
-class EditProfileController: UIViewController{
+class EditProfileController: UIViewController,UIImagePickerControllerDelegate,UINavigationControllerDelegate {
+    
     @IBOutlet weak var newProfileImageView: UIImageView!
     @IBOutlet weak var firstNameTextField: UITextField!
     @IBOutlet weak var lastNameTextField: UITextField!
@@ -282,17 +299,147 @@ class EditProfileController: UIViewController{
     @IBOutlet weak var dateOfBirthTextField: UITextField!
     @IBOutlet weak var phoneNumberTextField: UITextField!
     
+    @IBOutlet weak var addImageLabel: UIButton!
+    
+    @IBOutlet weak var submitbutton: UIButton!
+    
     var db = Firestore.firestore()
     var gender: String!
+    var imageForUpload : UIImage? = nil
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        addImageLabel.layer.cornerRadius = addImageLabel.frame.size.height/5
+        
+        submitbutton.layer.cornerRadius = submitbutton.frame.size.height/5
+        
         gender = genderSegment.titleForSegment(at: genderSegment.selectedSegmentIndex)
     }
+    
+    @IBAction func selectImageButton(_ sender: Any) {
+        
+        let imagePickerController = UIImagePickerController()
+        imagePickerController.delegate = self
+        
+        let actionSheet = UIAlertController(title: "Select Image", message: "Please select source", preferredStyle: .actionSheet)
+        
+        let cameraAction = UIAlertAction(title: "Camera", style: .default) { (action:UIAlertAction) in
+            if UIImagePickerController.isSourceTypeAvailable(.camera) {
+                imagePickerController.sourceType = .camera
+                self.present(imagePickerController, animated: true, completion: nil)
+            } else {
+                print("camera not avaliable")
+            }
+        }
+        
+        let libAction = UIAlertAction(title: "Photo Library", style: .default) { (action:UIAlertAction) in
+            if UIImagePickerController.isSourceTypeAvailable(.photoLibrary) {
+                imagePickerController.sourceType = .camera
+                self.present(imagePickerController, animated: true, completion: nil)
+            } else {
+                print("album not avaliable")
+            }
+        }
+        
+        let cancleAction = UIAlertAction(title: "Cancle", style: .default, handler: nil)
+        
+        actionSheet.addAction(cameraAction)
+        actionSheet.addAction(libAction)
+        actionSheet.addAction(cancleAction)
+        
+        self.present(actionSheet,animated: true,completion: nil)
+    }
+    
+    
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
+        let imageForUser = info[.originalImage] as! UIImage
+        imageForUpload = imageForUser
+        
+        newProfileImageView.image = imageForUser
+        picker.dismiss(animated: true, completion: nil)
+    }
+    
+    func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
+        picker.dismiss(animated: true, completion: nil)
+    }
+    
+    
     @IBAction func genderChoosed(_ sender: UISegmentedControl) {
         gender = genderSegment.titleForSegment(at: genderSegment.selectedSegmentIndex)
     }
     
+    func presentAlert(title:String,message:String,actiontitle:String)  {
+        
+        // for show alert to user
+        
+        let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
+        let action = UIAlertAction(title: actiontitle, style: .default, handler: nil)
+        
+        alert.addAction(action)
+        self.present(alert, animated: true, completion: nil)
+    }
+    
     @IBAction func submitPressed(_ sender: UIButton) {
+        
+        uploadImage()
+    }
+    
+    func uploadImage()  {
+        
+       
+        guard let imageSelect = self.imageForUpload else {     //add image for upload
+            print("Image is nil")
+            presentAlert(title: "Image Error", message: "Please select image", actiontitle: "Dismiss")
+            return
+        }
+        
+        guard let imageData = imageSelect.jpegData(compressionQuality: 0.5) else {
+            // convert image to jpeg
+            
+            presentAlert(title: "Image Error", message: "Can't convert Image", actiontitle: "Dismiss")
+            return
+        }
+        
+        let storageRef = Storage.storage().reference(forURL:"gs://gwshopreal-47f16.appspot.com")               // add link to upload
+        
+        let storageProductRef = storageRef.child("ProfileImage").child("\(Auth.auth().currentUser?.email)+\(Date().timeIntervalSince1970)")          // path for upload
+        
+        let metaData  = StorageMetadata()                      // set meta data
+        metaData.contentType = "image/jpg"
+        
+        storageProductRef.putData(imageData, metadata: metaData) { (storageMetaData, error) in                                          // upload file
+            
+            if let errorFromPut = error {                      // upload failed
+                self.presentAlert(title: "Error Upload Image", message: error?.localizedDescription ?? "error", actiontitle: "Dismiss")
+                print(errorFromPut.localizedDescription)
+                
+            } else {                                           // upload success
+                print("put success")
+                
+                storageProductRef.downloadURL { (url, error) in     // download URL
+                    
+                    if let metaImageURL = url?.absoluteString {     // change URL TO String
+                        
+                        
+                       self.uploadDataToFireBase(imageURL: metaImageURL)                           // update others                                                  information
+                        // add picture first
+                        // picture use long time
+                        
+                    } else {
+                        print("error from download URL")          // can't donwload URL
+                       
+                        
+                    }
+                    
+                }
+            }
+        }
+        
+    }
+    
+    
+    
+    func uploadDataToFireBase(imageURL : String )  {
         if newProfileNotNil(){
             if let emailSender = Auth.auth().currentUser?.email{
                 db.collection(K.userDetailCollection).whereField(K.sender, isEqualTo: emailSender).getDocuments { (querySnapshot, error) in
@@ -306,7 +453,8 @@ class EditProfileController: UIViewController{
                                 K.surname:  self.lastNameTextField.text!,
                                 K.gender: self.gender!,
                                 K.dateOfBirth: self.dateOfBirthTextField.text!,
-                                K.phoneNumber: self.phoneNumberTextField.text!
+                                K.phoneNumber: self.phoneNumberTextField.text!,
+                                K.imageURL : imageURL
                                 ], completion: { (error) in
                                     if let e = error{
                                         print("Error while updating data: \(e.localizedDescription)")
@@ -323,7 +471,6 @@ class EditProfileController: UIViewController{
         }else {
             print("Some text fields did not have any text inside")
         }
-        
     }
     
     func newProfileNotNil() -> Bool{
@@ -350,7 +497,13 @@ class EditAddressController:UIViewController {
     @IBOutlet weak var provinceTextField: UITextField!
     @IBOutlet weak var postCodeTextField: UITextField!
     @IBOutlet weak var phoneNumberTextField: UITextField!
-    var db = Firestore.firestore()
+    
+    
+    
+    
+    
+    
+    let db = Firestore.firestore()
     override func viewDidLoad() {
         super.viewDidLoad()
     }
@@ -1071,7 +1224,8 @@ class StoreMainController: UIViewController{
                 }else{
                     if let snapShotDocuments = querySnapshot?.documents{
                         let data = snapShotDocuments[0].data()
-                        if let storeName = data[K.storeDetail.storeName] as? String, let moneyTotal = data[K.storeDetail.moneyTotal] as? Double{
+                        if let storeName = data[K.storeDetail.storeName] as? String,
+                            let moneyTotal = data[K.storeDetail.moneyTotal] as? Double {
                             self.storeNameLabel.text = storeName
                             self.moneyTotalLabel.text = String(format: "%.2f", moneyTotal)
                         }
@@ -1088,12 +1242,16 @@ class StoreMainController: UIViewController{
                         for doc in snapShotDocuments{
                             let data = doc.data()
                             let docID = doc.documentID
-                            if let productName = data[K.productCollection.productName] as? String,let productDetail = data[K.productCollection.productDetail] as? String
-                                ,let productCategory = data[K.productCollection.productCategory] as? String,let productPrice = data[K.productCollection.productPrice] as?  String,let productQuantity = data[K.productCollection.productQuantity] as? String,let ImageURL = data[K.productCollection.productImageURL] as? String,
+                            if let productName = data[K.productCollection.productName] as? String
+                                ,let productDetail = data[K.productCollection.productDetail] as? String
+                                ,let productCategory = data[K.productCollection.productCategory] as? String
+                                ,let productPrice = data[K.productCollection.productPrice] as?  String
+                                ,let productQuantity = data[K.productCollection.productQuantity] as? String
+                                ,let ImageURL = data[K.productCollection.productImageURL] as? String,
                                 let senderFrom = data[K.productCollection.sender] as? String
                                 , let storeName = data[K.productCollection.storeName] as? String
-                                 {
-                                    self.products.append(Product(productName: productName, productDetail: productDetail, productCategory: productCategory, productPrice: productPrice, productQuantity: productQuantity, productImageURL: ImageURL, documentId: docID, sender:senderFrom, storeName: storeName))
+                            {
+                                self.products.append(Product(productName: productName, productDetail: productDetail, productCategory: productCategory, productPrice: productPrice, productQuantity: productQuantity, productImageURL: ImageURL, documentId: docID, sender:senderFrom, storeName: storeName))
                                 DispatchQueue.main.async {
                                     self.storeMainTableView.reloadData()
                                 }
@@ -1113,48 +1271,48 @@ class StoreMainController: UIViewController{
     @IBAction func searchPressed(_ sender: UIButton) {
         if searchProductTextField.text != ""{
             self.products = []
-                   if let emailSender = Auth.auth().currentUser?.email{
-                       db.collection(K.productCollection.productCollection).whereField(K.sender, isEqualTo: emailSender) .getDocuments { (querySnapshot, error) in
-                           if let e = error{
-                               print("\(e.localizedDescription)")
-                           }else{
-                               if let snapShotDocuments = querySnapshot?.documents{
-                                   for doc in snapShotDocuments{
-                                       let data = doc.data()
-                                        let docID = doc.documentID
-                                       if let product = data[K.productCollection.productName] as? String{
-                                           let range = NSRange(location: 0, length: product.utf16.count)
-                                        do{     let lowerCaseProduct = product.lowercased()
-                                            let lowerCaseSearchText = self.searchProductTextField.text!.lowercased()
-                                               let regex = try! NSRegularExpression(pattern: lowerCaseSearchText, options: [])
-                                               if regex.firstMatch(in: lowerCaseProduct, options: [], range: range) != nil{
-                                                   print("\(product) Found")
-                                                    if let productName = data[K.productCollection.productName] as? String,let productDetail = data[K.productCollection.productDetail] as? String
-                                                        ,let productCategory = data[K.productCollection.productCategory] as? String,let productPrice = data[K.productCollection.productPrice] as?  String,let productQuantity = data[K.productCollection.productQuantity] as? String,let ImageURL = data[K.productCollection.productImageURL] as? String{
-                                                        self.products.append(Product(productName: productName, productDetail: productDetail, productCategory: productCategory, productPrice: productPrice, productQuantity: productQuantity, productImageURL: ImageURL, documentId: docID,sender: emailSender,storeName: self.storeNameLabel.text!))
-                                                        
-                                                        DispatchQueue.main.async {
-                                                            self.storeMainTableView.reloadData()
-                                                            self.searchProductTextField.text = ""
-                                                        }
-                                                    }
-                                               }else{
-                                                   print("\(product) not found")
-                                               }
-                                           }catch{
-                                               print("error while regex")
-                                           }
-                                       }
-                                   }
-                               }
-                           }
-                       }
-                   }
-               }else{  print("Empty search field")
-                        searchProductTextField.placeholder = "Type product name"
-                        loadData()
-                   }
-
+            if let emailSender = Auth.auth().currentUser?.email{
+                db.collection(K.productCollection.productCollection).whereField(K.sender, isEqualTo: emailSender) .getDocuments { (querySnapshot, error) in
+                    if let e = error{
+                        print("\(e.localizedDescription)")
+                    }else{
+                        if let snapShotDocuments = querySnapshot?.documents{
+                            for doc in snapShotDocuments{
+                                let data = doc.data()
+                                let docID = doc.documentID
+                                if let product = data[K.productCollection.productName] as? String{
+                                    let range = NSRange(location: 0, length: product.utf16.count)
+                                    do{     let lowerCaseProduct = product.lowercased()
+                                        let lowerCaseSearchText = self.searchProductTextField.text!.lowercased()
+                                        let regex = try! NSRegularExpression(pattern: lowerCaseSearchText, options: [])
+                                        if regex.firstMatch(in: lowerCaseProduct, options: [], range: range) != nil{
+                                            print("\(product) Found")
+                                            if let productName = data[K.productCollection.productName] as? String,let productDetail = data[K.productCollection.productDetail] as? String
+                                                ,let productCategory = data[K.productCollection.productCategory] as? String,let productPrice = data[K.productCollection.productPrice] as?  String,let productQuantity = data[K.productCollection.productQuantity] as? String,let ImageURL = data[K.productCollection.productImageURL] as? String{
+                                                self.products.append(Product(productName: productName, productDetail: productDetail, productCategory: productCategory, productPrice: productPrice, productQuantity: productQuantity, productImageURL: ImageURL, documentId: docID,sender: emailSender,storeName: self.storeNameLabel.text!))
+                                                
+                                                DispatchQueue.main.async {
+                                                    self.storeMainTableView.reloadData()
+                                                    self.searchProductTextField.text = ""
+                                                }
+                                            }
+                                        }else{
+                                            print("\(product) not found")
+                                        }
+                                    }catch{
+                                        print("error while regex")
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }else{  print("Empty search field")
+            searchProductTextField.placeholder = "Type product name"
+            loadData()
+        }
+        
     }
     
     @IBAction func addProductPressed(_ sender: UIButton) {
@@ -1178,8 +1336,14 @@ extension StoreMainController: UITableViewDataSource,UITableViewDelegate{
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let product = products[indexPath.row]
         let productCell = storeMainTableView.dequeueReusableCell(withIdentifier: K.identifierForTableView.identifierProductInStoreMain) as! ProductCell
+        
+        let url = URL(string: product.productImageURL)!
+        let resource = ImageResource(downloadURL: url)
+        productCell.productImageView.kf.setImage(with: resource)
+        
         productCell.productNameLabel.text = product.productName
-        productCell.productPriceLabel.text = product.productPrice
+        productCell.productPriceLabel.text = "\(product.productPrice) ฿"
+        
         
         return productCell
     }
@@ -1228,12 +1392,23 @@ class ProductDetailController: UIViewController{
                 }else{
                     if let snapShotDocuments = documentSnapshot{
                         if let data = snapShotDocuments.data(){
-                            if let productName = data[K.productCollection.productName] as? String, let productPrice = data[K.productCollection.productPrice] as? String, let productQuantity = data[K.productCollection.productQuantity] as? String, let productCategory = data[K.productCollection.productCategory] as? String,let productDetail = data[K.productCollection.productDetail] as? String{
+                            if let productName = data[K.productCollection.productName] as? String
+                                , let productPrice = data[K.productCollection.productPrice] as? String
+                                , let productQuantity = data[K.productCollection.productQuantity] as? String
+                                , let productCategory = data[K.productCollection.productCategory] as? String
+                                ,let productDetail = data[K.productCollection.productDetail] as? String
+                                , let imageURL = data[K.productCollection.productImageURL] as? String
+                            {
+      
                                 self.productNameLabel.text = productName
                                 self.productPriceLabel.text = productPrice
                                 self.productRemainingLabel.text = productQuantity
                                 self.productCategorylabel.text = productCategory
                                 self.productDetailLabel.text = productDetail
+                                 let url = URL(string:imageURL )!
+                                let resource = ImageResource(downloadURL: url)
+                                self.productImageView.kf.setImage(with: resource)
+                                
                                 print(self.productNameLabel.text!)              // got productName
                                 // search for promotion in that productName (hasPromotion)
                                 self.db.collection(K.tableName.hasPromotionTableName).whereField(K.sender, isEqualTo: emailSender).whereField(K.productCollection.productDocID  , isEqualTo: self.productDocumentID!).getDocuments { (querySnapshot, error) in
@@ -1247,26 +1422,26 @@ class ProductDetailController: UIViewController{
                                                     print(promotion) // got promotionName
                                                     // search specific promotion data
                                                     self.db.collection(K.tableName.promotionTableName).whereField(K.sender, isEqualTo: emailSender).whereField(K.promotion.promotionName, isEqualTo: promotion).getDocuments { (querySnapshot, error) in
-                                                            if let e = error{
-                                                                print("Error while looping in promotionName: \(e.localizedDescription) ")
-                                                            }else{
-                                                                if let snapShotDocuments = querySnapshot?.documents{
-                                                                    for doc in snapShotDocuments{
-                                                                        let data = doc.data()
-                                                                        let docID = doc.documentID
-                                                                        if let promotionName = data[K.promotion.promotionName] as? String, let promotionDetail = data[K.promotion.promotionDetail] as? String,
-                                                                            let discountPercent = data[K.promotion.discountPercent] as? Int, let minimumPrice = data[K.promotion.minimumPrice] as? String,
-                                                                            let validDate = data[K.promotion.validDate] as? String{
-                                                                            self.promotions.append(Promotion(promotionName: promotionName, promotionDetail: promotionDetail, minimumPrice: minimumPrice, discountPercent: discountPercent, validDate: validDate, docID: docID))
-                                                                            print(self.promotions)
-                                                                            DispatchQueue.main.async {
-                                                                                self.promotionTableView.reloadData()
-                                                                            }
+                                                        if let e = error{
+                                                            print("Error while looping in promotionName: \(e.localizedDescription) ")
+                                                        }else{
+                                                            if let snapShotDocuments = querySnapshot?.documents{
+                                                                for doc in snapShotDocuments{
+                                                                    let data = doc.data()
+                                                                    let docID = doc.documentID
+                                                                    if let promotionName = data[K.promotion.promotionName] as? String, let promotionDetail = data[K.promotion.promotionDetail] as? String,
+                                                                        let discountPercent = data[K.promotion.discountPercent] as? Int, let minimumPrice = data[K.promotion.minimumPrice] as? String,
+                                                                        let validDate = data[K.promotion.validDate] as? String{
+                                                                        self.promotions.append(Promotion(promotionName: promotionName, promotionDetail: promotionDetail, minimumPrice: minimumPrice, discountPercent: discountPercent, validDate: validDate, docID: docID))
+                                                                        print(self.promotions)
+                                                                        DispatchQueue.main.async {
+                                                                            self.promotionTableView.reloadData()
                                                                         }
                                                                     }
                                                                 }
                                                             }
                                                         }
+                                                    }
                                                 }
                                             }
                                         }else {print("rip")}
@@ -1322,12 +1497,64 @@ class promotionInProductDetailCell:UITableViewCell{
     @IBOutlet weak var validDateLabel: UILabel!
     
 }
-class EditProductController: UIViewController{
+class EditProductController: UIViewController,UINavigationControllerDelegate,UIImagePickerControllerDelegate{
     @IBOutlet weak var productNameTextField: UITextField!
     @IBOutlet weak var productCategoryTextField: UITextField!
     @IBOutlet weak var productPriceTextField: UITextField!
     @IBOutlet weak var productQuantityTextField: UITextField!
     @IBOutlet weak var productDetailTextField: UITextField!
+    
+    @IBOutlet weak var productImage: UIImageView!
+    var imageForUpload : UIImage? = nil
+   
+    @IBAction func addImageBUtton(_ sender: Any) {
+       
+        let imagePickerController = UIImagePickerController()
+               imagePickerController.delegate = self
+               
+               let actionSheet = UIAlertController(title: "Select Image", message: "Please select source", preferredStyle: .actionSheet)
+               
+               let cameraAction = UIAlertAction(title: "Camera", style: .default) { (action:UIAlertAction) in
+                   if UIImagePickerController.isSourceTypeAvailable(.camera) {
+                       imagePickerController.sourceType = .camera
+                       self.present(imagePickerController, animated: true, completion: nil)
+                   } else {
+                       print("camera not avaliable")
+                   }
+               }
+               
+               let libAction = UIAlertAction(title: "Photo Library", style: .default) { (action:UIAlertAction) in
+                   if UIImagePickerController.isSourceTypeAvailable(.photoLibrary) {
+                       imagePickerController.sourceType = .camera
+                       self.present(imagePickerController, animated: true, completion: nil)
+                   } else {
+                       print("album not avaliable")
+                   }
+               }
+               
+               let cancleAction = UIAlertAction(title: "Cancle", style: .default, handler: nil)
+               
+               actionSheet.addAction(cameraAction)
+               actionSheet.addAction(libAction)
+               actionSheet.addAction(cancleAction)
+               
+               self.present(actionSheet,animated: true,completion: nil)
+           }
+           
+           
+           func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
+               let imageForUser = info[.originalImage] as! UIImage
+               imageForUpload = imageForUser
+               
+               productImage.image = imageForUser
+               picker.dismiss(animated: true, completion: nil)
+           }
+           
+           func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
+               picker.dismiss(animated: true, completion: nil)
+           }
+    
+    
     
     @IBOutlet weak var promotionInEditProductTableView: UITableView!
     var promotions: [Promotion]!
@@ -1342,6 +1569,7 @@ class EditProductController: UIViewController{
         promotionInEditProductTableView.dataSource = self
         promotionInEditProductTableView.delegate = self
         loadPromotionData()
+        
     }
     
     func loadPromotionData(){
@@ -1356,7 +1584,7 @@ class EditProductController: UIViewController{
                 if productPriceTextField.text != ""{
                     if productQuantityTextField.text != ""{
                         if productDetailTextField.text != ""{
-                                return true
+                            return true
                         }else { return false }
                     }else { return false }
                 }else { return false }
@@ -1365,6 +1593,71 @@ class EditProductController: UIViewController{
     }
     
     @IBAction func submitPressed(_ sender: UIButton){
+        uploadImage()
+    }
+    
+    func presentAlert(title:String,message:String,actiontitle:String)  {
+           
+           // for show alert to user
+           
+           let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
+           let action = UIAlertAction(title: actiontitle, style: .default, handler: nil)
+           
+           alert.addAction(action)
+           self.present(alert, animated: true, completion: nil)
+       }
+       
+    func uploadImage()  {
+        guard let imageSelect = self.imageForUpload else {     //add image for upload
+            print("Image is nil")
+            presentAlert(title: "Image Error", message: "Please select image", actiontitle: "Dismiss")
+            return
+        }
+        
+        guard let imageData = imageSelect.jpegData(compressionQuality: 0.5) else {
+            // convert image to jpeg
+            
+            presentAlert(title: "Image Error", message: "Can't convert Image", actiontitle: "Dismiss")
+            return
+        }
+        
+        let storageRef = Storage.storage().reference(forURL:"gs://gwshopreal-47f16.appspot.com")               // add link to upload
+        
+        let storageProductRef = storageRef.child("ProfileImage").child("\(Auth.auth().currentUser?.email)+\(Date().timeIntervalSince1970)")          // path for upload
+        
+        let metaData  = StorageMetadata()                      // set meta data
+        metaData.contentType = "image/jpg"
+        
+        storageProductRef.putData(imageData, metadata: metaData) { (storageMetaData, error) in                                          // upload file
+            
+            if let errorFromPut = error {                      // upload failed
+                self.presentAlert(title: "Error Upload Image", message: error?.localizedDescription ?? "error", actiontitle: "Dismiss")
+                print(errorFromPut.localizedDescription)
+                
+            } else {                                           // upload success
+                print("put success")
+                
+                storageProductRef.downloadURL { (url, error) in     // download URL
+                    
+                    if let metaImageURL = url?.absoluteString {     // change URL TO String
+                        
+                        
+                       self.uploadDataToFirebase(imageURL: metaImageURL)                           // update others                                                  information
+                        // add picture first
+                        // picture use long time
+                        
+                    } else {
+                        print("error from download URL")          // can't donwload URL
+                       
+                        
+                    }
+                    
+                }
+            }
+        }
+        
+    }
+    func uploadDataToFirebase(imageURL : String)  {
         if updateNotNil(){
             if let emailSender = Auth.auth().currentUser?.email{
                 db.collection(K.tableName.hasPromotionTableName).whereField(K.sender, isEqualTo: emailSender).whereField(K.productCollection.productDocID, isEqualTo: productDocumentID!).getDocuments { (querySnapshot, error) in
@@ -1379,12 +1672,13 @@ class EditProductController: UIViewController{
                         }
                         DispatchQueue.main.asyncAfter(deadline: .now() + 1.1){
                             self.db.collection(K.productCollection.productCollection).document(self.productDocumentID).updateData([
-                                                       K.productCollection.productName: self.productNameTextField.text!,
-                                                   K.productCollection.productDetail: self.productDetailTextField.text!,
-                                                   K.productCollection.productPrice: self.productPriceTextField.text!,
-                                                   K.productCollection.productQuantity: self.productQuantityTextField.text!,
-                                                   K.productCollection.productCategory: self.productCategoryTextField.text!
-                                                   ])
+                                K.productCollection.productName: self.productNameTextField.text!,
+                                K.productCollection.productDetail: self.productDetailTextField.text!,
+                                K.productCollection.productPrice: self.productPriceTextField.text!,
+                                K.productCollection.productQuantity: self.productQuantityTextField.text!,
+                                K.productCollection.productCategory: self.productCategoryTextField.text!,
+                                K.productCollection.productImageURL : imageURL
+                            ])
                             self.updatedProductName = self.productNameTextField.text!
                             for selectedPromotion in self.promotionName{
                                 self.db.collection(K.tableName.hasPromotionTableName).addDocument(data: [
@@ -1392,12 +1686,14 @@ class EditProductController: UIViewController{
                                     K.promotion.promotionName: selectedPromotion,
                                     K.sender: emailSender
                                 ])
+                                
                             }
+                            
                         }
-                        
+                        self.navigationController?.popViewController(animated: true)
                     }
                 }
-  
+                
             }
             print("Updated product successfully")
             self.dismiss(animated: true, completion: nil)
