@@ -21,6 +21,10 @@ class ProfileController:UIViewController {
     @IBOutlet weak var dateOfBirthLabel: UILabel!
     @IBOutlet weak var phoneNumberLabel: UILabel!
     @IBOutlet weak var headerNameLabel: UILabel!
+    @IBOutlet weak var showAddressLabel: UIButton!
+    @IBOutlet weak var showCreditCardLabel: UIButton!
+    @IBOutlet weak var logOutLabel: UIButton!
+    
     
     var db = Firestore.firestore()
     var user: [userDetail] = []
@@ -39,7 +43,9 @@ class ProfileController:UIViewController {
         navigationController?.setNavigationBarHidden(false, animated: animated)
         navigationItem.setHidesBackButton(false, animated: animated)
         tabBarController?.tabBar.isHidden = true
-        
+        showAddressLabel.layer.cornerRadius = showAddressLabel.frame.size.height/5
+        showCreditCardLabel.layer.cornerRadius = showCreditCardLabel.frame.size.height/5
+        logOutLabel.layer.cornerRadius = logOutLabel.frame.size.height/5
     }
     
     override func viewDidLoad() {
