@@ -35,7 +35,7 @@ struct K {
     
     static let dateField = "date"
     static let sender = "sender"
-    
+    static let imageURL = "imageURL"
     
     struct segue{
         static let logoutToMainSegue = "logoutToMainSegue"

@@ -181,7 +181,7 @@ extension AddProductController {
                     if let metaImageURL = url?.absoluteString {     // change URL TO String
                                                                        
                         
-                        self.updateStatus = self.uploadDataToFirebase(imageURL: metaImageURL)                           // update others                                                  information
+                        self.updateStatus = self.uploadDataToFirebase(imageURL: metaImageURL)                      // update others information
                                                                    // add picture first
                                                                    // picture use long time
                         

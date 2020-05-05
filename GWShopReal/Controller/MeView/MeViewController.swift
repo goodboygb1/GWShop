@@ -283,14 +283,15 @@ class EditProfileController: UIViewController,UIImagePickerControllerDelegate,UI
     @IBOutlet weak var dateOfBirthTextField: UITextField!
     @IBOutlet weak var phoneNumberTextField: UITextField!
     
-  
+    
     
     var db = Firestore.firestore()
     var gender: String!
+    var imageForUpload : UIImage? = nil
     
     override func viewDidLoad() {
         super.viewDidLoad()
-       
+        
         gender = genderSegment.titleForSegment(at: genderSegment.selectedSegmentIndex)
     }
     
@@ -303,18 +304,18 @@ class EditProfileController: UIViewController,UIImagePickerControllerDelegate,UI
         
         let cameraAction = UIAlertAction(title: "Camera", style: .default) { (action:UIAlertAction) in
             if UIImagePickerController.isSourceTypeAvailable(.camera) {
-            imagePickerController.sourceType = .camera
-            self.present(imagePickerController, animated: true, completion: nil)
+                imagePickerController.sourceType = .camera
+                self.present(imagePickerController, animated: true, completion: nil)
             } else {
                 print("camera not avaliable")
             }
         }
         
         let libAction = UIAlertAction(title: "Photo Library", style: .default) { (action:UIAlertAction) in
-             if UIImagePickerController.isSourceTypeAvailable(.photoLibrary) {
-                       imagePickerController.sourceType = .camera
-                       self.present(imagePickerController, animated: true, completion: nil)
-             } else {
+            if UIImagePickerController.isSourceTypeAvailable(.photoLibrary) {
+                imagePickerController.sourceType = .camera
+                self.present(imagePickerController, animated: true, completion: nil)
+            } else {
                 print("album not avaliable")
             }
         }
@@ -331,6 +332,8 @@ class EditProfileController: UIViewController,UIImagePickerControllerDelegate,UI
     
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
         let imageForUser = info[.originalImage] as! UIImage
+        imageForUpload = imageForUser
+        
         newProfileImageView.image = imageForUser
         picker.dismiss(animated: true, completion: nil)
     }
@@ -340,15 +343,82 @@ class EditProfileController: UIViewController,UIImagePickerControllerDelegate,UI
     }
     
     
-    
-       
-    
-    
     @IBAction func genderChoosed(_ sender: UISegmentedControl) {
         gender = genderSegment.titleForSegment(at: genderSegment.selectedSegmentIndex)
     }
     
+    func presentAlert(title:String,message:String,actiontitle:String)  {
+        
+        // for show alert to user
+        
+        let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
+        let action = UIAlertAction(title: actiontitle, style: .default, handler: nil)
+        
+        alert.addAction(action)
+        self.present(alert, animated: true, completion: nil)
+    }
+    
     @IBAction func submitPressed(_ sender: UIButton) {
+        
+        
+    }
+    
+    func uploadImage()  {
+        
+       
+        guard let imageSelect = self.imageForUpload else {     //add image for upload
+            print("Image is nil")
+            presentAlert(title: "Image Error", message: "Please select image", actiontitle: "Dismiss")
+            return
+        }
+        
+        guard let imageData = imageSelect.jpegData(compressionQuality: 0.5) else {
+            // convert image to jpeg
+            
+            presentAlert(title: "Image Error", message: "Can't convert Image", actiontitle: "Dismiss")
+            return
+        }
+        
+        let storageRef = Storage.storage().reference(forURL:    "gs://gwshopreal-47f16.appspot.com")               // add link to upload
+        
+        let storageProductRef = storageRef.child("ProfileImage").child("\(Auth.auth().currentUser?.email)+\(Date().timeIntervalSince1970)")          // path for upload
+        
+        let metaData  = StorageMetadata()                      // set meta data
+        metaData.contentType = "image/jpg"
+        
+        storageProductRef.putData(imageData, metadata: metaData) { (storageMetaData, error) in                                          // upload file
+            
+            if let errorFromPut = error {                      // upload failed
+                self.presentAlert(title: "Error Upload Image", message: error?.localizedDescription ?? "error", actiontitle: "Dismiss")
+                print(errorFromPut.localizedDescription)
+                
+            } else {                                           // upload success
+                print("put success")
+                
+                storageProductRef.downloadURL { (url, error) in     // download URL
+                    
+                    if let metaImageURL = url?.absoluteString {     // change URL TO String
+                        
+                        
+                       self.uploadDataToFireBase(imageURL: metaImageURL)                           // update others                                                  information
+                        // add picture first
+                        // picture use long time
+                        
+                    } else {
+                        print("error from download URL")          // can't donwload URL
+                       
+                        
+                    }
+                    
+                }
+            }
+        }
+        
+    }
+    
+    
+    
+    func uploadDataToFireBase(imageURL : String )  {
         if newProfileNotNil(){
             if let emailSender = Auth.auth().currentUser?.email{
                 db.collection(K.userDetailCollection).whereField(K.sender, isEqualTo: emailSender).getDocuments { (querySnapshot, error) in
@@ -362,8 +432,8 @@ class EditProfileController: UIViewController,UIImagePickerControllerDelegate,UI
                                 K.surname:  self.lastNameTextField.text!,
                                 K.gender: self.gender!,
                                 K.dateOfBirth: self.dateOfBirthTextField.text!,
-                                K.phoneNumber: self.phoneNumberTextField.text!
-                                
+                                K.phoneNumber: self.phoneNumberTextField.text!,
+                                K.imageURL : imageURL
                                 ], completion: { (error) in
                                     if let e = error{
                                         print("Error while updating data: \(e.localizedDescription)")
@@ -380,7 +450,6 @@ class EditProfileController: UIViewController,UIImagePickerControllerDelegate,UI
         }else {
             print("Some text fields did not have any text inside")
         }
-        
     }
     
     func newProfileNotNil() -> Bool{
@@ -407,70 +476,8 @@ class EditAddressController:UIViewController {
     @IBOutlet weak var provinceTextField: UITextField!
     @IBOutlet weak var postCodeTextField: UITextField!
     @IBOutlet weak var phoneNumberTextField: UITextField!
-   
-   
-    //    func uploadImage()  {
-    //        print("Start indicator")
-    //        guard let imageSelect = self.imageForUpload else {     //add image for upload
-    //            print("Image is nil")
-    //            presentAlert(title: "Image Error", message: "Please select image", actiontitle: "Dismiss")
-    //            return
-    //        }
-    //
-    //        guard let imageData = imageSelect.jpegData(compressionQuality: 0.5) else {
-    //                                                               // convert image to jpeg
-    //
-    //            presentAlert(title: "Image Error", message: "Can't convert Image", actiontitle: "Dismiss")
-    //            return
-    //        }
-    //
-    //        let storageRef = Storage.storage().reference(forURL:    "gs://gwshopreal-47f16.appspot.com")               // add link to upload
-    //
-    //        let storageProductRef = storageRef.child("ProductImage").child("\(Auth.auth().currentUser?.email)+\(Date().timeIntervalSince1970)")          // path for upload
-    //
-    //        let metaData  = StorageMetadata()                      // set meta data
-    //        metaData.contentType = "image/jpg"
-    //
-    //        storageProductRef.putData(imageData, metadata: metaData) { (storageMetaData, error) in                                          // upload file
-    //
-    //            if let errorFromPut = error {                      // upload failed
-    //                self.presentAlert(title: "Error Upload Image", message: error?.localizedDescription ?? "error", actiontitle: "Dismiss")
-    //                print(errorFromPut.localizedDescription)
-    //
-    //            } else {                                           // upload success
-    //                print("put success")
-    //
-    //                storageProductRef.downloadURL { (url, error) in     // download URL
-    //
-    //                    if let metaImageURL = url?.absoluteString {     // change URL TO String
-    //
-    //
-    //                        self.updateStatus = self.uploadDataToFirebase(imageURL: metaImageURL)                           // update others                                                  information
-    //                                                                   // add picture first
-    //                                                                   // picture use long time
-    //
-    //                    } else {
-    //                        print("error from download URL")          // can't donwload URL
-    //                        print(error?.localizedDescription)
-    //
-    //                    }
-    //
-    //                }
-    //            }
-    //        }
-    //
-    //    }
     
-    func presentAlert(title:String,message:String,actiontitle:String)  {
-        
-        // for show alert to user
-        
-        let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
-        let action = UIAlertAction(title: actiontitle, style: .default, handler: nil)
-        
-        alert.addAction(action)
-        self.present(alert, animated: true, completion: nil)
-    }
+    
     
     
     

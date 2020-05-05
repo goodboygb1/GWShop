@@ -114,7 +114,8 @@ class RegisterViewController: UIViewController{
                                 K.gender : self.gender!,
                                 K.phoneNumber : self.phoneNumberTextField.text!,
                                 K.dateOfBirth : self.dateTextField.text!,
-                                K.sender : email
+                                K.sender : email,
+                                K.imageURL : ""
                         ]
                         
                         self.db.collection(K.userDetailCollection).addDocument(data:  detailForSendToFirebase) { (error) in
