@@ -16,7 +16,6 @@ class ShowAllOrderTableViewCell: UITableViewCell {
     }
 
     @IBOutlet weak var orderIDLabel: UILabel!
-    
     @IBOutlet weak var statusLabel: UILabel!
     @IBOutlet weak var showStatusColour: UIImageView!
 }

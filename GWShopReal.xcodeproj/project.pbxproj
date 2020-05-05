@@ -219,9 +219,9 @@
 			isa = PBXGroup;
 			children = (
 				A372886F2452220D00189286 /* NotificationViewController.swift */,
+				A3C1C2F92461656700614FFE /* ShowAllOrderTableViewCell.swift */,
 				A38B50312461774F00399B2C /* OrderDetailTableViewCell.swift */,
 				A38B50332461776300399B2C /* OrderDetailViewController.swift */,
-				A3C1C2F92461656700614FFE /* ShowAllOrderTableViewCell.swift */,
 			);
 			path = NotificationView;
 			sourceTree = "<group>";

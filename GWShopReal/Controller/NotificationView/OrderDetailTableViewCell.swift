@@ -15,6 +15,8 @@ class OrderDetailTableViewCell: UITableViewCell {
         // Initialization code
     }
 
-   
-
+    @IBOutlet weak var productName: UILabel!
+    @IBOutlet weak var quantityLabel: UILabel!
+    @IBOutlet weak var totalPriceLabel: UILabel!
+    @IBOutlet weak var productImage: UIImageView!
 }

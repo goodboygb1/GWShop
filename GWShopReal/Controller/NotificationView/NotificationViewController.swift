@@ -11,7 +11,9 @@ import Firebase
 
 class NotificationViewController: UIViewController {
 
-    var orderForshow : [OrderedProduct] = []
+    var orderForshow : [OrderedProduct] = []            //order show to user
+    var cellUserSelect : OrderedProduct?                // cell that user select for sent to next view
+    
     
     @IBOutlet weak var orderForShowTableView: UITableView!
     
@@ -92,7 +94,7 @@ extension NotificationViewController : UITableViewDelegate,UITableViewDataSource
         cell.orderIDLabel.text = orderIncell.orderID
         
         if orderIncell.orderStatus {
-            cell.statusLabel.text = " distributed"
+            cell.statusLabel.text = "Distributed"
             cell.showStatusColour.backgroundColor = .green
         } else {
             cell.statusLabel.text = "Wait for distribution"
@@ -102,5 +104,17 @@ extension NotificationViewController : UITableViewDelegate,UITableViewDataSource
         return cell
     }
     
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+         cellUserSelect = orderForshow[indexPath.row]
+        performSegue(withIdentifier: K.segue.showOrderDetailToUser, sender: self)
+    
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == K.segue.showOrderDetailToUser {
+            let destinationVC = segue.destination as! OrderDetailViewController
+            destinationVC.orderForQuery = cellUserSelect
+        }
+    }
     
 }
