@@ -8,13 +8,16 @@
 
 import UIKit
 import Firebase
-class SendProductViewController: UIViewController {
+class SendProductViewController: UIViewController,updateCell {
+   
+    
 
     @IBOutlet weak var orderProductTableView: UITableView!
     
     var db = Firestore.firestore()
     var orderedProducts: [OrderedProduct] = []
     var selectedOrder: Int = 0
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         orderProductTableView.dataSource = self
@@ -59,11 +62,16 @@ class SendProductViewController: UIViewController {
     }
 
 }
-
+protocol updateCell {
+    func updateCell()
+}
 extension SendProductViewController:UITableViewDataSource, UITableViewDelegate{
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return orderedProducts.count
     }
+    func updateCell() {
+           loadOrderData()
+       }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let order = orderedProducts[indexPath.row]
@@ -86,6 +94,7 @@ extension SendProductViewController:UITableViewDataSource, UITableViewDelegate{
         if segue.identifier == K.segue.listOrderToOrderDetail{
             let destinationVC = segue.destination as! ShowOrderDetailViewController
             destinationVC.orderedProduct = self.orderedProducts[selectedOrder]
+            destinationVC.delegate = self
         }
     }
     
@@ -111,6 +120,7 @@ class ShowOrderDetailViewController:UIViewController{
     
     var orderedProduct: OrderedProduct!
     var orderedProductDetail: [OrderedProductDetail] = []
+    var delegate : updateCell?
     
     var db = Firestore.firestore()
     override func viewDidLoad() {
@@ -179,7 +189,13 @@ class ShowOrderDetailViewController:UIViewController{
     @IBAction func distributedPressed(_ sender: UIButton) {
         db.collection(K.tableName.orderCollection).document(orderedProduct.orderDocID).updateData([
             K.order.orderStatus: true
-        ])
+        ]) { (error) in
+            if let e = error {
+                print(e.localizedDescription)
+            } else {
+                self.delegate?.updateCell()
+            }
+        }
         
         self.dismiss(animated: true, completion: nil)
     }

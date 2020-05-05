@@ -29,8 +29,8 @@ class OrderDetailViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
            super.viewWillAppear(animated)
-           tabBarController?.navigationItem.setHidesBackButton(false, animated: animated)
-           tabBarController?.navigationController?.setNavigationBarHidden(false, animated: animated)
+          navigationItem.setHidesBackButton(false, animated: animated)
+          navigationController?.setNavigationBarHidden(false, animated: animated)
            
            
        }
