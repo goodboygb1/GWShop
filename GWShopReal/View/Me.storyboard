@@ -3340,7 +3340,7 @@
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <viewLayoutGuide key="safeArea" id="rTD-KG-ZX2"/>
                     </view>
-                    <tabBarItem key="tabBarItem" title="รายงาน" image="icon-report tab" id="OOZ-Yw-Rm8"/>
+                    <tabBarItem key="tabBarItem" title="รายงาน" image="icon-analytic" selectedImage="icon-analytic" id="OOZ-Yw-Rm8"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="GaB-Qe-gdk" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
@@ -3771,9 +3771,9 @@
         <image name="creditcard" catalog="system" width="128" height="91"/>
         <image name="creditcard.fill" catalog="system" width="128" height="91"/>
         <image name="house" catalog="system" width="128" height="110"/>
+        <image name="icon-analytic" width="14" height="11"/>
         <image name="icon-me tab" width="14.666666984558105" height="11.666666984558105"/>
         <image name="icon-promo" width="15.333333015441895" height="15.333333015441895"/>
-        <image name="icon-report tab" width="9" height="10.333333015441895"/>
         <image name="location-pin" width="128" height="128"/>
         <image name="location.fill" catalog="system" width="128" height="115"/>
         <image name="logoร้านพื้นหลังสีดำ" width="25" height="25"/>
