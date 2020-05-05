@@ -17,12 +17,16 @@ class AddProductController: UIViewController,UIImagePickerControllerDelegate,UIN
     var storeName : String?
     override func viewDidLoad() {
         super.viewDidLoad()
+       
         addImageLable.layer.cornerRadius = addImageLable.frame.size.height/5
         addProductLabel.layer.cornerRadius = addProductLabel.frame.size.height/5
+        
         imagePicker.delegate = self
+        
         picker.delegate = self
         picker.dataSource = self
         productCategoryTextField.inputView = picker
+        
         activityIndicator.hidesWhenStopped = true
         activityIndicator.style = .large
     }
@@ -65,7 +69,7 @@ class AddProductController: UIViewController,UIImagePickerControllerDelegate,UIN
         
         self.present(actionSheet, animated: true, completion: nil)
         
-    }
+    } 
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
         
         let imageChoosen = info[UIImagePickerController.InfoKey.originalImage] as! UIImage
