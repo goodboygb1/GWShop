@@ -107,6 +107,7 @@ class ShowOrderDetailViewController:UIViewController{
     @IBOutlet weak var nameLabel: UILabel!
     @IBOutlet weak var phoneNumberLabel: UILabel!
     @IBOutlet weak var dateOfPurchasedLabel: UILabel!
+    @IBOutlet weak var distributeButton: UIButton!
     
     var orderedProduct: OrderedProduct!
     var orderedProductDetail: [OrderedProductDetail] = []
@@ -116,7 +117,9 @@ class ShowOrderDetailViewController:UIViewController{
         super.viewDidLoad()
         orderDetailTableView.dataSource = self
         orderDetailTableView.delegate = self
-        
+        if orderedProduct.orderStatus == true{
+            distributeButton.isHidden = true
+        }
         loadEachData()
     }
     

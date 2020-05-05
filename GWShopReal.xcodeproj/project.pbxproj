@@ -11,6 +11,7 @@
 		84340E5624613C1100CB2CC1 /* TopFiveProductController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84340E5524613C1100CB2CC1 /* TopFiveProductController.swift */; };
 		84340E59246141FF00CB2CC1 /* TopFiveProduct.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84340E58246141FF00CB2CC1 /* TopFiveProduct.swift */; };
 		84340E5B24614B2600CB2CC1 /* ReportViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84340E5A24614B2600CB2CC1 /* ReportViewController.swift */; };
+		84340E5D2461655F00CB2CC1 /* SoldProductViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84340E5C2461655F00CB2CC1 /* SoldProductViewController.swift */; };
 		8436DBC9245174EE00956EDA /* Pods_GWShopReal.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 22955FD222D677EA13792783 /* Pods_GWShopReal.framework */; };
 		8436DBCA245174EE00956EDA /* Pods_GWShopReal.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 22955FD222D677EA13792783 /* Pods_GWShopReal.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		843723EC245D5E9C00C35A3A /* Cart.swift in Sources */ = {isa = PBXBuildFile; fileRef = 843723EB245D5E9C00C35A3A /* Cart.swift */; };
@@ -96,6 +97,7 @@
 		84340E5524613C1100CB2CC1 /* TopFiveProductController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopFiveProductController.swift; sourceTree = "<group>"; };
 		84340E58246141FF00CB2CC1 /* TopFiveProduct.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopFiveProduct.swift; sourceTree = "<group>"; };
 		84340E5A24614B2600CB2CC1 /* ReportViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReportViewController.swift; sourceTree = "<group>"; };
+		84340E5C2461655F00CB2CC1 /* SoldProductViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SoldProductViewController.swift; sourceTree = "<group>"; };
 		843723EB245D5E9C00C35A3A /* Cart.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Cart.swift; sourceTree = "<group>"; };
 		843B267D245B527F00248175 /* Promotion.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Promotion.swift; sourceTree = "<group>"; };
 		843D3849245C9494000A96D2 /* AddPromotionInProductController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddPromotionInProductController.swift; sourceTree = SOURCE_ROOT; };
@@ -211,6 +213,7 @@
 				844AB1A5246088C700738CC2 /* SendProductViewController.swift */,
 				84340E5524613C1100CB2CC1 /* TopFiveProductController.swift */,
 				84340E5A24614B2600CB2CC1 /* ReportViewController.swift */,
+				84340E5C2461655F00CB2CC1 /* SoldProductViewController.swift */,
 			);
 			path = MeView;
 			sourceTree = "<group>";
@@ -477,6 +480,7 @@
 				8490DB2F24588D7000A2BD88 /* BankAccount.swift in Sources */,
 				8451856F245C677A00152229 /* AddPromotionInProductController.swift in Sources */,
 				A3B4E992245EE12000683578 /* SelectCreditCardTableViewCell.swift in Sources */,
+				84340E5D2461655F00CB2CC1 /* SoldProductViewController.swift in Sources */,
 				84340E5B24614B2600CB2CC1 /* ReportViewController.swift in Sources */,
 				8433D16924570A77003C59E5 /* Address.swift in Sources */,
 				843723EC245D5E9C00C35A3A /* Cart.swift in Sources */,
