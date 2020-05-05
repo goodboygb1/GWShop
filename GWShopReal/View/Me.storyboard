@@ -759,13 +759,6 @@
                                 <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="เลือกสินค้าที่ต้องการเพิ่มโปรโมชั่นอย่างน้อย 1 ชนิด" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9vH-lB-Cbf">
-                                <rect key="frame" x="44" y="290" width="306" height="24"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" name="SukhumvitSet-SemiBold" family="Sukhumvit Set" pointSize="15"/>
-                                <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <nil key="highlightedColor"/>
-                            </label>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" allowsMultipleSelection="YES" rowHeight="90" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="BEK-JV-VgM">
                                 <rect key="frame" x="0.0" y="304" width="375" height="393"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -2710,6 +2703,7 @@
                     <connections>
                         <outlet property="addressDetailLabel" destination="D3O-w3-ROX" id="r5H-lw-pPF"/>
                         <outlet property="dateOfPurchasedLabel" destination="58N-tm-uwl" id="dlv-Nl-2CE"/>
+                        <outlet property="distributeButton" destination="JdD-zC-91W" id="iNB-fS-ufg"/>
                         <outlet property="districtLabel" destination="92z-QD-wUP" id="zVs-qu-Dbl"/>
                         <outlet property="nameLabel" destination="AOd-IQ-6He" id="yje-5c-P99"/>
                         <outlet property="orderDetailTableView" destination="7FQ-3I-nTF" id="el4-rk-MjA"/>
@@ -3714,6 +3708,11 @@
                                     </tableViewCell>
                                 </prototypes>
                             </tableView>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gWS-NO-J0d">
+                                <rect key="frame" x="313" y="88" width="46" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Button"/>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <viewLayoutGuide key="safeArea" id="kWI-fY-upo"/>

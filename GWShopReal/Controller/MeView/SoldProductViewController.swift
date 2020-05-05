@@ -61,7 +61,7 @@ class SoldProductViewController: UIViewController {
                                                                         if let e = error{
                                                                             print(e.localizedDescription)
                                                                         }else{
-                                                                            print("got doc porductID")
+                                                                            print("got doc porductID 2")
                                                                             if let data = documentSnapshot?.data(){
                                                                                 if let productName = data[K.productCollection.productName] as? String{
                                                                                     if self.soldProducts.count == 0{
