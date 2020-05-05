@@ -391,6 +391,7 @@ class ProductDetail: UIViewController {         // for add product detail
     @IBOutlet weak var productDetailLabel: UILabel!
     @IBOutlet weak var storeNameLabel: UILabel!
     
+    @IBOutlet weak var productImage: UIImageView!
     @IBOutlet weak var promotionTableView: UITableView!
     var productDetail : Product!
     var promotions: [Promotion] = []
@@ -406,6 +407,9 @@ class ProductDetail: UIViewController {         // for add product detail
         storeNameLabel.text = productDetail.storeName
         promotionTableView.dataSource = self
         promotionTableView.delegate = self
+        let url = URL(string: productDetail.productImageURL)!
+        let resource = ImageResource(downloadURL: url)
+        productImage.kf.setImage(with: resource)
         loadProductData()
     }
     //ภพ1
