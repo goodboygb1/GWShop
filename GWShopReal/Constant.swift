@@ -107,6 +107,7 @@ struct K {
 
         static let ShowAllProductSellInOneDay = "ShowAllProductSellInOneDay"
         static let TopProductIdentifier = "TopProductIdentifier"
+        static let showAllOrder = "showAllOrder"
 
     }
     struct cardDetail{
@@ -200,6 +201,7 @@ struct K {
         static let ticket = "ตั๋วและบัตรกำนัน"//
         static let others = "อื่นๆ" //
         static let watchAndGlasses = "นาฬิกาและแว่นตา"
+        
 
     }
     

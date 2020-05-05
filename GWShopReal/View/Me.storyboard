@@ -2531,7 +2531,7 @@
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <viewLayoutGuide key="safeArea" id="pJl-O0-c2S"/>
                     </view>
-                    <tabBarItem key="tabBarItem" title="ที่ต้องจัดส่ง" id="ZUm-vF-9qm">
+                    <tabBarItem key="tabBarItem" title="ที่ต้องจัดส่ง" image="btn-order" id="ZUm-vF-9qm">
                         <color key="badgeColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     </tabBarItem>
                     <connections>
@@ -3647,6 +3647,7 @@
         <image name="background" width="105" height="270.66665649414062"/>
         <image name="bg-address" width="125" height="48.333332061767578"/>
         <image name="bg-color" width="125" height="78.333335876464844"/>
+        <image name="btn-order" width="14" height="16"/>
         <image name="btn_ฉัน" width="14.666666984558105" height="18.666666030883789"/>
         <image name="cart" catalog="system" width="128" height="102"/>
         <image name="creditcard" catalog="system" width="128" height="91"/>
