@@ -82,9 +82,12 @@ class ProfileController:UIViewController {
                                 let phoneNumber = data[K.phoneNumber] as? String,
                                 let ImageURL = data[K.imageURL] as? String {
                                 
-                                let url = URL(string: ImageURL)!
+                                if let url = URL(string: ImageURL) {
                                 let resource = ImageResource(downloadURL: url)
-                                
+                                    DispatchQueue.main.async {
+                                         self.profileImageView.kf.setImage(with: resource)
+                                    }
+                                }
                                 DispatchQueue.main.async {
                                     self.headerNameLabel.text = "\(firstName) \(lastName)"
                                     self.emailLabel.text = email
@@ -93,7 +96,7 @@ class ProfileController:UIViewController {
                                     self.genderLabel.text = gender
                                     self.dateOfBirthLabel.text = dob
                                     self.phoneNumberLabel.text = phoneNumber
-                                    self.profileImageView.kf.setImage(with: resource)
+                                   
                                 }
                             }
                         }
@@ -296,7 +299,9 @@ class EditProfileController: UIViewController,UIImagePickerControllerDelegate,UI
     @IBOutlet weak var dateOfBirthTextField: UITextField!
     @IBOutlet weak var phoneNumberTextField: UITextField!
     
+    @IBOutlet weak var addImageLabel: UIButton!
     
+    @IBOutlet weak var submitbutton: UIButton!
     
     var db = Firestore.firestore()
     var gender: String!
@@ -304,6 +309,9 @@ class EditProfileController: UIViewController,UIImagePickerControllerDelegate,UI
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        addImageLabel.layer.cornerRadius = addImageLabel.frame.size.height/5
+        
+        submitbutton.layer.cornerRadius = submitbutton.frame.size.height/5
         
         gender = genderSegment.titleForSegment(at: genderSegment.selectedSegmentIndex)
     }

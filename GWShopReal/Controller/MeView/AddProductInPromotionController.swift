@@ -8,17 +8,21 @@
 
 import UIKit
 import Firebase
+import Kingfisher
 
 class AddProductInPromotionController: UIViewController {
     
     
+    @IBOutlet weak var nextButtonLable: UIButton!
     @IBOutlet weak var productInPromotionTableView: UITableView!
     var product : [Product] = []
     var productDocumentID: [String] = []
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         productInPromotionTableView.dataSource = self
         loadProduct()
+        nextButtonLable.layer.cornerRadius = nextButtonLable.frame.size.height/5
     }
     
     func loadProduct()  {
@@ -97,7 +101,9 @@ extension AddProductInPromotionController : UITableViewDataSource,UITableViewDel
         
         let productReturnToCell = product[indexPath.row]
         let cell = productInPromotionTableView.dequeueReusableCell(withIdentifier: K.identifierForTableView.addProductInAddPromotionCell) as! addProductInAddPromotionCell
-        
+        let url = URL(string: productReturnToCell.productImageURL)!
+        let resource = ImageResource(downloadURL: url)
+        cell.productImage.kf.setImage(with: resource)
         cell.productNameLable.text = productReturnToCell.productName
         cell.priceLabel.text  = productReturnToCell.productPrice
         cell.productImageURL = productReturnToCell.productImageURL

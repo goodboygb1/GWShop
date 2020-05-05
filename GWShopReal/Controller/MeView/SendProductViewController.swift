@@ -8,6 +8,8 @@
 
 import UIKit
 import Firebase
+import Kingfisher
+
 class SendProductViewController: UIViewController,updateCell {
    
     
@@ -167,7 +169,9 @@ class ShowOrderDetailViewController:UIViewController{
                 if let snapShotDocuments = querySnapshot?.documents{
                     for doc in snapShotDocuments{
                         let data = doc.data()
-                        if let productDocID = data[K.orderDetailCollection.productID] as? String,let quantity = data[K.orderDetailCollection.quantity] as? Int,let totalPrice = data[K.orderDetailCollection.priceInProduct] as? Double{
+                        if let productDocID = data[K.orderDetailCollection.productID] as? String
+                            ,let quantity = data[K.orderDetailCollection.quantity] as? Int
+                            ,let totalPrice = data[K.orderDetailCollection.priceInProduct] as? Double{
                             self.db.collection(K.productCollection.productCollection).document(productDocID).getDocument { (document, error) in
                                 if let e = error{
                                     print(e.localizedDescription)
@@ -216,6 +220,9 @@ extension ShowOrderDetailViewController:UITableViewDataSource,UITableViewDelegat
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let eachProduct = orderedProductDetail[indexPath.row]
         let productCell = self.orderDetailTableView.dequeueReusableCell(withIdentifier: K.identifierForTableView.orderDetailIdentifier) as! OrderDetailCell
+        let url = URL(string: eachProduct.imageURL)!
+        let resource = ImageResource(downloadURL: url)
+        productCell.productImageView.kf.setImage(with: resource)
         productCell.productNameLabel.text = eachProduct.productName
         productCell.productQuantitiesLabel.text = String(eachProduct.quantity)
         productCell.productTotalPriceLabel.text = String(eachProduct.totalPrice)

@@ -8,6 +8,8 @@
 
 import UIKit
 import Firebase
+import Kingfisher
+
 class CartViewController: UIViewController, reloadAfterFinishedOrder {
     
     
@@ -154,6 +156,9 @@ extension CartViewController: UITableViewDataSource{
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cart = carts[indexPath.row]
         let cartCell = cartTableView.dequeueReusableCell(withIdentifier: K.identifierForTableView.cartViewIdentifier) as! CartTableViewCell
+        let url = URL(string: cart.imageURL)!
+        let resource = ImageResource(downloadURL: url)
+        cartCell.productImageView.kf.setImage(with: resource)
         cartCell.shopNameLabel.text = cart.storeName
         cartCell.productNameLabel.text = cart.productName
         cartCell.priceLabel.text = cart.productPrice
