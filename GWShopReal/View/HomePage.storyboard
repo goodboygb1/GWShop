@@ -375,7 +375,7 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="LVf-Bj-jHh"/>
                     </view>
-                    <tabBarItem key="tabBarItem" title="หน้าแรก" image="btn_หน้าแรก" selectedImage="btn_หน้าแรก" id="wMi-Lr-1tr"/>
+                    <tabBarItem key="tabBarItem" title="หน้าแรก" image="icon-home tab" selectedImage="icon-home tab" id="wMi-Lr-1tr"/>
                     <navigationItem key="navigationItem" id="FNf-Rt-v1L"/>
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
                     <size key="freeformSize" width="375" height="2321"/>
@@ -1687,7 +1687,7 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="oQX-pF-Rre"/>
+        <segue reference="toO-mO-KhZ"/>
         <segue reference="DFL-w2-MaH"/>
     </inferredMetricsTieBreakers>
     <resources>
@@ -1702,6 +1702,7 @@
         <image name="house.fill" catalog="system" width="128" height="106"/>
         <image name="icon-card" width="9" height="7.3333334922790527"/>
         <image name="icon-cart" width="9.3333330154418945" height="8"/>
+        <image name="icon-home tab" width="11.333333015441895" height="9"/>
         <image name="icon-location" width="7.6666665077209473" height="12.666666984558105"/>
         <image name="icon_bag" width="53" height="48.333332061767578"/>
         <image name="icon_ball" width="53" height="48.333332061767578"/>

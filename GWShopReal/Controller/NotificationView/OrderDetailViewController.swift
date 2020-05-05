@@ -23,9 +23,20 @@ class OrderDetailViewController: UIViewController {
         let orderIDForQuery = orderForQuery?.orderID
         orderDetailTableView.delegate = self
         orderDetailTableView.dataSource = self
-        
         loadOrder(from: orderIDForQuery!)
-        
+       
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+           super.viewWillAppear(animated)
+           tabBarController?.navigationItem.setHidesBackButton(false, animated: animated)
+           tabBarController?.navigationController?.setNavigationBarHidden(false, animated: animated)
+           
+           
+       }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
     }
     
     func loadOrder(from orderIDForQuery : String)  {
@@ -59,12 +70,9 @@ class OrderDetailViewController: UIViewController {
                                     } else {
                                         if let data2 = queryShapShot2?.data() {
                                            
-                                            print("data = \(data2)")
-                                             if
-                                                    let imageURL = data2[K.productCollection.productImageURL] as? String
+                                            if let imageURL = data2[K.productCollection.productImageURL] as? String
                                                     ,let productName = data2[K.productCollection.productName] as? String
                                                 {
-                                                    print("imageURL ready")
                                                     
                                                     let newOrderDetail = OrderedProductDetail(quantity: totalQuantityForEachProduct, productID: productID, productName: productName, imageURL: imageURL, totalPrice: totalPricePerProduct)
                                                     
@@ -110,6 +118,7 @@ extension OrderDetailViewController : UITableViewDelegate,UITableViewDataSource 
         cell.productName.text = orderDetailForCell.productName
         cell.totalPriceLabel.text = String(orderDetailForCell.totalPrice)
         cell.productImage.kf.setImage(with: resource)
+        cell.quantityLabel.text = String(orderDetailForCell.quantity)
         return cell
         
     }
