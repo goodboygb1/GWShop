@@ -514,8 +514,67 @@ class ProductDetail: UIViewController {         // for add product detail
     }
     
     @IBAction func buyPressed(_ sender: UIButton) {
-        //print(promotions)
-        print(selectedPromotionDocumentID)
+         if let emailSender = Auth.auth().currentUser?.email{
+                   db.collection(K.tableName.cartTableName).whereField(K.cartDetail.user, isEqualTo: emailSender).whereField(K.cartDetail.productDocID, isEqualTo: productDetail.documentId).getDocuments { (querySnapshot, error) in
+                       if let e = error{
+                           print("Error while loading cart data: \(e.localizedDescription)")
+                       }else{
+                           if let snapShotdocuments = querySnapshot?.documents{
+                               if snapShotdocuments.count == 0{
+                                   if self.selectedPromotionDocumentID.count == 1{
+                                           self.db.collection(K.tableName.cartTableName).addDocument(data: [
+                                               K.cartDetail.productDocID: self.productDetail.documentId,
+                                               K.cartDetail.user: emailSender,
+                                               K.cartDetail.promotionDocID: self.selectedPromotionDocumentID[0],
+                                               K.cartDetail.quantity: 1,
+                                               K.storeDetail.storeName: self.productDetail.storeName,
+                                               K.productCollection.productPrice: self.productDetail.productPrice,
+                                               K.productCollection.productImageURL : self.productDetail.productImageURL
+                                           ])
+                                       self.navigationController?.popToRootViewController(animated: true)
+                                   }else if self.selectedPromotionDocumentID.count == 0{
+                                       self.db.collection(K.tableName.cartTableName).addDocument(data: [
+                                           K.cartDetail.productDocID: self.productDetail.documentId,
+                                           K.cartDetail.user: emailSender,
+                                           K.cartDetail.promotionDocID: "",
+                                           K.cartDetail.quantity: 1,
+                                           K.storeDetail.storeName: self.productDetail.storeName,
+                                           K.productCollection.productPrice: self.productDetail.productPrice,
+                                            K.productCollection.productImageURL : self.productDetail.productImageURL
+                                       ])
+                                       self.navigationController?.popToRootViewController(animated: true)
+                                   }else{
+                                       print("Please choose only one promotion")
+                                   }
+                               }else{
+                                   let data = snapShotdocuments[0].data()
+                                   let docID = snapShotdocuments[0].documentID
+                                   if let quantiy = data[K.cartDetail.quantity] as? Int{
+                                       if self.selectedPromotionDocumentID.count == 1{
+                                           self.db.collection(K.tableName.cartTableName).document(docID).updateData([
+                                               K.cartDetail.quantity: quantiy + 1,
+                                               K.cartDetail.promotionDocID: self.selectedPromotionDocumentID[0]
+                                           ])
+                                           self.navigationController?.popToRootViewController(animated: true)
+                                       }else if self.selectedPromotionDocumentID.count == 0{
+                                           self.db.collection(K.tableName.cartTableName).document(docID).updateData([
+                                               K.cartDetail.quantity: quantiy + 1,
+                                               K.cartDetail.promotionDocID: ""
+                                           ])
+                                           self.navigationController?.popToRootViewController(animated: true)
+                                       }else{
+                                           print("Please choose only one promotion")
+                                       }
+                                   }
+                                   
+                               }
+                           }
+                           
+                       }
+                   }
+                   
+               }
+        
     }
 }
 
