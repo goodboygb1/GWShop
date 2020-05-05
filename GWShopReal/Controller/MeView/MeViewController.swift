@@ -8,6 +8,7 @@
 
 import UIKit
 import Firebase
+import Kingfisher
 
 
 class ProfileController:UIViewController {
@@ -72,7 +73,12 @@ class ProfileController:UIViewController {
                                 let lastName = data[K.surname] as? String,
                                 let gender = data[K.gender] as? String,
                                 let dob = data[K.dateOfBirth] as? String,
-                                let phoneNumber = data[K.phoneNumber] as? String {
+                                let phoneNumber = data[K.phoneNumber] as? String,
+                                let ImageURL = data[K.imageURL] as? String {
+                                
+                                let url = URL(string: ImageURL)!
+                                let resource = ImageResource(downloadURL: url)
+                                
                                 DispatchQueue.main.async {
                                     self.headerNameLabel.text = "\(firstName) \(lastName)"
                                     self.emailLabel.text = email
@@ -81,6 +87,7 @@ class ProfileController:UIViewController {
                                     self.genderLabel.text = gender
                                     self.dateOfBirthLabel.text = dob
                                     self.phoneNumberLabel.text = phoneNumber
+                                    self.profileImageView.kf.setImage(with: resource)
                                 }
                             }
                         }
@@ -360,7 +367,7 @@ class EditProfileController: UIViewController,UIImagePickerControllerDelegate,UI
     
     @IBAction func submitPressed(_ sender: UIButton) {
         
-        
+        uploadImage()
     }
     
     func uploadImage()  {
@@ -379,7 +386,7 @@ class EditProfileController: UIViewController,UIImagePickerControllerDelegate,UI
             return
         }
         
-        let storageRef = Storage.storage().reference(forURL:    "gs://gwshopreal-47f16.appspot.com")               // add link to upload
+        let storageRef = Storage.storage().reference(forURL:"gs://gwshopreal-47f16.appspot.com")               // add link to upload
         
         let storageProductRef = storageRef.child("ProfileImage").child("\(Auth.auth().currentUser?.email)+\(Date().timeIntervalSince1970)")          // path for upload
         

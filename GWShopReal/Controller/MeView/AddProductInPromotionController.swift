@@ -48,6 +48,7 @@ class AddProductInPromotionController: UIViewController {
                                 , let storeName = data[K.productCollection.storeName] as? String
                                 
                                 
+                                
                             {
                                 
                                 let newProduct = Product(productName: productNameCell, productDetail: productDetailCell, productCategory: productCategoryCell, productPrice: productPriceCell, productQuantity: productQuantity, productImageURL: productImageURLCell, documentId: docID, sender: senderFrom, storeName: storeName )
