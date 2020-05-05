@@ -16,10 +16,11 @@ class LoginController: UIViewController,UITextFieldDelegate {
     @IBOutlet weak var emailTextField: UITextField!
     @IBOutlet weak var passwordTextField: UITextField!
     
+    @IBOutlet weak var loginButtonLabel: UIButton!
     override func viewDidLoad() {
         super.viewDidLoad()
         passwordTextField.delegate = self
-        
+        loginButtonLabel.layer.cornerRadius = loginButtonLabel.frame.size.height/5
     }
     
     
