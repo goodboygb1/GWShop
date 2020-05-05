@@ -108,8 +108,12 @@ struct K {
 
         static let ShowAllProductSellInOneDay = "ShowAllProductSellInOneDay"
         static let TopProductIdentifier = "TopProductIdentifier"
+
         static let showAllOrder = "showAllOrder"
         static let orderDetailForCustomer = "orderDetailForCustomer"
+
+        static let SoldProductIdentifier = "SoldProductIdentifier"
+
 
     }
     struct cardDetail{
