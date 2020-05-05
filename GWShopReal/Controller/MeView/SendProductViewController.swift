@@ -12,6 +12,7 @@ class SendProductViewController: UIViewController,updateCell {
    
     
 
+    @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
     @IBOutlet weak var orderProductTableView: UITableView!
     
     var db = Firestore.firestore()
@@ -23,9 +24,11 @@ class SendProductViewController: UIViewController,updateCell {
         orderProductTableView.dataSource = self
         orderProductTableView.delegate = self
         loadOrderData()
+        activityIndicator.hidesWhenStopped = true
     }
     
     func loadOrderData(){
+        activityIndicator.startAnimating()
         if let emailSender = Auth.auth().currentUser?.email{
             db.collection(K.tableName.storeDetailTableName).whereField(K.sender, isEqualTo: emailSender).getDocuments { (query, error) in
                 if let e = error{
@@ -44,7 +47,7 @@ class SendProductViewController: UIViewController,updateCell {
                                             let docID = doc.documentID
                                             if let orderID = data[K.order.orderID] as? String,let addressID = data[K.order.addressID] as? String, let dateOfPurchase = data[K.order.dateOfPurchase] as? String, let status = data[K.order.orderStatus] as? Bool, let paymentID = data[K.order.paymentID] as? String, let total = data["total"] as? Double,let user = data[K.order.userName] as? String{
                                                 self.orderedProducts.append(OrderedProduct(orderID: orderID, addressID: addressID, datePurchased: dateOfPurchase, orderStatus: status, paymentID: paymentID, total: total, orderDocID: docID,user: user))
-                                                
+                                                self.activityIndicator.stopAnimating()
                                                 DispatchQueue.main.async {
                                                     self.orderProductTableView.reloadData()
                                                 }
@@ -70,6 +73,7 @@ extension SendProductViewController:UITableViewDataSource, UITableViewDelegate{
         return orderedProducts.count
     }
     func updateCell() {
+        print("update Cell")
            loadOrderData()
        }
     
@@ -193,7 +197,11 @@ class ShowOrderDetailViewController:UIViewController{
             if let e = error {
                 print(e.localizedDescription)
             } else {
+                if let de = self.delegate {
+                    print("delegate triggle")
+                }
                 self.delegate?.updateCell()
+                self.navigationController?.popViewController(animated: true)
             }
         }
         

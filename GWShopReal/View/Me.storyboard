@@ -2520,6 +2520,10 @@
                                     </tableViewCell>
                                 </prototypes>
                             </tableView>
+                            <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" style="large" translatesAutoresizingMaskIntoConstraints="NO" id="a9g-Sa-ZNL">
+                                <rect key="frame" x="177" y="396" width="20" height="20"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </activityIndicatorView>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <viewLayoutGuide key="safeArea" id="pJl-O0-c2S"/>
@@ -2528,6 +2532,7 @@
                         <color key="badgeColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     </tabBarItem>
                     <connections>
+                        <outlet property="activityIndicator" destination="a9g-Sa-ZNL" id="k9p-3h-7KY"/>
                         <outlet property="orderProductTableView" destination="u0Q-bN-U3E" id="s9d-Bc-omy"/>
                         <segue destination="DNL-5l-fWp" kind="show" identifier="listOrderToOrderDetail" id="rmq-pI-EP4"/>
                     </connections>
