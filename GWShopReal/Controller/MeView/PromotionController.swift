@@ -27,15 +27,21 @@ class PromotionController: UIViewController {
                     print("Error while loading promotion data in promotion page: \(e.localizedDescription)")
                 }else{
                     if let snapShotDocuments = querySnapshot?.documents{
-                        for doc in snapShotDocuments{
-                            let data = doc.data()
-                            let docID = doc.documentID
-                            if let promotionName = data[K.promotion.promotionName] as? String, let promotionDetail = data[K.promotion.promotionDetail] as? String,
-                            let discountPercent = data[K.promotion.discountPercent] as? Int, let minimumPrice = data[K.promotion.minimumPrice] as? String,
-                            let validDate = data[K.promotion.validDate] as? String{
-                                self.promotions.append(Promotion(promotionName: promotionName, promotionDetail: promotionDetail, minimumPrice: minimumPrice, discountPercent: discountPercent, validDate: validDate, docID: docID))
-                                DispatchQueue.main.async {
-                                    self.promotionTableView.reloadData()
+                        if snapShotDocuments.count == 0{
+                            DispatchQueue.main.async {
+                                self.promotionTableView.reloadData()
+                            }
+                        }else{
+                            for doc in snapShotDocuments{
+                                let data = doc.data()
+                                let docID = doc.documentID
+                                if let promotionName = data[K.promotion.promotionName] as? String, let promotionDetail = data[K.promotion.promotionDetail] as? String,
+                                let discountPercent = data[K.promotion.discountPercent] as? Int, let minimumPrice = data[K.promotion.minimumPrice] as? String,
+                                let validDate = data[K.promotion.validDate] as? String{
+                                    self.promotions.append(Promotion(promotionName: promotionName, promotionDetail: promotionDetail, minimumPrice: minimumPrice, discountPercent: discountPercent, validDate: validDate, docID: docID))
+                                    DispatchQueue.main.async {
+                                        self.promotionTableView.reloadData()
+                                    }
                                 }
                             }
                         }
@@ -63,10 +69,22 @@ extension PromotionController: UITableViewDataSource,UITableViewDelegate{
         promotionCell.minimumPriceText.text = promotion.minimumPrice
         promotionCell.discountPercentText.text = String( promotion.discountPercent)
         promotionCell.validDateText.text = promotion.validDate
+        promotionCell.promotionDocIDLabel.text = promotion.docID
         
+        promotionCell.delegate = self
         return promotionCell
     }
 
+}
+extension PromotionController: promotionCellDelegate{
+    func didDeletePressed(docID: String) {
+        db.collection(K.tableName.promotionTableName).document(docID).delete()
+        loadPromotionData()
+    }
+}
+
+protocol promotionCellDelegate {
+    func didDeletePressed(docID: String)
 }
 
 class promotionCellinPromotionPage: UITableViewCell {
@@ -75,4 +93,11 @@ class promotionCellinPromotionPage: UITableViewCell {
     @IBOutlet weak var minimumPriceText: UILabel!
     @IBOutlet weak var discountPercentText: UILabel!
     @IBOutlet weak var validDateText: UILabel!
+    @IBOutlet weak var promotionDocIDLabel: UILabel!
+    
+    var delegate: promotionCellDelegate?
+    @IBAction func DeletePressed(_ sender: UIButton) {
+        delegate?.didDeletePressed(docID: promotionDocIDLabel.text!)
+    }
+    
 }

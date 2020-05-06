@@ -48,30 +48,37 @@ class CartViewController: UIViewController, reloadAfterFinishedOrder {
                     print("error while loading cart data in cart page: \(e.localizedDescription)")
                 }else{
                     if let snapShotDocuments = querySnapshot?.documents{
-                        for cart in snapShotDocuments{
-                            let data = cart.data()
-                            let docID = cart.documentID
-                            if let storeName = data[K.storeDetail.storeName] as? String, let productPrice = data[K.productCollection.productPrice] as? String,
-                                let number = data[K.cartDetail.quantity] as? Int,
-                                let productDocID = data[K.cartDetail.productDocID] as? String,
-                                let imageURL = data[K.productCollection.productImageURL] as? String
-                            {
-                                self.db.collection(K.productCollection.productCollection).document(productDocID).getDocument { (documentSnapshot, error) in
-                                    if let e = error{
-                                        print("error while loading product name: \(e.localizedDescription)")
-                                    }else{
-                                        let data = documentSnapshot?.data()
-                                        if let productName = data![K.productCollection.productName] as? String{
-                                            self.carts.append(Cart(storeName: storeName, productName: productName, productPrice: productPrice, numberProduct: number, documentID: docID,productDocumentID: productDocID, realPrice: 0.0, imageURL: imageURL))
-                                            DispatchQueue.main.async {
-                                                self.cartTableView.reloadData()
+                        if snapShotDocuments.count == 0{
+                            DispatchQueue.main.async {
+                                self.cartTableView.reloadData()
+                            }
+                        }else{
+                            for cart in snapShotDocuments{
+                                let data = cart.data()
+                                let docID = cart.documentID
+                                if let storeName = data[K.storeDetail.storeName] as? String, let productPrice = data[K.productCollection.productPrice] as? String,
+                                    let number = data[K.cartDetail.quantity] as? Int,
+                                    let productDocID = data[K.cartDetail.productDocID] as? String,
+                                    let imageURL = data[K.productCollection.productImageURL] as? String
+                                {
+                                    self.db.collection(K.productCollection.productCollection).document(productDocID).getDocument { (documentSnapshot, error) in
+                                        if let e = error{
+                                            print("error while loading product name: \(e.localizedDescription)")
+                                        }else{
+                                            let data = documentSnapshot?.data()
+                                            if let productName = data![K.productCollection.productName] as? String{
+                                                self.carts.append(Cart(storeName: storeName, productName: productName, productPrice: productPrice, numberProduct: number, documentID: docID,productDocumentID: productDocID, realPrice: 0.0, imageURL: imageURL))
+                                                DispatchQueue.main.async {
+                                                    self.cartTableView.reloadData()
+                                                }
                                             }
                                         }
                                     }
+                                    
                                 }
-                                
                             }
                         }
+                        
                     } // if let snapshot = query
                 }
             }
@@ -87,28 +94,33 @@ class CartViewController: UIViewController, reloadAfterFinishedOrder {
                     print("error while loading cart data on calculateTotalPrice.swift: \(e.localizedDescription)")
                 }else{
                     if let snapShotDocuments = querySnapshot?.documents{
-                        for doc in snapShotDocuments{
-                            let data = doc.data()
-                            if let quantity = data[K.cartDetail.quantity] as? Int, let price = data[K.productCollection.productPrice] as? String,let promotionDocID = data[K.cartDetail.promotionDocID] as? String, let productDocID = data[K.productCollection.productDocID] as? String{
-                                let priceInDoubleFormat = Double(price)
-                                let totalPricePerProduct = Double(quantity) * priceInDoubleFormat!
-                                if promotionDocID == ""{
-                                    self.totalPrice[productDocID] = totalPricePerProduct
-                                }else{
-                                    self.db.collection(K.tableName.promotionTableName).document(promotionDocID).getDocument { (documentSnapshot, error) in
-                                        let data = documentSnapshot?.data()
-                                        if let minimumPrice = data![K.promotion.minimumPrice] as? String, let discountPercent = data![K.promotion.discountPercent] as? Int{
-                                            let minimumPriceInDoubleFormat = Double(minimumPrice)
-                                            if minimumPriceInDoubleFormat! > totalPricePerProduct{
-                                                self.totalPrice[productDocID] = totalPricePerProduct
-                                            }else{
-                                                self.totalPrice[productDocID] = totalPricePerProduct - (totalPricePerProduct * (Double(discountPercent) / 100))
+                        if snapShotDocuments.count == 0{
+                            self.totalPriceLabel.text = String(0)
+                        }
+                        else{
+                            for doc in snapShotDocuments{
+                                let data = doc.data()
+                                if let quantity = data[K.cartDetail.quantity] as? Int, let price = data[K.productCollection.productPrice] as? String,let promotionDocID = data[K.cartDetail.promotionDocID] as? String, let productDocID = data[K.productCollection.productDocID] as? String{
+                                    let priceInDoubleFormat = Double(price)
+                                    let totalPricePerProduct = Double(quantity) * priceInDoubleFormat!
+                                    if promotionDocID == ""{
+                                        self.totalPrice[productDocID] = totalPricePerProduct
+                                    }else{
+                                        self.db.collection(K.tableName.promotionTableName).document(promotionDocID).getDocument { (documentSnapshot, error) in
+                                            let data = documentSnapshot?.data()
+                                            if let minimumPrice = data![K.promotion.minimumPrice] as? String, let discountPercent = data![K.promotion.discountPercent] as? Int{
+                                                let minimumPriceInDoubleFormat = Double(minimumPrice)
+                                                if minimumPriceInDoubleFormat! > totalPricePerProduct{
+                                                    self.totalPrice[productDocID] = totalPricePerProduct
+                                                }else{
+                                                    self.totalPrice[productDocID] = totalPricePerProduct - (totalPricePerProduct * (Double(discountPercent) / 100))
+                                                }
                                             }
+                                            self.totalPriceLabel.text = String(format: "%.2f", self.totalPrice.values.reduce(0, +))
                                         }
-                                        self.totalPriceLabel.text = String(format: "%.2f", self.totalPrice.values.reduce(0, +))
                                     }
+                                    self.totalPriceLabel.text = String(format: "%.2f", self.totalPrice.values.reduce(0, +))
                                 }
-                                self.totalPriceLabel.text = String(format: "%.2f", self.totalPrice.values.reduce(0, +))
                             }
                         }
                         

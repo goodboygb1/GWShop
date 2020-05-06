@@ -565,7 +565,7 @@ class ProductDetail: UIViewController {         // for add product detail
                                                K.cartDetail.quantity: quantiy + 1,
                                                K.cartDetail.promotionDocID: ""
                                            ])
-                                           self.navigationController?.popToRootViewController(animated: true)
+                                        self.performSegue(withIdentifier: K.segue.buyProductPressed, sender: self)
                                        }else{
                                            print("Please choose only one promotion")
                                        }

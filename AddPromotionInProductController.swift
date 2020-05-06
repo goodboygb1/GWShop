@@ -18,9 +18,53 @@ class AddPromotionInProductController: UIViewController {
     var productDocumentID: [String]!
     var discount: Double!
     var db = Firestore.firestore()
+    var datePickerView: UIDatePicker!
     override func viewDidLoad() {
         super.viewDidLoad()
     }
+    
+    @IBAction func showDatePicker(_ sender: UITextField) {
+           
+           // show datePicker when tab dateTextField
+           
+           datePickerView = UIDatePicker()                     // create DatePicker
+           datePickerView.datePickerMode = .date               // เอาแค่วันที่
+           datePickerView.calendar = Calendar(identifier: .buddhist)       // พ.ศ.
+           datePickerView.locale = Locale(identifier: "th")                // ไทย
+           
+           sender.inputView = datePickerView                   // ตั้ง input = picker แทนคีบอด
+           
+           let toolbar : UIToolbar = UIToolbar(frame: CGRect(x: 0, y: 0, width: 0, height: 44))
+           toolbar.barStyle = UIBarStyle.default        // สร้าง toolbar structure
+           
+           let cancleButton = UIBarButtonItem(barButtonSystemItem: .cancel, target: self, action:#selector(cancelTapped))         // create cancle button
+           
+           let flexibleSpace = UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: self, action: nil)               // space ขั่นกลาง
+           
+           let doneButton = UIBarButtonItem(barButtonSystemItem: .done, target: self, action: #selector(doneTapped))
+           // create done button
+           
+           toolbar.setItems([cancleButton,flexibleSpace,doneButton], animated: true)
+           // set item into toolsbar
+           sender.inputAccessoryView = toolbar         // add toolbar into                                                      inputAccessoryView
+           
+           toolbar.items = [cancleButton, flexibleSpace, doneButton]
+           sender.inputAccessoryView = toolbar
+       }
+       
+       @objc func doneTapped(sender : UIBarButtonItem!)  {  // กด done แล้วจะจบ
+           let dateFormatter  = DateFormatter()              // set formatter
+           dateFormatter.locale = Locale(identifier: "th")   // set location to thailand
+           dateFormatter.setLocalizedDateFormatFromTemplate("yyyy-MM-dd")
+           // set format เวลา
+           validDateTextField.text = dateFormatter.string(from: datePickerView.date)
+           // add date into text field
+           validDateTextField.resignFirstResponder()              // close textfield
+       }
+       
+       @objc func cancelTapped(sender:UIBarButtonItem!) {   // กด cancle จะไม่ทำอะไรเลย
+           validDateTextField.resignFirstResponder()
+       }
     
     func NewPromotionNotNil()-> Bool{
         discount = Double(discountPercentTextField.text!)
