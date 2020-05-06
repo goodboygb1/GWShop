@@ -77,6 +77,7 @@ struct K {
         static let showAllProducrSellInOneDay = "showAllProducrSellInOneDay"
         static let topFiveProductInMonthSegue = "topFiveProductInMonth"
         static let showOrderDetailToUser = "showOrderDetailToUser"
+        static let buyProductPressed = "buyProductPressed"
 
     }
     
@@ -113,6 +114,7 @@ struct K {
 
         static let showAllOrder = "showAllOrder"
         static let orderDetailForCustomer = "orderDetailForCustomer"
+
 
 
     }

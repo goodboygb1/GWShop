@@ -24,7 +24,7 @@ class TopFiveProductController: UIViewController {
         topFiveTableView.delegate = self
         
         loadTopFiveData()
-        DispatchQueue.main.asyncAfter(deadline: .now() + 2){
+        DispatchQueue.main.asyncAfter(deadline: .now() + 3){
             self.sortSoldProduct()
             self.topFiveTableView.reloadData()
         }
