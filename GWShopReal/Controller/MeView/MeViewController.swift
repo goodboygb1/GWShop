@@ -89,7 +89,7 @@ class ProfileController:UIViewController {
                                     }
                                 }
                                 DispatchQueue.main.async {
-                                    self.headerNameLabel.text = "\(firstName) \(lastName)"
+                                    self.headerNameLabel.text = "\(firstName)"
                                     self.emailLabel.text = email
                                     self.firstNameLabel.text = firstName
                                     self.lastNameLabel.text = lastName
@@ -376,7 +376,7 @@ class EditProfileController: UIViewController,UIImagePickerControllerDelegate,UI
         
         let libAction = UIAlertAction(title: "Photo Library", style: .default) { (action:UIAlertAction) in
             if UIImagePickerController.isSourceTypeAvailable(.photoLibrary) {
-                imagePickerController.sourceType = .camera
+                imagePickerController.sourceType = .photoLibrary
                 self.present(imagePickerController, animated: true, completion: nil)
             } else {
                 print("album not avaliable")
@@ -509,7 +509,7 @@ class EditProfileController: UIViewController,UIImagePickerControllerDelegate,UI
                     }
                 }
             }
-            self.dismiss(animated: false, completion: nil)
+            self.navigationController?.popToRootViewController(animated: true)
         }else {
             print("Some text fields did not have any text inside")
         }
